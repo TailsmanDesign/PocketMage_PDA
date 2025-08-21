@@ -143,6 +143,21 @@ void commandSelect(String command) {
     oledWord("...");
     delay(1000);
   } 
+  else if (command.startsWith("echo")) {
+    oledWord(command.substring(6);
+    delay(1000);
+  } 
+  else if (command == "flip" || command == "coin" || command == "toss") {
+    int flip = esp_random() % 2;
+    if (flip == 0) {
+      oledWord("Heads");
+    } else {
+      oledWord("Tails");
+    }
+    delay(2000);
+    CurrentKBState = NORMAL;
+  }
+
   else {
     settingCommandSelect(command);
   }
