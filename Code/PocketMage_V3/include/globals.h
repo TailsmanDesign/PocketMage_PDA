@@ -97,6 +97,11 @@ extern bool HOME_ON_BOOT;        // Start home app on boot
 extern int OLED_BRIGHTNESS;      // OLED brightness (0-255)
 extern int OLED_MAX_FPS;         // OLED max FPS
 
+extern String OTA1_APP;
+extern String OTA2_APP;
+extern String OTA3_APP;
+extern String OTA4_APP;
+
 // ===================== SYSTEM STATE =====================
 // E-Ink refresh control
 // extern volatile int einkRefresh;     // Partial/full refresh counter
@@ -224,6 +229,7 @@ void multiPassRefresh(int passes);
 void FILEWIZ_INIT();
 void processKB_FILEWIZ();
 void einkHandler_FILEWIZ();
+String fileWizardMini(bool allowRecentSelect = false);
 
 // <TXT.cpp>
 void TXT_INIT();

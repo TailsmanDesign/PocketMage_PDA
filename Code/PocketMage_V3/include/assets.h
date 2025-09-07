@@ -150,5 +150,17 @@ extern const unsigned char _journal [] PROGMEM;
 //
 extern const unsigned char _appLoader [] PROGMEM;
 
+// File icons
+extern const unsigned char _LFileIcon0 [] PROGMEM;
+extern const unsigned char _LFileIcon1 [] PROGMEM;
+extern const unsigned char _LFileIcon2 [] PROGMEM;
+extern const unsigned char _LFileIcon3 [] PROGMEM;
+extern const unsigned char* _LFileIcons[4];
+
+extern const unsigned char _SFileIcon0 [] PROGMEM;
+extern const unsigned char _SFileIcon1 [] PROGMEM;
+extern const unsigned char _SFileIcon2 [] PROGMEM;
+extern const unsigned char _SFileIcon3 [] PROGMEM;
+extern const unsigned char* _SFileIcons[4];
 
 #endif

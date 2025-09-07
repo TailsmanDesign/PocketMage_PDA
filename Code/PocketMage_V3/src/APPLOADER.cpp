@@ -9,8 +9,10 @@
 
 static String currentLine = "";
 
-enum AppLoaderState {MENU, INSTALLING, EDIT};
+enum AppLoaderState {MENU, SWAP_OR_EDIT, INSTALLING, EDIT};
 AppLoaderState CurrentAppLoaderState = MENU;
+
+uint8_t selectedSlot = 0; //1:A, 2:B, etc.
 
 // ---------- Globals ----------
 volatile uint8_t g_installProgress = 0; // 0-100 (0-50: extract, 50-100: intall)
@@ -183,7 +185,7 @@ static void installTask(void *param) {
       OLED().oledWord("App Install Complete!");
 
       // Save the installed app to Preferences
-      prefs.begin(PREFS_NAMESPACE, false); // RW
+      prefs.begin("PocketMage", false); // RW
       prefs.putString((String("OTA") + p->otaIndex).c_str(), p->tarRelName);
       prefs.end();
     }
@@ -218,8 +220,6 @@ bool installAppTarToOtaAsync(const char *tarRelName, int otaIndex) {
     return true;
 }
 
-
-
 // ---------- Helpers ----------
 bool setBootToOtaSlot(int otaIndex /*1..4*/) {
     if (otaIndex < 1 || otaIndex > 4) return false;
@@ -238,7 +238,7 @@ bool setBootToOtaSlot(int otaIndex /*1..4*/) {
 
 String getInstalledAppForOta(int otaIndex) {
   if (otaIndex < 1 || otaIndex > 4) return String();
-  prefs.begin(PREFS_NAMESPACE, true); // read-only
+  prefs.begin("PocketMage", true); // read-only
   String app = prefs.getString((String("OTA") + otaIndex).c_str(), "");
   prefs.end();
   return app;
@@ -267,6 +267,7 @@ void loop() {
     delay(50);
 }
 */
+
 void APPLOADER_INIT() {
   currentLine = "";
   CurrentAppState = APPLOADER;
@@ -290,16 +291,22 @@ void processKB_APPLOADER() {
           currentLine.toLowerCase();
           if (currentLine == "a") {
             // edit a
+            selectedSlot = 1;
           }
           else if (currentLine == "b") {
             // edit b
+            selectedSlot = 2;
           }
           else if (currentLine == "c") {
             // edit c
+            selectedSlot = 3;
           }
           else if (currentLine == "d") {
             // edit d
+            selectedSlot = 4;
           }
+          CurrentAppLoaderState = SWAP_OR_EDIT;
+          CurrentKBState = NORMAL;
 
           currentLine = "";
         }                                      
@@ -339,6 +346,32 @@ void processKB_APPLOADER() {
           }
         }
 
+        currentMillis = millis();
+        //Make sure oled only updates at OLED_MAX_FPS
+        if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
+          OLEDFPSMillis = currentMillis;
+          OLED().oledLine(currentLine, false);
+        }
+      }
+      break;
+    case SWAP_OR_EDIT:
+      if (currentMillis - KBBounceMillis >= KB_COOLDOWN) {  
+        char inchar = KB().updateKeypress();
+        // HANDLE INPUTS
+        //No char recieved
+        if (inchar == 0);   
+        // Swap
+
+
+        // Delete
+        
+        
+        // Home recieved
+        else if (inchar == 12) {
+          selectedSlot = 0;
+          CurrentAppLoaderState = MENU;
+          currentLine = "";
+        }
         currentMillis = millis();
         //Make sure oled only updates at OLED_MAX_FPS
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {

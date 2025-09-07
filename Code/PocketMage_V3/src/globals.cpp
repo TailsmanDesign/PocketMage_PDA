@@ -70,6 +70,11 @@ bool HOME_ON_BOOT;        // Start home app on boot
 int OLED_BRIGHTNESS;      // OLED brightness (0-255)
 int OLED_MAX_FPS;         // OLED max FPS
 
+String OTA1_APP;
+String OTA2_APP;
+String OTA3_APP;
+String OTA4_APP;
+
 // ===================== SYSTEM STATE =====================
 // E-Ink refresh control
 // volatile int einkRefresh = FULL_REFRESH_AFTER; // Partial/full refresh counter

@@ -672,6 +672,12 @@ namespace pocketmage::power{
     OLED_BRIGHTNESS = prefs.getInt("OLED_BRIGHTNESS", 255);
     OLED_MAX_FPS = prefs.getInt("OLED_MAX_FPS", 30);
 
+    OTA1_APP = prefs.getString("OTA1", "-");
+    OTA2_APP = prefs.getString("OTA2", "-");
+    OTA3_APP = prefs.getString("OTA3", "-");
+    OTA4_APP = prefs.getString("OTA4", "-");
+
+
     // Update State (if needed)
     if (changeState) {
         u8g2.setContrast(OLED_BRIGHTNESS);
