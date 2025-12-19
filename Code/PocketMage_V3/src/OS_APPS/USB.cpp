@@ -21,6 +21,10 @@ void USBAppShutdown() {
   // Stop MSC functionality
   msc.end();
 
+  // Stop USB peripheral completely
+  USB.end();
+  delay(50);
+
   // Free card struct
   if (card) {
     free(card);
@@ -32,11 +36,14 @@ void USBAppShutdown() {
 
   mscEnabled = false;
 
+  // Switch USB control to BMS
+  PowerSystem.setUSBControlBMS();
+
   ESP_LOGI(TAG, "Re-mounting SD_MMC...");
 
   SD_MMC.end();  // Properly stop previous SD_MMC usage
 
-  SD_MMC.setPins(SD_CLK, SD_CMD, SD_D0); // Check your pins here
+  SD_MMC.setPins(SD_CLK, SD_CMD, SD_D0);
 
   if (!SD_MMC.begin("/sdcard", true) || SD_MMC.cardType() == CARD_NONE) {
     ESP_LOGE(TAG, "SD Mount Failed :(");
@@ -61,9 +68,6 @@ void USBAppShutdown() {
   if (!SD_MMC.exists("/journal")) SD_MMC.mkdir("/journal");
   if (SAVE_POWER) setCpuFrequencyMhz(POWER_SAVE_FREQ);
   disableTimeout = false;
-
-  // Switch USB contol to BMS
-  PowerSystem.setUSBControlBMS();
 }
 
 static int32_t onWrite(uint32_t lba, uint32_t offset, uint8_t* buffer, uint32_t bufsize) {
