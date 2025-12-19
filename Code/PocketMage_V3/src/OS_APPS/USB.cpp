@@ -21,10 +21,6 @@ void USBAppShutdown() {
   // Stop MSC functionality
   msc.end();
 
-  // Stop USB peripheral completely
-  USB.end();
-  delay(50);
-
   // Free card struct
   if (card) {
     free(card);
