@@ -49,7 +49,7 @@
 #include "esp_log.h"
 
 // ------------------ General ------------------
-enum TXTState_NEW { TXT_, FONT, SAVE_AS, LOAD_FILE };
+enum TXTState_NEW { TXT_, FONT, SAVE_AS, LOAD_FILE, NEW_FILE };
 TXTState_NEW CurrentTXTState_NEW = TXT_;
 
 #define TYPE_INTERFACE_TIMEOUT 5000  // ms
@@ -650,66 +650,7 @@ int displayDocumentPreview(int startX = 0, int startY = 0) {
   // Return total height used
   return cursorY - startY;
 }
-/* //migrated to pocketmage_touch.h
-// Scroll
-void updateScroll() {
-  const char* tag = "TOUCH";
-  static int lastTouchPos = -1;
-  static unsigned long lastTouchTime = 0;
-  static int prev_lineScroll = 0;
 
-  uint16_t touched = cap.touched();  // Read touch state
-  int touchPos = -1;
-
-  // Find the first active touch point (lowest index first)
-  for (int i = 0; i < 9; i++) {
-    if (touched & (1 << i)) {
-      touchPos = i;
-
-      ESP_LOGI(tag, "Prev pad: %d\tTouched pad: \n", lastTouchPos,
-               touchPos);  // TODO(logging): come up with more descriptive tags
-
-      break;
-    }
-  }
-
-  unsigned long currentTime = millis();
-
-  if (touchPos != -1) {  // If a touch is detected
-    ESP_LOGI(tag, "Touch detected\n");
-
-    if (lastTouchPos != -1) {  // Compare with previous touch
-      int touchDelta = abs(touchPos - lastTouchPos);
-      if (touchDelta <= 2) {  // Ignore large jumps
-        int maxScroll = getTotalDisplayLines();
-
-        // REVERSED SCROLL DIRECTION:
-        if (touchPos < lastTouchPos && lineScroll < maxScroll) {
-          prev_lineScroll = lineScroll;
-          lineScroll++;
-        } else if (touchPos > lastTouchPos && lineScroll > 0) {
-          prev_lineScroll = lineScroll;
-          lineScroll--;
-        }
-      }
-    }
-
-    lastTouchPos = touchPos;      // update tracked touch
-    lastTouch = touchPos;         // <--- update UI flag
-    lastTouchTime = currentTime;  // reset timeout
-  } else if (lastTouchPos != -1 && (currentTime - lastTouchTime > TOUCH_TIMEOUT_MS)) {
-    // Timeout: reset both
-    lastTouchPos = -1;
-    lastTouch = -1;  // <--- reset UI flag
-
-    if (prev_lineScroll != lineScroll) {
-      updateScreen = true;
-    }
-
-    prev_lineScroll = lineScroll;
-  }
-}
-*/
 bool lineHasText(const LineObject& lineObj) {
   // Check if line has any words
   if (lineObj.words.empty())
@@ -1273,6 +1214,49 @@ void saveMarkdownFile(const String& path) {
   SDActive = false;
 }
 
+void newMarkdownFile(const String& path) {
+  if (noSD) {
+    OLED().oledWord("SAVE FAILED - No SD!");
+    delay(3000);
+    return;
+  }
+
+  SDActive = true;
+  setCpuFrequencyMhz(240);
+  delay(50);
+
+  // Determine save path
+  String savePath = path;
+  if (savePath == "" || savePath == "-")
+    savePath = "/temp.txt";
+  if (!savePath.startsWith("/"))
+    savePath = "/" + savePath;
+
+  File file = SD_MMC.open(savePath.c_str(), FILE_WRITE);
+  if (!file) {
+    OLED().oledWord("SAVE FAILED - OPEN ERR");
+    delay(2000);
+    ESP_LOGE("SD", "Failed to open file for writing: %s", savePath.c_str());
+    SDActive = false;
+    return;
+  }
+
+  // Write nothing
+
+  file.close();
+
+  // Save metadata
+  pocketmage::file::writeMetadata(savePath);
+  editingFile = savePath;
+
+  OLED().oledWord("Created: " + savePath);
+  delay(1000);
+
+  if (SAVE_POWER)
+    setCpuFrequencyMhz(POWER_SAVE_FREQ);
+  SDActive = false;
+}
+
 // Returns the pixel width of a LineObject (vector of wordObjects)
 int getLineWidth(const LineObject& lineObj, char style) {
   int lineWidth = 0;
@@ -1557,16 +1541,21 @@ void editAppend(char inchar) {
     
     saveMarkdownFile(editingFile);
   }
+  // NEW FILE Recieved
+  else if (inchar == 30) {
+    CurrentKBState = NORMAL;
+    CurrentTXTState_NEW = SAVE_AS;
+  }
   // FILE Recieved
   else if (inchar == 7) {
-    CurrentTXTState_NEW = LOAD_FILE;
     CurrentKBState = NORMAL;
+    CurrentTXTState_NEW = LOAD_FILE;
   }
   // Font Switcher
   else if (inchar == 14) {
-    CurrentTXTState_NEW = FONT;
     CurrentKBState = FUNC;
     updateScreen = true;
+    CurrentTXTState_NEW = FONT;
   } else {
     // Add char to current word
     lastWord->text += inchar;
@@ -1844,6 +1833,70 @@ void processKB_TXT_NEW() {
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
           OLED().oledLine(currentLine, false, "Input Filename");
+        }
+      }
+      break;
+    case NEW_FILE:
+      inchar = KB().updateKeypress();
+      if (currentMillis - KBBounceMillis >= KB_COOLDOWN) {
+        // HANDLE INPUTS
+        //No char recieved
+        if (inchar == 0);   
+        //CR Recieved
+        else if (inchar == 13) {                          
+          if (currentLine != "" && currentLine != "-") {
+            if (!currentLine.startsWith("/notes/")) currentLine = "/notes/" + currentLine;
+            if (!currentLine.endsWith(".txt")) currentLine = currentLine + ".txt";
+            newMarkdownFile(currentLine);
+            CurrentTXTState_NEW = TXT_;
+          } else {
+            OLED().oledWord("Invalid Name");
+            delay(2000);
+          }
+          
+          currentLine = "";
+        }                                      
+        //SHIFT Recieved
+        else if (inchar == 17) {                                  
+          if (CurrentKBState == SHIFT) CurrentKBState = NORMAL;
+          else CurrentKBState = SHIFT;
+        }
+        //FN Recieved
+        else if (inchar == 18) {                                  
+          if (CurrentKBState == FUNC) CurrentKBState = NORMAL;
+          else CurrentKBState = FUNC;
+        }
+        //Space Recieved
+        else if (inchar == 32) {                                  
+          // Spaces not allowed in filenames
+        }
+        //ESC / CLEAR Recieved
+        else if (inchar == 20) {                                  
+          currentLine = "";
+        }
+        //BKSP Recieved
+        else if (inchar == 8) {                  
+          if (currentLine.length() > 0) {
+            currentLine.remove(currentLine.length() - 1);
+          }
+        }
+        // Home recieved
+        else if (inchar == 12) {
+          CurrentTXTState_NEW = TXT_;
+        }
+        else {
+          currentLine += inchar;
+          if (inchar >= 48 && inchar <= 57) {}  //Only leave FN on if typing numbers
+          else if (CurrentKBState != NORMAL) {
+            CurrentKBState = NORMAL;
+          }
+        }
+
+        currentMillis = millis();
+        //Make sure oled only updates at OLED_MAX_FPS
+        if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
+          OLEDFPSMillis = currentMillis;
+          OLED().oledLine(currentLine, false, "Input Name for New File");
         }
       }
       break;
