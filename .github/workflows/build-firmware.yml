@@ -53,3 +53,49 @@ jobs:
             Code/PocketMage_V3/.pio/build/PM_V3/firmware.*
             Code/PocketMage_V3/.pio/build/PM_V3/*.bin
             Code/PocketMage_V3/.pio/build/PM_V3/*.elf
+
+  tabulae_rasae_applicationis_creare:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: Code/BlankApp
+
+    steps:
+      - name: Conjure the Repository
+        uses: actions/checkout@v4
+
+      - name: Prepare the Python Cauldron
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache Ancient Dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.platformio/.cache
+            .pio
+          key: ${{ runner.os }}-pio-${{ hashFiles('platformio.ini') }}
+          restore-keys: |
+            ${{ runner.os }}-pio-
+
+      - name: Summon PlatformIO
+        run: pip install -U platformio
+
+      - name: Forge the BlankApp Spell
+        run: |
+          pio run -e PM_V3
+          echo "Listing the build directory:"
+          ls -l .pio/build/PM_V3
+          echo "Listing recursively:"
+          ls -lR .pio/build/PM_V3
+
+      - name: Create the Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: blankapp-artifacts
+          path: |
+            Code/BlankApp/.pio/build/PM_V3/firmware.*
+            Code/BlankApp/.pio/build/PM_V3/*.bin
+            Code/BlankApp/.pio/build/PM_V3/*.elf
