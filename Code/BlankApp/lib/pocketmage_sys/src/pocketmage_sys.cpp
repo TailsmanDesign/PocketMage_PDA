@@ -66,7 +66,7 @@ namespace pocketmage::file{
         return;
     } else {
         SDActive = true;
-        pocketmage::setCpuSpeed(240);
+        setCpuFrequencyMhz(240);
         delay(50);
 
         String textToSave = vectorToString();
@@ -163,7 +163,7 @@ namespace pocketmage::file{
         return;
     } else {
         SDActive = true;
-        pocketmage::setCpuSpeed(240);
+        setCpuFrequencyMhz(240);
         delay(50);
 
         keypad.disableInterrupts();
@@ -193,7 +193,7 @@ namespace pocketmage::file{
         return;
     } else {
         SDActive = true;
-        pocketmage::setCpuSpeed(240);
+        setCpuFrequencyMhz(240);
         delay(50);
 
         keypad.disableInterrupts();
@@ -259,7 +259,7 @@ namespace pocketmage::file{
         return;
     } else {
         SDActive = true;
-        pocketmage::setCpuSpeed(240);
+        setCpuFrequencyMhz(240);
         delay(50);
 
         keypad.disableInterrupts();
@@ -283,7 +283,7 @@ namespace pocketmage::file{
     }
     
     void renMetadata(String oldPath, String newPath) {
-    pocketmage::setCpuSpeed(240);
+    setCpuFrequencyMhz(240);
     const char* metaPath = SYS_METADATA_FILE;
 
     // Open metadata file for reading
@@ -332,7 +332,7 @@ namespace pocketmage::file{
     ESP_LOGI(TAG, "Metadata updated for renamed file.");
 
     if (SAVE_POWER)
-        pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+        setCpuFrequencyMhz(POWER_SAVE_FREQ);
     }
     
     void copyFile(String oldFile, String newFile) {
@@ -342,7 +342,7 @@ namespace pocketmage::file{
         return;
     } else {
         SDActive = true;
-        pocketmage::setCpuSpeed(240);
+        setCpuFrequencyMhz(240);
         delay(50);
 
         keypad.disableInterrupts();
@@ -374,7 +374,7 @@ namespace pocketmage::file{
         return;
     } else {
         SDActive = true;
-        pocketmage::setCpuSpeed(240);
+        setCpuFrequencyMhz(240);
         delay(50);
 
         keypad.disableInterrupts();

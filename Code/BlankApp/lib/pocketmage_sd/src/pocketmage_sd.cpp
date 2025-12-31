@@ -21,7 +21,7 @@ void PocketmageSD::listDir(fs::FS &fs, const char *dirname) {
     return;
   }
   else {
-    pocketmage::setCpuSpeed(240);
+    setCpuFrequencyMhz(240);
     delay(50);
     if (noTimeout_) *noTimeout_ = true;
     ESP_LOGI(tag, "Listing directory %s\r\n", dirname);
@@ -71,7 +71,7 @@ void PocketmageSD::listDir(fs::FS &fs, const char *dirname) {
     // }
 
     if (noTimeout_) *noTimeout_ = false;
-    if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+    if (SAVE_POWER) setCpuFrequencyMhz(POWER_SAVE_FREQ);
   }
 }
 void PocketmageSD::readFile(fs::FS &fs, const char *path) {
@@ -81,7 +81,7 @@ void PocketmageSD::readFile(fs::FS &fs, const char *path) {
     return;
   }
   else {
-    pocketmage::setCpuSpeed(240);
+    setCpuFrequencyMhz(240);
     delay(50);
     if (noTimeout_) *noTimeout_ = true;
     ESP_LOGI(tag, "Reading file %s\r\n", path);
@@ -95,7 +95,7 @@ void PocketmageSD::readFile(fs::FS &fs, const char *path) {
 
     file.close();
     if (noTimeout_) *noTimeout_ = false;
-    if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+    if (SAVE_POWER) setCpuFrequencyMhz(POWER_SAVE_FREQ);
   }
 }
 String PocketmageSD::readFileToString(fs::FS &fs, const char *path) {
@@ -105,7 +105,7 @@ String PocketmageSD::readFileToString(fs::FS &fs, const char *path) {
     return "";
   }
   else { 
-    pocketmage::setCpuSpeed(240);
+    setCpuFrequencyMhz(240);
     delay(50);
 
     if (noTimeout_) *noTimeout_ = true;
@@ -138,7 +138,7 @@ void PocketmageSD::writeFile(fs::FS &fs, const char *path, const char *message) 
     return;
   }
   else {
-    pocketmage::setCpuSpeed(240);
+    setCpuFrequencyMhz(240);
     delay(50);
     if (noTimeout_) *noTimeout_ = true;
     ESP_LOGI(tag, "Writing file: %s\r\n", path);
@@ -158,7 +158,7 @@ void PocketmageSD::writeFile(fs::FS &fs, const char *path, const char *message) 
     }
     file.close();
     if (noTimeout_) *noTimeout_ = false;
-    if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+    if (SAVE_POWER) setCpuFrequencyMhz(POWER_SAVE_FREQ);
   }
 }
 void PocketmageSD::appendFile(fs::FS &fs, const char *path, const char *message) {
@@ -168,7 +168,7 @@ void PocketmageSD::appendFile(fs::FS &fs, const char *path, const char *message)
     return;
   }
   else {
-    pocketmage::setCpuSpeed(240);
+    setCpuFrequencyMhz(240);
     delay(50);
     if (noTimeout_) *noTimeout_ = true;
     ESP_LOGI(tag, "Appending to file: %s\r\n", path);
@@ -187,7 +187,7 @@ void PocketmageSD::appendFile(fs::FS &fs, const char *path, const char *message)
     }
     file.close();
     if (noTimeout_) *noTimeout_ = false;
-    if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+    if (SAVE_POWER) setCpuFrequencyMhz(POWER_SAVE_FREQ);
   }
 }
 void PocketmageSD::renameFile(fs::FS &fs, const char *path1, const char *path2) {
@@ -197,7 +197,7 @@ void PocketmageSD::renameFile(fs::FS &fs, const char *path1, const char *path2) 
     return;
   }
   else {
-    pocketmage::setCpuSpeed(240);
+    setCpuFrequencyMhz(240);
     delay(50);
     if (noTimeout_) *noTimeout_ = true;
     ESP_LOGI(tag, "Renaming file %s to %s\r\n", path1, path2);
@@ -209,7 +209,7 @@ void PocketmageSD::renameFile(fs::FS &fs, const char *path1, const char *path2) 
       ESP_LOGE(tag, "Rename failed: %s to %s", path1, path2);
     }
     if (noTimeout_) *noTimeout_ = false;
-    if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+    if (SAVE_POWER) setCpuFrequencyMhz(POWER_SAVE_FREQ);
   }
 }
 void PocketmageSD::deleteFile(fs::FS &fs, const char *path) {
@@ -219,7 +219,7 @@ void PocketmageSD::deleteFile(fs::FS &fs, const char *path) {
     return;
   }
   else {
-    pocketmage::setCpuSpeed(240);
+    setCpuFrequencyMhz(240);
     delay(50);
     if (noTimeout_) *noTimeout_ = true;
     ESP_LOGI(tag, "Deleting file: %s\r\n", path);
@@ -230,6 +230,6 @@ void PocketmageSD::deleteFile(fs::FS &fs, const char *path) {
       ESP_LOGE(tag, "Delete failed for %s", path);
     }
     if (noTimeout_) *noTimeout_ = false;
-    if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+    if (SAVE_POWER) setCpuFrequencyMhz(POWER_SAVE_FREQ);
   }
 }

@@ -35,7 +35,7 @@ void PocketMage_INIT(){
 
   // SET CPU CLOCK FOR POWER SAVE MODE
   if (SAVE_POWER) setCpuFrequencyMhz(40 );
-  else            pocketmage::setCpuSpeed(240);
+  else            setCpuFrequencyMhz(240);
   
   // CAPACATIVE TOUCH SETUP
   setupTouch();

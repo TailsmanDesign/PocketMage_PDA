@@ -36,7 +36,7 @@ void setupSD() {
   }
   wireSD();
 
-  pocketmage::setCpuSpeed(240);
+  setCpuFrequencyMhz(240);
   // Create folders and files if needed
   if (!SD_MMC.exists("/sys"))               SD_MMC.mkdir( "/sys"          );
   if (!SD_MMC.exists("/notes"))             SD_MMC.mkdir( "/notes"        );
