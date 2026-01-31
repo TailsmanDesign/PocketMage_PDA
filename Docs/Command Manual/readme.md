@@ -3,13 +3,46 @@ This is a guide on common key combinations and commands on the PocketMage PDA de
 
 ---
 ## General Keystrokes (work in almost any app)
+- **( < )** | Cursor left
+- **( > )** | Cursor right
+- **( o )** | Cursor to end of line
 - **(FN) + ( < )** | Exit or back button
 - **(FN) + ( > )** | Save document
-- **(FN) + ( o )** | Clear Line
+- **(SHFt) + ( o )** | Clear Line
 - **(FN) + (Key)** | FN layer keymapping (legends on the PCB)
 - **(SHFT) + (key)** | Capital letter
 - **( o ) OR (ENTER)** | Select button
 
+---
+## Keymap
+### Default Layer
+```
+[q] [w] [e] [r] [t] [y] [u] [i] [o] [p]
+[a] [s] [d] [f] [g] [h] [j] [k] [l] [BKSP]
+[TAB] [z] [x] [c] [v] [b] [n] [m] [.] [ENTER]
+[SHIFT] [FN] [SPACE] [<] [o] [>]
+```
+### Shift Layer
+```
+[Q] [W] [E] [R] [T] [Y] [U] [I] [O] [P]
+[A] [S] [D] [F] [G] [H] [J] [K] [L] [BKSP]
+[TAB] [Z] [X] [C] [V] [B] [N] [M] ['] [ENTER]
+[SHIFT] [FN] [SPACE] [SHIFT+<] [SHIFT+o] [SHIFT+>]
+```
+### Function Layer
+```
+[1] [2] [3] [4] [5] [6] [7] [8] [9] [0]
+[#] [!] [$] [:] [;] [(] [)] [&] ["] [BKSP]
+[FN+TAB] [%] [_] [+] [-] [*] [/] [?] [,] [ENTER]
+[SHIFT] [FN] [SPACE] [FN+<] [FN+o] [FN+>]
+```
+### Function + Shift Layer
+```
+[!] [@] [#] [$] [%] [^] [&] [*] [(] [)]
+[~] [`] [|] [[] []] [{] [}] [<] [>] [BKSP]
+[FN+TAB] [%] [_] [&] [+] [-] [\] [?] [,] [ENTER]
+[SHIFT] [FN] [SPACE] [FN+<] [FN+o] [FN+>]
+```
 ---
 ## While Sleeping
 ### Bypass home and directly enter an app
