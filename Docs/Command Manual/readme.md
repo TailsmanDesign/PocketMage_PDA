@@ -8,9 +8,9 @@ This is a guide on common key combinations and commands on the PocketMage PDA de
 - **( o )** | Cursor to end of line
 - **(FN) + ( < )** | Exit or back button
 - **(FN) + ( > )** | Save document
-- **(SHFt) + ( o )** | Clear Line
+- **(SHIFT) + ( o )** | Clear Line
 - **(FN) + (Key)** | FN layer keymapping (legends on the PCB)
-- **(SHFT) + (key)** | Capital letter
+- **(SHIFT) + (key)** | Capital letter
 - **( o ) OR (ENTER)** | Select button
 
 ---
