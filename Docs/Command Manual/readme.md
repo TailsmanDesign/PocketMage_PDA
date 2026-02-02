@@ -5,12 +5,14 @@ This is a guide on common key combinations and commands on the PocketMage PDA de
 ## General Keystrokes (work in almost any app)
 - **( < )** | Cursor left
 - **( > )** | Cursor right
-- **( o )** | Cursor to end of line
+- **(SHIFT) + ( < )** | Cursor to start of line
+- **(SHIFT) + ( > )** | Cursor to end of line
+- **(FN) + ( o )** | Clear line
 - **(FN) + ( < )** | Exit or back button
 - **(FN) + ( > )** | Save document
-- **(SHIFT) + ( o )** | Clear Line
-- **(FN) + (Key)** | FN layer keymapping (legends on the PCB)
 - **(SHIFT) + (key)** | Capital letter
+- **(FN) + (Key)** | FN layer keymapping (legends on the PCB)
+- **(FN) + (SHIFT) + (Key)** | FN+SHIFT layer keymapping
 - **( o ) OR (ENTER)** | Select button
 
 ---
@@ -41,7 +43,7 @@ This is a guide on common key combinations and commands on the PocketMage PDA de
 [!] [@] [#] [$] [%] [^] [&] [*] [(] [)]
 [~] [`] [|] [[] []] [{] [}] [<] [>] [BKSP]
 [FN+TAB] [%] [_] [&] [+] [-] [\] [?] [,] [ENTER]
-[SHIFT] [FN] [SPACE] [FN+<] [FN+o] [FN+>]
+[SHIFT] [FN] [SPACE] [FN+SHIFT+<] [FN+SHIFT+o] [FN+SHIFT+>]
 ```
 ---
 ## While Sleeping
