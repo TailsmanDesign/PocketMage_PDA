@@ -1590,13 +1590,14 @@ void editAppend(char inchar) {
       return;
     }
     if (!savePath.startsWith("/")) savePath = "/" + savePath;
-    
+    saveCrashState();
     saveMarkdownFile(savePath);
   }
   // Journal save
   else if (inchar == 6 && CurrentTXTState_NEW == JOURNAL_MODE) {
     String savePath = getCurrentJournal();
     if (!savePath.startsWith("/")) savePath = "/" + savePath;
+    saveCrashState();
     saveMarkdownFile(savePath);
   }
 
@@ -1876,6 +1877,7 @@ void processKB_TXT_NEW() {
           if (currentLine != "" && currentLine != "-") {
             if (!currentLine.startsWith("/notes/")) currentLine = "/notes/" + currentLine;
             if (!currentLine.endsWith(".txt")) currentLine = currentLine + ".txt";
+            saveCrashState();
             saveMarkdownFile(currentLine);
             CurrentTXTState_NEW = TXT_;
           } else {

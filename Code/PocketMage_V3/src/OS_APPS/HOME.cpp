@@ -91,10 +91,19 @@ void commandSelect(String command) {
   }
 
   // Boot to other apps
-  else if (command == "a") rebootToAppSlot(1);
-  else if (command == "b") rebootToAppSlot(2);
-  else if (command == "c") rebootToAppSlot(3);
-  else if (command == "d") rebootToAppSlot(4);
+  else if (command == "a") {
+    saveCrashState();
+    rebootToAppSlot(1);
+  } else if (command == "b") {
+    saveCrashState();
+    rebootToAppSlot(2);
+  } else if (command == "c") {
+    saveCrashState();
+    rebootToAppSlot(3);
+  } else if (command == "d") {
+    saveCrashState();
+    rebootToAppSlot(4);
+  }
   
   /////////////////////////////
   else if (command == "reset") {

@@ -1,7 +1,67 @@
-#include<globals.h>
+#include <esp_system.h>
+#include <globals.h>
 static constexpr const char* TAG = "UTILS";
 
 static uint8_t prevSec = 0;  
+
+static const char* CRASH_LOG_PATH = "/crash.log";
+
+// Convert reset reason to readable text
+static const char* resetReasonToStr(esp_reset_reason_t r) {
+  switch (r) {
+    case ESP_RST_PANIC:
+      return "PANIC";
+    case ESP_RST_WDT:
+      return "WATCHDOG";
+    case ESP_RST_BROWNOUT:
+      return "BROWNOUT";
+    case ESP_RST_SW:
+      return "SOFTWARE";
+    case ESP_RST_POWERON:
+      return "POWERON";
+    default:
+      return "OTHER";
+  }
+}
+
+void saveCrashState() {
+  prefs.begin("PocketMage", false);
+  prefs.putInt("CurrentAppState", static_cast<int>(CurrentAppState));
+  prefs.end();
+}
+
+
+void logLastCrash() {
+  // Check if SD is available
+  if (SD().getNoSD()) {
+    Serial.println("No SD card, cannot log crash!");
+    return;
+  }
+
+  // Get reset reason
+  esp_reset_reason_t reason = esp_reset_reason();
+
+  // Update crash counter in prefs
+  prefs.begin("crash", false);
+  int count = prefs.getInt("count", 0) + 1;
+  int lastState = prefs.getInt("state", -1);
+  prefs.putInt("count", count);
+  prefs.end();
+
+  // Build log string
+  String logEntry = "\n--- BOOT ---\n";
+  logEntry += "Crash #: " + String(count) + "\n";
+  logEntry += "Reason: " + String(resetReasonToStr(reason)) + " (" + String(reason) + ")\n";
+  logEntry += "Last AppState: " + String(lastState) + "\n";
+  logEntry += "Free heap: " + String(ESP.getFreeHeap()) + "\n";
+  logEntry += "Uptime(ms): " + String(millis()) + "\n";
+
+  // Append to crash log using PocketmageSD
+  SD().appendToFile(CRASH_LOG_PATH, logEntry);
+
+  // Optional: feedback to console
+  Serial.println("Crash logged to " + String(CRASH_LOG_PATH));
+}
 
 void printDebug() {
     DateTime now = CLOCK().nowDT();
@@ -214,6 +274,7 @@ void loadState(bool changeState) {
         prefs.end();
         return;
     }
+  saveCrashState();
 
     u8g2.setContrast(OLED_BRIGHTNESS);
 
@@ -296,14 +357,12 @@ void loadState(bool changeState) {
             HOME_INIT();
             break;
         }
-
     }
     #endif // POCKETMAGE_OS
     prefs.end();
 }
 
 void updateBattState() {
-
     // Read and scale voltage (add calibration offset if needed)
     float rawVoltage = (analogRead(BAT_SENS) * (3.3 / 4095.0) * 2) + 0.2;
 

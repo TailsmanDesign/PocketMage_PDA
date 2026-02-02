@@ -9,7 +9,7 @@
 #include <pocketmage.h>
 // OTA_APP: remove assets.h + assets.cpp, and OS_APPS/, follow OTA_APP: tag instructions in codebase
 #include <assets.h> // OTA_APP: remove
-
+#include <stdint.h>
 
 // ===================== SYSTEM STATE =====================
 extern Preferences prefs;                       // NVS preferencesv
@@ -61,6 +61,16 @@ void einkHandler(void *parameter);
 void applicationEinkHandler();
 void processKB();
 
+// Logs last crash info to persistent storage when called on boot
+void logLastCrash();
+
+// Saves current AppState so we know what crashed
+// Call before app transitions or risky operations
+void saveCrashState();
+
+// helpers
+bool crashLoopDetected();
+void resetCrashCounter();
 
 // OTA_APP: Remove all pocketmage v3 prototypes below this line
 #if !OTA_APP // POCKETMAGE_OS
