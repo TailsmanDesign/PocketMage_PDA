@@ -1,12 +1,13 @@
 {
   "versions": [
+    "BETA_V1_0_HOTFIX2",
+    "BETA_V1.5.2",
     "BETA_V1.5",
     "BETA_V1.4",
     "BETA_V1.3",
     "BETA_V1.2_SDHOTFIX2",
     "BETA_V1.2_SDCARDHOTFIX",
     "BETA_V1.2",
-    "BETA_V1.1",
-    "BETA_V1_0_HOTFIX2"
+    "BETA_V1.1"
   ]
 }
