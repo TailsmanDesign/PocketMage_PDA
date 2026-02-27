@@ -1,6 +1,6 @@
 {
   "versions": [
-    "dev-20260226-045837",
+    "BETA_1.5.4",
     "BETA_V1_0_HOTFIX2",
     "BETA_V1.5.3",
     "BETA_V1.5.2",
@@ -10,7 +10,6 @@
     "BETA_V1.2_SDHOTFIX2",
     "BETA_V1.2_SDCARDHOTFIX",
     "BETA_V1.2",
-    "BETA_V1.1",
-    "BETA_1.5.4"
+    "BETA_V1.1"
   ]
 }
