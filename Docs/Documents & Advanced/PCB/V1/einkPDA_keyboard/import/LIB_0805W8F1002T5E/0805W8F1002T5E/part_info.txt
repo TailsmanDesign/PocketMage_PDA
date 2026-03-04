@@ -1,0 +1,9 @@
+Manufacturer=ROYALOHM
+PartNumber=0805W8F1002T5E
+PartCategory=Resistor
+PackageCategory=Resistor Chip
+PinCount=2
+Version=1.1
+Released=2024-06-17 09:11:45
+Downloaded=2024-10-12 18:43:58
+3D=Y

@@ -56,7 +56,6 @@ void setupBZ() {
   //ledc_channel_config(&ledc_channel);
   auto& bz = BZ();
   bz.begin();
-  bz.playJingle(Jingles::Startup);
 }
 
 // Access for other apps

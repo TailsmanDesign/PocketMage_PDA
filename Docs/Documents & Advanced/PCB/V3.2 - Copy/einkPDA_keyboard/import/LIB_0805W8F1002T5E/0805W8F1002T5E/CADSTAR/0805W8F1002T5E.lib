@@ -1,0 +1,16 @@
+.0805W8F1002T5E :1 ;Thick Film Resistors - SMD RMC 0805 1/8W 1% T/R-5000
+RESC2013X65N
+*STM R
+*NGS
+*PLB 1="1" 2="2"
+*MXP 2
+*DFN 0805W8F1002T5E
+~!Mouser Part Number (303-0805W8F1002T5E)
+~!Link Mouser Price/Stock (https://www.mouser.co.uk/ProductDetail/Royalohm/0805W8F1002T5E?qs=e8oIoAS2J1QfYPOBCQ0fIg%3D%3D)
+~!Manufacturer_Name (ROYALOHM)
+~!Manufacturer_Part_Number (0805W8F1002T5E)
+~!Link Datasheet (https://www.mouser.de/datasheet/2/1365/1-3044649.pdf)
+~!Height (0.65mm)
+~!3D_Model (0805W8F1002T5E)
+"0805W8F1002T5E"
+1.1!U 2.1!U 

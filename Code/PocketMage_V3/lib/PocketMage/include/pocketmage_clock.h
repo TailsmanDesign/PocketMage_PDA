@@ -37,6 +37,8 @@ private:
   bool begun_ = false;
   volatile long timeoutMillis_ = 0;   // Timeout tracking
   volatile long prevTimeMillis_ = 0;  // Previous time for timeout
+  enum TimeParseResult { TIME_OK = 0, TIME_INVALID_FORMAT, TIME_OUT_OF_RANGE };
+  static TimeParseResult parseTimeString(const String& timeStr, int& outHours, int& outMinutes);
 };
 
 void wireClock();

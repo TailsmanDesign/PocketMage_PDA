@@ -1,8 +1,6 @@
 name: Creare et Publicare Inscriptorem per Rete
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
   release:
     types: [published]

@@ -77,10 +77,10 @@ void copyDirRecursive(File src, const String &assetsSrc, const String &assetsDst
         String dstFile = assetsDst + relative;
 
         if (entry.isDirectory()) {
-            ensureDir(SD_MMC, dstFile.c_str());
+            ensureDir(*global_fs, dstFile.c_str());
             copyDirRecursive(entry, assetsSrc, assetsDst);
         } else {
-            File dst = SD_MMC.open(dstFile.c_str(), FILE_WRITE);
+            File dst = global_fs->open(dstFile.c_str(), FILE_WRITE);
             if (dst) {
                 uint8_t buf[512];
                 size_t len;
@@ -176,9 +176,9 @@ void loadAndDrawAppIcon(int x, int y, int otaIndex, bool showName, int maxNameCh
 
 	AppInfo app;
 	if (!loadAppInfo(otaIndex, app)) return;
-	if (!SD_MMC.exists(app.iconPath)) return;
+	if (!global_fs->exists(app.iconPath)) return;
 
-	File f = SD_MMC.open(app.iconPath, "r");
+	File f = global_fs->open(app.iconPath, "r");
 	if (!f) return;
 
 	uint8_t buf[40 * 5]; // 40x40 1-bit = 200 bytes
@@ -215,7 +215,7 @@ void loadAndDrawAppIcon(int x, int y, int otaIndex, bool showName, int maxNameCh
 
 void cleanupAppsTemp(String binPath) {
   // --- Cleanup TEMP_DIR, keep *_ICON.bin only ---
-  File root = SD_MMC.open(TEMP_DIR);
+  File root = global_fs->open(TEMP_DIR);
   if (root && root.isDirectory()) {
     File entry;
     while ((entry = root.openNextFile())) {
@@ -223,7 +223,7 @@ void cleanupAppsTemp(String binPath) {
       String fullPath = pathJoin(TEMP_DIR, name);
       entry.close();
       if (!name.endsWith("_ICON.bin")) {
-        SD_MMC.remove(fullPath);
+        global_fs->remove(fullPath);
       }
     }
     root.close();
@@ -274,7 +274,7 @@ static void installTask(void *param) {
   String tarPath = pathJoin(APP_DIRECTORY, p->tarRelName);
 
 	// --- Check TAR exists ---
-	if (!SD_MMC.exists(tarPath.c_str())) {
+	if (!global_fs->exists(tarPath.c_str())) {
 		Serial.printf("Tar not found: %s\n", tarPath.c_str());
     if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
 		g_installFailed = true;
@@ -284,9 +284,9 @@ static void installTask(void *param) {
 	}
 
 	// --- Ensure directories ---
-	if (!ensureDir(SD_MMC, APP_DIRECTORY) ||
-		//!rmRF(SD_MMC, TEMP_DIR) ||
-		!ensureDir(SD_MMC, TEMP_DIR)) {
+	if (!ensureDir(*global_fs, APP_DIRECTORY) ||
+		//!rmRF(*global_fs, TEMP_DIR) ||
+		!ensureDir(*global_fs, TEMP_DIR)) {
 		Serial.println("Failed to prepare TEMP_DIR");
     if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
 		g_installFailed = true;
@@ -302,7 +302,7 @@ static void installTask(void *param) {
 		g_installProgress = progress / 2; // 0–50% for extraction
 	});
 
-	if (!unpacker.tarExpander(SD_MMC, tarPath.c_str(), SD_MMC, TEMP_DIR)) {
+	if (!unpacker.tarExpander(*global_fs, tarPath.c_str(), *global_fs, TEMP_DIR)) {
 		Serial.printf("Extraction failed (err=%d)\n", unpacker.tarGzGetError());
 
     if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
@@ -322,7 +322,7 @@ String base = "";
 String iconPath = "";
 String expectedIcon = base + "_ICON.bin";
 
-File tempRoot = SD_MMC.open(TEMP_DIR);
+File tempRoot = global_fs->open(TEMP_DIR);
 if (tempRoot && tempRoot.isDirectory()) {
     File entry;
     String expectedIcon; // will be set once base is known
@@ -369,7 +369,7 @@ Serial.printf("App base name determined: '%s'\n", base.c_str());
 // Wait up to ~200 ms for SD_MMC to see the files
 int waitMs = 0;
 while (waitMs < 200) {
-    File tempRoot = SD_MMC.open(TEMP_DIR);
+    File tempRoot = global_fs->open(TEMP_DIR);
     bool found = false;
     if (tempRoot && tempRoot.isDirectory()) {
         File entry;
@@ -384,14 +384,14 @@ while (waitMs < 200) {
         }
         tempRoot.close();
     }
-    if (found && SD_MMC.exists(binPath.c_str())) break;
+    if (found && global_fs->exists(binPath.c_str())) break;
 
     vTaskDelay(10 / portTICK_PERIOD_MS);
     waitMs += 10;
 }
 
 Serial.println("Listing /apps/temp:");
-tempRoot = SD_MMC.open(TEMP_DIR);
+tempRoot = global_fs->open(TEMP_DIR);
 if (tempRoot && tempRoot.isDirectory()) {
     File entry;
     while ((entry = tempRoot.openNextFile())) {
@@ -401,9 +401,9 @@ if (tempRoot && tempRoot.isDirectory()) {
     tempRoot.close();
 }
 
-if (binPath.length() == 0 || !SD_MMC.exists(binPath.c_str())) {
+if (binPath.length() == 0 || !global_fs->exists(binPath.c_str())) {
     Serial.printf("Bin not found after extraction: %s\n", binPath.c_str());
-    cleanupAppsTempRecursive(SD_MMC, TEMP_DIR);
+    cleanupAppsTempRecursive(*global_fs, TEMP_DIR);
     if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
     g_installFailed = true;
     g_installDone = true;
@@ -417,14 +417,14 @@ delay(100);
 String assetsSrc = pathJoin(TEMP_DIR, "assets");
 String assetsDst = pathJoin("/assets", base);   // <-- correct target path
 
-if (SD_MMC.exists(assetsSrc.c_str())) {
-    rmRF(SD_MMC, assetsDst.c_str()); // clean old assets
+if (global_fs->exists(assetsSrc.c_str())) {
+    rmRF(*global_fs, assetsDst.c_str()); // clean old assets
     Serial.printf("Copying assets: %s -> %s\n", assetsSrc.c_str(), assetsDst.c_str());
-    if (!copyAssetsFlat(SD_MMC, assetsSrc.c_str(), assetsDst.c_str())) {
+    if (!copyAssetsFlat(*global_fs, assetsSrc.c_str(), assetsDst.c_str())) {
         Serial.println("Failed to copy assets!");
         g_installFailed = true;
         g_installDone = true;
-        cleanupAppsTempRecursive(SD_MMC, TEMP_DIR);
+        cleanupAppsTempRecursive(*global_fs, TEMP_DIR);
             if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
         delete p;
         vTaskDelete(NULL);
@@ -441,7 +441,7 @@ if (SD_MMC.exists(assetsSrc.c_str())) {
 	if (!partition) {
 		Serial.printf("OTA_%d partition not found\n", p->otaIndex);
 
-    cleanupAppsTempRecursive(SD_MMC, TEMP_DIR);
+    cleanupAppsTempRecursive(*global_fs, TEMP_DIR);
     if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
 
 		g_installFailed = true;
@@ -450,11 +450,11 @@ if (SD_MMC.exists(assetsSrc.c_str())) {
 		vTaskDelete(NULL);
 	}
 
-	File f = SD_MMC.open(binPath, "r");
+	File f = global_fs->open(binPath, "r");
 	if (!f) {
 		Serial.printf("Failed to open: %s\n", binPath.c_str());
 
-    cleanupAppsTempRecursive(SD_MMC, TEMP_DIR);
+    cleanupAppsTempRecursive(*global_fs, TEMP_DIR);
     if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
 
 		g_installFailed = true;
@@ -473,7 +473,7 @@ if (SD_MMC.exists(assetsSrc.c_str())) {
 		Serial.printf("esp_ota_begin failed: %s\n", esp_err_to_name(err));
 		f.close();
     
-    cleanupAppsTempRecursive(SD_MMC, TEMP_DIR);
+    cleanupAppsTempRecursive(*global_fs, TEMP_DIR);
     if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
 
 		g_installFailed = true;
@@ -492,7 +492,7 @@ if (SD_MMC.exists(assetsSrc.c_str())) {
 			esp_ota_abort(ota_handle);
 			f.close();
 
-      cleanupAppsTempRecursive(SD_MMC, TEMP_DIR);
+      cleanupAppsTempRecursive(*global_fs, TEMP_DIR);
         if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
 
 			g_installFailed = true;
@@ -532,7 +532,7 @@ if (iconPath.length() == 0) {
 		}
 	}
 
-  cleanupAppsTempRecursive(SD_MMC, TEMP_DIR);
+  cleanupAppsTempRecursive(*global_fs, TEMP_DIR);
   if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
 
 	g_installProgress = 100;
@@ -726,7 +726,7 @@ void processKB_APPLOADER() {
         //Make sure oled only updates at OLED_MAX_FPS
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentLine, false);
+          OLED().oledLine(currentLine, currentLine.length(), false);
         }
       }
       break;

@@ -8,6 +8,7 @@
 
 #include <pocketmage.h>
 
+
 static constexpr const char* tag = "OLED";
 
 // Initialization of oled display class
@@ -83,9 +84,11 @@ void PocketmageOled::oledWord(String word, bool allowLarge, bool showInfo) {
   
 }
 
-void PocketmageOled::oledLine(String line, bool doProgressBar, String bottomMsg) {
+void PocketmageOled::oledLine(String line, int input_pos, bool doProgressBar, String bottomMsg) {
+    u8g2.setDrawColor(1);
     uint8_t mcl = EINK().maxCharsPerLine();
     uint8_t maxLength = mcl;
+    String left = "";
     u8g2_.clearBuffer();
 
   //PROGRESS BAR
@@ -145,10 +148,47 @@ void PocketmageOled::oledLine(String line, bool doProgressBar, String bottomMsg)
   // DRAW LINE TEXT (unchanged)
   u8g2_.setFont(u8g2_font_ncenB18_tr);
   if (u8g2_.getStrWidth(line.c_str()) < (u8g2_.getDisplayWidth() - 5)) {
-    u8g2_.drawStr(0, 20, line.c_str());
-    if (line.length() > 0) u8g2_.drawVLine(u8g2_.getStrWidth(line.c_str()) + 2, 1, 22);
+    if (line.length() > 0) {
+      if (input_pos == 0) {
+        u8g2_.drawStr(0, 20, line.c_str());
+        u8g2_.drawVLine(0, 1, 22);
+      } else if (input_pos == line.length()) {
+        u8g2_.drawStr(0, 20, line.c_str());
+        u8g2_.drawVLine(u8g2_.getStrWidth(line.c_str()) + 2, 1, 22);
+      } else {
+        left = line.substring(0, input_pos);
+        u8g2_.drawStr(0, 20, line.c_str());
+        u8g2_.drawVLine(u8g2_.getStrWidth(left.c_str()), 1, 22);
+      }
+    } else {
+      u8g2_.drawStr(0, 20, line.c_str());
+    }
   } else {
-    u8g2_.drawStr(u8g2_.getDisplayWidth()-8-u8g2_.getStrWidth(line.c_str()), 20, line.c_str());
+    if (input_pos == 0) {
+      u8g2_.drawStr(0, 20, line.c_str());
+      u8g2_.drawVLine(0, 1, 22);
+    } else if (input_pos == line.length()) {
+      //show end of line, input scrolls left
+      u8g2_.drawStr(u8g2_.getDisplayWidth()-8-u8g2_.getStrWidth(line.c_str()), 20, line.c_str());
+      u8g2_.drawVLine(u8g2_.getDisplayWidth()-6, 1, 22);
+    } else {
+      //calc cursor pos
+      left = line.substring(0, input_pos);
+      int cursor_offset = u8g2_.getStrWidth(left.c_str());
+      int line_start = 0;
+      if (cursor_offset > (u8g2_.getDisplayWidth() - 8) / 2) {
+        //shift left
+        line_start += ((u8g2_.getDisplayWidth() - 8) / 2) - cursor_offset;
+        if (line_start + u8g2_.getStrWidth(line.c_str()) < u8g2_.getDisplayWidth() - 8) {
+          //shift back right
+          line_start += u8g2_.getDisplayWidth() - 8 - (line_start + u8g2_.getStrWidth(line.c_str()));
+          
+        }
+        cursor_offset += line_start;
+      }
+      u8g2_.drawStr(line_start, 20, line.c_str());
+      u8g2_.drawVLine(cursor_offset, 1, 22);
+    }
   }
 
   u8g2_.sendBuffer();

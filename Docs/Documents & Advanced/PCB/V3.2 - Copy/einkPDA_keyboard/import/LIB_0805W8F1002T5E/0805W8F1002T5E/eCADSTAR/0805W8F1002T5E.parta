@@ -1,0 +1,66 @@
+(Japanese_coding: sjis)
+(function "ECS_16120669"
+    (uver 1)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (ctime 2024-06-17-09:11:45)
+    (utime 2024-06-17-09:11:45)
+    (interface
+        (port "1" (symbPinId 1) (portType INOUT))
+        (port "2" (symbPinId 2) (portType INOUT))
+    )
+    (property "symbolName" "0805W8F1002T5E")
+)
+
+
+(pinAssign "ECS_16120669"
+    (uver 1)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (ctime 2024-06-17-09:11:45)
+    (utime 2024-06-17-09:11:45)
+    (interface
+        (port "1" (symbPinId 1) (portName "1") (portType INOUT))
+        (port "2" (symbPinId 2) (portName "2") (portType INOUT))
+    )
+    (internal
+        (funcInst (functionRef "ECS_16120669")
+                (port "1" (match "1"))
+                (port "2" (match "2"))
+        )
+    )
+    (property "usePowerBox" "No")
+    (property "symbolName" "0805W8F1002T5E")
+)
+
+
+(part "0805W8F1002T5E"
+    (uver 1)
+    (cuser "SamacSys")
+    (uuser "SamacSys")
+    (ctime 2024-06-17-09:11:45)
+    (utime 2024-06-17-09:11:45)
+    (packageRef "0805W8F1002T5E")
+    (pinAssignRef "ECS_16120669")
+    (interface
+        (port "1" (symbPinId 1) (portName "1") (portType INOUT))
+        (port "2" (symbPinId 2) (portName "2") (portType INOUT))
+    )
+    (partClass UNDEF)
+    (useInSchema Y)
+    (useInLayout Y)
+    (inPartsList Y)
+    (partType NORMAL)
+    (placeRestriction FREE)
+    (property "enetNonSeries" "NO")
+    (property "refDesPrefix" "R")
+    (property "description" "Thick Film Resistors - SMD RMC 0805 1/8W 1% T/R-5000")
+    (property "Mouser_Part_Number" "303-0805W8F1002T5E")
+    (property "Mouser_Price/Stock" "https://www.mouser.co.uk/ProductDetail/Royalohm/0805W8F1002T5E?qs=e8oIoAS2J1QfYPOBCQ0fIg%3D%3D")
+    (property "Manufacturer_Name" "ROYALOHM")
+    (property "Manufacturer_Part_Number" "0805W8F1002T5E")
+    (property "Datasheet_Link" "https://www.mouser.de/datasheet/2/1365/1-3044649.pdf")
+    (property "compAreaTopHeight" 0.65)
+)
+
+

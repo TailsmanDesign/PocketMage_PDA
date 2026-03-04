@@ -677,8 +677,8 @@ char keysArrayFN[4][10] = {
 char keysArrayFN_SHFT[4][10] = {
     { '!', '@', '#', '$', '%', '^', '&',  '*',  '(', ')' },
     { '~', '`', '|', '[', ']', '{', '}',  '<',  '>',   8 },
-    {  14, '%', '_', '&', '+', '-', '\\', '?',  ',',  13 },
-    {   0,  17,  18, ' ', ' ', ' ',  12,    7,    6,   0 }
+    {  14, '%', '=', '&', '+', '-', '\\', '?',  ',',  13 },
+    {   0,  17,  18, ' ', ' ', ' ',  24,   25,   26,   0 }
 };
 #pragma endregion
 
@@ -697,8 +697,9 @@ void setupKB(int KB_irq_pin) {
   if (!keypad.begin(TCA8418_DEFAULT_ADDR, &Wire)) {
     ESP_LOGE(TAG, "Error Initializing the Keyboard");
     OLED().oledWord("Keyboard INIT Failed");
-    delay(1000);
-    while (1);
+    delay(500);
+    //while (1);
+    esp_restart();
   }
   keypad.matrix(4, 10);
   wireKB();

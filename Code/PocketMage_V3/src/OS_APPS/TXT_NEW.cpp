@@ -1075,7 +1075,7 @@ void loadMarkdownFile(const String& path) {
     return;
   }
 
-  if (SD().getNoSD()) {
+  if (PM_SDAUTO().getNoSD()) {
     OLED().oledWord("LOAD FAILED - No SD!");
     delay(5000);
     return;
@@ -1086,7 +1086,7 @@ void loadMarkdownFile(const String& path) {
   delay(50);
 
   docLines.clear();
-  File file = SD_MMC.open(path.c_str(), FILE_READ);
+  File file = global_fs->open(path.c_str(), FILE_READ);
   if (!file) {
     ESP_LOGE("SD", "File does not exist: %s", path.c_str());  // FIXME: - Come up with better error handling
                                                               //        - Should this be Error or Warning?
@@ -1177,7 +1177,7 @@ void loadMarkdownFile(const String& path) {
 }
 
 void saveMarkdownFile(const String& path) {
-  if (SD().getNoSD()) {
+  if (PM_SDAUTO().getNoSD()) {
     OLED().oledWord("SAVE FAILED - No SD!");
     delay(3000);
     return;
@@ -1194,7 +1194,7 @@ void saveMarkdownFile(const String& path) {
   if (!savePath.startsWith("/"))
     savePath = "/" + savePath;
 
-  File file = SD_MMC.open(savePath.c_str(), FILE_WRITE);
+  File file = global_fs->open(savePath.c_str(), FILE_WRITE);
   if (!file) {
     OLED().oledWord("SAVE FAILED - OPEN ERR");
     delay(2000);
@@ -1228,8 +1228,8 @@ void saveMarkdownFile(const String& path) {
   file.close();
 
   // Save metadata
-  SD().writeMetadata(savePath);
-  SD().setEditingFile(savePath);
+  PM_SDAUTO().writeMetadata(savePath);
+  PM_SDAUTO().setEditingFile(savePath);
 
   OLED().oledWord("Saved: " + savePath);
   delay(1000);
@@ -1240,7 +1240,7 @@ void saveMarkdownFile(const String& path) {
 }
 
 void newMarkdownFile(const String& path) {
-  if (SD().getNoSD()) {
+  if (PM_SDAUTO().getNoSD()) {
     OLED().oledWord("SAVE FAILED - No SD!");
     delay(3000);
     return;
@@ -1257,7 +1257,7 @@ void newMarkdownFile(const String& path) {
   if (!savePath.startsWith("/"))
     savePath = "/" + savePath;
 
-  File file = SD_MMC.open(savePath.c_str(), FILE_WRITE);
+  File file = global_fs->open(savePath.c_str(), FILE_WRITE);
   if (!file) {
     OLED().oledWord("SAVE FAILED - OPEN ERR");
     delay(2000);
@@ -1271,8 +1271,8 @@ void newMarkdownFile(const String& path) {
   file.close();
 
   // Save metadata
-  SD().writeMetadata(savePath);
-  SD().setEditingFile(savePath);
+  PM_SDAUTO().writeMetadata(savePath);
+  PM_SDAUTO().setEditingFile(savePath);
 
   OLED().oledWord("Created: " + savePath);
   delay(1000);
@@ -1583,7 +1583,7 @@ void editAppend(char inchar) {
   }
   // SAVE Recieved
   else if (inchar == 6 && CurrentTXTState_NEW != JOURNAL_MODE) {
-    String savePath = SD().getEditingFile();
+    String savePath = PM_SDAUTO().getEditingFile();
     if (savePath == "" || savePath == "-" || savePath == "/temp.txt") {
       KB().setKeyboardState(NORMAL);
       CurrentTXTState_NEW = SAVE_AS;
@@ -1783,10 +1783,14 @@ void initFonts() {
   fonts[sans].list_BI = &FreeSansBoldOblique9pt8b;
 }
 
-void TXT_INIT() {
+void TXT_INIT(String inPath) {
   initFonts();
 
-  loadMarkdownFile(SD().getEditingFile());
+  if (inPath == "") loadMarkdownFile(PM_SDAUTO().getEditingFile());
+  else {
+    PM_SDAUTO().setEditingFile(inPath);
+    loadMarkdownFile(inPath);
+  }
 
   setFontStyle(serif);
 
@@ -1815,6 +1819,7 @@ void einkHandler_TXT_NEW() {
   if (updateScreen) {
     updateScreen = false;
     display.setFullWindow();
+    display.setTextColor(GxEPD_BLACK);
     display.fillScreen(GxEPD_WHITE);
     displayDocument();
     EINK().refresh();
@@ -1935,7 +1940,7 @@ void processKB_TXT_NEW() {
         //Make sure oled only updates at OLED_MAX_FPS
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentLine, false, "Input Filename");
+          OLED().oledLine(currentLine, currentLine.length(), false, "Input Filename");
         }
       }
       break;
@@ -1999,7 +2004,7 @@ void processKB_TXT_NEW() {
         //Make sure oled only updates at OLED_MAX_FPS
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentLine, false, "Input Name for New File");
+          OLED().oledLine(currentLine, currentLine.length(), false, "Input Name for New File");
         }
       }
       break;
@@ -2016,7 +2021,7 @@ void processKB_TXT_NEW() {
         if (outPath.endsWith(".txt") || outPath.endsWith(".md")) {
           if (!outPath.startsWith("/")) outPath = "/" + outPath;
           loadMarkdownFile(outPath);
-          SD().setEditingFile(outPath);
+          PM_SDAUTO().setEditingFile(outPath);
           CurrentTXTState_NEW = TXT_;
           updateScreen = true;
         } else {

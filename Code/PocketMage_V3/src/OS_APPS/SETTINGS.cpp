@@ -4,6 +4,7 @@ enum SettingsState { settings0, settings1 };
 SettingsState CurrentSettingsState = settings0;
 
 static String currentLine = "";
+static int cursor_pos = 0;
 
 void SETTINGS_INIT() {
   // OPEN SETTINGS
@@ -14,15 +15,16 @@ void SETTINGS_INIT() {
   newState = true;
 }
 
-void settingCommandSelect(String command) {
+String settingCommandSelect(String command) {
+  String returnText = "";
   command.toLowerCase();
 
-  if (command.startsWith("timeset ")) {
+  if (command.startsWith("timeset ") || command.startsWith("settime ")) {
     String timePart = command.substring(8);
     CLOCK().setTimeFromString(timePart);
-    return;
+    return returnText;
   }
-  else if (command.startsWith("dateset ")) {
+  else if (command.startsWith("dateset ") || command.startsWith("setdate ")) {
     String datePart = command.substring(8);
     if (datePart.length() == 8 && datePart.toInt() > 0) {
       int year  = datePart.substring(0, 4).toInt();
@@ -32,18 +34,16 @@ void settingCommandSelect(String command) {
       DateTime now = CLOCK().nowDT();  // Preserve current time
       CLOCK().getRTC().adjust(DateTime(year, month, day, now.hour(), now.minute(), now.second()));
     } else {
-      OLED().oledWord("Invalid format (use YYYYMMDD)");
-      delay(2000);
+      returnText = "Invalid format (use YYYYMMDD)";
     }
-    return;
+    return returnText;
   }
   else if (command.startsWith("lumina ")) {
     String luminaPart = command.substring(7);
     int lumina = stringToInt(luminaPart);
     if (lumina == -1) {
-      OLED().oledWord("Invalid");
-      delay(500);
-      return;
+      returnText = "Invalid";
+      return returnText;
     }
     else if (lumina > 255) lumina = 255;
     else if (lumina < 0) lumina = 0;
@@ -53,14 +53,13 @@ void settingCommandSelect(String command) {
     prefs.putInt("OLED_BRIGHTNESS", OLED_BRIGHTNESS);
     prefs.end();
     newState = true;
-    OLED().oledWord("Settings Updated");
-    delay(200);
-    return;
+    returnText = "Settings Updated";
+    return returnText;
   }
   else if (command.startsWith("timeout ")) {
     String timeoutPart = command.substring(8);
     int timeout = stringToInt(timeoutPart);
-    if (timeout == -1) return;
+    if (timeout == -1) return "Invalid!";
     else if (timeout > 3600) timeout = 3600;
     else if (timeout < 15) timeout = 15;
     TIMEOUT = timeout;
@@ -68,17 +67,15 @@ void settingCommandSelect(String command) {
     prefs.putInt("TIMEOUT", TIMEOUT);
     prefs.end();
     newState = true;
-    OLED().oledWord("Settings Updated");
-    delay(200);
-    return;
+    returnText = "Settings Updated";
+    return returnText;
   }
   else if (command.startsWith("oledfps ")) {
     String oledfpsPart = command.substring(8);
     int oledfps = stringToInt(oledfpsPart);
     if (oledfps == -1) {
-      OLED().oledWord("Invalid");
-      delay(500);
-      return;
+      returnText = "Invalid";
+      return returnText;
     }
     else if (oledfps > 144) oledfps = 144;
     else if (oledfps < 5) oledfps = 5;
@@ -87,18 +84,16 @@ void settingCommandSelect(String command) {
     prefs.putInt("OLED_MAX_FPS", OLED_MAX_FPS);
     prefs.end();
     newState = true;
-    OLED().oledWord("Settings Updated");
-    delay(200);
-    return;
+    returnText = "Settings Updated";
+    return returnText;
   }
   else if (command.startsWith("clock ")) {
     String clockPart = command.substring(6);
     clockPart.trim();
 
     if (clockPart != "t" && clockPart != "f") {
-      OLED().oledWord("Invalid");
-      delay(500);
-      return;
+      returnText = "Invalid";
+      return returnText;
     }
 
     SYSTEM_CLOCK = (clockPart == "t");
@@ -106,9 +101,8 @@ void settingCommandSelect(String command) {
     prefs.putBool("SYSTEM_CLOCK", SYSTEM_CLOCK);
     prefs.end();
     newState = true;
-    OLED().oledWord("Settings Updated");
-    delay(200);
-    return;
+    returnText = "Settings Updated";
+    return returnText;
   }
 
   else if (command.startsWith("showyear ")) {
@@ -116,9 +110,8 @@ void settingCommandSelect(String command) {
     yearPart.trim();
 
     if (yearPart != "t" && yearPart != "f") {
-      OLED().oledWord("Invalid");
-      delay(500);
-      return;
+      returnText = "Invalid";
+      return returnText;
     }
 
     SHOW_YEAR = (yearPart == "t");
@@ -126,9 +119,8 @@ void settingCommandSelect(String command) {
     prefs.putBool("SHOW_YEAR", SHOW_YEAR);
     prefs.end();
     newState = true;
-    OLED().oledWord("Settings Updated");
-    delay(200);
-    return;
+    returnText = "Settings Updated";
+    return returnText;
   }
 
   else if (command.startsWith("savepower ")) {
@@ -136,9 +128,8 @@ void settingCommandSelect(String command) {
     savePowerPart.trim();
 
     if (savePowerPart != "t" && savePowerPart != "f") {
-      OLED().oledWord("Invalid");
-      delay(500);
-      return;
+      returnText = "Invalid";
+      return returnText;
     }
 
     SAVE_POWER = (savePowerPart == "t");
@@ -146,9 +137,8 @@ void settingCommandSelect(String command) {
     prefs.putBool("SAVE_POWER", SAVE_POWER);
     prefs.end();
     newState = true;
-    OLED().oledWord("Settings Updated");
-    delay(200);
-    return;
+    returnText = "Settings Updated";
+    return returnText;
   }
 
   else if (command.startsWith("debug ")) {
@@ -156,9 +146,8 @@ void settingCommandSelect(String command) {
     debugPart.trim();
 
     if (debugPart != "t" && debugPart != "f") {
-      OLED().oledWord("Invalid");
-      delay(500);
-      return;
+      returnText = "Invalid";
+      return returnText;
     }
 
     DEBUG_VERBOSE = (debugPart == "t");
@@ -166,9 +155,8 @@ void settingCommandSelect(String command) {
     prefs.putBool("DEBUG_VERBOSE", DEBUG_VERBOSE);
     prefs.end();
     newState = true;
-    OLED().oledWord("Settings Updated");
-    delay(200);
-    return;
+    returnText = "Settings Updated";
+    return returnText;
   }
 
   else if (command.startsWith("boottohome ")) {
@@ -176,9 +164,8 @@ void settingCommandSelect(String command) {
     bootHomePart.trim();
 
     if (bootHomePart != "t" && bootHomePart != "f") {
-      OLED().oledWord("Invalid");
-      delay(500);
-      return;
+      returnText = "Invalid";
+      return returnText;
     }
 
     HOME_ON_BOOT = (bootHomePart == "t");
@@ -186,9 +173,8 @@ void settingCommandSelect(String command) {
     prefs.putBool("HOME_ON_BOOT", HOME_ON_BOOT);
     prefs.end();
     newState = true;
-    OLED().oledWord("Settings Updated");
-    delay(200);
-    return;
+    returnText = "Settings Updated";
+    return returnText;
   }
 
   else if (command.startsWith("allownosd ")) {
@@ -196,95 +182,43 @@ void settingCommandSelect(String command) {
     noSDPart.trim();
 
     if (noSDPart != "t" && noSDPart != "f") {
-      OLED().oledWord("Invalid");
-      delay(500);
-      return;
+      returnText = "Invalid";
+      return returnText;
     }
 
     ALLOW_NO_MICROSD = (noSDPart == "t");
     prefs.begin("PocketMage", false);
-    prefs.putBool("ALLOW_NO_MICROSD", ALLOW_NO_MICROSD);
+    prefs.putBool("ALLOW_NO_SD", ALLOW_NO_MICROSD);
     prefs.end();
     newState = true;
-    OLED().oledWord("Settings Updated");
-    delay(200);
-    return;
+    returnText = "Settings Updated";
+    return returnText;
   }
   else {
-    OLED().oledWord("Huh?");
-    delay(1000);
+    returnText = "Huh?";
+    return returnText;
   }
-  return;
+  return "";
 }
 
 void processKB_settings() {
   int currentMillis = millis();
+  String left = "";
+  String right = "";
+  String command = "";
+  String returnText = "";
 
   switch (CurrentSettingsState) {
     case settings0:
-      if (currentMillis - KBBounceMillis >= KB_COOLDOWN) {  
-        char inchar = KB().updateKeypress();
-        // HANDLE INPUTS
-        //No char recieved
-        if (inchar == 0);   
-        //CR Recieved
-        else if (inchar == 13) {                          
-          settingCommandSelect(currentLine);
-          currentLine = "";
-        }                                      
-        // SHIFT Recieved
-        else if (inchar == 17) {
-          if (KB().getKeyboardState() == SHIFT || KB().getKeyboardState() == FN_SHIFT) {
-            KB().setKeyboardState(NORMAL);
-          } else if (KB().getKeyboardState() == FUNC) {
-            KB().setKeyboardState(FN_SHIFT);
-          } else {
-            KB().setKeyboardState(SHIFT);
-          }
-        }
-        // FN Recieved
-        else if (inchar == 18) {
-          if (KB().getKeyboardState() == FUNC || KB().getKeyboardState() == FN_SHIFT) {
-            KB().setKeyboardState(NORMAL);
-          } else if (KB().getKeyboardState() == SHIFT) {
-            KB().setKeyboardState(FN_SHIFT);
-          } else {
-            KB().setKeyboardState(FUNC);
-          }
-        }
-        //Space Recieved
-        else if (inchar == 32) {                                  
-          currentLine += " ";
-        }
-        //ESC / CLEAR Recieved
-        else if (inchar == 20) {                                  
-          currentLine = "";
-        }
-        //BKSP Recieved
-        else if (inchar == 8) {                  
-          if (currentLine.length() > 0) {
-            currentLine.remove(currentLine.length() - 1);
-          }
-        }
-        // Home recieved
-        else if (inchar == 12) {
-          HOME_INIT();
-        }
-        else {
-          currentLine += inchar;
-          if (inchar >= 48 && inchar <= 57) {}  //Only leave FN on if typing numbers
-          else if (KB().getKeyboardState() != NORMAL) {
-            KB().setKeyboardState(NORMAL);
-          }
-        }
-
-        currentMillis = millis();
-        //Make sure oled only updates at OLED_MAX_FPS
-        if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
-          OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentLine, false);
+      command = textPrompt();
+      if (command != "_EXIT_") {
+        returnText = settingCommandSelect(command);
+        if (returnText != "") {
+          OLED().oledWord(returnText);
+          delay(1000);
         }
       }
+      else HOME_INIT();
       break;
 
     case settings1:

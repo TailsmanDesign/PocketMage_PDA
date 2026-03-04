@@ -52,6 +52,9 @@ void applicationEinkHandler() {
     case APPLOADER:
       einkHandler_APPLOADER();
       break;
+    case TERMINAL:
+      einkHandler_TERMINAL();
+      break;
     // ADD APP CASES HERE
     default:
       einkHandler_HOME();
@@ -128,6 +131,9 @@ void processKB() {
     case APPLOADER:
       processKB_APPLOADER();
       break;
+    case TERMINAL:
+      processKB_TERMINAL();
+      break;
     // ADD APP CASES HERE
     default:
       processKB_HOME();
@@ -152,15 +158,13 @@ void setup() {
 
 // Keyboard / OLED Loop
 void loop() {
-  static int i = 0;
+  // Run background tasks
   #if !OTA_APP // POCKETMAGE_OS
     if (!noTimeout)  checkTimeout();
     if (DEBUG_VERBOSE) printDebug();
-
-    if (DEBUG_VERBOSE) PowerSystem.printDiagnostics();
   #endif
-
   updateBattState();
+  
   processKB();
 
   // Yield to watchdog

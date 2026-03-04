@@ -1,0 +1,11 @@
+FILE_TYPE = MULTI_PHYS_TABLE;
+
+PART '0805W8F1002T5E'
+CLASS = DISCRETE
+{========================================================================================}
+:"MANUFACTURER_NAME", "MANUFACTURER_PART_NUMBER"= "PART_NUMBER", "JEDEC_TYPE", "PACK_TYPE", "MOUSER_PART_NUMBER", "MOUSER_PRICE/STOCK", "DESCRIPTION", "DATASHEET", "HEIGHT";
+{========================================================================================}
+ "ROYALOHM", "0805W8F1002T5E" (!) = "", "RESC2013X65N", "Resistor Chip", "303-0805W8F1002T5E", "https://www.mouser.co.uk/ProductDetail/Royalohm/0805W8F1002T5E?qs=e8oIoAS2J1QfYPOBCQ0fIg%3D%3D", "Thick Film Resistors - SMD RMC 0805 1/8W 1% T/R-5000", "https://www.mouser.de/datasheet/2/1365/1-3044649.pdf", "0.65 mm"
+END_PART
+
+END.

@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP 0805W8F1002T5E
+D Thick Film Resistors - SMD RMC 0805 1/8W 1% T/R-5000
+K
+F https://www.mouser.de/datasheet/2/1365/1-3044649.pdf
+$ENDCMP
+#
+#End Doc Library

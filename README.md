@@ -1,5 +1,5 @@
 # PocketMage PDA
-[Please note that this project is a work in progress and incomplete]
+[Please note that this project is in Beta]
 
 @Ashtf 2025
 
@@ -14,9 +14,18 @@
 
   I will try my best to keep this GitHub up to date with the development of the device.
 
-# [Creating Your Own Apps]
-  Check out the /Code/BlankApp folder for a simple example app template. Check out the following video as a tutorial on how to create and format your app:
+# [Getting Started]
+**Helpful Resources:**
 
+[FAQ](https://github.com/ashtf8/PocketMage_PDA/tree/main/Docs/FAQ)
+
+[Tutorials](https://github.com/ashtf8/PocketMage_PDA/tree/main/Docs/Tutorials)
+
+[PocketMage Command & Keystroke Manual](https://github.com/ashtf8/PocketMage_PDA/tree/main/Docs/Getting%20Started/Command%20Manual)
+
+[3rd Party App Template](https://github.com/ashtf8/PocketMage_PDA/blob/main/Code/PocketMage_V3/src/APP_TEMPLATE.cpp)
+
+  Check the [APP_TEMPLATE.cpp](./Code/PocketMage_V3/src/APP_TEMPLATE.cpp) and [/Code/PocketMage_V3/src/readme.md](./Code/PocketMage_V3/src/readme.md) file for more information. Check out the following video as a tutorial on how to create and format your app:
 [Developing For the PocketMage](https://www.youtube.com/watch?v=3Ytc-3-BbMM)
 
 # [Hardware]
@@ -70,25 +79,8 @@
 - Bluetooth keyboard support
 
 # License
-All files are distributed under CC BY-NC-SA 4.0 license:
+All files are distributed under Apache-2.0 license:
 
 PocketMage PDA - A clamshell note-taking and productivity device using E-Ink and OLED.
 
-Copyright (C) 2025 Ashtf
-
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC--BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)  
-
-This project is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License (CC BY-NC-SA 4.0)**.  
-
-You are free to:  
-- **Share** — copy and redistribute the material in any medium or format  
-- **Adapt** — remix, transform, and build upon the material  
-
-Under the following terms:  
-- **Attribution** — You must give appropriate credit.  
-- **NonCommercial** — You may not use this material for commercial purposes.  
-- **ShareAlike** — If you remix, transform, or build upon it, you must distribute your contributions under the same license.  
-
-The original author retains the right to use this work commercially.  
-
-Full license details: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)  
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 

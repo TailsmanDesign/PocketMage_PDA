@@ -1,0 +1,7 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "TCA8418")(type "KiCad")(uri "${KIPRJMOD}/import/ul_TCA8418RTWR (1)/KiCADv6/footprints.pretty")(options "")(descr ""))
+  (lib (name "snaptron_7mm_doublesided")(type "KiCad")(uri "${KIPRJMOD}/created/snaptron_7mm_doublesided.pretty")(options "")(descr ""))
+  (lib (name "CustomParts_FP")(type "KiCad")(uri "${KIPRJMOD}/CustomParts_FP.pretty")(options "")(descr ""))
+  (lib (name "MP2722GRH-0000-Z")(type "KiCad")(uri "${KIPRJMOD}/JLC_Parts/MP2722GRH-0000-Z")(options "")(descr ""))
+)

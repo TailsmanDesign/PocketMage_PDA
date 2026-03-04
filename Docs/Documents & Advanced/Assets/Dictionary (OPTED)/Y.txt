@@ -1,0 +1,971 @@
+Y () Y, the twenty-fifth letter of the English alphabet, at the beginning of a word or syllable, except when a prefix (see Y-), is usually a fricative vocal consonant; as a prefix, and usually in the middle or at the end of a syllable, it is a vowel. See Guide to Pronunciation, // 145, 178-9, 272.
+
+Y's (pl. ) of Y
+
+Ys (pl. ) of Y
+
+Y (n.) Something shaped like the letter Y; a forked piece resembling in form the letter Y.
+
+Y (n.) One of the forked holders for supporting the telescope of a leveling instrument, or the axis of a theodolite; a wye.
+
+Y (n.) A forked or bifurcated pipe fitting.
+
+Y (n.) A portion of track consisting of two diverging tracks connected by a cross track.
+
+Y (pron.) I.
+
+Y- () Alt. of I-
+
+Y- () A prefix of obscure meaning, originally used with verbs, adverbs, adjectives, nouns, and pronouns. In the Middle English period, it was little employed except with verbs, being chiefly used with past participles, though occasionally with the infinitive Ycleped, or yclept, is perhaps the only word not entirely obsolete which shows this use.
+
+Ya (adv.) Yea.
+
+Yacare (n.) A South American crocodilian (Jacare sclerops) resembling the alligator in size and habits. The eye orbits are connected together, and surrounded by prominent bony ridges. Called also spectacled alligator, and spectacled cayman.
+
+Yacca (n.) A West Indian name for two large timber trees (Podocarpus coriaceus, and P. Purdicanus) of the Yew family. The wood, which is much used, is pale brownish with darker streaks.
+
+Yacht (n.) A light and elegantly furnished vessel, used either for private parties of pleasure, or as a vessel of state to convey distinguished persons from one place to another; a seagoing vessel used only for pleasure trips, racing, etc.
+
+Yacht (v. i.) To manage a yacht; to voyage in a yacht.
+
+Yachter (n.) One engaged in sailing a jacht.
+
+Yachting (n.) Sailing for pleasure in a yacht.
+
+Yachtman (n.) See Yachtsman.
+
+Yachtsmen (pl. ) of Yachtsman
+
+Yachtsman (n.) One who owns or sails a yacht; a yachter.
+
+Yaf (imp.) Gave. See Give.
+
+Yaffingale (n.) The yaffle.
+
+Yaffle (n.) The European green woodpecker (Picus, / Genius, viridis). It is noted for its loud laughlike note. Called also eccle, hewhole, highhoe, laughing bird, popinjay, rain bird, yaffil, yaffler, yaffingale, yappingale, yackel, and woodhack.
+
+Yager (n.) In the German army, one belonging to a body of light infantry armed with rifles, resembling the chasseur of the French army.
+
+Yaguarundi (n.) Same as Jaguarondi.
+
+Yajur-Veda (n.) See Veda.
+
+Yak (n.) A bovine mammal (Poephagus grunnies) native of the high plains of Central Asia. Its neck, the outer side of its legs, and its flanks, are covered with long, flowing, fine hair. Its tail is long and bushy, often white, and is valued as an ornament and for other purposes in India and China. There are several domesticated varieties, some of which lack the mane and the long hair on the flanks. Called also chauri gua, grunting cow, grunting ox, sarlac, sarlik, and sarluc.
+
+Yakamilk (n.) See Trumpeter, 3 (a).
+
+Yakare (n.) Same as Yacare.
+
+Yakin (n.) A large Asiatic antelope (Budorcas taxicolor) native of the higher parts of the Himalayas and other lofty mountains. Its head and neck resemble those of the ox, and its tail is like that of the goat. Called also budorcas.
+
+Yakoots (n. pl.) (Ethnol.) A nomadic Mongolian tribe native of Northern Siberia, and supposed to be of Turkish stock. They are mainly pastoral in their habits.
+
+Yaksha (n.) A kind of demigod attendant on Kuvera, the god of wealth.
+
+Yalah (n.) The oil of the mahwa tree.
+
+Yam (n.) A large, esculent, farinaceous tuber of various climbing plants of the genus Dioscorea; also, the plants themselves. Mostly natives of warm climates. The plants have netted-veined, petioled leaves, and pods with three broad wings. The commonest species is D. sativa, but several others are cultivated.
+
+Yama (n.) The king of the infernal regions, corresponding to the Greek Pluto, and also the judge of departed souls. In later times he is more exclusively considered the dire judge of all, and the tormentor of the wicked. He is represented as of a green color, with red garments, having a crown on his head, his eyes inflamed, and sitting on a buffalo, with a club and noose in his hands.
+
+Yamma (n.) The llama.
+
+Yamp (n.) An umbelliferous plant (Carum Gairdneri); also, its small fleshy roots, which are eaten by the Indians from Idaho to California.
+
+Yang (n.) The cry of the wild goose; a honk.
+
+Yang (v. i.) To make the cry of the wild goose.
+
+Yank (n.) A jerk or twitch.
+
+Yanked (imp. & p. p.) of Yank
+
+Yanking (p. pr. & vb. n.) of Yank
+
+Yank (v. t.) To twitch; to jerk.
+
+Yank (n.) An abbreviation of Yankee.
+
+Yankee (n.) A nickname for a native or citizen of New England, especially one descended from old New England stock; by extension, an inhabitant of the Northern States as distinguished from a Southerner; also, applied sometimes by foreigners to any inhabitant of the United States.
+
+Yankee (a.) Of or pertaining to a Yankee; characteristic of the Yankees.
+
+Yankee-Doodle (n.) The name of a tune adopted popularly as one of the national airs of the United States.
+
+Yankee-Doodle (n.) Humorously, a Yankee.
+
+Yankeeism (n.) A Yankee idiom, word, custom, or the like.
+
+Yaourt (n.) A fermented drink, or milk beer, made by the Turks.
+
+Yap (v. i.) To bark; to yelp.
+
+Yap (n.) A bark; a yelp.
+
+Yapock (n.) A South American aquatic opossum (Chironectes variegatus) found in Guiana and Brazil. Its hind feet are webbed, and its fore feet do not have an opposable thumb for climbing. Called also water opossum.
+
+Yapon (n.) Same as Yaupon.
+
+Yarage (a.) The power of moving, or being managed, at sea; -- said with reference to a ship.
+
+Yard (v. i.) A rod; a stick; a staff.
+
+Yard (v. i.) A branch; a twig.
+
+Yard (v. i.) A long piece of timber, as a rafter, etc.
+
+Yard (v. i.) A measure of length, equaling three feet, or thirty-six inches, being the standard of English and American measure.
+
+Yard (v. i.) The penis.
+
+Yard (v. i.) A long piece of timber, nearly cylindrical, tapering toward the ends, and designed to support and extend a square sail. A yard is usually hung by the center to the mast. See Illust. of Ship.
+
+Yard (n.) An inclosure; usually, a small inclosed place in front of, or around, a house or barn; as, a courtyard; a cowyard; a barnyard.
+
+Yard (n.) An inclosure within which any work or business is carried on; as, a dockyard; a shipyard.
+
+Yard (v. t.) To confine (cattle) to the yard; to shut up, or keep, in a yard; as, to yard cows.
+
+Yardarm (n.) Either half of a square-rigged vessel's yard, from the center or mast to the end.
+
+Yardfuls (pl. ) of Yardful
+
+Yardful (n.) As much as a yard will contain; enough to fill a yard.
+
+Yardland (n.) A measure of land of uncertain quantity, varying from fifteen to forty acres; a virgate.
+
+Yardstick (n.) A stick three feet, or a yard, in length, used as a measure of cloth, etc.
+
+Yardwand (n.) A yardstick.
+
+Yare (n.) Ready; dexterous; eager; lively; quick to move.
+
+Yare (adv.) Soon.
+
+Yarely (adv.) In a yare manner.
+
+Yark (v. t. & i.) To yerk.
+
+Yarke (n.) Same as Saki.
+
+Yarn (n.) Spun wool; woolen thread; also, thread of other material, as of cotton, flax, hemp, or silk; material spun and prepared for use in weaving, knitting, manufacturing sewing thread, or the like.
+
+Yarn (n.) One of the threads of which the strands of a rope are composed.
+
+Yarn (n.) A story told by a sailor for the amusement of his companions; a story or tale; as, to spin a yarn.
+
+Yarnen (a.) Made of yarn; consisting of yarn.
+
+Yarnut (n.) See Yernut.
+
+Yarr (v. i.) To growl or snarl as a dog.
+
+Yarrish (a.) Having a rough, dry taste.
+
+Yarrow (n.) An American and European composite plant (Achillea Millefolium) with very finely dissected leaves and small white corymbed flowers. It has a strong, and somewhat aromatic, odor and taste, and is sometimes used in making beer, or is dried for smoking. Called also milfoil, and nosebleed.
+
+Yarwhip (n.) The European bar-tailed godwit; -- called also yardkeep, and yarwhelp. See Godwit.
+
+Yataghan (n.) A long knife, or short saber, common among Mohammedan nations, usually having a double curve, sometimes nearly straight.
+
+Yate (n.) A gate. See 1st Gate.
+
+Yaud (n.) See Yawd.
+
+Yaul (n.) See Yawl.
+
+Yaulp (v. i.) To yaup.
+
+Yaup (v. i.) To cry out like a child; to yelp.
+
+Yaup (n.) A cry of distress, rage, or the like, as the cry of a sickly bird, or of a child in pain.
+
+Yaup (n.) The blue titmouse.
+
+Yauper (n.) One who, or that which, yaups.
+
+Yaupon (n.) A shrub (Ilex Cassine) of the Holly family, native from Virginia to Florida. The smooth elliptical leaves are used as a substitute for tea, and were formerly used in preparing the black drink of the Indians of North Carolina. Called also South-Sea tea.
+
+Yawed (imp. & p. p.) of Yaw
+
+Yawing (p. pr. & vb. n.) of Yaw
+
+Yaw (v. i.) To rise in blisters, breaking in white froth, as cane juice in the clarifiers in sugar works.
+
+Yaw (v. i. & t.) To steer wild, or out of the line of her course; to deviate from her course, as when struck by a heavy sea; -- said of a ship.
+
+Yaw (n.) A movement of a vessel by which she temporarily alters her course; a deviation from a straight course in steering.
+
+Yawd (n.) A jade; an old horse or mare.
+
+Yawl (n.) A small ship's boat, usually rowed by four or six oars.
+
+Yawl (v. i.) To cry out like a dog or cat; to howl; to yell.
+
+Yawl-rigged (a.) Having two masts with fore-and-aft sails, but differing from a schooner in that the after mast is very small, and stepped as far aft as possible. See Illustration in Appendix.
+
+Yawned (imp. & p. p.) of Yawn
+
+Yawning (p. pr. & vb. n.) of Yawn
+
+Yawn (v. i.) To open the mouth involuntarily through drowsiness, dullness, or fatigue; to gape; to oscitate.
+
+Yawn (v. i.) To open wide; to gape, as if to allow the entrance or exit of anything.
+
+Yawn (v. i.) To open the mouth, or to gape, through surprise or bewilderment.
+
+Yawn (v. i.) To be eager; to desire to swallow anything; to express desire by yawning; as, to yawn for fat livings.
+
+Yawn (n.) An involuntary act, excited by drowsiness, etc., consisting of a deep and long inspiration following several successive attempts at inspiration, the mouth, fauces, etc., being wide open.
+
+Yawn (n.) The act of opening wide, or of gaping.
+
+Yawn (n.) A chasm, mouth, or passageway.
+
+Yawningly (adv.) In a yawning manner.
+
+Yawp (v. & n.) See Yaup.
+
+Yaws (n.) A disease, occurring in the Antilles and in Africa, characterized by yellowish or reddish tumors, of a contagious character, which, in shape and appearance, often resemble currants, strawberries, or raspberries. There are several varieties of this disease, variously known as framboesia, pian, verrugas, and crab-yaws.
+
+Yaw-weed (n.) A low, shrubby, rubiaceous plant (Morinda Royoc) growing along the seacoast of the West Indies. It has small, white, odorous flowers.
+
+Ybe (p. p.) Been.
+
+Ycleped (p. p.) Called; named; -- obsolete, except in archaic or humorous writings.
+
+Ydo (p. p.) Done.
+
+Ydrad (p. p.) Dreaded.
+
+Ye () Alt. of Ye
+
+Ye () an old method of printing the article the (AS. /e), the "y" being used in place of the Anglo-Saxon thorn (/). It is sometimes incorrectly pronounced ye. See The, and Thorn, n., 4.
+
+Yen (pl. ) of Ye
+
+Ye (n.) An eye.
+
+Ye (pron.) The plural of the pronoun of the second person in the nominative case.
+
+Ye (adv.) Yea; yes.
+
+Yea (adv.) Yes; ay; a word expressing assent, or an affirmative, or an affirmative answer to a question, now superseded by yes. See Yes.
+
+Yea (adv.) More than this; not only so, but; -- used to mark the addition of a more specific or more emphatic clause. Cf. Nay, adv., 2.
+
+Yea (n.) An affirmative vote; one who votes in the affirmative; as, a vote by yeas and nays.
+
+Yead (v. i.) Properly, a variant of the defective imperfect yode, but sometimes mistaken for a present. See the Note under Yede.
+
+Yeaned (imp. & p. p.) of Yean
+
+Yeaning (p. pr. & vb. n.) of Yean
+
+Yean (v. t. & i.) To bring forth young, as a goat or a sheep; to ean.
+
+Yeanling (n.) A lamb or a kid; an eanling.
+
+Year (n.) The time of the apparent revolution of the sun trough the ecliptic; the period occupied by the earth in making its revolution around the sun, called the astronomical year; also, a period more or less nearly agreeing with this, adopted by various nations as a measure of time, and called the civil year; as, the common lunar year of 354 days, still in use among the Mohammedans; the year of 360 days, etc. In common usage, the year consists of 365 days, and every fourth year (called bissextile, or leap year) of 366 days, a day being added to February on that year, on account of the excess above 365 days (see Bissextile).
+
+Year (n.) The time in which any planet completes a revolution about the sun; as, the year of Jupiter or of Saturn.
+
+Year (n.) Age, or old age; as, a man in years.
+
+Yeara (n.) The California poison oak (Rhus diversiloba). See under Poison, a.
+
+Yearbook (n.) A book published yearly; any annual report or summary of the statistics or facts of a year, designed to be used as a reference book; as, the Congregational Yearbook.
+
+Yearbook (n.) A book containing annual reports of cases adjudged in the courts of England.
+
+Yeared (a.) Containing years; having existed or continued many years; aged.
+
+Yearling (n.) An animal one year old, or in the second year of its age; -- applied chiefly to cattle, sheep, and horses.
+
+Yearling (a.) Being a year old.
+
+Yearly (a.) Happening, accruing, or coming every year; annual; as, a yearly income; a yearly feast.
+
+Yearly (a.) Lasting a year; as, a yearly plant.
+
+Yearly (a.) Accomplished in a year; as, the yearly circuit, or revolution, of the earth.
+
+Yearly (adv.) Annually; once a year to year; as, blessings yearly bestowed.
+
+Yearned (imp. & p. p.) of Yearn
+
+Yearning (p. pr. & vb. n.) of Yearn
+
+Yearn (v. t.) To pain; to grieve; to vex.
+
+Yearn (v. i.) To be pained or distressed; to grieve; to mourn.
+
+Yearn (v. i. & t.) To curdle, as milk.
+
+Yearn (v. i.) To be filled with longing desire; to be harassed or rendered uneasy with longing, or feeling the want of a thing; to strain with emotions of affection or tenderness; to long; to be eager.
+
+Yearnful (a.) Desirous.
+
+Yearningly (adv.) With yearning.
+
+Yearnings (n. pl.) The maws, or stomachs, of young calves, used as a rennet for curdling milk.
+
+Yearth (n.) The earth.
+
+Yeast (n.) The foam, or troth (top yeast), or the sediment (bottom yeast), of beer or other in fermentation, which contains the yeast plant or its spores, and under certain conditions produces fermentation in saccharine or farinaceous substances; a preparation used for raising dough for bread or cakes, and making it light and puffy; barm; ferment.
+
+Yeast (n.) Spume, or foam, of water.
+
+Yeast (n.) A form of fungus which grows as indvidual rounded cells, rather than in a mycelium, and reproduces by budding; esp. members of the orders Endomycetales and Moniliales. Some fungi may grow both as a yeast or as a mycelium, depending on the conditions of growth.
+
+Yeast-bitten (a.) A term used of beer when the froth of the yeast has reentered the body of the beer.
+
+Yeastiness (n.) The quality or state of being yeasty, or frothy.
+
+Yeasty (a.) Frothy; foamy; spumy, like yeast.
+
+Yedding (n.) The song of a minstrel; hence, any song.
+
+Yede (imp.) Went. See Yode.
+
+Yeel (n.) An eel.
+
+Yeldhall (n.) Guildhall.
+
+Yeldrin (n.) Alt. of Yeldrine
+
+Yeldrine (n.) The yellow-hammer; -- called also yeldrock, and yoldrin.
+
+Yelk (n.) Same as Yolk.
+
+Yelled (imp. & p. p.) of Yell
+
+Yelling (p. pr. & vb. n.) of Yell
+
+Yell (v. i.) To cry out, or shriek, with a hideous noise; to cry or scream as with agony or horror.
+
+Yell (v. t.) To utter or declare with a yell; to proclaim in a loud tone.
+
+Yell (n.) A sharp, loud, hideous outcry.
+
+Yellow (superl.) Being of a bright saffronlike color; of the color of gold or brass; having the hue of that part of the rainbow, or of the solar spectrum, which is between the orange and the green.
+
+Yellow (n.) A bright golden color, reflecting more light than any other except white; the color of that part of the spectrum which is between the orange and green.
+
+Yellow (n.) A yellow pigment.
+
+Yellowed (imp. & p. p.) of Yellow
+
+Yellowing (p. pr. & vb. n.) of Yellow
+
+Yellow (v. t.) To make yellow; to cause to have a yellow tinge or color; to dye yellow.
+
+Yellow (v. i.) To become yellow or yellower.
+
+Yellowammer (n.) See Yellow-hammer.
+
+Yellowbill (n.) The American scoter.
+
+Yellowbird (n.) The American goldfinch, or thistle bird. See Goldfinch.
+
+Yellowbird (n.) The common yellow warbler; -- called also summer yellowbird. See Illust. of Yellow warbler, under Yellow, a.
+
+Yellow-covered (a.) Covered or bound in yellow paper.
+
+Yellow-eyed (a.) Having yellow eyes.
+
+Yellowfin (n.) A large squeteague.
+
+Yellowfish (n.) A rock trout (Pleurogrammus monopterygius) found on the coast of Alaska; -- called also striped fish, and Atka mackerel.
+
+Yellow-golds (n.) A certain plant, probably the yellow oxeye.
+
+Yellowhammer (n.) A common European finch (Emberiza citrinella). The color of the male is bright yellow on the breast, neck, and sides of the head, with the back yellow and brown, and the top of the head and the tail quills blackish. Called also yellow bunting, scribbling lark, and writing lark.
+
+Yellowhammer (n.) The flicker.
+
+Yellowing (n.) The act or process of making yellow.
+
+Yellowish (a.) Somewhat yellow; as, amber is of a yellowish color.
+
+Yellowlegs (n.) Any one of several species of long-legged sandpipers of the genus Totanus, in which the legs are bright yellow; -- called also stone snipe, tattler, telltale, yellowshanks; and yellowshins. See Tattler, 2.
+
+Yellowness (n.) The quality or state of being yellow; as, the yellowness of an orange.
+
+Yellowness (n.) Jealousy.
+
+Yellowroot (n.) Any one of several plants with yellow roots.
+
+Yellowroot (n.) See Xanthorhiza.
+
+Yellowroot (n.) Same as Orangeroot.
+
+Yellows (n.) A disease of the bile in horses, cattle, and sheep, causing yellowness of the eyes; jaundice.
+
+Yellows (n.) A disease of plants, esp. of peach trees, in which the leaves turn to a yellowish color; jeterus.
+
+Yellows (n.) A group of butterflies in which the predominating color is yellow. It includes the common small yellow butterflies. Called also redhorns, and sulphurs. See Sulphur.
+
+Yellowseed (n.) A kind of pepper grass (Lepidium campestre).
+
+Yellowshanks (n.) Alt. of Yellowshins
+
+Yellowshins (n.) See Yellolegs.
+
+Yellowtail (n.) Any one of several species of marine carangoid fishes of the genus Seriola; especially, the large California species (S. dorsalis) which sometimes weighs thirty or forty pounds, and is highly esteemed as a food fish; -- called also cavasina, and white salmon.
+
+Yellowtail (n.) The mademoiselle, or silver perch.
+
+Yellowtail (n.) The menhaden.
+
+Yellowtail (n.) The runner, 12.
+
+Yellowtail (n.) A California rockfish (Sebastodes flavidus).
+
+Yellowtail (n.) The sailor's choice (Diplodus rhomboides).
+
+Yellowthroat (n.) Any one of several species of American ground warblers of the genus Geothlypis, esp. the Maryland yellowthroat (G. trichas), which is a very common species.
+
+Yellowtop (n.) A kind of grass, perhaps a species of Agrostis.
+
+Yellowwood (n.) The wood of any one of several different kinds of trees; also, any one of the trees themselves. Among the trees so called are the Cladrastis tinctoria, an American leguminous tree; the several species of prickly ash (Xanthoxylum); the Australian Flindersia Oxleyana, a tree related to the mahogany; certain South African species of Podocarpus, trees related to the yew; the East Indian Podocarpus latifolia; and the true satinwood (Chloroxylon Swietenia). All these Old World trees furnish valuable timber.
+
+Yellowwort (n.) A European yellow-flowered, gentianaceous (Chlora perfoliata). The whole plant is intensely bitter, and is sometimes used as a tonic, and also in dyeing yellow.
+
+Yelped (imp. & p. p.) of Yelp
+
+Yelping (p. pr. & vb. n.) of Yelp
+
+Yelp (v. i.) To boast.
+
+Yelp (v. i.) To utter a sharp, quick cry, as a hound; to bark shrilly with eagerness, pain, or fear; to yaup.
+
+Yelp (n.) A sharp, quick cry; a bark.
+
+Yelper (n.) An animal that yelps, or makes a yelping noise.
+
+Yelper (n.) The avocet; -- so called from its sharp, shrill cry.
+
+Yelper (n.) The tattler.
+
+Yeman (n.) A yeoman.
+
+Yen (n.) The unit of value and account in Japan. Since Japan's adoption of the gold standard, in 1897, the value of the yen has been about 50 cents. The yen is equal to 100 sen.
+
+Yend (v. t.) To throw; to cast.
+
+Yenite (n.) A silicate of iron and lime occurring in black prismatic crystals; -- also called ilvaite.
+
+Yeomen (pl. ) of Yeoman
+
+Yeoman (n.) A common man, or one of the commonly of the first or most respectable class; a freeholder; a man free born.
+
+Yeoman (n.) A servant; a retainer.
+
+Yeoman (n.) A yeoman of the guard; also, a member of the yeomanry cavalry.
+
+Yeoman (n.) An interior officer under the boatswain, gunner, or carpenters, charged with the stowage, account, and distribution of the stores.
+
+Yeomanlike (a.) Resembling, or suitable to, a yeoman; yeomanly.
+
+Yeomanly (a.) Pertaining to a yeoman; becoming or suitable to, a yeoman; yeomanlike.
+
+Yeomanry (n.) The position or rank of a yeoman.
+
+Yeomanry (n.) The collective body of yeomen, or freeholders.
+
+Yeomanry (n.) The yeomanry cavalry.
+
+Yeorling (n.) The European yellow-hammer.
+
+Yer (prep.) Ere; before.
+
+Yerba (n.) An herb; a plant.
+
+Yerd (n.) See 1st & 2d Yard.
+
+Yerked (imp. & p. p.) of Yerk
+
+Yerking (p. pr. & vb. n.) of Yerk
+
+Yerk (v. t.) To throw or thrust with a sudden, smart movement; to kick or strike suddenly; to jerk.
+
+Yerk (v. t.) To strike or lash with a whip.
+
+Yerk (v. i.) To throw out the heels; to kick; to jerk.
+
+Yerk (v. i.) To move a quick, jerking motion.
+
+Yerk (n.) A sudden or quick thrust or motion; a jerk.
+
+Yern (v. i.) See 3d Yearn.
+
+Yern (a.) Eager; brisk; quick; active.
+
+Yerne (a.) Eagerly; briskly; quickly.
+
+Yernut (n.) An earthnut, or groundnut. See Groundnut (d).
+
+Yerst (adv.) See Erst.
+
+Yes (adv.) Ay; yea; -- a word which expresses affirmation or consent; -- opposed to no.
+
+Yest (n.) See Yeast.
+
+Yester (a.) Last; last past; next before; of or pertaining to yesterday.
+
+Yesterday (n.) The day last past; the day next before the present.
+
+Yesterday (n.) Fig.: A recent time; time not long past.
+
+Yesterday (adv.) On the day last past; on the day preceding to-day; as, the affair took place yesterday.
+
+Yestereve (n.) Alt. of Yester-evening
+
+Yester-evening (n.) The evening of yesterday; the evening last past.
+
+Yestermorn (n.) Alt. of Yester-morning
+
+Yester-morning (n.) The morning of yesterday.
+
+Yestern (a.) Of or pertaining to yesterday; relating to the day last past.
+
+Yesternight (n.) The last night; the night last past.
+
+Yesternight (adv.) On the last night.
+
+Yesternoon (n.) The noon of yesterday; the noon last past.
+
+Yesterweek (n.) The week last past; last week.
+
+Yesteryear (n.) The year last past; last year.
+
+Yestreen (n.) Yester-evening; yesternight; last night.
+
+Yesty (a.) See Yeasty.
+
+Yet (n.) Any one of several species of large marine gastropods belonging to the genus Yetus, or Cymba; a boat shell.
+
+Yet (adv.) In addition; further; besides; over and above; still.
+
+Yet (adv.) At the same time; by continuance from a former state; still.
+
+Yet (adv.) Up to the present time; thus far; hitherto; until now; -- and with the negative, not yet, not up to the present time; not as soon as now; as, Is it time to go? Not yet. See As yet, under As, conj.
+
+Yet (conj.) Before some future time; before the end; eventually; in time.
+
+Yet (conj.) Even; -- used emphatically.
+
+Yet (conj.) Nevertheless; notwithstanding; however.
+
+Yeve (v. i.) To give.
+
+Yeven (p. p.) Given.
+
+Yew (v. i.) See Yaw.
+
+Yew (n.) An evergreen tree (Taxus baccata) of Europe, allied to the pines, but having a peculiar berrylike fruit instead of a cone. It frequently grows in British churchyards.
+
+Yew (n.) The wood of the yew. It is light red in color, compact, fine-grained, and very elastic. It is preferred to all other kinds of wood for bows and whipstocks, the best for these purposes coming from Spain.
+
+Yew (n.) A bow for shooting, made of the yew.
+
+Yew (a.) Of or pertaining to yew trees; made of the wood of a yew tree; as, a yew whipstock.
+
+Yewen (a.) Made of yew; as, yewen bows.
+
+Yex (v. i.) To hiccough.
+
+Yex (v. i.) A hiccough.
+
+Yezdegerdian (a.) Of or pertaining to Yezdegerd, the last Sassanian monarch of Persia, who was overthrown by the Mohammedans; as, the Yezdegerdian era, which began on the 16th of June, a. d. 632. The era is still used by the Parsees.
+
+Yezdi (n.) Same as Izedi.
+
+Yezidee (n.) Alt. of Yezidi
+
+Yezidi (n.) Same as Izedi.
+
+Yfere (adv.) Together. See Ifere.
+
+Ygdrasyl (n.) See in the Dictionary of Noted Names in Fiction.
+
+Yghe (n.) Eye.
+
+Ygo (p. p.) Gone.
+
+Yground () p. p. of Grind.
+
+Yholde () p. p. of Hold.
+
+Yielded (imp. & p. p.) of Yield
+
+Yold (obs. p. p.) of Yield
+
+Yielding (p. pr. & vb. n.) of Yield
+
+Yield (v. t.) To give in return for labor expended; to produce, as payment or interest on what is expended or invested; to pay; as, money at interest yields six or seven per cent.
+
+Yield (v. t.) To furnish; to afford; to render; to give forth.
+
+Yield (v. t.) To give up, as something that is claimed or demanded; to make over to one who has a claim or right; to resign; to surrender; to relinquish; as a city, an opinion, etc.
+
+Yield (v. t.) To admit to be true; to concede; to allow.
+
+Yield (v. t.) To permit; to grant; as, to yield passage.
+
+Yield (v. t.) To give a reward to; to bless.
+
+Yield (v. i.) To give up the contest; to submit; to surrender; to succumb.
+
+Yield (v. i.) To comply with; to assent; as, I yielded to his request.
+
+Yield (v. i.) To give way; to cease opposition; to be no longer a hindrance or an obstacle; as, men readily yield to the current of opinion, or to customs; the door yielded.
+
+Yield (v. i.) To give place, as inferior in rank or excellence; as, they will yield to us in nothing.
+
+Yield (n.) Amount yielded; product; -- applied especially to products resulting from growth or cultivation.
+
+Yieldable (a.) Disposed to yield or comply.
+
+Yieldance (n.) The act of producing; yield; as, the yieldance of the earth.
+
+Yieldance (n.) The act of yielding; concession.
+
+Yielder (n.) One who yields.
+
+Yielding (a.) Inclined to give way, or comply; flexible; compliant; accommodating; as, a yielding temper.
+
+Yieldless (a.) Without yielding; unyielding.
+
+Yift (n.) Gift.
+
+Yin (n.) A Chinese weight of 2/ pounds.
+
+Yis (adv.) Yes.
+
+Yit (conj.) Yet.
+
+Yite (n.) The European yellow-hammer.
+
+Yive (v. t. & i.) To give.
+
+-yl () A suffix used as a characteristic termination of chemical radicals; as in ethyl, carbonyl, hydroxyl, etc.
+
+Yle (n.) Isle.
+
+Y level () See under Y, n.
+
+Yliche (a. & adv.) Alt. of Ylike
+
+Ylike (a. & adv.) Like; alike.
+
+Yllanraton (n.) The agouara.
+
+Ymaked (p. p.) Made.
+
+Ymel (prep.) Among.
+
+Ynambu (n.) A South American tinamou (Rhynchotus rufescens); -- called also perdiz grande, and rufous tinamou. See Illust. of Tinamou.
+
+Ynough (a.) Alt. of Ynow
+
+Ynow (a.) Enough.
+
+Yockel (n.) The yaffle.
+
+Yode (imp.) Went; walked; proceeded.
+
+Yodeled (imp. & p. p.) of Yodle
+
+Yodled () of Yodle
+
+Yodeling (p. pr. & vb. n.) of Yodle
+
+Yodling () of Yodle
+
+Yodel (v. t. & i.) Alt. of Yodle
+
+Yodle (v. t. & i.) To sing in a manner common among the Swiss and Tyrolese mountaineers, by suddenly changing from the head voice, or falsetto, to the chest voice, and the contrary; to warble.
+
+Yodel (n.) Alt. of Yodle
+
+Yodle (n.) A song sung by yodeling, as by the Swiss mountaineers.
+
+Yodler (n.) One who yodels.
+
+Yoga (n.) A species of asceticism among the Hindoos, which consists in a complete abstraction from all worldly objects, by which the votary expects to obtain union with the universal spirit, and to acquire superhuman faculties.
+
+Yogi (n.) A follower of the yoga philosophy; an ascetic.
+
+Yoicks (interj.) A cry of encouragement to foxhounds.
+
+Yoit (n.) The European yellow-hammer.
+
+Yojan (n.) A measure of distance, varying from four to ten miles, but usually about five.
+
+Yoke (n.) A bar or frame of wood by which two oxen are joined at the heads or necks for working together.
+
+Yoke (n.) A frame or piece resembling a yoke, as in use or shape.
+
+Yoke (n.) A frame of wood fitted to a person's shoulders for carrying pails, etc., suspended on each side; as, a milkmaid's yoke.
+
+Yoke (n.) A frame worn on the neck of an animal, as a cow, a pig, a goose, to prevent passage through a fence.
+
+Yoke (n.) A frame or convex piece by which a bell is hung for ringing it. See Illust. of Bell.
+
+Yoke (n.) A crosspiece upon the head of a boat's rudder. To its ends lines are attached which lead forward so that the boat can be steered from amidships.
+
+Yoke (n.) A bent crosspiece connecting two other parts.
+
+Yoke (n.) A tie securing two timbers together, not used for part of a regular truss, but serving a temporary purpose, as to provide against unusual strain.
+
+Yoke (n.) A band shaped to fit the shoulders or the hips, and joined to the upper full edge of the waist or the skirt.
+
+Yoke (n.) Fig.: That which connects or binds; a chain; a link; a bond connection.
+
+Yoke (n.) A mark of servitude; hence, servitude; slavery; bondage; service.
+
+Yoke (n.) Two animals yoked together; a couple; a pair that work together.
+
+Yoke (n.) The quantity of land plowed in a day by a yoke of oxen.
+
+Yoke (n.) A portion of the working day; as, to work two yokes, that is, to work both portions of the day, or morning and afternoon.
+
+Yoked (imp. & p. p.) of Yoke
+
+Yoking (p. pr. & vb. n.) of Yoke
+
+Yoke (v. t.) To put a yoke on; to join in or with a yoke; as, to yoke oxen, or pair of oxen.
+
+Yoke (v. t.) To couple; to join with another.
+
+Yoke (v. t.) To enslave; to bring into bondage; to restrain; to confine.
+
+Yoke (v. i.) To be joined or associated; to be intimately connected; to consort closely; to mate.
+
+Yokeage (n.) See Rokeage.
+
+Yokefellow (n.) An associate or companion in, or as in; a mate; a fellow; especially, a partner in marriage.
+
+Yokel (n.) A country bumpkin.
+
+Yokelet (n.) A small farm; -- so called as requiring but one yoke of oxen to till it.
+
+Yokemate (n.) Same as Yokefellow.
+
+Yoke-toed (a.) Having two toes in front and two behind, as the trogons and woodpeckers.
+
+Yold (p. p.) Yielded.
+
+Yolden (p. p.) Yielded.
+
+Yolk (n.) The yellow part of an egg; the vitellus.
+
+Yolk (n.) An oily secretion which naturally covers the wool of sheep.
+
+Yoll (v. i.) To yell.
+
+Yon (a.) At a distance, but within view; yonder.
+
+Yon (adv.) Yonder.
+
+Yoncopin (n.) A local name in parts of the Mississippi Valley for the American lotus (Nelumbo lutea).
+
+Yond (a.) Furious; mad; angry; fierce.
+
+Yond (a.) Yonder.
+
+Yonder (adv.) At a distance, but within view.
+
+Yonder (a.) Being at a distance within view, or conceived of as within view; that or those there; yon.
+
+Yoni (n.) The symbol under which Sakti, or the personification of the female power in nature, is worshiped. Cf. Lingam.
+
+Yonker (n.) A young fellow; a younker.
+
+Yore (adv.) In time long past; in old time; long since.
+
+Yorker (n.) A tice.
+
+Yorkshire (n.) A county in the north of England.
+
+York use () The one of the three printed uses of England which was followed in the north. It was based on the Sarum use. See Use, n., 6.
+
+Yot (v. t.) To unite closely.
+
+Yote (v. t.) To pour water on; to soak in, or mix with, water.
+
+You (dat. & obj.) The pronoun of the second person, in the nominative, dative, and objective case, indicating the person or persons addressed. See the Note under Ye.
+
+Youl (v. i.) To yell; to yowl.
+
+Young (superl.) Not long born; still in the first part of life; not yet arrived at adolescence, maturity, or age; not old; juvenile; -- said of animals; as, a young child; a young man; a young fawn.
+
+Young (superl.) Being in the first part, pr period, of growth; as, a young plant; a young tree.
+
+Young (superl.) Having little experience; inexperienced; unpracticed; ignorant; weak.
+
+Young (n.) The offspring of animals, either a single animal or offspring collectively.
+
+Youngger (n.) One who is younger; an inferior in age; a junior.
+
+Youngish (a.) Somewhat young.
+
+Youngling (n.) A young person; a youth; also, any animal in its early life.
+
+Youngling (a.) Young; youthful.
+
+Youngly (a.) Like a young person or thing; young; youthful.
+
+Youngly (adv.) In a young manner; in the period of youth; early in life.
+
+Youngly (adv.) Ignorantly; weakly.
+
+Youngness (n.) The quality or state of being young.
+
+Youngster (n.) A young person; a youngling; a lad.
+
+Youngth (n.) Youth.
+
+Youngthly (a.) Pertaining to, or resembling, youth; youthful.
+
+Younker (a.) A young person; a stripling; a yonker.
+
+Youpon (n.) Same as Yaupon.
+
+Your (pron. & a.) The form of the possessive case of the personal pronoun you.
+
+Yours (pron.) See the Note under Your.
+
+Yourselves (pl. ) of Yourself
+
+Yourself (pron.) An emphasized or reflexive form of the pronoun of the second person; -- used as a subject commonly with you; as, you yourself shall see it; also, alone in the predicate, either in the nominative or objective case; as, you have injured yourself.
+
+Youths (pl. ) of Youth
+
+Youth (pl. ) of Youth
+
+Youth (n.) The quality or state of being young; youthfulness; juvenility.
+
+Youth (n.) The part of life that succeeds to childhood; the period of existence preceding maturity or age; the whole early part of life, from childhood, or, sometimes, from infancy, to manhood.
+
+Youth (n.) A young person; especially, a young man.
+
+Youth (n.) Young persons, collectively.
+
+Youthful (a.) Not yet mature or aged; young.
+
+Youthful (a.) Also used figuratively.
+
+Youthful (a.) Of or pertaining to the early part of life; suitable to early life; as, youthful days; youthful sports.
+
+Youthful (a.) Fresh; vigorous, as in youth.
+
+Youthhood (n.) The quality or state of being a youth; the period of youth.
+
+Youthly (a.) Young; youthful.
+
+Youthsome (a.) Youthful.
+
+Youthy (a.) Young.
+
+Youze (n.) The cheetah.
+
+Yow (pron.) You.
+
+Yowe (n.) A ewe.
+
+Yowl (v. i.) To utter a loud, long, and mournful cry, as a dog; to howl; to yell.
+
+Yowl (n.) A loud, protracted, and mournful cry, as that of a dog; a howl.
+
+Yowley (n.) The European yellow-hammer.
+
+Yox (v. i.) See Yex.
+
+Ypight (p. p.) See Pight.
+
+Ypocras (n.) Hippocras.
+
+Ypres lace () Fine bobbin lace made at Ypres in Belgium, usually exactly like Valenciennes lace.
+
+Ypsiliform (a.) Resembling the / in appearance; -- said of the germinal spot in the ripe egg at one of the stages of fecundation.
+
+Ypsiloid (a.) In the form of the letter Y; Y-shaped.
+
+Yraft (p. p.) Bereft.
+
+Yren (n.) Iron.
+
+Yronne (p. p.) Run.
+
+Ysame (adv.) Together.
+
+Yt () Alt. of Yt
+
+Yt () an old method of printing that (AS. /aet, /aet) the "y" taking the place of the old letter "thorn" (/). Cf. Ye, the.
+
+Ythrowe () p. p. of Throw.
+
+Ytterbic (a.) Pertaining to, or derived from, ytterbium; containing ytterbium.
+
+Ytterbium (n.) A rare element of the boron group, sometimes associated with yttrium or other related elements, as in euxenite and gadolinite. Symbol Yb; provisional atomic weight 173.2. Cf. Yttrium.
+
+Yttria (n.) The oxide, Y2O3, or earth, of yttrium.
+
+Yttric (a.) Pertaining to, derived from, or containing, yttrium.
+
+Yttriferous (a.) Bearing or containing yttrium or the allied elements; as, gadolinite is one of the yttriferous minerals.
+
+Yttrious (a.) Same as Yttric.
+
+Yttrium (n.) A rare metallic element of the boron-aluminium group, found in gadolinite and other rare minerals, and extracted as a dark gray powder. Symbol Y. Atomic weight, 89.
+
+Yttro-cerite (n.) A mineral of a violet-blue color, inclining to gray and white. It is a hydrous fluoride of cerium, yttrium, and calcium.
+
+Yttro-columbite (n.) Alt. of Yttro-tantalite
+
+Yttro-tantalite (n.) A tantalate of uranium, yttrium, and calcium, of a brown or black color.
+
+Yu (n.) Jade.
+
+Yucca (n.) See Flicker, n., 2.
+
+Yucca (n.) A genus of American liliaceous, sometimes arborescent, plants having long, pointed, and often rigid, leaves at the top of a more or less woody stem, and bearing a large panicle of showy white blossoms.
+
+Yuck (v. i.) To itch.
+
+Yuck (v. t.) To scratch.
+
+Yuckel (n.) Same as Yockel.
+
+Yuen (n.) The crowned gibbon (Hylobates pileatus), native of Siam, Southern China, and the Island of Hainan. It is entirely arboreal in its habits, and has very long arms. the males are dark brown or blackish, with a caplike mass of long dark hair, and usually with a white band around the face. The females are yellowish white, with a dark spot on the breast and another on the crown. Called also wooyen, and wooyen ape.
+
+Yufts (n.) Russia leather.
+
+Yug (n.) Alt. of Yuga
+
+Yuga (n.) Any one of the four ages, Krita, or Satya, Treta, Dwapara, and Kali, into which the Hindoos divide the duration or existence of the world.
+
+Yuke (v. i. & t.) Same as Yuck.
+
+Yulan (n.) A species of Magnolia (M. conspicua) with large white blossoms that open before the leaves. See the Note under Magnolia.
+
+Yule (n.) Christmas or Christmastide; the feast of the Nativity of our Savior.
+
+Yuletide (n.) Christmas time; Christmastide; the season of Christmas.
+
+Yumas (n. pl.) A tribe of Indians native of Arizona and the adjacent parts of Mexico and California. They are agricultural, and cultivate corn, wheat, barley, melons, etc.
+
+Yunx (n.) A genus of birds comprising the wrynecks.
+
+Yupon (n.) Same as Yaupon.
+
+Yux (n. & v.) See Yex, n.
+
+Yvel (a. & adv.) Evil; ill.
+
+Ywar (a.) Aware; wary.
+
+Ywis (adv.) Certainly; most likely; truly; probably.

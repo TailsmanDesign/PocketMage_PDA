@@ -4,12 +4,18 @@
 // LIBRARIES
 #include <USBMSC.h>
 #include <SD_MMC.h>
+#include <SD.h>
+#include <SPI.h>
 #include <freertos/FreeRTOS.h>
 #include <freertos/task.h>
 #include <pocketmage.h>
 // OTA_APP: remove assets.h + assets.cpp, and OS_APPS/, follow OTA_APP: tag instructions in codebase
 #include <assets.h> // OTA_APP: remove
 
+// ===================== SPI BUSSES =====================
+extern SPIClass *vspi;
+extern SPIClass *hspi;
+extern fs::FS* global_fs;
 
 // ===================== SYSTEM STATE =====================
 extern Preferences prefs;                       // NVS preferencesv
@@ -30,7 +36,7 @@ extern String OTA4_APP;
 enum KBState { NORMAL, SHIFT, FUNC, FN_SHIFT };    // Keyboard state
 
 // ===================== APP STATES =====================
-enum AppState { HOME, TXT, FILEWIZ, USB_APP, BT, SETTINGS, TASKS, CALENDAR, JOURNAL, LEXICON, APPLOADER };
+enum AppState { HOME, TXT, FILEWIZ, USB_APP, BT, SETTINGS, TASKS, CALENDAR, JOURNAL, LEXICON, APPLOADER, TERMINAL };
 extern const String appStateNames[];            // App state names
 extern const unsigned char *appIcons[11];       // App icons
 extern AppState CurrentAppState;                // Current app state
@@ -53,6 +59,7 @@ void printDebug();
 void checkTimeout();
 void loadState(bool changeState = true);
 void updateBattState();
+String textPrompt(String promptText = "", String prefix = "");
 #if !OTA_APP
 void saveEditingFile(); // OTA_APP: Remove saveEditingFile
 #endif
@@ -71,7 +78,7 @@ void einkHandler_FILEWIZ();
 String fileWizardMini(bool allowRecentSelect = false, String rootDir = "/");
 
 // <TXT.cpp>
-void TXT_INIT();
+void TXT_INIT(String inPath = "");
 void TXT_INIT_JournalMode();
 void processKB_TXT_NEW();
 void einkHandler_TXT_NEW();
@@ -81,6 +88,7 @@ void saveMarkdownFile(const String& path);
 void HOME_INIT();
 void einkHandler_HOME();
 void processKB_HOME();
+String commandSelect(String command);
 void mageIdle(bool internalRefresh = true);
 void resetIdle();
 
@@ -95,7 +103,7 @@ void processKB_TASKS();
 void SETTINGS_INIT();
 void processKB_settings();
 void einkHandler_settings();
-void settingCommandSelect(String command);
+String settingCommandSelect(String command);
 
 // <USB.cpp>
 void USB_INIT();
@@ -126,3 +134,11 @@ void rebootToAppSlot(int otaIndex);
 void loadAndDrawAppIcon(int x, int y, int otaIndex, bool showName = true, int maxNameChars = 10);
 #endif // POCKETMAGE_OS
 #endif // GLOBALS_H
+
+// <TERMINAL.cpp>
+void TERMINAL_INIT();
+void processKB_TERMINAL();
+void einkHandler_TERMINAL();
+// Wrench
+const char* readCFile(const String& path);
+void compileWrench(const char* wrenchCode);

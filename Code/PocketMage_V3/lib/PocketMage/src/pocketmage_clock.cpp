@@ -46,27 +46,94 @@ bool PocketmageCLOCK::begin() {
   return true;
 }
 
+PocketmageCLOCK::TimeParseResult PocketmageCLOCK::parseTimeString(const String& timeStr,
+                                                                  int& outHours, int& outMinutes) {
+  String s = timeStr;
+  s.trim();
+
+  outHours = -1;
+  outMinutes = -1;
+
+  // --- Detect AM / PM suffix ---
+  bool isAM = false;
+  bool isPM = false;
+
+  String lower = s;
+  lower.toLowerCase();
+
+  if (lower.endsWith("am")) {
+    isAM = true;
+    s = s.substring(0, s.length() - 2);
+  } else if (lower.endsWith("pm")) {
+    isPM = true;
+    s = s.substring(0, s.length() - 2);
+  } else if (lower.endsWith("a")) {
+    isAM = true;
+    s = s.substring(0, s.length() - 1);
+  } else if (lower.endsWith("p")) {
+    isPM = true;
+    s = s.substring(0, s.length() - 1);
+  }
+
+  s.trim();
+
+  int colonIdx = s.indexOf(':');
+
+  if (colonIdx != -1) {
+    // H:MM or HH:MM
+    String hStr = s.substring(0, colonIdx);
+    String mStr = s.substring(colonIdx + 1);
+
+    if (mStr.length() != 2 || hStr.length() < 1 || hStr.length() > 2)
+      return TIME_INVALID_FORMAT;
+
+    outHours = hStr.toInt();
+    outMinutes = mStr.toInt();
+  } else {
+    // HMM or HHMM
+    if (s.length() < 3 || s.length() > 4)
+      return TIME_INVALID_FORMAT;
+
+    int value = s.toInt();
+    outHours = value / 100;
+    outMinutes = value % 100;
+  }
+
+  // --- Apply AM/PM conversion ---
+  if (isAM || isPM) {
+    if (outHours < 1 || outHours > 12)
+      return TIME_OUT_OF_RANGE;
+
+    if (isAM && outHours == 12)
+      outHours = 0;
+    else if (isPM && outHours != 12)
+      outHours += 12;
+  }
+
+  if (outHours < 0 || outHours > 23 || outMinutes < 0 || outMinutes > 59)
+    return TIME_OUT_OF_RANGE;
+
+  return TIME_OK;
+}
+
 void PocketmageCLOCK::setTimeFromString(String timeStr) {
-  if (timeStr.length() != 5 || timeStr[2] != ':') {
-      ESP_LOGE(TAG, "Invalid format! Use HH:MM. Provided str: %s", timeStr.c_str());
-      return;
+  int hours, minutes;
+
+  TimeParseResult res = parseTimeString(timeStr, hours, minutes);
+
+  if (res != TIME_OK) {
+    ESP_LOGE(TAG, "Invalid time (%d): %s", res, timeStr.c_str());
+    OLED().oledWord("Invalid");
+    delay(500);
+    return;
   }
 
-  int hours = timeStr.substring(0, 2).toInt();
-  int minutes = timeStr.substring(3, 5).toInt();
-
-  if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
-      OLED().oledWord("Invalid");
-      delay(500);
-      return;
-  }
-
-  DateTime now = CLOCK().nowDT();  // Get current date
+  DateTime now = CLOCK().nowDT();
   CLOCK().getRTC().adjust(DateTime(now.year(), now.month(), now.day(), hours, minutes, 0));
 
-  ESP_LOGI(TAG, "Time updated!");
+  ESP_LOGI(TAG, "Time updated to %02d:%02d", hours, minutes);
 }
-    
+
 bool PocketmageCLOCK::isValid() {
   if (!begun_) return false;
   DateTime t = rtc_.now();

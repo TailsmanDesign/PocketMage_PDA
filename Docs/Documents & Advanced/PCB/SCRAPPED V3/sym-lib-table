@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "TCA8418")(type "KiCad")(uri "${KIPRJMOD}/import/ul_TCA8418RTWR (1)/KiCADv6/2024-10-10_03-44-21.kicad_sym")(options "")(descr ""))
+  (lib (name "snaptron_7mm_doublesided")(type "KiCad")(uri "${KIPRJMOD}/created/snaptron_7mm_doublesided.kicad_sym")(options "")(descr ""))
+)

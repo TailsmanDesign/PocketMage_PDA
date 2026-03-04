@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--/16120669/351303/2.50/2/3/Resistor/-->
+<quadcept_library>
+  <setting unit="mil" />
+  <textstyle name="Default" height="47.244094488189" strokewidth="7.8740157480315" charwidth="47.244094488189" />
+  <textstyle name="Dimension" height="19.6850393700787" strokewidth="0" charwidth="19.6850393700787" />
+  <textstyle name="H127W0635TH00762" height="50" strokewidth="3" charwidth="25" />
+  <textstyle name="H15W15TH02" height="59.0551181102362" strokewidth="7.8740157480315" charwidth="59.0551181102362" />
+  <padstyle name="r145_100" surface="True" plated="False" isvia="False" nopaste="False" nomask="True" complex="False" holesize="0">
+    <padshape layer="TOP" shape="rectangle" width="39.370078740157" height="57.086614173228" />
+    <padshape layer="TOP_SOLDER_MASK" shape="rectangle" width="47.244094488188" height="64.960629921259" />
+    <padshape layer="TOP_SOLDER_PASTE" shape="rectangle" width="39.370078740157" height="57.086614173228" />
+  </padstyle>
+  <footprint name="RESC2013X65N" originx="0" originy="0" pickpointx="0" pickpointy="0">
+    <pcbpin number="1" name="1" style="r145_100" originx="-37.401574803149" originy="0" rotation="0" />
+    <pcbpin number="2" name="2" style="r145_100" originx="37.401574803149" originy="0" rotation="0" />
+    <line layer="TOP_PLACE_BOUND" originx="-66.929133858267" originy="39.370078740157" endx="66.929133858267" endy="39.370078740157" width="1.9685039370079" />
+    <line layer="TOP_PLACE_BOUND" originx="66.929133858267" originy="39.370078740157" endx="66.929133858267" endy="-39.370078740157" width="1.9685039370079" />
+    <line layer="TOP_PLACE_BOUND" originx="66.929133858267" originy="-39.370078740157" endx="-66.929133858267" endy="-39.370078740157" width="1.9685039370079" />
+    <line layer="TOP_PLACE_BOUND" originx="-66.929133858267" originy="-39.370078740157" endx="-66.929133858267" endy="39.370078740157" width="1.9685039370079" />
+    <line layer="TOP_ASSEMBLY" originx="-39.370078740157" originy="25.11811023622" endx="39.370078740157" endy="25.11811023622" width="3.9370078740157" />
+    <line layer="TOP_ASSEMBLY" originx="39.370078740157" originy="25.11811023622" endx="39.370078740157" endy="-25.11811023622" width="3.9370078740157" />
+    <line layer="TOP_ASSEMBLY" originx="39.370078740157" originy="-25.11811023622" endx="-39.370078740157" endy="-25.11811023622" width="3.9370078740157" />
+    <line layer="TOP_ASSEMBLY" originx="-39.370078740157" originy="-25.11811023622" endx="-39.370078740157" endy="25.11811023622" width="3.9370078740157" />
+    <line layer="TOP_SILKSCREEN" originx="0" originy="21.181102362204" endx="0" endy="-21.181102362204" width="7.8740157480314" />
+  </footprint>
+  <symbol name="0805W8F1002T5E" originx="0" originy="0">
+    <line originx="200" originy="50" endx="500" endy="50" width="0" />
+    <line originx="500" originy="-50" endx="500" endy="50" width="0" />
+    <line originx="500" originy="-50" endx="200" endy="-50" width="0" />
+    <line originx="200" originy="50" endx="200" endy="-50" width="0" />
+    <sympin number="1" originx="200" originy="0" rotation="180" length="100" width="7.8740157480315" flipped="False">
+      <text name="pinname" originx="0" originy="-10" style="Default" rotation="0" justify="upperleft" flipped="False" hidden="True" data="1" />
+      <text name="pindes" originx="0" originy="10" style="Default" rotation="0" justify="lowerleft" flipped="False" hidden="False" data="1" />
+    </sympin>
+    <sympin number="2" originx="500" originy="0" rotation="0" length="100" width="7.8740157480315" flipped="False">
+      <text name="pinname" originx="700" originy="-10" style="Default" rotation="0" justify="upperright" flipped="False" hidden="True" data="2" />
+      <text name="pindes" originx="700" originy="10" style="Default" rotation="0" justify="lowerright" flipped="False" hidden="False" data="2" />
+    </sympin>
+  </symbol>
+  <component name="0805W8F1002T5E" designatorprefix="R" height="25.590551181102" footprint="RESC2013X65N">
+    <comppin designator="1" sympin="1" pinswap="0" gateswap="0" gate="1" group="1" side="" type="Any" name="1" />
+    <comppin designator="2" sympin="2" pinswap="0" gateswap="0" gate="1" group="1" side="" type="Any" name="2" />
+    <attached_symbol gate="1" name="0805W8F1002T5E" />
+    <pinmap designator="1" footprintpin="1" />
+    <pinmap designator="2" footprintpin="2" />
+    <text name="Datasheet" originx="0" originy="0" style="Default" rotation="0" justify="" flipped="False" hidden="True" data="https://www.mouser.de/datasheet/2/1365/1-3044649.pdf" />
+    <text name="Description" originx="0" originy="0" style="Default" rotation="0" justify="" flipped="False" hidden="True" data="Thick Film Resistors - SMD RMC 0805 1/8W 1% T/R-5000" />
+    <text name="Mouser Part Number" originx="0" originy="0" style="Default" rotation="0" justify="" flipped="False" hidden="True" data="303-0805W8F1002T5E" />
+    <text name="Mouser Price/Stock" originx="0" originy="0" style="Default" rotation="0" justify="" flipped="False" hidden="True" data="https://www.mouser.co.uk/ProductDetail/Royalohm/0805W8F1002T5E?qs=e8oIoAS2J1QfYPOBCQ0fIg%3D%3D" />
+    <text name="Manufacturer_Name" originx="0" originy="0" style="Default" rotation="0" justify="" flipped="False" hidden="True" data="ROYALOHM" />
+    <text name="Manufacturer_Part_Number" originx="550" originy="150" style="Default" rotation="0" justify="left" flipped="False" hidden="False" data="0805W8F1002T5E" />
+  </component>
+</quadcept_library>

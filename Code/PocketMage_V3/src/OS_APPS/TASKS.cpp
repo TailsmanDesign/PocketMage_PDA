@@ -41,15 +41,20 @@ void updateTasksFile() {
   pocketmage::setCpuSpeed(240);
   delay(50);
   // Clear the existing tasks file first
-  SD().delFile("/sys/tasks.txt");
+  PM_SDAUTO().delFile("/sys/tasks.txt");
 
+  pocketmage::setCpuSpeed(240);
+  if (!global_fs->exists("/sys/tasks.txt")) {
+    File f = global_fs->open("/sys/tasks.txt", FILE_WRITE);
+    if (f) f.close();
+  }
   // Iterate through the tasks vector and append each task to the file
   for (size_t i = 0; i < tasks.size(); i++) {
     // Create a string from the task's attributes with "|" delimiter
     String taskInfo = tasks[i][0] + "|" + tasks[i][1] + "|" + tasks[i][2] + "|" + tasks[i][3];
     
     // Append the task info to the file
-    SD().appendToFile("/sys/tasks.txt", taskInfo);
+    PM_SDAUTO().appendToFile("/sys/tasks.txt", taskInfo);
   }
 
   if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
@@ -68,7 +73,7 @@ void updateTaskArray() {
   SDActive = true;
   pocketmage::setCpuSpeed(240);
   delay(50);
-  File file = SD_MMC.open("/sys/tasks.txt", "r"); // Open the text file in read mode
+  File file = global_fs->open("/sys/tasks.txt", "r"); // Open the text file in read mode
   if (!file) {
     ESP_LOGE(TAG, "Failed to open file to read: %s", file.path());
     return;
@@ -268,7 +273,7 @@ void processKB_TASKS() {
         //Make sure oled only updates at 60fps
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentLine, false);
+          OLED().oledLine(currentLine, currentLine.length(), false);
         }
       }
       break;

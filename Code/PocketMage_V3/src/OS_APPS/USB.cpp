@@ -49,7 +49,7 @@ void USBAppShutdown() {
     if (ALLOW_NO_MICROSD) {
       OLED().oledWord("All Work Will Be Lost!");
       delay(5000);
-      SD().setNoSD(true);
+      PM_SDAUTO().setNoSD(true);
     } else {
       OLED().oledWord("Insert SD Card and Reboot!");
       delay(5000);
@@ -201,7 +201,7 @@ void processKB_USB() {
   //Make sure oled only updates at 10FPS
   if (currentMillis - OLEDFPSMillis >= (1000/10 /*OLED_MAX_FPS*/)) {
     OLEDFPSMillis = currentMillis;
-    OLED().oledLine(currentLine, false);
+    OLED().oledLine(currentLine, currentLine.length(), false);
   }
   
   if (currentMillis - KBBounceMillis >= KB_COOLDOWN) {  
@@ -212,7 +212,11 @@ void processKB_USB() {
     // Home recieved
     else if (inchar == 12 || inchar == 8 || inchar == 19 || inchar == 28|| inchar == 12) {
       USBAppShutdown();
-      HOME_INIT();
+      prefs.begin("PocketMage", false);
+      prefs.putInt("CurrentAppState", static_cast<int>(HOME));
+      prefs.putBool("Seamless_Reboot", true);
+      prefs.end();
+      esp_restart();
     }
   }
 }

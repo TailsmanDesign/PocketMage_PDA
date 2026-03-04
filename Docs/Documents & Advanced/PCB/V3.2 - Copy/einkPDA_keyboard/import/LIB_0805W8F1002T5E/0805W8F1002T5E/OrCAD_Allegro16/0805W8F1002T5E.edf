@@ -1,0 +1,94 @@
+
+(EDIF
+  (rename &0805W8F1002T5E "0805W8F1002T5E")
+  (EDIFVersion 2 0 0)
+  (EDIFLevel 0)
+  (keywordMap (keywordLevel 0))
+  (status
+    (written
+      (timestamp 2024 10 12 18 43 58)
+      (dataOrigin "16120669/351303/2.50/2/3/Resistor")
+      (program "SamacSys ECAD Model 0805W8F1002T5E"
+        (version "1.1"))))
+  (library
+  (rename &0805W8F1002T5E "0805W8F1002T5E")
+    (EDIFLevel 0)
+    (technology
+      (numberDefinition (scale 1 (e 254 -6) (unit DISTANCE)))
+      (userData GRIDRESOLUTION (integer 50 50))
+      (figureGroup DEFAULT (pathWidth 10) (textHeight 100))
+      (figureGroup PROPERTY (pathWidth 10) (textHeight 90))
+      (figureGroup PINNUMBER (pathWidth 10) (textHeight 90))
+      (figureGroup PINNAME (pathWidth 10) (textHeight 90))
+      (figureGroup COMMENT (pathWidth 10) (textHeight 90))
+      (figureGroup PIN (pathWidth 10) (textHeight 90))
+      (figureGroup GRAPHIC (pathWidth 10) (textHeight 100))
+    )
+    (cell
+      (rename &0805W8F1002T5E "0805W8F1002T5E")
+      (cellType GENERIC)
+      (view
+        (rename NORMAL "Normal")
+        (viewType SCHEMATIC)
+        (interface
+          (designator "R")
+          (property (rename PACKAGENAME "PackageName") (string "0805W8F1002T5E"))
+          (property (rename ISHETEROGENEOUS "IsHeterogeneous") (string "False"))
+          (property (rename DEVICESINVIEW "DevicesInView") (string "1"))
+          (property (rename DEVICESINPACKAGE "DevicesInPackage") (string "1"))
+          (property (rename DEVICEDESIGNATOR "DeviceDesignator") (string "A"))
+          (property (rename DEVICENUMBERING "DeviceNumbering") (string "Alpha"))
+          (property (rename PCB_32_FOOTPRINT "PCB Footprint") (string "RESC2013X65N"))
+          (property (rename &Mouser_Part_Number "Mouser Part Number") (string "303-0805W8F1002T5E"))
+          (property (rename &Mouser_Price_Stock "Mouser Price/Stock") (string "https://www.mouser.co.uk/ProductDetail/Royalohm/0805W8F1002T5E?qs=e8oIoAS2J1QfYPOBCQ0fIg%3D%3D"))
+          (property (rename &Manufacturer_Name "Manufacturer_Name") (string "ROYALOHM"))
+          (property (rename &Manufacturer_Part_Number "Manufacturer_Part_Number") (string "0805W8F1002T5E"))
+          (property (rename &Description "Description") (string "Thick Film Resistors - SMD RMC 0805 1/8W 1percent T/R-5000"))
+          (property (rename &Datasheet_Link "Datasheet Link") (string "https://www.mouser.de/datasheet/2/1365/1-3044649.pdf"))
+          (property (rename &Height "Height") (string "0.65 mm"))
+          (property (rename &_60__32_VALUE_32__62_ "Value") (string "0805W8F1002T5E"))
+          (property (rename VALUE "Value") (string "Value"))
+          (port
+            (rename &1 "1")
+            (designator "1")
+            (property (rename ORDER "Order") (string "0") (owner "OrCAD"))
+          )
+          (port
+            (rename &2 "2")
+            (designator "2")
+            (property (rename ORDER "Order") (string "1") (owner "OrCAD"))
+          )
+          (symbol
+            (portImplementation
+              (name &1)
+              (keywordDisplay DESIGNATOR (display PINNUMBER))
+              (figure PIN (path (pointList (pt -200 -100) (pt 0 -100))))
+              (connectLocation (figure GRAPHIC (dot (pt -200 -100))))
+            )
+            (portImplementation
+              (name &2)
+              (keywordDisplay DESIGNATOR (display PINNUMBER))
+              (figure PIN (path (pointList (pt 300 -100) (pt 500 -100))))
+              (connectLocation (figure GRAPHIC (dot (pt 500 -100))))
+            )
+            (figure GRAPHIC
+              (figureGroupOverride GRAPHIC
+                (pathWidth 10))
+              (path
+                (pointList
+                  (pt 0 -50)
+                  (pt 300 -50)
+                  (pt 300 -150)
+                  (pt 0 -150)
+                  (pt 0 -50)
+                )
+              )
+            )
+            (keywordDisplay DESIGNATOR (display PROPERTY (justify LOWERLEFT) (orientation R0) (origin (pt 350 80))))
+            (propertyDisplay &_60__32_VALUE_32__62_ (display PROPERTY (justify LOWERLEFT) (orientation R0) (origin (pt 350 -20))))
+          )
+        )
+      )
+    )
+  )
+)

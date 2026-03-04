@@ -13,7 +13,7 @@
 #include <config.h> // for FULL_REFRESH_AFTER
 #pragma region fonts
 // FONTS
-// 3x7
+// Small
 #include "Fonts/Font3x7FixedNum.h"
 #include "Fonts/Font4x5Fixed.h"
 #include "Fonts/Font5x7Fixed.h"
@@ -24,6 +24,7 @@
 #include <Fonts/FreeSerif9pt7b.h>
 #include <Fonts/FreeSerifBold9pt7b.h>
 // 12x7
+#include <Fonts/FreeMonoBold12pt7b.h>
 #include <Fonts/FreeMono12pt7b.h>
 #include <Fonts/FreeSans12pt7b.h>
 #include <Fonts/FreeSerif12pt7b.h>

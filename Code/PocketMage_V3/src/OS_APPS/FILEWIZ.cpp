@@ -25,6 +25,7 @@ std::vector<String> excludedPaths = {
 
 void FILEWIZ_INIT() {
   CurrentAppState = FILEWIZ;
+  CurrentFileWizState = WIZ0_;
   KB().setKeyboardState(NORMAL);
   EINK().forceSlowFullUpdate(true);
   newState = true;
@@ -85,7 +86,7 @@ String renderWizMini(String folder, int8_t scrollDelta) {
     scrollDelta = 0;
     cachedFiles.clear();
 
-    File dir = SD_MMC.open(folder);
+    File dir = global_fs->open(folder);
     if (dir && dir.isDirectory()) {
       File entry;
       while ((entry = dir.openNextFile())) {
@@ -287,7 +288,7 @@ String fileWizardMini(bool allowRecentSelect, String rootDir) {
     // Select received
     else if (inchar == 20 || inchar == 29 || inchar == 7 || inchar == 13) {
       if (selectedPath != "") {
-        File entry = SD_MMC.open(selectedPath);
+        File entry = global_fs->open(selectedPath);
         // If selectedPath is a folder, open it and change the selectedDirectory
         if (entry && entry.isDirectory()) {
           selectedDirectory = selectedPath;
@@ -304,9 +305,9 @@ String fileWizardMini(bool allowRecentSelect, String rootDir) {
     else if (allowRecentSelect && (inchar >= '0' && inchar <= '9')) {
       int fileIndex = (inchar == '0') ? 10 : (inchar - '0');
       // SET WORKING FILE
-      String selectedFile = SD().getFilesListIndex(fileIndex - 1);
+      String selectedFile = PM_SDAUTO().getFilesListIndex(fileIndex - 1);
       if (selectedFile != "-" && selectedFile != "") {
-        SD().setWorkingFile(selectedFile);
+        PM_SDAUTO().setWorkingFile(selectedFile);
         // GO TO WIZ1_
         CurrentFileWizState = WIZ1_;
         newState = true;
@@ -345,7 +346,7 @@ void processKB_FILEWIZ() {
       else if (outPath != "") {
         // Open file
         if (outPath != "-" && outPath != "") {
-          SD().setWorkingFile(outPath);
+          PM_SDAUTO().setWorkingFile(outPath);
           // GO TO WIZ1_
           CurrentFileWizState = WIZ1_;
           newState = true;
@@ -366,8 +367,7 @@ void processKB_FILEWIZ() {
         if (inchar == 0);
         //BKSP Recieved
         else if (inchar == 127 || inchar == 8 || inchar == 12) {
-          CurrentFileWizState = WIZ0_;
-          newState = true;
+          FILEWIZ_INIT();
           break;
         }
         else if (inchar >= '1' && inchar <= '4') {
@@ -395,7 +395,7 @@ void processKB_FILEWIZ() {
         //Make sure oled only updates at 60fps
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentWord, false);
+          OLED().oledLine(currentWord, currentWord.length(), false);
         }
         KBBounceMillis = currentMillis;
       }
@@ -419,7 +419,7 @@ void processKB_FILEWIZ() {
         // Y RECIEVED
         else if (inchar == 'y' || inchar == 'Y') {
           // DELETE FILE
-          SD().delFile(SD().getWorkingFile());
+          PM_SDAUTO().delFile(PM_SDAUTO().getWorkingFile());
           
           // RETURN TO FILE WIZ HOME
           refreshFiles = true;
@@ -439,7 +439,7 @@ void processKB_FILEWIZ() {
         //Make sure oled only updates at 60fps
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentWord, false);
+          OLED().oledLine(currentWord, currentWord.length(), false);
         }
         KBBounceMillis = currentMillis;
       }
@@ -498,7 +498,7 @@ void processKB_FILEWIZ() {
         else if (inchar == 13) {      
           // RENAME FILE                    
           String newName = "/" + currentWord + ".txt";
-          SD().renFile(SD().getWorkingFile(), newName);
+          PM_SDAUTO().renFile(PM_SDAUTO().getWorkingFile(), newName);
 
           // RETURN TO WIZ0
           refreshFiles = true;
@@ -522,7 +522,7 @@ void processKB_FILEWIZ() {
         //Make sure oled only updates at 60fps
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentWord, false);
+          OLED().oledLine(currentWord, currentWord.length(), false);
         }
       }
       break;
@@ -580,7 +580,7 @@ void processKB_FILEWIZ() {
         else if (inchar == 13) {      
           // Copy FILE                    
           String newName = "/" + currentWord + ".txt";
-          SD().copyFile(SD().getWorkingFile(), newName);
+          PM_SDAUTO().copyFile(PM_SDAUTO().getWorkingFile(), newName);
 
           // RETURN TO WIZ0
           refreshFiles = true;
@@ -604,7 +604,7 @@ void processKB_FILEWIZ() {
         //Make sure oled only updates at 60fps
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentWord, false);
+          OLED().oledLine(currentWord, currentWord.length(), false);
         }
       }
       break;
@@ -624,18 +624,18 @@ void einkHandler_FILEWIZ() {
         display.drawBitmap(0, 0, fileWizardallArray[0], 320, 218, GxEPD_BLACK);
 
         // DRAW FILE LIST
-
         // TODO: Replace this with displaying the 10 most recent files from SDMMC_META
         keypad.disableInterrupts();
-        SD().listDir(SD_MMC, "/notes");
+        PM_SDAUTO().listDir(*global_fs, "/notes");
         keypad.enableInterrupts();
 
         for (int i = 0; i < MAX_FILES; i++) {
           display.setCursor(30, 54+(17*i));
-          display.print(SD().getFilesListIndex(i));
+          display.print(PM_SDAUTO().getFilesListIndex(i));
         }
 
-        EINK().refresh();
+        //EINK().refresh();
+        EINK().multiPassRefresh(2);
       }
       break;
     case WIZ1_:
@@ -644,10 +644,11 @@ void einkHandler_FILEWIZ() {
         EINK().resetDisplay();
 
         // DRAW APP
-        EINK().drawStatusBar("- " + SD().getWorkingFile());
+        EINK().drawStatusBar("- " + PM_SDAUTO().getWorkingFile());
         display.drawBitmap(0, 0, fileWizardallArray[1], 320, 218, GxEPD_BLACK);
 
-        EINK().refresh();
+        //EINK().refresh();
+        EINK().multiPassRefresh(2);
       }
       break;
     case WIZ1_YN:
@@ -656,7 +657,7 @@ void einkHandler_FILEWIZ() {
         EINK().resetDisplay();
 
         // DRAW APP
-        EINK().drawStatusBar("DEL:" + SD().getWorkingFile() + "?(Y/N)");
+        EINK().drawStatusBar("DEL:" + PM_SDAUTO().getWorkingFile() + "?(Y/N)");
         display.drawBitmap(0, 0, fileWizardallArray[1], 320, 218, GxEPD_BLACK);
 
         EINK().refresh();

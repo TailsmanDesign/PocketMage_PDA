@@ -19,7 +19,7 @@ static volatile bool doFull = false;
 
 
 void TXT_INIT_OLD() {
-  if (SD().getEditingFile() != "") SD().loadFile();
+  if (PM_SDAUTO().getEditingFile() != "") PM_SDAUTO().loadFile();
   CurrentAppState = TXT;
   CurrentTXTState = TXT_;
   KB().setKeyboardState(NORMAL);
@@ -112,8 +112,8 @@ void processKB_TXT_OLD() {
         //SAVE Recieved
         else if (inchar == 6) {
           //File exists, save normally
-          if (SD().getEditingFile() != "" && SD().getEditingFile() != "-") {
-            SD().saveFile();
+          if (PM_SDAUTO().getEditingFile() != "" && PM_SDAUTO().getEditingFile() != "-") {
+            PM_SDAUTO().saveFile();
             KB().setKeyboardState(NORMAL);
             newLineAdded = true;
           }
@@ -128,7 +128,7 @@ void processKB_TXT_OLD() {
         }
         //LOAD Recieved
         else if (inchar == 5) {
-          SD().loadFile();
+          PM_SDAUTO().loadFile();
           KB().setKeyboardState(NORMAL);
           newLineAdded = true;
         }
@@ -158,7 +158,7 @@ void processKB_TXT_OLD() {
           OLEDFPSMillis = currentMillis;
           // ONLY SHOW OLEDLINE WHEN NOT IN SCROLL MODE
           if (TOUCH().getLastTouch() == -1) {
-            OLED().oledLine(currentLine);
+            OLED().oledLine(currentLine, currentLine.length());
             if (TOUCH().getPrevDynamicScroll() != TOUCH().getDynamicScroll()) TOUCH().setPrevDynamicScroll(TOUCH().getDynamicScroll());
           }
           else OLED().oledScroll();
@@ -212,9 +212,9 @@ void processKB_TXT_OLD() {
         else if (inchar >= '0' && inchar <= '9'){
           int fileIndex = (inchar == '0') ? 10 : (inchar - '0');
           //Edit a new file
-          if (SD().getFilesListIndex(fileIndex - 1) != SD().getEditingFile()) { 
+          if (PM_SDAUTO().getFilesListIndex(fileIndex - 1) != PM_SDAUTO().getEditingFile()) { 
             //Selected file does not exist, create a new one
-            if (SD().getFilesListIndex(fileIndex - 1) == "-") {
+            if (PM_SDAUTO().getFilesListIndex(fileIndex - 1) == "-") {
               CurrentTXTState = WIZ3;
               EINK().setFullRefreshAfter(FULL_REFRESH_AFTER + 1);
               newState = true;
@@ -222,8 +222,8 @@ void processKB_TXT_OLD() {
             }
             //Selected file exists, prompt to save current file
             else {      
-              prevEditingFile = SD().getEditingFile();
-              SD().setEditingFile(SD().getFilesListIndex(fileIndex - 1));      
+              prevEditingFile = PM_SDAUTO().getEditingFile();
+              PM_SDAUTO().setEditingFile(PM_SDAUTO().getFilesListIndex(fileIndex - 1));      
               CurrentTXTState = WIZ1;
               EINK().setFullRefreshAfter(FULL_REFRESH_AFTER + 1);
               newState = true;
@@ -246,7 +246,7 @@ void processKB_TXT_OLD() {
         //Make sure oled only updates at 60fps
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentWord, false);
+          OLED().oledLine(currentWord, currentWord.length(),false);
         }
         break;
       case WIZ1:
@@ -276,11 +276,11 @@ void processKB_TXT_OLD() {
             //File to be saved exists
             else {
               //Save current file
-              SD().saveFile();
+              PM_SDAUTO().saveFile();
 
               delay(200);
               //Load new file
-              SD().loadFile();
+              PM_SDAUTO().loadFile();
               //Return to TXT
               CurrentTXTState = TXT_;
               KB().setKeyboardState(NORMAL);
@@ -293,7 +293,7 @@ void processKB_TXT_OLD() {
           //NO  (don't save current file)
           else if (numSelect == 2) {
             //Just load new file
-            SD().loadFile();
+            PM_SDAUTO().loadFile();
             //Return to TXT
             CurrentTXTState = TXT_;
             KB().setKeyboardState(NORMAL);
@@ -308,7 +308,7 @@ void processKB_TXT_OLD() {
         //Make sure oled only updates at 60fps
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentWord, false);
+          OLED().oledLine(currentWord, currentWord.length(), false);
         }
         break;
 
@@ -354,11 +354,11 @@ void processKB_TXT_OLD() {
           prevEditingFile = "/" + currentWord + ".txt";
 
           //Save the file
-          SD().saveFile();
+          PM_SDAUTO().saveFile();
 
           delay(200);
           //Load new file
-          SD().loadFile();
+          PM_SDAUTO().loadFile();
 
           keypad.enableInterrupts();
 
@@ -383,7 +383,7 @@ void processKB_TXT_OLD() {
         //Make sure oled only updates at 60fps
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentWord, false);
+          OLED().oledLine(currentWord, currentWord.length(), false);
         }
         break;
       case WIZ3:
@@ -426,7 +426,7 @@ void processKB_TXT_OLD() {
           prevEditingFile = "/" + currentWord + ".txt";
 
           //Save the file
-          SD().saveFile();
+          PM_SDAUTO().saveFile();
           //Ask to save prev file
           
           //Return to TXT_
@@ -450,7 +450,7 @@ void processKB_TXT_OLD() {
         //Make sure oled only updates at 60fps
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentWord, false);
+          OLED().oledLine(currentWord, currentWord.length(), false);
         }
         break;
       case FONT:
@@ -512,7 +512,7 @@ void processKB_TXT_OLD() {
         //Make sure oled only updates at 60fps
         if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
           OLEDFPSMillis = currentMillis;
-          OLED().oledLine(currentWord, false);
+          OLED().oledLine(currentWord, currentWord.length(), false);
         }
         break;
 
@@ -549,12 +549,12 @@ void einkHandler_TXT_OLD() {
         display.drawBitmap(60,0,fileWizLiteallArray[0],200,218, GxEPD_BLACK);
 
         keypad.disableInterrupts();
-        SD().listDir(SD_MMC, "/");
+        PM_SDAUTO().listDir(*global_fs, "/");
         keypad.enableInterrupts();
 
         for (int i = 0; i < MAX_FILES; i++) {
           display.setCursor(88, 54+(17*i));
-          display.print(SD().getFilesListIndex(i));
+          display.print(PM_SDAUTO().getFilesListIndex(i));
         }
 
         EINK().refresh();
@@ -617,7 +617,7 @@ void einkHandler_TXT_OLD() {
         display.drawBitmap(60,0,fontfont0,200,218, GxEPD_BLACK);
 
         keypad.disableInterrupts();
-        SD().listDir(SD_MMC, "/");
+        PM_SDAUTO().listDir(*global_fs, "/");
         keypad.enableInterrupts();
 
         for (int i = 0; i < 7; i++) {

@@ -9,12 +9,12 @@
 #include <globals.h>
 #include "esp_log.h"
 
-#define IDLE_TIME 20000 // time to wait for idle (ms)
 #if !OTA_APP // POCKETMAGE_OS
 static String currentLine = "";
 static bool resetIdleAnim = false; 
 static int prevTime = 0;
 long lastInput = 0;
+static int cursor_pos = 0;
 
 void HOME_INIT() {
   CurrentAppState = HOME;
@@ -26,7 +26,8 @@ void HOME_INIT() {
   //frames.push_back(&testTextScreen);
 }
 
-void commandSelect(String command) {
+String commandSelect(String command) {
+  String returnText = "";
   command.toLowerCase();
 
   // OPEN IN FILE WIZARD
@@ -34,16 +35,16 @@ void commandSelect(String command) {
     command = removeChar(command, ' ');
     command = removeChar(command, '-');
     keypad.disableInterrupts();
-    SD().listDir(SD_MMC, "/");
+    PM_SDAUTO().listDir(*global_fs, "/");
     keypad.enableInterrupts();
 
     for (uint8_t i = 0; i < MAX_FILES; i++) {
-      String lowerFileName = SD().getFilesListIndex(i);
+      String lowerFileName = PM_SDAUTO().getFilesListIndex(i);
       lowerFileName.toLowerCase();
       if (command == lowerFileName || (command+".txt") == lowerFileName || ("/"+command+".txt") == lowerFileName) {
-        SD().setWorkingFile(SD().getFilesListIndex(i));
+        PM_SDAUTO().setWorkingFile(PM_SDAUTO().getFilesListIndex(i));
         FILEWIZ_INIT();
-        return;
+        return "";
       }
     }
   }
@@ -53,16 +54,16 @@ void commandSelect(String command) {
     command = removeChar(command, ' ');
     command = removeChar(command, '/');
     keypad.disableInterrupts();
-    SD().listDir(SD_MMC, "/");
+    PM_SDAUTO().listDir(*global_fs, "/");
     keypad.enableInterrupts();
 
     for (uint8_t i = 0; i < MAX_FILES; i++) {
-      String lowerFileName = SD().getFilesListIndex(i);
+      String lowerFileName = PM_SDAUTO().getFilesListIndex(i);
       lowerFileName.toLowerCase();
       if (command == lowerFileName || (command+".txt") == lowerFileName || ("/"+command+".txt") == lowerFileName) {
-        SD().setEditingFile(SD().getFilesListIndex(i));
+        PM_SDAUTO().setEditingFile(PM_SDAUTO().getFilesListIndex(i));
         TXT_INIT();
-        return;
+        return "";
       }
     }
   }
@@ -99,6 +100,12 @@ void commandSelect(String command) {
   else if (command == "reset") {
     esp_restart();
   } 
+  else if (command == "sdreset") {
+    prefs.begin("PocketMage", false);
+    prefs.putBool("SD_SPI_CMPT", false);
+    prefs.end();
+    returnText = "SD compatibility mode disabled";
+  }
   /////////////////////////////
   else if (command == "sleep") {
     PWR_BTN_event = true;
@@ -106,8 +113,12 @@ void commandSelect(String command) {
   }
   /////////////////////////////
   else if (command == "home") {
-    OLED().oledWord("You're home, silly!");
-    delay(1000);
+    if (CurrentAppState == HOME) {
+      returnText = "You're home, silly!";
+    }
+    else {
+      HOME_INIT();
+    }
   } 
   /////////////////////////////
   else if (command == "note" || command == "text" || command == "write" || command == "notebook" || command == "notepad" || command == "txt" || command == "1") {
@@ -128,6 +139,9 @@ void commandSelect(String command) {
   else if (command == "tasks" || command == "task" || command == "6") {
     TASKS_INIT();
   }
+  else if (command == "term" || command == "terminal" || command == "cmd" || command == "command" || command == "script" || command == "0") {
+    TERMINAL_INIT();
+  }
   /////////////////////////////
   else if (command == "bluetooth" || command == "bt" || command == "4") {
     // OPEN BLUETOOTH
@@ -147,36 +161,36 @@ void commandSelect(String command) {
   }
   /////////////////////////////
   else if (command == "i farted") {
-    OLED().oledWord("That smells");
-    delay(1000);
+    returnText = "That smells";
   } 
   else if (command == "poop") {
-    OLED().oledWord("Yuck");
-    delay(1000);
+    returnText = "Yuck";
   } 
   else if (command == "hello") {
-    OLED().oledWord("Hey, you!");
-    delay(1000);
+    returnText = "Hey, you!";
   } 
   else if (command == "hi") {
-    OLED().oledWord("What's up?");
-    delay(1000);
+    returnText = "What's up?";
   } 
   else if (command == "i love you") {
-    OLED().oledWord("luv u 2 <3");
-    delay(1000);
+    returnText = "luv u 2 <3";
   } 
   else if (command == "what can you do") {
-    OLED().oledWord("idk man");
-    delay(1000);
+    returnText = "idk man";
   } 
   else if (command == "alexa") {
-    OLED().oledWord("...");
-    delay(1000);
+    returnText = "...";
   } 
   else {
-    settingCommandSelect(command);
+    returnText = settingCommandSelect(command);
   }
+
+  if (returnText != "") {
+    OLED().oledWord(returnText);
+    delay(2000);
+  }
+
+  return returnText;
 }
 
 void drawHome() {
@@ -349,85 +363,16 @@ void mageIdle(bool internalRefresh) {
 
 void processKB_HOME() {
   int currentMillis = millis();
+  String left = "";
+  String right = "";
+  String command = "";
 
   switch (CurrentHOMEState) {
     case HOME_HOME:
-      if (currentMillis - KBBounceMillis >= KB_COOLDOWN) {  
-        char inchar = KB().updateKeypress();
-
-        if (inchar != 0) lastInput = millis();
-
-        // HANDLE INPUTS
-        //No char recieved
-        if (inchar == 0);   
-        //CR Recieved
-        else if (inchar == 13) {                          
-          commandSelect(currentLine);
-          currentLine = "";
-        }                                      
-        // SHIFT Recieved
-        else if (inchar == 17) {
-          if (KB().getKeyboardState() == SHIFT || KB().getKeyboardState() == FN_SHIFT) {
-            KB().setKeyboardState(NORMAL);
-          } else if (KB().getKeyboardState() == FUNC) {
-            KB().setKeyboardState(FN_SHIFT);
-          } else {
-            KB().setKeyboardState(SHIFT);
-          }
-        }
-        // FN Recieved
-        else if (inchar == 18) {
-          if (KB().getKeyboardState() == FUNC || KB().getKeyboardState() == FN_SHIFT) {
-            KB().setKeyboardState(NORMAL);
-          } else if (KB().getKeyboardState() == SHIFT) {
-            KB().setKeyboardState(FN_SHIFT);
-          } else {
-            KB().setKeyboardState(FUNC);
-          }
-        }
-        //Space Recieved
-        else if (inchar == 32) {                                  
-          currentLine += " ";
-        }
-        // Home recieved
-        else if (inchar == 12) {
-          CurrentAppState = HOME;
-          currentLine     = "";
-          newState        = true;
-          KB().setKeyboardState(NORMAL);
-        }
-        //ESC / CLEAR Recieved
-        else if (inchar == 20) {                                  
-          currentLine = "";
-        }
-        //BKSP Recieved
-        else if (inchar == 8) {                  
-          if (currentLine.length() > 0) {
-            currentLine.remove(currentLine.length() - 1);
-          }
-        }
-        else {
-          currentLine += inchar;
-          if (inchar >= 48 && inchar <= 57) {}  //Only leave FN on if typing numbers
-          else if (KB().getKeyboardState() != NORMAL) {
-            KB().setKeyboardState(NORMAL);
-          }
-        }
-
-        currentMillis = millis();
-        //Make sure oled only updates at OLED_MAX_FPS
-        if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
-          OLEDFPSMillis = currentMillis;
-
-          if (millis() - lastInput > IDLE_TIME) {
-            mageIdle(true);
-          }
-          else {
-            resetIdle();
-            OLED().oledLine(currentLine, false);
-          }
-        }
-      }
+      KB().setKeyboardState(NORMAL);
+      command = textPrompt();
+      if (command != "_EXIT_") commandSelect(command);
+      else newState = true;
       break;
 
     case NOWLATER:
