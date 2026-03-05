@@ -19,7 +19,9 @@ struct CalendarEvent {
   int durationMinutes;
   String repeat;
   String note;
-  int calendarIndex = -1;  // stores original index in calendarEvents, for when it's copied into day events
+
+  // stores original index in calendarEvents, for when it's copied into day events
+  int calendarIndex = -1;
 
   // Compare all fields
   bool operator==(const CalendarEvent& other) const {
@@ -561,8 +563,8 @@ void commandSelectDay(String command) {
       newEventStartDate = String(dateBuf);
 
       // Reconstruct HHMM string for newEventStartTime
-      char timeBuf[5];
-      snprintf(timeBuf, sizeof(timeBuf), "%02d%02d", evt.hour, evt.minute);
+      char timeBuf[6];  // needs to be 6 bc last byte of string is null terminator \0
+      snprintf(timeBuf, sizeof(timeBuf), "%02d:%02d", evt.hour, evt.minute);
       newEventStartTime = String(timeBuf);
 
       newEventDuration = String(evt.durationMinutes);
@@ -898,39 +900,80 @@ void drawCalendarWeek(int weekOffset) {
 
 // ics import/export
 void expandRecurringEvents(int year, int month, int day) {
-    dayEvents.clear();
-    String todayStr = intToYYYYMMDD(year, month, day);
+  dayEvents.clear();
+  String todayStr = intToYYYYMMDD(year, month, day);
 
-    for (size_t i = 0; i < calendarEvents.size(); i++) {
-        CalendarEvent e = calendarEvents[i];
-        e.calendarIndex = i; // <- store original index
+  for (size_t i = 0; i < calendarEvents.size(); i++) {
+    CalendarEvent e = calendarEvents[i];
+    e.calendarIndex = i;  // <- store original index
 
-        // Non-repeating event
-        if (e.year == year && e.month == month && e.day == day) {
-            dayEvents.push_back(e);
-            continue;
-        }
-
-        // Weekly recurrence
-        if (e.repeat.startsWith("WEEKLY")) {
-            String byDay = e.repeat.substring(7); 
-            int targetDOW = dayStringToInt(byDay);
-            int todayDOW = getDayOfWeek(year, month, day);
-
-            if (todayDOW == targetDOW) {
-                if (e.year < year || (e.year == year && (e.month < month || (e.month == month && e.day <= day)))) {
-                    CalendarEvent recEvent = e;
-                    recEvent.year = year;
-                    recEvent.month = month;
-                    recEvent.day = day;
-                    recEvent.calendarIndex = i; // preserve original
-                    dayEvents.push_back(recEvent);
-                }
-            }
-        }
-
-        // TODO: handle DAILY, MONTHLY, YEARLY
+    // Non-repeating event
+    if (e.year == year && e.month == month && e.day == day) {
+      dayEvents.push_back(e);
+      continue;
     }
+
+    // Weekly recurrence
+    if (e.repeat.startsWith("WEEKLY")) {
+      String byDay = e.repeat.substring(7);
+      int targetDOW = dayStringToInt(byDay);
+      int todayDOW = getDayOfWeek(year, month, day);
+
+      if (todayDOW == targetDOW) {
+        if (e.year < year ||
+            (e.year == year && (e.month < month || (e.month == month && e.day <= day)))) {
+          CalendarEvent recEvent = e;
+          recEvent.year = year;
+          recEvent.month = month;
+          recEvent.day = day;
+          recEvent.calendarIndex = i;  // preserve original
+          dayEvents.push_back(recEvent);
+        }
+      }
+    }
+
+    // TODO: handle DAILY, MONTHLY, YEARLY
+    // DAILY recurrence
+    if (e.repeat == "DAILY") {
+      if (e.year < year ||
+          (e.year == year && (e.month < month || (e.month == month && e.day <= day)))) {
+        CalendarEvent recEvent = e;
+        recEvent.year = year;
+        recEvent.month = month;
+        recEvent.day = day;
+        recEvent.calendarIndex = i;
+        dayEvents.push_back(recEvent);
+      }
+    }
+
+    // MONTHLY recurrence
+    if (e.repeat == "MONTHLY") {
+      if (day == e.day) {
+        if (e.year < year || (e.year == year && (e.month <= month))) {
+          CalendarEvent recEvent = e;
+          recEvent.year = year;
+          recEvent.month = month;
+          recEvent.day = day;
+          recEvent.calendarIndex = i;
+          dayEvents.push_back(recEvent);
+        }
+      }
+    }
+
+    // YEARLY recurrence
+    if (e.repeat == "YEARLY") {
+      if (month == e.month && day == e.day) {
+        if (year >= e.year) {
+          CalendarEvent recEvent = e;
+          recEvent.year = year;
+          recEvent.month = month;
+          recEvent.day = day;
+          recEvent.calendarIndex = i;
+          dayEvents.push_back(recEvent);
+        }
+      }
+    }
+  }
 }
 
 bool parseICSDateTime(const String& line,
@@ -1078,80 +1121,76 @@ bool parseICSRRule(const String& rruleLine, String& outRepeat) {
 }
 
 void parseICSEvent(const std::vector<String>& icsLines) {
-    std::vector<String> eventLines;
-    bool inEvent = false;
+  std::vector<String> eventLines;
+  bool inEvent = false;
 
-    for (const auto& line : icsLines) {
-        if (line == "BEGIN:VEVENT") {
-            inEvent = true;
-            eventLines.clear();
-        }
-
-        if (inEvent) {
-            eventLines.push_back(line);
-        }
-
-        if (line == "END:VEVENT" && inEvent) {
-            String eventName, repeat, note;
-            int year = 0, month = 0, day = 0;
-            int hour = 0, minute = 0;
-            int durMins = 0;
-
-            for (const auto& eline : eventLines) {
-                if (eline.startsWith("SUMMARY:")) {
-                    eventName = eline.substring(8);
-                } 
-                else if (eline.startsWith("DTSTART")) {
-                    int colonPos = eline.indexOf(':');
-                    if (colonPos != -1) {
-                        String dt = eline.substring(colonPos + 1);
-                        if (dt.length() >= 13) {
-                            year   = dt.substring(0, 4).toInt();
-                            month  = dt.substring(4, 6).toInt();
-                            day    = dt.substring(6, 8).toInt();
-                            hour   = dt.substring(9, 11).toInt();
-                            minute = dt.substring(11, 13).toInt();
-                        }
-                    }
-                } 
-                else if (eline.startsWith("DTEND")) {
-                    int colonPos = eline.indexOf(':');
-                    if (colonPos != -1) {
-                        String dtEnd = eline.substring(colonPos + 1);
-
-                        // Build proper start datetime string from ints
-                        char startBuf[16];
-                        snprintf(startBuf, sizeof(startBuf), "%04d%02d%02dT%02d%02d00",
-                                 year, month, day, hour, minute);
-
-                        durMins = calculateDurationMinutes(String(startBuf), dtEnd);
-                    }
-                } 
-                else if (eline.startsWith("RRULE:")) {
-                    parseICSRRule(eline, repeat);
-                } 
-                else if (eline.startsWith("DESCRIPTION:")) {
-                    note = eline.substring(12);
-                }
-            }
-
-            CalendarEvent ev;
-            ev.eventName       = eventName;
-            ev.year            = year;
-            ev.month           = month;
-            ev.day             = day;
-            ev.hour            = hour;
-            ev.minute          = minute;
-            ev.durationMinutes = durMins;
-            ev.repeat          = repeat;
-            ev.note            = note;
-            ev.calendarIndex   = calendarEvents.size(); // <-- assign index
-
-            calendarEvents.push_back(ev);
-
-            inEvent = false;
-        }
+  for (const auto& line : icsLines) {
+    if (line == "BEGIN:VEVENT") {
+      inEvent = true;
+      eventLines.clear();
     }
+
+    if (inEvent) {
+      eventLines.push_back(line);
+    }
+
+    if (line == "END:VEVENT" && inEvent) {
+      String eventName, repeat, note;
+      int year = 0, month = 0, day = 0;
+      int hour = 0, minute = 0;
+      int durMins = 0;
+
+      for (const auto& eline : eventLines) {
+        if (eline.startsWith("SUMMARY:")) {
+          eventName = eline.substring(8);
+        } else if (eline.startsWith("DTSTART")) {
+          int colonPos = eline.indexOf(':');
+          if (colonPos != -1) {
+            String dt = eline.substring(colonPos + 1);
+            if (dt.length() >= 13) {
+              year = dt.substring(0, 4).toInt();
+              month = dt.substring(4, 6).toInt();
+              day = dt.substring(6, 8).toInt();
+              hour = dt.substring(9, 11).toInt();
+              minute = dt.substring(11, 13).toInt();
+            }
+          }
+        } else if (eline.startsWith("DTEND")) {
+          int colonPos = eline.indexOf(':');
+          if (colonPos != -1) {
+            String dtEnd = eline.substring(colonPos + 1);
+
+            // Build proper start datetime string from ints
+            char startBuf[16];
+            snprintf(startBuf, sizeof(startBuf), "%04d%02d%02dT%02d%02d00", year, month, day, hour,
+                     minute);
+
+            durMins = calculateDurationMinutes(String(startBuf), dtEnd);
+          }
+        } else if (eline.startsWith("RRULE:")) {
+          parseICSRRule(eline, repeat);
+        } else if (eline.startsWith("DESCRIPTION:")) {
+          note = eline.substring(12);
+        }
+      }
+
+      CalendarEvent ev;
+      ev.eventName = eventName;
+      ev.year = year;
+      ev.month = month;
+      ev.day = day;
+      ev.hour = hour;
+      ev.minute = minute;
+      ev.durationMinutes = durMins;
+      ev.repeat = repeat;
+      ev.note = note;
+      ev.calendarIndex = calendarEvents.size();  // <-- assign index
+
+      calendarEvents.push_back(ev);
+
+      inEvent = false;
+    }
+  }
 }
 
 void parseICSFile(const String& filename) {
@@ -1491,36 +1530,37 @@ void deleteEventByIndex(int indexToDelete) {
 }
 
 void updateEventByIndex(int indexToUpdate) {
-    if (indexToUpdate < 0 || indexToUpdate >= dayEvents.size()) return;
+  if (indexToUpdate < 0 || indexToUpdate >= dayEvents.size())
+    return;
 
-    CalendarEvent& evt = dayEvents[indexToUpdate];
+  CalendarEvent& evt = dayEvents[indexToUpdate];
 
-    // Convert new event strings to integers
-    int newYear   = newEventStartDate.substring(0, 4).toInt();
-    int newMonth  = newEventStartDate.substring(4, 6).toInt();
-    int newDay    = newEventStartDate.substring(6, 8).toInt();
+  // Convert new event strings to integers
+  int newYear = newEventStartDate.substring(0, 4).toInt();
+  int newMonth = newEventStartDate.substring(4, 6).toInt();
+  int newDay = newEventStartDate.substring(6, 8).toInt();
 
-    int hour, minute;
-    parseHHMM(newEventStartTime, hour, minute);
+  int hour, minute;
+  parseHHMM(newEventStartTime, hour, minute);
 
-    int durMinutes = newEventDuration.toInt();
+  int durMinutes = newEventDuration.toInt();
 
-    // Update the dayEvents copy
-    evt.eventName       = newEventName;
-    evt.year            = newYear;
-    evt.month           = newMonth;
-    evt.day             = newDay;
-    evt.hour            = hour;
-    evt.minute          = minute;
-    evt.durationMinutes = durMinutes;
-    evt.repeat          = newEventRepeat;
-    evt.note            = newEventNote;
+  // Update the dayEvents copy
+  evt.eventName = newEventName;
+  evt.year = newYear;
+  evt.month = newMonth;
+  evt.day = newDay;
+  evt.hour = hour;
+  evt.minute = minute;
+  evt.durationMinutes = durMinutes;
+  evt.repeat = newEventRepeat;
+  evt.note = newEventNote;
 
-    // Update the original calendarEvents using the stored index
-    int idx = evt.calendarIndex;
-    if (idx >= 0 && idx < calendarEvents.size()) {
-        calendarEvents[idx] = evt;
-    }
+  // Update the original calendarEvents using the stored index
+  int idx = evt.calendarIndex;
+  if (idx >= 0 && idx < calendarEvents.size()) {
+    calendarEvents[idx] = evt;
+  }
 }
 
 // Loops
