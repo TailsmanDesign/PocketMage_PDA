@@ -3,6 +3,7 @@
     "active_layer": 2,
     "active_layer_preset": "",
     "auto_track_width": false,
+<<<<<<< Updated upstream
     "hidden_netclasses": [
       "Default"
     ],
@@ -124,6 +125,10 @@
       "Net-(C20-Pad2)",
       "LOAD"
     ],
+=======
+    "hidden_netclasses": [],
+    "hidden_nets": [],
+>>>>>>> Stashed changes
     "high_contrast_mode": 0,
     "net_color_mode": 1,
     "opacity": {
@@ -154,6 +159,7 @@
       "grid",
       "footprints_front",
       "footprints_back",
+      "footprint_references",
       "tracks",
       "pads",
       "zones",
