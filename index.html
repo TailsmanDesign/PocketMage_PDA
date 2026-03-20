@@ -19,7 +19,6 @@
     <script src="https://unpkg.com/crypto-js@4.1.1/crypto-js.js"></script>
     <script src="https://unpkg.com/buffer@6.0.3/index.js"></script>
     <script>
-        // expose Node Buffer in the global scope for libraries that expect it 
         window.Buffer = window.buffer && window.buffer.Buffer; 
     </script>
 
@@ -33,7 +32,6 @@
     <script type="module">
         import { ESPLoader, Transport } from "esptool-js";
 
-        // Re-expose ESPLoader and Transport to the global scope
         window.ESPLoader = ESPLoader;
         window.Transport = Transport;
     </script>
@@ -167,6 +165,7 @@
             color: var(--wp--preset--color--background);
             border: none;
             padding: 0.75rem 1.5rem;
+            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
@@ -240,7 +239,7 @@
         select {
             width: 100%;
             padding: calc(0.667em + 2px) calc(1.333em + 2px);
-            font-family: inherit;
+            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             font-size: clamp(16px, 1rem + ((1vw - 3.2px) * 0.125), 18px);
             font-weight: 700;
             border: 2px solid currentColor;
@@ -263,8 +262,8 @@
         }
 
         option {
+            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             font-weight: 700;
-            font-family: inherit;
         }
 
         .select-wrapper {
@@ -281,7 +280,7 @@
             width: 100%;
             box-sizing: border-box;
             padding: 0.6rem 2.25rem 0.6rem 0.75rem;
-            font: inherit;
+            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             font-weight: 700;
             border: 2px solid currentColor;
             background-color: var(--wp--preset--color--background, #fff);
@@ -516,7 +515,7 @@
     </footer>
 
     <script>
-        const NUMBER_OF_VERSIONS_SHOWN = 5;                                                                                 // NUMBER OF FIRMWARE VERSIONS TO SHOW ON DROPDOWNS
+        const NUMBER_OF_VERSIONS_SHOWN = 5;
 
         const versionSelect = document.getElementById('version-select');
         const latestVersionText = document.getElementById('latest-version-text');
@@ -532,7 +531,6 @@
         let esploader;
         let transport;
 
-        // Create terminal helper for esptool-js
         const espLoaderTerminal = {
             clean() {
                 console.clear();
@@ -545,9 +543,8 @@
             },
         };
 
-        // Convert Uint8Array to binary string (Latin1) for esptool-js
         function uint8ToBinaryString(u8) {
-            const CHUNK = 0x8000; // chunk size to avoid call stack limits
+            const CHUNK = 0x8000;
             let result = '';
             for (let i = 0; i < u8.length; i += CHUNK) {
                 const sub = u8.subarray(i, i + CHUNK);
@@ -556,7 +553,6 @@
             return result;
         }
 
-        // Parse an offset value that may be numeric, decimal string or hex string (0x...)
         function parseOffset(off) {
             if (typeof off === 'number' && !isNaN(off)) return off;
             if (typeof off === 'string') {
@@ -572,24 +568,21 @@
             return 0;
         }
 
-        // Parse dev version tag like dev-20251121-012248 and return formatted UTC datetime string
         function formatDevBuild(version) {
             if (!version || typeof version !== 'string') return null;
             const m = version.match(/^dev-(\d{8})-(\d{6})$/);
             if (!m) return null;
-            const datePart = m[1]; // YYYYMMDD
-            const timePart = m[2]; // HHMMSS
+            const datePart = m[1]; 
+            const timePart = m[2]; 
             const year = parseInt(datePart.slice(0, 4), 10);
-            const month = parseInt(datePart.slice(4, 6), 10) - 1; // JS months 0-11
+            const month = parseInt(datePart.slice(4, 6), 10) - 1; 
             const day = parseInt(datePart.slice(6, 8), 10);
             const hours = parseInt(timePart.slice(0, 2), 10);
             const minutes = parseInt(timePart.slice(2, 4), 10);
             const seconds = parseInt(timePart.slice(4, 6), 10);
 
-            // Construct a UTC timestamp
             const ts = Date.UTC(year, month, day, hours, minutes, seconds);
             const d = new Date(ts);
-            // Format as "YYYY-MM-DD HH:MM:SS UTC" (stable)
             const pad = (n) => String(n).padStart(2, '0');
             const formatted = `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())} UTC`;
             return formatted;
@@ -609,21 +602,42 @@
                     return;
                 }
 
-                const versionsToShow = data.versions.slice(0, NUMBER_OF_VERSIONS_SHOWN);
+                const releaseVersions = data.versions
+                    .filter(v => !v.startsWith('dev-'))
+                    .sort((a, b) => {
+                        const cleanA = a.replace(/^[^0-9]+/, '');
+                        const cleanB = b.replace(/^[^0-9]+/, '');
+                        const partsA = cleanA.split(/[-_.]/);
+                        const partsB = cleanB.split(/[-_.]/);
+                        for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
+                            const numA = parseInt(partsA[i] || "0", 10);
+                            const numB = parseInt(partsB[i] || "0", 10);
+                            if (!isNaN(numA) && !isNaN(numB) && numA !== numB) {
+                                return numB - numA;
+                            }
+                        }
+                        return a.localeCompare(b);
+                    });
+
+                const versionsToShow = releaseVersions.slice(0, NUMBER_OF_VERSIONS_SHOWN);
+
+                if (versionsToShow.length === 0) {
+                    versionSelect.innerHTML = '<option value="">No release versions available</option>';
+                    statusDiv.textContent = 'No release versions found';
+                    return;
+                }
+
                 const firstVersion = versionsToShow[0];
-                
                 latestVersionText.textContent = `The latest firmware is ${firstVersion}`;
 
                 const manifestResponse = await fetch(`./firmware/${firstVersion}/manifest.json`, { cache: 'no-store' });
                 if (!manifestResponse.ok) throw new Error(`Failed to fetch manifest for ${firstVersion}: ${manifestResponse.status}`);
                 const manifest = await manifestResponse.json();
 
-                // Validate manifest structure
                 if (!manifest.builds || !manifest.builds[0] || !Array.isArray(manifest.builds[0].parts)) {
                     throw new Error('Invalid manifest structure: builds[0].parts missing');
                 }
 
-                // Extract the file structure from the manifest
                 const build = manifest.builds[0];
                 const findPart = (pred) => build.parts.find(pred) || null;
 
@@ -646,7 +660,6 @@
                     } : null
                 };
 
-                // add safety logs to help debug missing manifest fields
                 console.debug('Detected firmware parts from manifest:', firmwareFiles);
 
                 versionsToShow.forEach(version => {
@@ -656,10 +669,9 @@
                     versionSelect.appendChild(option);
                 });
 
-                if (versionsToShow.length > 0) {
-                    versionSelect.value = versionsToShow[0];
-                    updateStatus();
-                }
+                versionSelect.value = versionsToShow[0];
+                updateStatus();
+                
             } catch (error) {
                 console.error('Failed to load versions:', error);
                 versionSelect.innerHTML = '<option value="">Error loading versions</option>';
@@ -671,7 +683,6 @@
             const version = versionSelect.value;
             const preserveData = preserveDataCheckbox.checked;
 
-            // Hide dev info by default
             devInfo.style.display = 'none';
             devInfo.textContent = '';
 
@@ -687,7 +698,6 @@
             flashBtn.textContent = `Flash ${version}`;
             statusDiv.textContent = `Ready to flash ${version} (${modeText})`;
 
-            // If this version is a dev build, try to parse and display a friendly date/time
             const devFormatted = formatDevBuild(version);
             if (devFormatted) {
                 devInfo.style.display = 'block';
@@ -698,18 +708,13 @@
 
         async function initializeEspLoader() {
             try {
-                // Check if ESPLoader and Transport are available
                 if (typeof window.ESPLoader === 'undefined' || typeof window.Transport === 'undefined') {
                     throw new Error('ESPLoader library not loaded. Please refresh the page.');
                 }
 
-                // Request serial port
                 const port = await navigator.serial.requestPort();
-
-                // Create transport
                 transport = new window.Transport(port, true);
 
-                // Create a new ESP loader instance with the terminal
                 const flashOptions = {
                     transport,
                     baudrate: 115200,
@@ -717,7 +722,6 @@
                 };
                 esploader = new window.ESPLoader(flashOptions);
 
-                // Connect and detect chip
                 const chip = await esploader.main();
                 console.debug('Detected chip:', chip);
                 if (!chip) {
@@ -746,23 +750,19 @@
                 progressBar.style.display = 'block';
                 statusDiv.textContent = 'Connecting to device...';
 
-                // Initialize ESP loader
                 const initialized = await initializeEspLoader();
                 if (!initialized) {
                     return;
                 }
 
-                // Validate we found parts in the manifest earlier
                 if (!firmwareFiles.application) {
                     throw new Error('Manifest is missing application/firmware entry (cannot locate firmware file path). Check manifest.json.');
                 }
 
                 statusDiv.textContent = 'Loading firmware files...';
 
-                // Determine which files to flash based on preserve data option
                 const preparedFiles = [];
 
-                // Helper to fetch a file and return Uint8Array
                 async function fetchUint8(path) {
                     const r = await fetch(path);
                     if (!r.ok) throw new Error(`Failed to fetch ${path}: ${r.status}`);
@@ -771,7 +771,6 @@
                 }
 
                 if (!preserveData) {
-                    // Full install
                     if (firmwareFiles.bootloader && firmwareFiles.bootloader.path) {
                         const bootloaderU8 = await fetchUint8(`./firmware/${version}/${firmwareFiles.bootloader.path}`);
                         preparedFiles.push({
@@ -793,20 +792,17 @@
                     }
                 }
 
-                // Always flash the application
                 const appU8 = await fetchUint8(`./firmware/${version}/${firmwareFiles.application.path}`);
                 preparedFiles.push({
                     dataU8: appU8,
                     address: firmwareFiles.application.offset
                 });
 
-                // Build fileArray for esptool-js: esptool-js expects data as Latin1 string and numeric addresses
                 const fileArrayStr = preparedFiles.map(f => ({
                     data: uint8ToBinaryString(f.dataU8),
                     address: Number(f.address)
                 }));
 
-                // Debug log sizes/offsets
                 console.debug('Prepared files for flashing:', fileArrayStr.map(f => ({
                     address: '0x' + (Number(f.address)).toString(16),
                     length: f.data.length
@@ -814,7 +810,6 @@
 
                 statusDiv.textContent = 'Flashing firmware...';
 
-                // Flash options
                 const flashOptions = {
                     fileArray: fileArrayStr,
                     flashSize: 'keep',
@@ -833,7 +828,6 @@
 
                 await esploader.writeFlash(flashOptions);
 
-                // Clean up after flashing
                 await esploader.hardReset();
 
                 statusDiv.textContent = 'Firmware flashed successfully! Device is rebooting...';
@@ -857,9 +851,7 @@
         preserveDataCheckbox.addEventListener('change', updateStatus);
         flashBtn.addEventListener('click', flashFirmware);
 
-        // Wait for the ESPLoader to be loaded before initializing
         window.addEventListener('load', () => {
-            // Check if ESPLoader is available
             if (typeof window.ESPLoader === 'undefined') {
                 statusDiv.textContent = 'Error: ESPLoader library failed to load. Please refresh the page.';
                 return;
