@@ -12,12 +12,10 @@
 
     <link rel="icon" href="./favicon.png" />
 
-    <!-- Sorts Mill Goudy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet">
 
-    <!-- CryptoJS and Buffer libraries -->
     <script src="https://unpkg.com/crypto-js@4.1.1/crypto-js.js"></script>
     <script src="https://unpkg.com/buffer@6.0.3/index.js"></script>
     <script>
@@ -25,7 +23,6 @@
         window.Buffer = window.buffer && window.buffer.Buffer; 
     </script>
 
-    <!-- esptool-js -->
     <script type="importmap">
     {
         "imports": {
@@ -245,6 +242,7 @@
             padding: calc(0.667em + 2px) calc(1.333em + 2px);
             font-family: inherit;
             font-size: clamp(16px, 1rem + ((1vw - 3.2px) * 0.125), 18px);
+            font-weight: 700;
             border: 2px solid currentColor;
             border-radius: 0;
             background: var(--wp--preset--color--background);
@@ -264,6 +262,11 @@
             background: #fff;
         }
 
+        option {
+            font-weight: 700;
+            font-family: inherit;
+        }
+
         .select-wrapper {
             position: relative;
             display: inline-block;
@@ -279,6 +282,7 @@
             box-sizing: border-box;
             padding: 0.6rem 2.25rem 0.6rem 0.75rem;
             font: inherit;
+            font-weight: 700;
             border: 2px solid currentColor;
             background-color: var(--wp--preset--color--background, #fff);
             color: var(--wp--preset--color--primary, #333);
@@ -307,6 +311,13 @@
         .select-wrapper select:disabled {
             cursor: not-allowed;
             opacity: 0.7;
+        }
+
+        .latest-version-text {
+            text-align: center;
+            font-weight: 400;
+            font-size: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.125), 16px);
+            margin-top: 0.75rem;
         }
 
         .checkbox-group {
@@ -468,6 +479,7 @@
                                 <option value="">Loading versions...</option>
                             </select>
                         </div>
+                        <div id="latest-version-text" class="latest-version-text"></div>
                     </div>
                     <div class="form-group">
                         <div class="checkbox-group">
@@ -504,7 +516,10 @@
     </footer>
 
     <script>
+        const NUMBER_OF_VERSIONS_SHOWN = 5;                                                                                 // NUMBER OF FIRMWARE VERSIONS TO SHOW ON DROPDOWNS
+
         const versionSelect = document.getElementById('version-select');
+        const latestVersionText = document.getElementById('latest-version-text');
         const flashBtn = document.getElementById('flash-btn');
         const statusDiv = document.getElementById('status');
         const preserveDataCheckbox = document.getElementById('preserve-data');
@@ -594,13 +609,10 @@
                     return;
                 }
 
-                // Assume manifest-index.json keeps newest version first (workflow prepends new releases).
-                const firstVersion = data.versions[0];
-                if (!firstVersion) {
-                    versionSelect.innerHTML = '<option value="">No versions available</option>';
-                    statusDiv.textContent = 'No firmware versions found';
-                    return;
-                }
+                const versionsToShow = data.versions.slice(0, NUMBER_OF_VERSIONS_SHOWN);
+                const firstVersion = versionsToShow[0];
+                
+                latestVersionText.textContent = `The latest firmware is ${firstVersion}`;
 
                 const manifestResponse = await fetch(`./firmware/${firstVersion}/manifest.json`, { cache: 'no-store' });
                 if (!manifestResponse.ok) throw new Error(`Failed to fetch manifest for ${firstVersion}: ${manifestResponse.status}`);
@@ -637,15 +649,15 @@
                 // add safety logs to help debug missing manifest fields
                 console.debug('Detected firmware parts from manifest:', firmwareFiles);
 
-                data.versions.forEach(version => {
+                versionsToShow.forEach(version => {
                     const option = document.createElement('option');
                     option.value = version;
                     option.textContent = version;
                     versionSelect.appendChild(option);
                 });
 
-                if (data.versions.length > 0) {
-                    versionSelect.value = data.versions[0];
+                if (versionsToShow.length > 0) {
+                    versionSelect.value = versionsToShow[0];
                     updateStatus();
                 }
             } catch (error) {
