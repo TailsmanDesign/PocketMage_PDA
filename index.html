@@ -497,6 +497,7 @@
             <p>When "Preserve user data" is checked, only application partition will be flashed, keeping your settings
                 and saved content.</p>
             <p>When unchecked, a complete installation will be performed, which erases all data and settings.</p>
+            <p>Note: SD card data is NOT affected by this option.</p>
         </div>
 
         <div class="info-box">
@@ -605,18 +606,16 @@
                 const releaseVersions = data.versions
                     .filter(v => !v.startsWith('dev-'))
                     .sort((a, b) => {
-                        const cleanA = a.replace(/^[^0-9]+/, '');
-                        const cleanB = b.replace(/^[^0-9]+/, '');
-                        const partsA = cleanA.split(/[-_.]/);
-                        const partsB = cleanB.split(/[-_.]/);
-                        for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
-                            const numA = parseInt(partsA[i] || "0", 10);
-                            const numB = parseInt(partsB[i] || "0", 10);
-                            if (!isNaN(numA) && !isNaN(numB) && numA !== numB) {
+                        const numsA = (a.match(/\d+/g) || []).map(Number);
+                        const numsB = (b.match(/\d+/g) || []).map(Number);
+                        for (let i = 0; i < Math.max(numsA.length, numsB.length); i++) {
+                            const numA = numsA[i] || 0;
+                            const numB = numsB[i] || 0;
+                            if (numA !== numB) {
                                 return numB - numA;
                             }
                         }
-                        return a.localeCompare(b);
+                        return b.localeCompare(a);
                     });
 
                 const versionsToShow = releaseVersions.slice(0, NUMBER_OF_VERSIONS_SHOWN);
@@ -696,7 +695,7 @@
             flashBtn.disabled = false;
             const modeText = preserveData ? 'Update (preserve data)' : 'Full installation';
             flashBtn.textContent = `Flash ${version}`;
-            statusDiv.textContent = `Ready to flash ${version} (${modeText})`;
+            statusDiv.textContent = `Ready to flash ${version} - ${modeText}`;
 
             const devFormatted = formatDevBuild(version);
             if (devFormatted) {
