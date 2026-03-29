@@ -428,22 +428,31 @@ String textPrompt(String promptText, String prefix) {
         }
       }
 
-      // Handle idle timeouts triggering a visual update
+      // Handle idle state transitions
       bool isIdle = (millis() - lastInput > IDLE_TIME);
       static bool wasIdle = false;
+      
+      // If we just woke up from being idle, reset the mage and force a text redraw
       if (isIdle != wasIdle) {
-         redraw = true;
          wasIdle = isIdle;
+         if (!isIdle) {
+             resetIdle();
+             redraw = true; 
+         }
       }
 
-      if (redraw && (currentMillis - OLEDFPSMillis >= (1000 / OLED_MAX_FPS))) {
-        OLEDFPSMillis = currentMillis;
-        redraw = false;
-
+      // Display Update Loop (Runs at OLED_MAX_FPS)
+      if (currentMillis - OLEDFPSMillis >= (1000 / OLED_MAX_FPS)) {
         if (isIdle) {
-          mageIdle(true);
-        } else {
-          resetIdle();
+          // Continuously update the idle animation frames while idle
+          OLEDFPSMillis = currentMillis;
+          mageIdle(true); 
+        } 
+        else if (redraw) {
+          // Only redraw the text prompt if the user typed or moved the cursor
+          OLEDFPSMillis = currentMillis;
+          redraw = false;
+          
           if (prefix != "") OLED().oledLine(prefix + currentLine, cursor_pos+prefix.length(), false, promptText);
           else OLED().oledLine(currentLine, cursor_pos, false, promptText);
         }
