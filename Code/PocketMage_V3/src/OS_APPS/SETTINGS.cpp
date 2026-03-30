@@ -217,6 +217,21 @@ String settingCommandSelect(String command) {
     newState = true;
     return "Settings Updated";
   }
+  else if (command.startsWith("weekstart ")) {
+    String weekPart = command.substring(10);
+    weekPart.trim();
+
+    if (weekPart != "t" && weekPart != "f") return "Invalid";
+
+    WEEK_START_MONDAY = (weekPart == "t");
+    
+    prefs.begin("PocketMage", false);
+    prefs.putBool("WEEK_START_MON", WEEK_START_MONDAY);
+    prefs.end();
+    
+    newState = true;
+    return "Settings Updated";
+  }
   else if (command.startsWith("allownosd ")) {
     String noSDPart = command.substring(10);
     noSDPart.trim();
@@ -293,6 +308,13 @@ void einkHandler_settings() {
     // OLED_MAX_FPS
     display.setCursor(163, 42);
     display.print(String(OLED_MAX_FPS).c_str());
+    // WEEK_START_MONDAY
+    display.setFont(&Font5x7Fixed);
+    display.setCursor(163, 60);
+    display.print("WeekStart:");
+    if (WEEK_START_MONDAY) display.drawBitmap(163, 63, _toggleON, 26, 11, GxEPD_BLACK);
+    else display.drawBitmap(163, 63, _toggleOFF, 26, 11, GxEPD_BLACK);
+    display.setFont(&FreeSerif9pt7b);
 
     EINK().drawStatusBar("Type a Command:");
 

@@ -31,6 +31,7 @@ bool HOME_ON_BOOT;                       // Start home app on boot
 int OLED_BRIGHTNESS;                     // OLED brightness (0-255)
 int OLED_MAX_FPS;                        // OLED max FPS
 bool SD_SPI_COMPATIBILITY;               // SD card compatibility mode
+bool WEEK_START_MONDAY;                  // Calendar weeks start on Monday
 
 // ===================== APP STATES =====================
 const String appStateNames[] = { "txt", "filewiz", "usb", "bt", "settings", "tasks", "calendar", "journal", "lexicon", "terminal" , "loader" }; // App state names
