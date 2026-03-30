@@ -143,12 +143,14 @@ void USB_INIT() {
   esp_err_t err = sdmmc_host_init();
   if (err != ESP_OK) {
     ESP_LOGE(TAG, "Host init failed %s\n", esp_err_to_name(err));
+    OLED().sysMessage("Host init failed: " + String(esp_err_to_name(err)),2000);
     return;
   }
 
   err = sdmmc_host_init_slot(SDMMC_HOST_SLOT_1, &slot_config);
   if (err != ESP_OK) {
     ESP_LOGE(TAG, "Slot init failed: %s\n", esp_err_to_name(err));
+    OLED().sysMessage("Slot init failed: " + String(esp_err_to_name(err)),2000);
     sdmmc_host_deinit();
     return;
   }
@@ -157,6 +159,7 @@ void USB_INIT() {
   card = (sdmmc_card_t*)malloc(sizeof(sdmmc_card_t));
   if (!card) {
     ESP_LOGE(TAG, "Failed to allocate card struct\n", esp_err_to_name(err));
+    OLED().sysMessage("Failed malloc: " + String(esp_err_to_name(err)),2000);
     sdmmc_host_deinit();
     return;
   }
@@ -164,6 +167,7 @@ void USB_INIT() {
   err = sdmmc_card_init(&host, card);
   if (err != ESP_OK) {
     ESP_LOGE(TAG, "Card init failed: %s\n", esp_err_to_name(err));
+    OLED().sysMessage("Card init failed: " + String(esp_err_to_name(err)),2000);
     free(card);
     card = nullptr;
     sdmmc_host_deinit();
