@@ -88,6 +88,10 @@
           ""
         ],
         [
+          "clearance|73747693|62272693|67c5686e-f610-404b-ba3a-d972151899e3|dba3c94d-c9a0-426a-ae4b-cf383415a758",
+          ""
+        ],
+        [
           "clearance|76304533|62122200|40a22d14-ee57-48bf-9f75-f6745c1bb888|231ebb4e-4448-4537-bdda-1c71dc952f76",
           ""
         ],
@@ -113,6 +117,14 @@
         ],
         [
           "clearance|85250000|82450000|1f40178c-557d-4edb-be3f-d9156aa24c08|d075db26-3480-421a-b57e-a8f6078def44",
+          ""
+        ],
+        [
+          "copper_edge_clearance|120355071|52002930|0f1653b5-a740-457b-bdf7-c167d514bc79|c321a474-c008-4c5e-8c90-e4417c25cbb9",
+          ""
+        ],
+        [
+          "copper_edge_clearance|61500000|50900000|7213abfd-4b80-43a8-a7ed-8aeabea14858|81cd683d-e59f-4661-b767-4e8086524fe5",
           ""
         ],
         [
@@ -152,15 +164,15 @@
           ""
         ],
         [
+          "copper_edge_clearance|97615072|52002930|5f6c48c8-55bc-4f53-9bbe-8b44e258666b|67bc4df9-b9ce-43e8-8f2b-3885aa4a0ff9",
+          ""
+        ],
+        [
           "shorting_items|73072999|66409999|06c9246b-073d-4b53-a329-887644bbf52e|a360e769-c57e-4501-9e39-43ad4c60fb58",
           ""
         ],
         [
           "shorting_items|73073000|66410000|408f29b9-e9fe-42d5-b705-07a7a74a0fd7|a360e769-c57e-4501-9e39-43ad4c60fb58",
-          ""
-        ],
-        [
-          "shorting_items|73073000|66410000|a360e769-c57e-4501-9e39-43ad4c60fb58|dba3c94d-c9a0-426a-ae4b-cf383415a758",
           ""
         ],
         [
@@ -256,11 +268,23 @@
           ""
         ],
         [
-          "starved_thermal|145062400|66762285|4333a1f9-94fa-4d23-b5c3-ae7312d75b42|ce91489d-8be6-414b-aa12-f9cf1ce6bbc8|B.Cu",
+          "starved_thermal|143874800|67225200|4333a1f9-94fa-4d23-b5c3-ae7312d75b42|4d1b6877-ec63-4f37-8712-7b88d52cd8df|B.Cu",
           ""
         ],
         [
-          "starved_thermal|149728249|45428249|4333a1f9-94fa-4d23-b5c3-ae7312d75b42|d739cffe-3099-45f5-a34b-3a5cbf905b62|B.Cu",
+          "starved_thermal|143874800|67225200|4333a1f9-94fa-4d23-b5c3-ae7312d75b42|4d1b6877-ec63-4f37-8712-7b88d52cd8df|F.Cu",
+          ""
+        ],
+        [
+          "starved_thermal|143874800|68800000|4333a1f9-94fa-4d23-b5c3-ae7312d75b42|55284fed-3770-4853-8348-c895144b0024|B.Cu",
+          ""
+        ],
+        [
+          "starved_thermal|143874800|68800000|4333a1f9-94fa-4d23-b5c3-ae7312d75b42|55284fed-3770-4853-8348-c895144b0024|F.Cu",
+          ""
+        ],
+        [
+          "starved_thermal|145062400|66762285|4333a1f9-94fa-4d23-b5c3-ae7312d75b42|f7471eaf-c258-4900-9c56-6ac4dd350576|B.Cu",
           ""
         ],
         [

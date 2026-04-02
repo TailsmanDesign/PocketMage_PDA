@@ -1,4 +1,4 @@
-26424499125491841
+26438446260209980
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -59219,6 +59219,41 @@ ceramic
 0
 3
 3
+CustomParts_FP
+2X_DIP_DHN-02-V-TR
+
+
+0
+4
+4
+CustomParts_FP
+BUZ-SMD_3P_L5.0-W5.0-P3.50-TL
+
+
+0
+3
+3
+CustomParts_FP
+JST_PH_2P_P2.00mm
+JST PH series connector, S2B-PH-SM4-TB (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator
+connector JST PH horizontal
+0
+4
+3
+CustomParts_FP
+contactPad_cutoutL
+
+
+0
+3
+2
+CustomParts_FP
+contactPad_cutoutR
+
+
+0
+3
+2
 Diode_SMD
 D_0201_0603Metric
 Diode SMD 0201 (0603 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: https://www.vishay.com/docs/20052/crcw0201e3.pdf), generated with kicad-footprint-generator
@@ -70181,6 +70216,13 @@ Yellow 5381 Series LED
 0
 2
 2
+MP2722GRH-0000-Z
+IC_MP2722GRH-0000-Z
+
+
+0
+22
+22
 Module
 A20_OLINUXINO_LIME2
 A20 Olinuxino LIME2, 1.2GHz, 512-1024MB RAM, Micro-SD, NAND or eMMC, 1000Mbit Ethernet
@@ -98552,6 +98594,13 @@ Logo WEEE
 0
 0
 0
+TCA8418
+RTW24_2P45X2P45
+
+TCA8418RTWR 
+0
+34
+26
 TerminalBlock
 TerminalBlock_Altech_AK300-2_P5.00mm
 Altech AK300 terminal block, pitch 5.0mm, 45 degree angled, see http://www.mouser.com/ds/2/16/PCBMETRC-24178.pdf
@@ -105601,10 +105650,17 @@ Varistor VF
 0
 2
 2
-customparts
-KEY-TH_3P-L4.5-W4.5-P3.0-EH
+snaptron_7mm_doublesided
+contact_pad
 
 
 0
 3
-3
+2
+snaptron_7mm_doublesided
+contact_pad_SINGLE
+
+
+0
+2
+2
