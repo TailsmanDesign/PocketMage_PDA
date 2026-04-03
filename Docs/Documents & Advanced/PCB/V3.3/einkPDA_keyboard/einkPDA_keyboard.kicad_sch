@@ -11428,7 +11428,7 @@
 	)
 	(text "Sleep Load Switch"
 		(exclude_from_sim no)
-		(at 157.734 259.08 0)
+		(at 157.734 259.842 0)
 		(effects
 			(font
 				(size 1.27 1.27)

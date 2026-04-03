@@ -3514,12 +3514,6 @@
 		(uuid "9dc97d46-7676-4621-aa20-c73f694803f2")
 	)
 	(junction
-		(at 48.26 82.55)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a80a0e3d-efe6-4157-8a5d-bd5d24d0cf95")
-	)
-	(junction
 		(at 73.66 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3530,12 +3524,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c9f9a5f9-2b97-4725-a7e2-cde23fd9f50d")
-	)
-	(junction
-		(at 48.26 74.93)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e1f7f708-3021-499c-8aaf-932cdb63d8e9")
 	)
 	(junction
 		(at 26.67 48.26)
@@ -4222,16 +4210,6 @@
 	)
 	(wire
 		(pts
-			(xy 48.26 82.55) (xy 55.88 82.55)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d107ecdd-cc95-4654-8188-068447948408")
-	)
-	(wire
-		(pts
 			(xy 124.46 54.61) (xy 130.81 54.61)
 		)
 		(stroke
@@ -4269,16 +4247,6 @@
 			(type default)
 		)
 		(uuid "df7df0ae-f0cb-4345-a35a-5b0057620d5a")
-	)
-	(wire
-		(pts
-			(xy 55.88 74.93) (xy 48.26 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e5e691cb-b467-4650-bd13-ae13d6c8d79d")
 	)
 	(wire
 		(pts
@@ -5053,7 +5021,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "MPR121QR2"
+		(property "MPN" "C91322"
 			(at 109.22 115.57 0)
 			(effects
 				(font
@@ -5411,7 +5379,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05A105KA5NQNC"
+		(property "MPN" "C52923"
 			(at 166.37 52.07 0)
 			(effects
 				(font
@@ -5591,7 +5559,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "AFE03-S25FMA-1H"
+		(property "MPN" "C262544"
 			(at 135.89 29.21 0)
 			(effects
 				(font
@@ -5778,7 +5746,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05A105KA5NQNC"
+		(property "MPN" "C52923"
 			(at 172.72 66.04 0)
 			(effects
 				(font
@@ -5893,7 +5861,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL21A475KAQNNNE"
+		(property "MPN" "C1779"
 			(at 48.26 39.37 0)
 			(effects
 				(font
@@ -6139,7 +6107,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05A105KA5NQNC"
+		(property "MPN" "C52923"
 			(at 73.66 52.07 0)
 			(effects
 				(font
@@ -6386,7 +6354,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05B104KO5NNNC"
+		(property "MPN" "C1525"
 			(at 96.52 91.44 0)
 			(effects
 				(font
@@ -6568,7 +6536,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "AFC01-S12FCA-00"
+		(property "MPN" "C262661"
 			(at 209.55 109.22 0)
 			(effects
 				(font
@@ -6976,7 +6944,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "MBR0530"
+		(property "MPN" "C77336"
 			(at 64.77 48.26 0)
 			(effects
 				(font
@@ -7155,7 +7123,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05A105KA5NQNC"
+		(property "MPN" "C52923"
 			(at 172.72 34.29 0)
 			(effects
 				(font
@@ -7273,7 +7241,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "Si1308EDL"
+		(property "MPN" "C7603347"
 			(at 45.72 60.96 0)
 			(effects
 				(font
@@ -7388,7 +7356,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05A475MP5NRNC"
+		(property "MPN" "C23733"
 			(at 116.84 36.83 0)
 			(effects
 				(font
@@ -7835,7 +7803,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "MBR0530"
+		(property "MPN" "C77336"
 			(at 64.77 35.56 0)
 			(effects
 				(font
@@ -7878,7 +7846,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1R"
+		(property "Value" "0.47R"
 			(at 50.8 80.0099 0)
 			(effects
 				(font
@@ -7950,7 +7918,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "0603WAF100KT5E"
+		(property "MPN" "C3013349"
 			(at 48.26 78.74 0)
 			(effects
 				(font
@@ -8130,7 +8098,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "MBR0530"
+		(property "MPN" "C77336"
 			(at 64.77 24.13 0)
 			(effects
 				(font
@@ -8245,7 +8213,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "0603WAF7502T5E"
+		(property "MPN" "C23242"
 			(at 81.28 127 0)
 			(effects
 				(font
@@ -8424,7 +8392,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05A105KA5NQNC"
+		(property "MPN" "C52923"
 			(at 120.65 54.61 0)
 			(effects
 				(font
@@ -8510,121 +8478,6 @@
 			(project ""
 				(path "/8cfe7814-b2da-47eb-a463-3cc98c19cb36"
 					(reference "#PWR01")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 55.88 78.74 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "a1de155e-1c9a-4824-9477-caef9ea9d93a")
-		(property "Reference" "R4"
-			(at 58.42 77.4699 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "1R"
-			(at 58.42 80.0099 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
-			(at 54.102 78.74 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 55.88 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 55.88 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Height" ""
-			(at 55.88 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer_Name" ""
-			(at 55.88 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Mouser Part Number" ""
-			(at 55.88 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Mouser Price/Stock" ""
-			(at 55.88 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MPN" "0603WAF100KT5E"
-			(at 55.88 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "7ca7133d-b294-45d3-87f4-1a0e64618533")
-		)
-		(pin "2"
-			(uuid "59b24478-12d3-4dc5-916f-a478620772ac")
-		)
-		(instances
-			(project "einkPDA_screen"
-				(path "/8cfe7814-b2da-47eb-a463-3cc98c19cb36"
-					(reference "R4")
 					(unit 1)
 				)
 			)
@@ -8720,7 +8573,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05B104KO5NNNC"
+		(property "MPN" "C1525"
 			(at 90.17 129.54 0)
 			(effects
 				(font
@@ -8901,7 +8754,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "0805W8F1002T5E"
+		(property "MPN" "C17414"
 			(at 38.1 78.74 0)
 			(effects
 				(font
@@ -9080,7 +8933,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "4D03WGJ0103T5E"
+		(property "MPN" "C29718"
 			(at 78.74 110.49 0)
 			(effects
 				(font
@@ -9210,7 +9063,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05A105KA5NQNC"
+		(property "MPN" "C52923"
 			(at 162.56 57.15 0)
 			(effects
 				(font
@@ -9322,7 +9175,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05A105KA5NQNC"
+		(property "MPN" "C52923"
 			(at 116.84 59.69 0)
 			(effects
 				(font
@@ -9634,7 +9487,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05A105KA5NQNC"
+		(property "MPN" "C52923"
 			(at 172.72 54.61 0)
 			(effects
 				(font
@@ -9746,7 +9599,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05A105KA5NQNC"
+		(property "MPN" "C52923"
 			(at 116.84 49.53 0)
 			(effects
 				(font
@@ -9925,7 +9778,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "CL05A475MP5NRNC"
+		(property "MPN" "C23733"
 			(at 26.67 52.07 0)
 			(effects
 				(font
@@ -10038,7 +9891,7 @@
 				(hide yes)
 			)
 		)
-		(property "MPN" "SWPA5020S100MT"
+		(property "MPN" "C52281"
 			(at 38.1 48.26 0)
 			(effects
 				(font
