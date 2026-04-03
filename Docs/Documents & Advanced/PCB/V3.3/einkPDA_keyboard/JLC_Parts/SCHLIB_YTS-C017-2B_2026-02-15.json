@@ -1,0 +1,45 @@
+{
+  "head": {
+    "docType": "2",
+    "editorVersion": "6.5.51",
+    "x": 400,
+    "y": 300,
+    "c_para": {
+      "pre": "SW?",
+      "name": "YTS-C017-2B",
+      "package": "KEY-TH_3P-L4.5-W4.5-P3.0-EH",
+      "Contributor": "LCSC",
+      "Supplier": "LCSC",
+      "Supplier Part": "C2910872",
+      "Manufacturer": "YIYUAN(怡远)",
+      "Manufacturer Part": "YTS-C017-2B",
+      "JLCPCB Part Class": "Extended Part"
+    },
+    "uuid": "6e3de5b0b1af41dc91087cfed410d7ed",
+    "utime": 1698225902,
+    "puuid": "432afb6fd0b64d0194ea6b13abb26b37",
+    "importFlag": 0,
+    "c_spiceCmd": null,
+    "hasIdFlag": true
+  },
+  "canvas": "CA~1000~1000~#FFFFFF~yes~#CCCCCC~10~1000~1000~line~10~pixel~5~400~300",
+  "shape": [
+    "P~show~0~3~380~310~180~gge3~0^^380~310^^M 380 310 h 20~#880000^^0~402~313~0~GND~start~~~#0000FF^^1~395~309~0~3~end~~~#0000FF^^0~397~310^^0~M 400 313 L 403 310 L 400 307",
+    "PL~405 314 395 314~#880000~1~0~none~gge10~0",
+    "PL~403 316 397 316~#880000~1~0~none~gge11~0",
+    "PL~401 318 399 318~#880000~1~0~none~gge12~0",
+    "PL~400 310 400 314~#880000~1~0~none~gge13~0",
+    "P~show~0~1~380~300~180~gge14~0^^380~300^^M 380 300 h 10~#880000^^0~393~303~0~1~start~~~#0000FF^^1~384~299~0~1~end~~~#0000FF^^0~387~300^^0~M 390 303 L 393 300 L 390 297",
+    "P~show~0~2~420~300~0~gge21~0^^420~300^^M 420 300 h -10~#880000^^0~407~303~0~2~end~~~#0000FF^^1~416~299~0~2~start~~~#0000FF^^0~413~300^^0~M 410 297 L 407 300 L 410 303",
+    "PL~408 294 392 298~#880000~1~0~none~gge28~0",
+    "E~408~300~2~2~#880000~1~0~none~gge29~0",
+    "E~392~300~2~2~#880000~1~0~none~gge30~0"
+  ],
+  "BBox": {
+    "x": 378.1,
+    "y": 289.6,
+    "width": 43.9,
+    "height": 28.4
+  },
+  "colors": {}
+}
