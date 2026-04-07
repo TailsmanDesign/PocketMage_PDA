@@ -23,6 +23,9 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
+**PocketMage OS Version:**
+Type "version" on the home screen to display the PMOS version and enter it here.
+
 **Desktop (please complete the following information if it applies to your bug):**
  - OS: [e.g. iOS]
  - Browser [e.g. chrome, safari]
