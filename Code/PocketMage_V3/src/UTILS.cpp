@@ -103,6 +103,11 @@ void checkTimeout() {
       updateTaskArray();
       sortTasksByDueDate(tasks);
 #endif
+<<<<<<< Updated upstream
+=======
+      u8g2.clearBuffer();
+      OLED().oledWord(" ");
+>>>>>>> Stashed changes
       OLED().setPowerSave(true);
       disableTimeout = true;
       newState = true;
