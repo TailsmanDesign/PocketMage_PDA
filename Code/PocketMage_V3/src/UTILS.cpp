@@ -103,6 +103,8 @@ void checkTimeout() {
       updateTaskArray();
       sortTasksByDueDate(tasks);
 #endif
+      u8g2.clearBuffer();
+      OLED().oledWord(" ");
       OLED().setPowerSave(true);
       disableTimeout = true;
       newState = true;
@@ -304,6 +306,7 @@ String textPrompt(String promptText, String prefix) {
     #if !OTA_APP 
       if (!noTimeout)  checkTimeout();
       if (DEBUG_VERBOSE) printDebug();
+      if (CurrentHOMEState == NOWLATER) return "_RETURN_";
     #endif
     
     updateBattState();

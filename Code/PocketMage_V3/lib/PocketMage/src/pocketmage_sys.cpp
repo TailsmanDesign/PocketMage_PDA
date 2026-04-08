@@ -346,6 +346,8 @@ void PocketMage_INIT() {
   if (!seamlessReboot)
     BZ().playJingle(Jingles::Startup);
 
+  // Clear any excess keystrokes
+  keypad.flush();
 }
 
 // ===================== GLOBAL TEXT HELPERS =====================

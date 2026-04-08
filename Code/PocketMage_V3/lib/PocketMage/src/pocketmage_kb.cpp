@@ -744,11 +744,26 @@ char PocketmageKB::updateKeypress() {
 
   // Check for keypad char
   if (TCA8418_event_ == true) {
-    int k = keypad_.getEvent();
+    int k = keypad_.getEvent(); // Pulls exactly ONE key from the FIFO
     
-    keypad_.writeRegister(TCA8418_REG_INT_STAT, 1);
+    // --- CRITICAL HARDWARE FIX: Clear Overflows & Prevent Lost Keys ---
+    // Read the current interrupt status
     int intstat = keypad_.readRegister(TCA8418_REG_INT_STAT);
-    if ((intstat & 0x01) == 0) TCA8418_event_ = false;
+    
+    // Write the exact same status back to clear ALL flagged interrupts (including overflow)
+    if (intstat > 0) {
+      keypad_.writeRegister(TCA8418_REG_INT_STAT, intstat); 
+    }
+
+    // Read the Event Count register to see how many keys remain in the hardware FIFO.
+    // Mask with 0x0F to isolate the count (0 to 10).
+    int pendingEvents = keypad_.readRegister(TCA8418_REG_KEY_LCK_EC) & 0x0F;
+    
+    // ONLY tell the OS we are done if the buffer is physically empty.
+    if (pendingEvents == 0) { 
+        TCA8418_event_ = false;
+    }
+    // ------------------------------------------------------------------
 
     if (k != 0) {
       bool isPress = (k & 0x80) != 0;
