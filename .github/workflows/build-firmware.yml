@@ -37,19 +37,27 @@ jobs:
       - name: Summon PlatformIO
         run: pip install -U platformio
 
-      - name: Forge the PocketMage Spell
+      - name: Forge the PocketMage Spells
         run: |
-          pio run -e PM_V3
-          echo "Listing the build directory:"
-          ls -l .pio/build/PM_V3
-          echo "Listing recursively:"
-          ls -lR .pio/build/PM_V3
+          # Build both the Production and Beta environments
+          pio run -e PM_PRODUCTION -e PM_BETA
+          
+          # Create a clean release directory structure for the Web Flasher
+          mkdir -p release/production
+          mkdir -p release/beta
+          
+          # Copy Production Binaries
+          cp .pio/build/PM_PRODUCTION/firmware.bin release/production/
+          cp .pio/build/PM_PRODUCTION/partitions.bin release/production/
+          cp .pio/build/PM_PRODUCTION/bootloader.bin release/production/
+          
+          # Copy Beta Binaries
+          cp .pio/build/PM_BETA/firmware.bin release/beta/
+          cp .pio/build/PM_BETA/partitions.bin release/beta/
+          cp .pio/build/PM_BETA/bootloader.bin release/beta/
 
-      - name: Create the Artifacts
+      - name: Gather the Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: pocketmage-artifacts
-          path: |
-            Code/PocketMage_V3/.pio/build/PM_V3/firmware.*
-            Code/PocketMage_V3/.pio/build/PM_V3/*.bin
-            Code/PocketMage_V3/.pio/build/PM_V3/*.elf
+          name: pocketmage-release
+          path: Code/PocketMage_V3/release/
