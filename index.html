@@ -1,873 +1,871 @@
 <!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Flash firmware to your PocketMage device via USB using your web browser." />
-    <meta name="author" content="Ashtf" />
-    <meta name="keywords" content="PocketMage, firmware, web installer, esptool, ESP32, flash, USB, Web Serial API" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Flash firmware to your PocketMage device via USB using your web browser." />
+    <meta name="author" content="Ashtf" />
+    <meta name="keywords" content="PocketMage, firmware, web installer, esptool, ESP32, flash, USB, Web Serial API" />
 
-    <title>PocketMage Web Installer</title>
+    <title>PocketMage Web Installer</title>
 
-    <link rel="icon" href="./favicon.png" />
+    <link rel="icon" href="./favicon.png" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sorts+Mill+Goudy:ital@0;1&display=swap" rel="stylesheet">
 
-    <script src="https://unpkg.com/crypto-js@4.1.1/crypto-js.js"></script>
-    <script src="https://unpkg.com/buffer@6.0.3/index.js"></script>
-    <script>
-        window.Buffer = window.buffer && window.buffer.Buffer; 
-    </script>
+    <script src="https://unpkg.com/crypto-js@4.1.1/crypto-js.js"></script>
+    <script src="https://unpkg.com/buffer@6.0.3/index.js"></script>
+    <script>
+        window.Buffer = window.buffer && window.buffer.Buffer; 
+    </script>
 
-    <script type="importmap">
-    {
-        "imports": {
-            "esptool-js": "https://unpkg.com/esptool-js@0.5.0/bundle.js"
-        }
-    }
-    </script>
-    <script type="module">
-        import { ESPLoader, Transport } from "esptool-js";
+    <script type="importmap">
+    {
+        "imports": {
+            "esptool-js": "https://unpkg.com/esptool-js@0.5.0/bundle.js"
+        }
+    }
+    </script>
+    <script type="module">
+        import { ESPLoader, Transport } from "esptool-js";
 
-        window.ESPLoader = ESPLoader;
-        window.Transport = Transport;
-    </script>
+        window.ESPLoader = ESPLoader;
+        window.Transport = Transport;
+    </script>
 
-    <style>
-        :root {
-            --wp--preset--color--background: #fefef3;
-            --wp--preset--color--primary: #353535;
-            --wp--preset--color--foreground: #453f87;
-        }
+    <style>
+        :root {
+            --wp--preset--color--background: #fefef3;
+            --wp--preset--color--primary: #353535;
+            --wp--preset--color--foreground: #453f87;
+        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        body {
-            font-family: 'Sorts Mill Goudy', serif, -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--wp--preset--color--background);
-            color: var(--wp--preset--color--primary);
-            font-size: 21px;
-            line-height: 1.5;
-            letter-spacing: -0.01em;
-            overflow-x: hidden;
-        }
+        body {
+            font-family: 'Sorts Mill Goudy', serif, -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--wp--preset--color--background);
+            color: var(--wp--preset--color--primary);
+            font-size: 21px;
+            line-height: 1.5;
+            letter-spacing: -0.01em;
+            overflow-x: hidden;
+        }
 
-        .site-header {
-            background: var(--wp--preset--color--background);
-            padding: 61px 0 16px 0;
-            border-bottom: 1px solid #e0e0e0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        .site-header {
+            background: var(--wp--preset--color--background);
+            padding: 61px 0 16px 0;
+            border-bottom: 1px solid #e0e0e0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-        .header-container {
-            max-width: 1920px;
-            margin: 0 auto;
-            padding: 0 clamp(24px, 3.333vw, 64px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .header-container {
+            max-width: 1920px;
+            margin: 0 auto;
+            padding: 0 clamp(24px, 3.333vw, 64px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-        .site-branding {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .site-branding {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-        .site-logo {
-            width: 61px;
-            height: 61px;
-        }
+        .site-logo {
+            width: 61px;
+            height: 61px;
+        }
 
-        .site-title {
-            font-size: clamp(36px, 2.25rem + ((1vw - 3.2px) * 1.75), 64px);
-            font-weight: 500;
-            letter-spacing: 0;
-            line-height: 1.25;
-            margin: 0;
-        }
+        .site-title {
+            font-size: clamp(36px, 2.25rem + ((1vw - 3.2px) * 1.75), 64px);
+            font-weight: 500;
+            letter-spacing: 0;
+            line-height: 1.25;
+            margin: 0;
+        }
 
-        .site-title a {
-            color: var(--wp--preset--color--primary);
-            text-decoration: none;
-        }
+        .site-title a {
+            color: var(--wp--preset--color--primary);
+            text-decoration: none;
+        }
 
-        .main-content {
-            max-width: 640px;
-            margin: 0 auto;
-            padding: clamp(48px, 9vw, 64px) clamp(24px, 3.333vw, 64px);
-        }
+        .main-content {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: clamp(48px, 9vw, 64px) clamp(24px, 3.333vw, 64px);
+        }
 
-        h1 {
-            font-size: clamp(36px, 2.25rem + ((1vw - 3.2px) * 1.75), 64px);
-            font-weight: 450;
-            line-height: 1.25;
-            margin-top: 1em;
-            margin-bottom: 0.75em;
-            letter-spacing: 0;
-        }
+        h1 {
+            font-size: clamp(36px, 2.25rem + ((1vw - 3.2px) * 1.75), 64px);
+            font-weight: 450;
+            line-height: 1.25;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+            letter-spacing: 0;
+        }
 
-        h2 {
-            font-size: clamp(32px, 2rem + ((1vw - 3.2px) * 1), 48px);
-            font-weight: 700;
-            line-height: 1.25;
-            margin-top: 1em;
-            margin-bottom: 0.75em;
-        }
+        h2 {
+            font-size: clamp(32px, 2rem + ((1vw - 3.2px) * 1), 48px);
+            font-weight: 700;
+            line-height: 1.25;
+            margin-top: 1em;
+            margin-bottom: 0.75em;
+        }
 
-        .connect-section {
-            background: #fff;
-            border: 2px solid currentColor;
-            border-radius: 0;
-            padding: 1.5rem;
-            margin: 0 0 min(32px, 6.4vw) 0;
-            box-shadow: 4px 4px 0 currentColor;
-            text-align: center;
-            top: 100px;
-            z-index: 50;
-        }
+        .connect-section {
+            background: #fff;
+            border: 2px solid currentColor;
+            border-radius: 0;
+            padding: 1.5rem;
+            margin: 0 0 min(32px, 6.4vw) 0;
+            box-shadow: 4px 4px 0 currentColor;
+            text-align: center;
+            top: 100px;
+            z-index: 50;
+        }
 
-        .form-section {
-            background: #fff;
-            border: 2px solid currentColor;
-            border-radius: 0;
-            padding: 2rem;
-            margin: min(32px, 6.4vw) 0;
-            box-shadow: 4px 4px 0 currentColor;
-        }
+        .form-section {
+            background: #fff;
+            border: 2px solid currentColor;
+            border-radius: 0;
+            padding: 2rem;
+            margin: min(32px, 6.4vw) 0;
+            box-shadow: 4px 4px 0 currentColor;
+        }
 
-        .form-controls-row {
-            display: flex;
-            gap: 2rem;
-            align-items: flex-start;
-            margin-bottom: 2rem;
-        }
+        .form-controls-row {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
 
-        .install-section {
-            text-align: center;
-            padding: 0;
-            margin: 0;
-            flex: none;
-            min-width: 190px;
-        }
+        .install-section {
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            flex: none;
+            min-width: 190px;
+        }
 
-        .flash-button {
-            background-color: var(--wp--preset--color--foreground);
-            color: var(--wp--preset--color--background);
-            border: none;
-            padding: 0.75rem 1.5rem;
-            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            border-radius: 0;
-            box-shadow: 4px 4px 0 var(--wp--preset--color--primary);
-            transition: all 0.2s;
-            width: 100%;
-        }
+        .flash-button {
+            background-color: var(--wp--preset--color--foreground);
+            color: var(--wp--preset--color--background);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 0;
+            box-shadow: 4px 4px 0 var(--wp--preset--color--primary);
+            transition: all 0.2s;
+            width: 100%;
+        }
 
-        .flash-button:hover {
-            transform: translate(2px, 2px);
-            box-shadow: 2px 2px 0 var(--wp--preset--color--primary);
-        }
+        .flash-button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--wp--preset--color--primary);
+        }
 
-        .flash-button:disabled {
-            background-color: #999;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: 4px 4px 0 var(--wp--preset--color--primary);
-        }
+        .flash-button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 4px 4px 0 var(--wp--preset--color--primary);
+        }
 
-        .status-text {
-            margin-top: 1rem;
-            color: #666;
-            font-size: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.375), 20px);
-        }
+        .status-text {
+            margin-top: 1rem;
+            color: #666;
+            font-size: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.375), 20px);
+        }
 
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background-color: #f0f0f0;
-            border: 2px solid currentColor;
-            margin-top: 1rem;
-            position: relative;
-            display: none;
-        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #f0f0f0;
+            border: 2px solid currentColor;
+            margin-top: 1rem;
+            position: relative;
+            display: none;
+        }
 
-        .progress-fill {
-            height: 100%;
-            background-color: var(--wp--preset--color--foreground);
-            width: 0%;
-            transition: width 0.3s;
-        }
+        .progress-fill {
+            height: 100%;
+            background-color: var(--wp--preset--color--foreground);
+            width: 0%;
+            transition: width 0.3s;
+        }
 
-        .progress-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--wp--preset--color--primary);
-            font-weight: 700;
-        }
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--wp--preset--color--primary);
+            font-weight: 700;
+        }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
 
-        .form-group:last-child {
-            margin-bottom: 0;
-        }
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
 
-        label {
-            display: block;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            font-size: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.125), 16px);
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.125), 16px);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
 
-        select {
-            width: 100%;
-            padding: calc(0.667em + 2px) calc(1.333em + 2px);
-            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-size: clamp(16px, 1rem + ((1vw - 3.2px) * 0.125), 18px);
-            font-weight: 700;
-            border: 2px solid currentColor;
-            border-radius: 0;
-            background: var(--wp--preset--color--background);
-            color: var(--wp--preset--color--primary);
-            cursor: pointer;
-            box-shadow: 4px 4px 0 currentColor;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23353535' d='M10.293 3.293L6 7.586 1.707 3.2...");
-            background-repeat: no-repeat;
-            background-position: right 1em center;
-            background-size: 1em;
-            padding-right: 2.5em;
-        }
+        select {
+            width: 100%;
+            padding: calc(0.667em + 2px) calc(1.333em + 2px);
+            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: clamp(16px, 1rem + ((1vw - 3.2px) * 0.125), 18px);
+            font-weight: 700;
+            border: 2px solid currentColor;
+            border-radius: 0;
+            background: var(--wp--preset--color--background);
+            color: var(--wp--preset--color--primary);
+            cursor: pointer;
+            box-shadow: 4px 4px 0 currentColor;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23353535' d='M10.293 3.293L6 7.586 1.707 3.2...");
+            background-repeat: no-repeat;
+            background-position: right 1em center;
+            background-size: 1em;
+            padding-right: 2.5em;
+        }
 
-        select:focus {
-            outline: none;
-            background: #fff;
-        }
+        select:focus {
+            outline: none;
+            background: #fff;
+        }
 
-        option {
-            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-weight: 700;
-        }
+        option {
+            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 700;
+        }
 
-        .select-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
+        .select-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
 
-        .select-wrapper select {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
+        .select-wrapper select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
 
-            width: 100%;
-            box-sizing: border-box;
-            padding: 0.6rem 2.25rem 0.6rem 0.75rem;
-            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-weight: 700;
-            border: 2px solid currentColor;
-            background-color: var(--wp--preset--color--background, #fff);
-            color: var(--wp--preset--color--primary, #333);
-            cursor: pointer;
-        }
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0.6rem 2.25rem 0.6rem 0.75rem;
+            font-family: -apple-system, BlinkMacOSSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-weight: 700;
+            border: 2px solid currentColor;
+            background-color: var(--wp--preset--color--background, #fff);
+            color: var(--wp--preset--color--primary, #333);
+            cursor: pointer;
+        }
 
-        .select-wrapper select:focus {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(69, 63, 135, 0.12);
-        }
+        .select-wrapper select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(69, 63, 135, 0.12);
+        }
 
-        .select-wrapper::after {
-            content: "";
-            pointer-events: none;
-            position: absolute;
-            top: 50%;
-            right: 12px;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 6px solid var(--wp--preset--color--primary, #353535);
-        }
+        .select-wrapper::after {
+            content: "";
+            pointer-events: none;
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid var(--wp--preset--color--primary, #353535);
+        }
 
-        .select-wrapper select:disabled {
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
+        .select-wrapper select:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
 
-        .latest-version-text {
-            text-align: center;
-            font-weight: 400;
-            font-size: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.125), 16px);
-            margin-top: 0.75rem;
-        }
+        .latest-version-text {
+            text-align: center;
+            font-weight: 400;
+            font-size: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.125), 16px);
+            margin-top: 0.75rem;
+        }
 
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: 0.5rem;
-        }
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
 
-        .checkbox-option input[type="checkbox"] {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--wp--preset--color--foreground);
-        }
+        .checkbox-option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--wp--preset--color--foreground);
+        }
 
-        .checkbox-option label {
-            display: inline;
-            font-weight: 400;
-            text-transform: none;
-            letter-spacing: inherit;
-            font-size: clamp(16px, 1rem + ((1vw - 3.2px) * 0.125), 18px);
-            margin: 0;
-            cursor: pointer;
-        }
+        .checkbox-option label {
+            display: inline;
+            font-weight: 400;
+            text-transform: none;
+            letter-spacing: inherit;
+            font-size: clamp(16px, 1rem + ((1vw - 3.2px) * 0.125), 18px);
+            margin: 0;
+            cursor: pointer;
+        }
 
-        .info-box {
-            background: #f8f9fa;
-            border: 2px solid currentColor;
-            border-radius: 0;
-            padding: 1.25rem;
-            margin: min(32px, 6.4vw) 0;
-            overflow: auto;
-        }
+        .info-box {
+            background: #f8f9fa;
+            border: 2px solid currentColor;
+            border-radius: 0;
+            padding: 1.25rem;
+            margin: min(32px, 6.4vw) 0;
+            overflow: auto;
+        }
 
-        .info-box strong {
-            display: block;
-            font-size: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.125), 16px);
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-        }
+        .info-box strong {
+            display: block;
+            font-size: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.125), 16px);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin-bottom: 0.75rem;
+        }
 
-        .info-box p {
-            line-height: 1.5;
-            margin-bottom: 0.5rem;
-        }
+        .info-box p {
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
 
-        .info-box p:last-child {
-            margin-bottom: 0;
-        }
+        .info-box p:last-child {
+            margin-bottom: 0;
+        }
 
-        .site-footer {
-            background: var(--wp--preset--color--background);
-            border-top: 1px solid #e0e0e0;
-            padding: clamp(24px, 3.333vw, 64px);
-            text-align: center;
-            margin-top: clamp(48px, 9vw, 64px);
-        }
+        .site-footer {
+            background: var(--wp--preset--color--background);
+            border-top: 1px solid #e0e0e0;
+            padding: clamp(24px, 3.333vw, 64px);
+            text-align: center;
+            margin-top: clamp(48px, 9vw, 64px);
+        }
 
-        .footer-content {
-            max-width: 640px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 11px;
-            font-size: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.125), 16px);
-        }
+        .footer-content {
+            max-width: 640px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 11px;
+            font-size: clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.125), 16px);
+        }
 
-        .footer-separator {
-            border: none;
-            border-top: 1px solid currentColor;
-            width: 20px;
-            margin: 0;
-            opacity: 0.3;
-        }
+        .footer-separator {
+            border: none;
+            border-top: 1px solid currentColor;
+            width: 20px;
+            margin: 0;
+            opacity: 0.3;
+        }
 
-        .footer-content a {
-            color: var(--wp--preset--color--foreground);
-            text-decoration: underline;
-            font-weight: 700;
-        }
+        .footer-content a {
+            color: var(--wp--preset--color--foreground);
+            text-decoration: underline;
+            font-weight: 700;
+        }
 
-        .footer-content a:hover {
-            text-decoration: none;
-        }
+        .footer-content a:hover {
+            text-decoration: none;
+        }
 
-        .dev-build {
-            margin-top: 0.45rem;
-            color: var(--wp--preset--color--foreground);
-            font-weight: 700;
-            font-size: clamp(12px, 0.75rem + ((1vw - 3.2px) * 0.2), 14px);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+        .dev-build {
+            margin-top: 0.45rem;
+            color: var(--wp--preset--color--foreground);
+            font-weight: 700;
+            font-size: clamp(12px, 0.75rem + ((1vw - 3.2px) * 0.2), 14px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-        @media (max-width: 768px) {
-            .form-controls-row {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
+        @media (max-width: 768px) {
+            .form-controls-row {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
 
-            .checkbox-group {
-                flex-direction: column;
-                align-items: flex-start;
-            }
+            .checkbox-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-            .header-container {
-                flex-direction: column;
-                gap: 1rem;
-            }
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
 
-            .install-section {
-                min-width: unset;
-            }
+            .install-section {
+                min-width: unset;
+            }
 
-            .connect-section {
-                position: relative;
-                top: 0;
-            }
-        }
-    </style>
+            .connect-section {
+                position: relative;
+                top: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="header-container">
-            <div class="site-branding">
-                <img class="site-logo" src="./logo.png" alt="PocketMage Logo">
-                <h1 class="site-title">
-                    <a href="https://pocketmage.org">PocketMage</a>
-                </h1>
-            </div>
-        </div>
-    </header>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="site-branding">
+                <img class="site-logo" src="./logo.png" alt="PocketMage Logo">
+                <h1 class="site-title">
+                    <a href="https://pocketmage.org">PocketMage</a>
+                </h1>
+            </div>
+        </div>
+    </header>
 
-    <main class="main-content">
-        <h1>Web Installer</h1>
-        <p>Flash firmware to your PocketMage via USB</p>
+    <main class="main-content">
+        <h1>Web Installer</h1>
+        <p>Flash firmware to your PocketMage via USB</p>
 
-        <div class="connect-section">
-            <button id="flash-btn" class="flash-button" disabled>Select firmware version</button>
-            <div class="progress-bar" id="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
-                <div class="progress-text" id="progress-text">0%</div>
-            </div>
-            <div class="status-text" id="status">Select a version to begin</div>
-            <div class="dev-build" id="dev-info" style="display:none;" aria-live="polite"></div>
-        </div>
+        <div class="connect-section">
+            <button id="flash-btn" class="flash-button" disabled>Select firmware version</button>
+            <div class="progress-bar" id="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+                <div class="progress-text" id="progress-text">0%</div>
+            </div>
+            <div class="status-text" id="status">Select a version to begin</div>
+            <div class="dev-build" id="dev-info" style="display:none;" aria-live="polite"></div>
+        </div>
 
-        <div class="form-section">
-            <div class="form-controls-row">
-                <div style="flex:2;">
-                    <div class="form-group">
-                        <label for="version-select">Firmware Version</label>
-                        <div class="select-wrapper">
-                            <select id="version-select" aria-label="Firmware Version">
-                                <option value="">Loading versions...</option>
-                            </select>
-                        </div>
-                        <div id="latest-version-text" class="latest-version-text"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hardware-select">Select your PocketMage hardware version</label>
-                        <div class="select-wrapper">
-                            <select id="hardware-select" aria-label="Hardware Version">
-                                <option value="Beta V3.2">Beta V3.2</option>
-                                <option value="Production V3.3">Production V3.3</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="checkbox-group">
-                            <div class="checkbox-option">
-                                <input type="checkbox" id="preserve-data" name="preserve-data" checked />
-                                <label for="preserve-data">Preserve user data during installation</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="form-section">
+            <div class="form-controls-row">
+                <div style="flex:2;">
+                    <div class="form-group">
+                        <label for="version-select">Firmware Version</label>
+                        <div class="select-wrapper">
+                            <select id="version-select" aria-label="Firmware Version">
+                                <option value="">Loading versions...</option>
+                            </select>
+                        </div>
+                        <div id="latest-version-text" class="latest-version-text"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="hardware-select">Select your PocketMage hardware version</label>
+                        <div class="select-wrapper">
+                            <select id="hardware-select" aria-label="Hardware Version">
+                                <option value="Beta V3.2">Beta V3.2</option>
+                                <option value="Production V3.3">Production V3.3</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="preserve-data" name="preserve-data" checked />
+                                <label for="preserve-data">Preserve user data during installation</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <div class="info-box">
-            <strong>Installation Options</strong>
-            <p>When "Preserve user data" is checked, only application partition will be flashed, keeping your settings
-                and saved content.</p>
-            <p>When unchecked, a complete installation will be performed, which erases all data and settings.</p>
-            <p>Note: SD card data is NOT affected by this option.</p>
-        </div>
+        <div class="info-box">
+            <strong>Installation Options</strong>
+            <p>When "Preserve user data" is checked, only application partition will be flashed, keeping your settings
+                and saved content.</p>
+            <p>When unchecked, a complete installation will be performed, which erases all data and settings.</p>
+            <p>Note: SD card data is NOT affected by this option.</p>
+        </div>
 
-        <div class="info-box">
-            <strong>Requirements</strong>
-            <p>This tool requires a Chromium-based browser (Chrome, Edge, Opera) with Web Serial API support.</p>
-            <p>Connect your device via USB and ensure no other program is using the serial port.</p>
-        </div>
-    </main>
+        <div class="info-box">
+            <strong>Requirements</strong>
+            <p>This tool requires a Chromium-based browser (Chrome, Edge, Opera) with Web Serial API support.</p>
+            <p>Connect your device via USB and ensure no other program is using the serial port.</p>
+        </div>
+    </main>
 
-    <footer class="site-footer">
-        <div class="footer-content">
-            <p>@Ashtf 2025</p>
-            <hr class="footer-separator" />
-            <p><a href="https://pocketmage.org">PocketMage</a></p>
-        </div>
-    </footer>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>@Ashtf 2025</p>
+            <hr class="footer-separator" />
+            <p><a href="https://pocketmage.org">PocketMage</a></p>
+        </div>
+    </footer>
 
-    <script>
-        const NUMBER_OF_VERSIONS_SHOWN = 5;
+    <script>
+        const NUMBER_OF_VERSIONS_SHOWN = 5;
 
-        const versionSelect = document.getElementById('version-select');
-        const latestVersionText = document.getElementById('latest-version-text');
-        const flashBtn = document.getElementById('flash-btn');
-        const statusDiv = document.getElementById('status');
-        const preserveDataCheckbox = document.getElementById('preserve-data');
-        const progressBar = document.getElementById('progress-bar');
-        const progressFill = document.getElementById('progress-fill');
-        const progressText = document.getElementById('progress-text');
-        const devInfo = document.getElementById('dev-info');
+        const versionSelect = document.getElementById('version-select');
+        const latestVersionText = document.getElementById('latest-version-text');
+        const flashBtn = document.getElementById('flash-btn');
+        const statusDiv = document.getElementById('status');
+        const preserveDataCheckbox = document.getElementById('preserve-data');
+        const progressBar = document.getElementById('progress-bar');
+        const progressFill = document.getElementById('progress-fill');
+        const progressText = document.getElementById('progress-text');
+        const devInfo = document.getElementById('dev-info');
 
-        let firmwareFiles = {};
-        let esploader;
-        let transport;
+        let firmwareFiles = {};
+        let esploader;
+        let transport;
 
-        const espLoaderTerminal = {
-            clean() {
-                console.clear();
-            },
-            writeLine(data) {
-                console.log(data);
-            },
-            write(data) {
-                console.log(data);
-            },
-        };
+        const espLoaderTerminal = {
+            clean() {
+                console.clear();
+            },
+            writeLine(data) {
+                console.log(data);
+            },
+            write(data) {
+                console.log(data);
+            }
+        };
 
-        function uint8ToBinaryString(u8) {
-            const CHUNK = 0x8000;
-            let result = '';
-            for (let i = 0; i < u8.length; i += CHUNK) {
-                const sub = u8.subarray(i, i + CHUNK);
-                result += String.fromCharCode.apply(null, sub);
-            }
-            return result;
-        }
+        function uint8ToBinaryString(u8) {
+            const CHUNK = 0x8000;
+            let result = '';
+            for (let i = 0; i < u8.length; i += CHUNK) {
+                const sub = u8.subarray(i, i + CHUNK);
+                result += String.fromCharCode.apply(null, sub);
+            }
+            return result;
+        }
 
-        function parseOffset(off) {
-            if (typeof off === 'number' && !isNaN(off)) return off;
-            if (typeof off === 'string') {
-                const s = off.trim();
-                if (s.length === 0) return 0;
-                if (s.startsWith('0x') || s.startsWith('0X')) {
-                    const v = parseInt(s, 16);
-                    return isNaN(v) ? 0 : v;
-                }
-                const v = parseInt(s, 10);
-                return isNaN(v) ? 0 : v;
-            }
-            return 0;
-        }
+        function parseOffset(off) {
+            if (typeof off === 'number' && !isNaN(off)) return off;
+            if (typeof off === 'string') {
+                const s = off.trim();
+                if (s.length === 0) return 0;
+                if (s.startsWith('0x') || s.startsWith('0X')) {
+                    const v = parseInt(s, 16);
+                    return isNaN(v) ? 0 : v;
+                }
+                const v = parseInt(s, 10);
+                return isNaN(v) ? 0 : v;
+            }
+            return 0;
+        }
 
-        function formatDevBuild(version) {
-            if (!version || typeof version !== 'string') return null;
-            const m = version.match(/^dev-(\d{8})-(\d{6})$/);
-            if (!m) return null;
-            const datePart = m[1]; 
-            const timePart = m[2]; 
-            const year = parseInt(datePart.slice(0, 4), 10);
-            const month = parseInt(datePart.slice(4, 6), 10) - 1; 
-            const day = parseInt(datePart.slice(6, 8), 10);
-            const hours = parseInt(timePart.slice(0, 2), 10);
-            const minutes = parseInt(timePart.slice(2, 4), 10);
-            const seconds = parseInt(timePart.slice(4, 6), 10);
+        function formatDevBuild(version) {
+            if (!version || typeof version !== 'string') return null;
+            const m = version.match(/^dev-(\d{8})-(\d{6})$/);
+            if (!m) return null;
+            const datePart = m[1]; 
+            const timePart = m[2]; 
+            const year = parseInt(datePart.slice(0, 4), 10);
+            const month = parseInt(datePart.slice(4, 6), 10) - 1; 
+            const day = parseInt(datePart.slice(6, 8), 10);
+            const hours = parseInt(timePart.slice(0, 2), 10);
+            const minutes = parseInt(timePart.slice(2, 4), 10);
+            const seconds = parseInt(timePart.slice(4, 6), 10);
 
-            const ts = Date.UTC(year, month, day, hours, minutes, seconds);
-            const d = new Date(ts);
-            const pad = (n) => String(n).padStart(2, '0');
-            const formatted = `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())} UTC`;
-            return formatted;
-        }
+            const ts = Date.UTC(year, month, day, hours, minutes, seconds);
+            const d = new Date(ts);
+            const pad = (n) => String(n).padStart(2, '0');
+            const formatted = `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())} UTC`;
+            return formatted;
+        }
 
-        async function loadVersions() {
-            try {
-                const response = await fetch('./manifest-index.json', { cache: 'no-store' });
-                if (!response.ok) throw new Error(`manifest-index.json fetch failed: ${response.status}`);
-                const data = await response.json();
+        async function loadVersions() {
+            try {
+                const response = await fetch('./manifest-index.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error(`manifest-index.json fetch failed: ${response.status}`);
+                const data = await response.json();
 
-                versionSelect.innerHTML = '';
+                versionSelect.innerHTML = '';
 
-                if (!data.versions || data.versions.length === 0) {
-                    versionSelect.innerHTML = '<option value="">No versions available</option>';
-                    statusDiv.textContent = 'No firmware versions found';
-                    return;
-                }
+                if (!data.versions || data.versions.length === 0) {
+                    versionSelect.innerHTML = '<option value="">No versions available</option>';
+                    statusDiv.textContent = 'No firmware versions found';
+                    return;
+                }
 
-                const releaseVersions = data.versions
-                    .filter(v => !v.startsWith('dev-'))
-                    .sort((a, b) => {
-                        const numsA = (a.match(/\d+/g) || []).map(Number);
-                        const numsB = (b.match(/\d+/g) || []).map(Number);
-                        for (let i = 0; i < Math.max(numsA.length, numsB.length); i++) {
-                            const numA = numsA[i] || 0;
-                            const numB = numsB[i] || 0;
-                            if (numA !== numB) {
-                                return numB - numA;
-                            }
-                        }
-                        return b.localeCompare(a);
-                    });
+                const releaseVersions = data.versions
+                    .filter(v => !v.startsWith('dev-'))
+                    .sort((a, b) => {
+                        const numsA = (a.match(/\d+/g) || []).map(Number);
+                        const numsB = (b.match(/\d+/g) || []).map(Number);
+                        for (let i = 0; i < Math.max(numsA.length, numsB.length); i++) {
+                            const numA = numsA[i] || 0;
+                            const numB = numsB[i] || 0;
+                            if (numA !== numB) {
+                                return numB - numA;
+                            }
+                        }
+                        return b.localeCompare(a);
+                    });
 
-                const versionsToShow = releaseVersions.slice(0, NUMBER_OF_VERSIONS_SHOWN);
+                const versionsToShow = releaseVersions.slice(0, NUMBER_OF_VERSIONS_SHOWN);
 
-                if (versionsToShow.length === 0) {
-                    versionSelect.innerHTML = '<option value="">No release versions available</option>';
-                    statusDiv.textContent = 'No release versions found';
-                    return;
-                }
+                if (versionsToShow.length === 0) {
+                    versionSelect.innerHTML = '<option value="">No release versions available</option>';
+                    statusDiv.textContent = 'No release versions found';
+                    return;
+                }
 
-                const firstVersion = versionsToShow[0];
-                latestVersionText.textContent = `The latest firmware is ${firstVersion}`;
+                const firstVersion = versionsToShow[0];
+                latestVersionText.textContent = `The latest firmware is ${firstVersion}`;
 
-                const manifestResponse = await fetch(`./firmware/${firstVersion}/manifest.json`, { cache: 'no-store' });
-                if (!manifestResponse.ok) throw new Error(`Failed to fetch manifest for ${firstVersion}: ${manifestResponse.status}`);
-                const manifest = await manifestResponse.json();
+                const manifestResponse = await fetch(`./firmware/${firstVersion}/manifest.json`, { cache: 'no-store' });
+                if (!manifestResponse.ok) throw new Error(`Failed to fetch manifest for ${firstVersion}: ${manifestResponse.status}`);
+                const manifest = await manifestResponse.json();
 
-                if (!manifest.builds || !manifest.builds[0] || !Array.isArray(manifest.builds[0].parts)) {
-                    throw new Error('Invalid manifest structure: builds[0].parts missing');
-                }
+                if (!manifest.builds || !manifest.builds[0] || !Array.isArray(manifest.builds[0].parts)) {
+                    throw new Error('Invalid manifest structure: builds[0].parts missing');
+                }
 
-                const build = manifest.builds[0];
-                const findPart = (pred) => build.parts.find(pred) || null;
+                const build = manifest.builds[0];
+                const findPart = (pred) => build.parts.find(pred) || null;
 
-                const bootloaderPart = findPart(p => p.path && p.path.toLowerCase().includes('bootloader'));
-                const partitionsPart = findPart(p => p.path && p.path.toLowerCase().includes('partitions'));
-                const applicationPart = findPart(p => p.path && (p.path.toLowerCase().includes('firmware') || p.path.toLowerCase().includes('app') || p.path.toLowerCase().includes('application')));
+                const bootloaderPart = findPart(p => p.path && p.path.toLowerCase().includes('bootloader'));
+                const partitionsPart = findPart(p => p.path && p.path.toLowerCase().includes('partitions'));
+                const applicationPart = findPart(p => p.path && (p.path.toLowerCase().includes('firmware') || p.path.toLowerCase().includes('app') || p.path.toLowerCase().includes('application')));
 
-                firmwareFiles = {
-                    bootloader: bootloaderPart ? {
-                        path: bootloaderPart.path,
-                        offset: parseOffset(bootloaderPart.offset)
-                    } : null,
-                    partitions: partitionsPart ? {
-                        path: partitionsPart.path,
-                        offset: parseOffset(partitionsPart.offset)
-                    } : null,
-                    application: applicationPart ? {
-                        path: applicationPart.path,
-                        offset: parseOffset(applicationPart.offset)
-                    } : null
-                };
+                firmwareFiles = {
+                    bootloader: bootloaderPart ? {
+                        path: bootloaderPart.path,
+                        offset: parseOffset(bootloaderPart.offset)
+                    } : null,
+                    partitions: partitionsPart ? {
+                        path: partitionsPart.path,
+                        offset: parseOffset(partitionsPart.offset)
+                    } : null,
+                    application: applicationPart ? {
+                        path: applicationPart.path,
+                        offset: parseOffset(applicationPart.offset)
+                    } : null
+                };
 
-                console.debug('Detected firmware parts from manifest:', firmwareFiles);
+                console.debug('Detected firmware parts from manifest:', firmwareFiles);
 
-                versionsToShow.forEach(version => {
-                    const option = document.createElement('option');
-                    option.value = version;
-                    option.textContent = version;
-                    versionSelect.appendChild(option);
-                });
+                versionsToShow.forEach(version => {
+                    const option = document.createElement('option');
+                    option.value = version;
+                    option.textContent = version;
+                    versionSelect.appendChild(option);
+                });
 
-                versionSelect.value = versionsToShow[0];
-                updateStatus();
-                
-            } catch (error) {
-                console.error('Failed to load versions:', error);
-                versionSelect.innerHTML = '<option value="">Error loading versions</option>';
-                statusDiv.textContent = 'Failed to load version list';
-            }
-        }
+                versionSelect.value = versionsToShow[0];
+                updateStatus();
+                
+            } catch (error) {
+                console.error('Failed to load versions:', error);
+                versionSelect.innerHTML = '<option value="">Error loading versions</option>';
+                statusDiv.textContent = 'Failed to load version list';
+            }
+        }
 
-        function updateStatus() {
-            const version = versionSelect.value;
-            const preserveData = preserveDataCheckbox.checked;
+        function updateStatus() {
+            const version = versionSelect.value;
+            const preserveData = preserveDataCheckbox.checked;
 
-            devInfo.style.display = 'none';
-            devInfo.textContent = '';
+            devInfo.style.display = 'none';
+            devInfo.textContent = '';
 
-            if (!version) {
-                flashBtn.disabled = true;
-                flashBtn.textContent = 'Select firmware version';
-                statusDiv.textContent = 'Please select a version';
-                return;
-            }
+            if (!version) {
+                flashBtn.disabled = true;
+                flashBtn.textContent = 'Select firmware version';
+                statusDiv.textContent = 'Please select a version';
+                return;
+            }
 
-            flashBtn.disabled = false;
-            const modeText = preserveData ? 'Update (preserve data)' : 'Full installation';
-            flashBtn.textContent = `Flash ${version}`;
-            statusDiv.textContent = `Ready to flash ${version} - ${modeText}`;
+            flashBtn.disabled = false;
+            const modeText = preserveData ? 'Update (preserve data)' : 'Full installation';
+            flashBtn.textContent = `Flash ${version}`;
+            statusDiv.textContent = `Ready to flash ${version} - ${modeText}`;
 
-            const devFormatted = formatDevBuild(version);
-            if (devFormatted) {
-                devInfo.style.display = 'block';
-                devInfo.title = devFormatted;
-                devInfo.textContent = `Dev Build: ${devFormatted}`;
-            }
-        }
+            const devFormatted = formatDevBuild(version);
+            if (devFormatted) {
+                devInfo.style.display = 'block';
+                devInfo.title = devFormatted;
+                devInfo.textContent = `Dev Build: ${devFormatted}`;
+            }
+        }
 
-        async function initializeEspLoader() {
-            try {
-                if (typeof window.ESPLoader === 'undefined' || typeof window.Transport === 'undefined') {
-                    throw new Error('ESPLoader library not loaded. Please refresh the page.');
-                }
+        async function initializeEspLoader() {
+            try {
+                if (typeof window.ESPLoader === 'undefined' || typeof window.Transport === 'undefined') {
+                    throw new Error('ESPLoader library not loaded. Please refresh the page.');
+                }
 
-                const port = await navigator.serial.requestPort();
-                transport = new window.Transport(port, true);
+                const port = await navigator.serial.requestPort();
+                transport = new window.Transport(port, true);
 
-                const flashOptions = {
-                    transport,
-                    baudrate: 115200,
-                    terminal: espLoaderTerminal,
-                };
-                esploader = new window.ESPLoader(flashOptions);
+                const flashOptions = {
+                    transport,
+                    baudrate: 115200,
+                    terminal: espLoaderTerminal,
+                };
+                esploader = new window.ESPLoader(flashOptions);
 
-                const chip = await esploader.main();
-                console.debug('Detected chip:', chip);
-                if (!chip) {
-                    throw new Error('Failed to detect chip type');
-                }
+                const chip = await esploader.main();
+                console.debug('Detected chip:', chip);
+                if (!chip) {
+                    throw new Error('Failed to detect chip type');
+                }
 
-                return true;
-            } catch (error) {
-                console.error('Failed to initialize ESP loader:', error);
-                statusDiv.textContent = `Error: ${error.message}`;
-                return false;
-            }
-        }
+                return true;
+            } catch (error) {
+                console.error('Failed to initialize ESP loader:', error);
+                statusDiv.textContent = `Error: ${error.message}`;
+                return false;
+            }
+        }
 
-        async function flashFirmware() {
-            const version = versionSelect.value;
-            const preserveData = preserveDataCheckbox.checked;
+        async function flashFirmware() {
+            const version = versionSelect.value;
+            const preserveData = preserveDataCheckbox.checked;
 
-            if (!version) {
-                statusDiv.textContent = 'Please select a version';
-                return;
-            }
+            if (!version) {
+                statusDiv.textContent = 'Please select a version';
+                return;
+            }
 
-            try {
-                flashBtn.disabled = true;
-                progressBar.style.display = 'block';
-                statusDiv.textContent = 'Connecting to device...';
+            try {
+                flashBtn.disabled = true;
+                progressBar.style.display = 'block';
+                statusDiv.textContent = 'Connecting to device...';
 
-                const initialized = await initializeEspLoader();
-                if (!initialized) {
-                    return;
-                }
+                const initialized = await initializeEspLoader();
+                if (!initialized) {
+                    return;
+                }
 
-                if (!firmwareFiles.application) {
-                    throw new Error('Manifest is missing application/firmware entry (cannot locate firmware file path). Check manifest.json.');
-                }
+                if (!firmwareFiles.application) {
+                    throw new Error('Manifest is missing application/firmware entry (cannot locate firmware file path). Check manifest.json.');
+                }
 
-                statusDiv.textContent = 'Loading firmware files...';
+                statusDiv.textContent = 'Loading firmware files...';
 
-                const preparedFiles = [];
+                const preparedFiles = [];
 
-                async function fetchUint8(path) {
-                    const r = await fetch(path);
-                    if (!r.ok) throw new Error(`Failed to fetch ${path}: ${r.status}`);
-                    const buf = await r.arrayBuffer();
-                    return new Uint8Array(buf);
-                }
+                async function fetchUint8(path) {
+                    const r = await fetch(path);
+                    if (!r.ok) throw new Error(`Failed to fetch ${path}: ${r.status}`);
+                    const buf = await r.arrayBuffer();
+                    return new Uint8Array(buf);
+                }
 
-                if (!preserveData) {
-                    if (firmwareFiles.bootloader && firmwareFiles.bootloader.path) {
-                        const bootloaderU8 = await fetchUint8(`./firmware/${version}/${firmwareFiles.bootloader.path}`);
-                        preparedFiles.push({
-                            dataU8: bootloaderU8,
-                            address: firmwareFiles.bootloader.offset
-                        });
-                    } else {
-                        console.warn('Bootloader entry missing in manifest; skipping bootloader.');
-                    }
+                if (!preserveData) {
+                    if (firmwareFiles.bootloader && firmwareFiles.bootloader.path) {
+                        const bootloaderU8 = await fetchUint8(`./firmware/${version}/${firmwareFiles.bootloader.path}`);
+                        preparedFiles.push({
+                            dataU8: bootloaderU8,
+                            address: firmwareFiles.bootloader.offset
+                        });
+                    } else {
+                        console.warn('Bootloader entry missing in manifest; skipping bootloader.');
+                    }
 
-                    if (firmwareFiles.partitions && firmwareFiles.partitions.path) {
-                        const partitionsU8 = await fetchUint8(`./firmware/${version}/${firmwareFiles.partitions.path}`);
-                        preparedFiles.push({
-                            dataU8: partitionsU8,
-                            address: firmwareFiles.partitions.offset
-                        });
-                    } else {
-                        console.warn('Partitions entry missing in manifest; skipping partitions.');
-                    }
-                }
+                    if (firmwareFiles.partitions && firmwareFiles.partitions.path) {
+                        const partitionsU8 = await fetchUint8(`./firmware/${version}/${firmwareFiles.partitions.path}`);
+                        preparedFiles.push({
+                            dataU8: partitionsU8,
+                            address: firmwareFiles.partitions.offset
+                        });
+                    } else {
+                        console.warn('Partitions entry missing in manifest; skipping partitions.');
+                    }
+                }
 
-                const appU8 = await fetchUint8(`./firmware/${version}/${firmwareFiles.application.path}`);
-                preparedFiles.push({
-                    dataU8: appU8,
-                    address: firmwareFiles.application.offset
-                });
+                const appU8 = await fetchUint8(`./firmware/${version}/${firmwareFiles.application.path}`);
+                preparedFiles.push({
+                    dataU8: appU8,
+                    address: firmwareFiles.application.offset
+                });
 
-                const fileArrayStr = preparedFiles.map(f => ({
-                    data: uint8ToBinaryString(f.dataU8),
-                    address: Number(f.address)
-                }));
+                const fileArrayStr = preparedFiles.map(f => ({
+                    data: uint8ToBinaryString(f.dataU8),
+                    address: Number(f.address)
+                }));
 
-                console.debug('Prepared files for flashing:', fileArrayStr.map(f => ({
-                    address: '0x' + (Number(f.address)).toString(16),
-                    length: f.data.length
-                })));
+                console.debug('Prepared files for flashing:', fileArrayStr.map(f => ({
+                    address: '0x' + (Number(f.address)).toString(16),
+                    length: f.data.length
+                })));
 
-                statusDiv.textContent = 'Flashing firmware...';
+                statusDiv.textContent = 'Flashing firmware...';
 
-                const flashOptions = {
-                    fileArray: fileArrayStr,
-                    flashSize: 'keep',
-                    eraseAll: !preserveData,
-                    compress: true,
-                    reportProgress: (fileIndex, written, total) => {
-                        const percent = Math.round((written / total) * 100);
-                        progressFill.style.width = `${percent}%`;
-                        progressText.textContent = `${percent}%`;
-                    },
-                    calculateMD5Hash: (image) => {
-                        if (!image || typeof image !== 'string') return null;
-                        return CryptoJS.MD5(CryptoJS.enc.Latin1.parse(image)).toString();
-                    }
-                };
+                const flashOptions = {
+                    fileArray: fileArrayStr,
+                    flashSize: 'keep',
+                    eraseAll: !preserveData,
+                    compress: true,
+                    reportProgress: (fileIndex, written, total) => {
+                        const percent = Math.round((written / total) * 100);
+                        progressFill.style.width = `${percent}%`;
+                        progressText.textContent = `${percent}%`;
+                    },
+                    calculateMD5Hash: (image) => {
+                        if (!image || typeof image !== 'string') return null;
+                        return CryptoJS.MD5(CryptoJS.enc.Latin1.parse(image)).toString();
+                    }
+                };
 
-                await esploader.writeFlash(flashOptions);
+                await esploader.writeFlash(flashOptions);
 
-                await esploader.hardReset();
+                await esploader.hardReset();
 
-                statusDiv.textContent = 'Firmware flashed successfully! Device is rebooting...';
-                progressFill.style.width = '100%';
-                progressText.textContent = '100%';
+                statusDiv.textContent = 'Firmware flashed successfully! Device is rebooting...';
+                progressFill.style.width = '100%';
+                progressText.textContent = '100%';
 
-            } catch (error) {
-                console.error('Flashing failed:', error);
-                statusDiv.textContent = `Flashing failed: ${error && error.message ? error.message : String(error)}`;
-            } finally {
-                flashBtn.disabled = false;
-                setTimeout(() => {
-                    progressBar.style.display = 'none';
-                    progressFill.style.width = '0%';
-                    progressText.textContent = '0%';
-                }, 3000);
-            }
-        }
+            } catch (error) {
+                console.error('Flashing failed:', error);
+                statusDiv.textContent = `Flashing failed: ${error && error.message ? error.message : String(error)}`;
+            } finally {
+                flashBtn.disabled = false;
+                setTimeout(() => {
+                    progressBar.style.display = 'none';
+                    progressFill.style.width = '0%';
+                    progressText.textContent = '0%';
+                }, 3000);
+            }
+        }
 
-        versionSelect.addEventListener('change', updateStatus);
-        preserveDataCheckbox.addEventListener('change', updateStatus);
-        flashBtn.addEventListener('click', flashFirmware);
+        versionSelect.addEventListener('change', updateStatus);
+        preserveDataCheckbox.addEventListener('change', updateStatus);
+        flashBtn.addEventListener('click', flashFirmware);
 
-        window.addEventListener('load', () => {
-            if (typeof window.ESPLoader === 'undefined') {
-                statusDiv.textContent = 'Error: ESPLoader library failed to load. Please refresh the page.';
-                return;
-            }
+        window.addEventListener('load', () => {
+            if (typeof window.ESPLoader === 'undefined') {
+                statusDiv.textContent = 'Error: ESPLoader library failed to load. Please refresh the page.';
+                return;
+            }
 
-            loadVersions();
-        });
-    </script>
+            loadVersions();
+        });
+    </script>
 </body>
-
 </html>
