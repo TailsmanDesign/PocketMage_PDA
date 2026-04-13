@@ -543,6 +543,7 @@
         };
 
         let firmwareFiles = {};
+        let currentFirmwareBaseUrl = '';
         let esploader;
         let transport;
 
@@ -667,6 +668,7 @@
 
             devInfo.style.display = 'none';
             devInfo.textContent = '';
+            currentFirmwareBaseUrl = '';
 
             if (!version) {
                 flashBtn.disabled = true;
@@ -677,10 +679,20 @@
 
             try {
                 const hwFolder = hardwareFolderMap[hardwareValue];
-                const manifestUrl = `./firmware/${version}/${hwFolder}/manifest.json`;
+                let manifestUrl = `./firmware/${version}/${hwFolder}/manifest.json`;
+                let manifestResponse = await fetch(manifestUrl, { cache: 'no-store' });
+
+                if (manifestResponse.ok) {
+                    currentFirmwareBaseUrl = `./firmware/${version}/${hwFolder}`;
+                } else {
+                    manifestUrl = `./firmware/${version}/manifest.json`;
+                    manifestResponse = await fetch(manifestUrl, { cache: 'no-store' });
+                    if (!manifestResponse.ok) {
+                        throw new Error(`Failed to fetch manifest: ${manifestResponse.status}`);
+                    }
+                    currentFirmwareBaseUrl = `./firmware/${version}`;
+                }
                 
-                const manifestResponse = await fetch(manifestUrl, { cache: 'no-store' });
-                if (!manifestResponse.ok) throw new Error(`Failed to fetch manifest: ${manifestResponse.status}`);
                 const manifest = await manifestResponse.json();
 
                 if (!manifest.builds || !manifest.builds[0] || !Array.isArray(manifest.builds[0].parts)) {
@@ -759,11 +771,10 @@
 
         async function flashFirmware() {
             const version = versionSelect.value;
-            const hardwareValue = hardwareSelect.value;
             const preserveData = preserveDataCheckbox.checked;
 
-            if (!version) {
-                statusDiv.textContent = 'Please select a version';
+            if (!version || !currentFirmwareBaseUrl) {
+                statusDiv.textContent = 'Please select a valid version';
                 return;
             }
 
@@ -784,7 +795,6 @@
                 statusDiv.textContent = 'Loading firmware files...';
 
                 const preparedFiles = [];
-                const hwFolder = hardwareFolderMap[hardwareValue];
 
                 async function fetchUint8(path) {
                     const r = await fetch(path);
@@ -795,7 +805,7 @@
 
                 if (!preserveData) {
                     if (firmwareFiles.bootloader && firmwareFiles.bootloader.path) {
-                        const bootloaderU8 = await fetchUint8(`./firmware/${version}/${hwFolder}/${firmwareFiles.bootloader.path}`);
+                        const bootloaderU8 = await fetchUint8(`${currentFirmwareBaseUrl}/${firmwareFiles.bootloader.path}`);
                         preparedFiles.push({
                             dataU8: bootloaderU8,
                             address: firmwareFiles.bootloader.offset
@@ -805,7 +815,7 @@
                     }
 
                     if (firmwareFiles.partitions && firmwareFiles.partitions.path) {
-                        const partitionsU8 = await fetchUint8(`./firmware/${version}/${hwFolder}/${firmwareFiles.partitions.path}`);
+                        const partitionsU8 = await fetchUint8(`${currentFirmwareBaseUrl}/${firmwareFiles.partitions.path}`);
                         preparedFiles.push({
                             dataU8: partitionsU8,
                             address: firmwareFiles.partitions.offset
@@ -815,7 +825,7 @@
                     }
                 }
 
-                const appU8 = await fetchUint8(`./firmware/${version}/${hwFolder}/${firmwareFiles.application.path}`);
+                const appU8 = await fetchUint8(`${currentFirmwareBaseUrl}/${firmwareFiles.application.path}`);
                 preparedFiles.push({
                     dataU8: appU8,
                     address: firmwareFiles.application.offset
