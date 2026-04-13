@@ -528,6 +528,7 @@
 
         const versionSelect = document.getElementById('version-select');
         const latestVersionText = document.getElementById('latest-version-text');
+        const hardwareSelect = document.getElementById('hardware-select');
         const flashBtn = document.getElementById('flash-btn');
         const statusDiv = document.getElementById('status');
         const preserveDataCheckbox = document.getElementById('preserve-data');
@@ -535,6 +536,11 @@
         const progressFill = document.getElementById('progress-fill');
         const progressText = document.getElementById('progress-text');
         const devInfo = document.getElementById('dev-info');
+
+        const hardwareFolderMap = {
+            "Beta V3.2": "PM_BETA",
+            "Production V3.3": "PM_PRODUCTION"
+        };
 
         let firmwareFiles = {};
         let esploader;
@@ -637,8 +643,44 @@
                 const firstVersion = versionsToShow[0];
                 latestVersionText.textContent = `The latest firmware is ${firstVersion}`;
 
-                const manifestResponse = await fetch(`./firmware/${firstVersion}/manifest.json`, { cache: 'no-store' });
-                if (!manifestResponse.ok) throw new Error(`Failed to fetch manifest for ${firstVersion}: ${manifestResponse.status}`);
+                versionsToShow.forEach(version => {
+                    const option = document.createElement('option');
+                    option.value = version;
+                    option.textContent = version;
+                    versionSelect.appendChild(option);
+                });
+
+                versionSelect.value = versionsToShow[0];
+                await updateStatus();
+                
+            } catch (error) {
+                console.error('Failed to load versions:', error);
+                versionSelect.innerHTML = '<option value="">Error loading versions</option>';
+                statusDiv.textContent = 'Failed to load version list';
+            }
+        }
+
+        async function updateStatus() {
+            const version = versionSelect.value;
+            const hardwareValue = hardwareSelect.value;
+            const preserveData = preserveDataCheckbox.checked;
+
+            devInfo.style.display = 'none';
+            devInfo.textContent = '';
+
+            if (!version) {
+                flashBtn.disabled = true;
+                flashBtn.textContent = 'Select firmware version';
+                statusDiv.textContent = 'Please select a version';
+                return;
+            }
+
+            try {
+                const hwFolder = hardwareFolderMap[hardwareValue];
+                const manifestUrl = `./firmware/${version}/${hwFolder}/manifest.json`;
+                
+                const manifestResponse = await fetch(manifestUrl, { cache: 'no-store' });
+                if (!manifestResponse.ok) throw new Error(`Failed to fetch manifest: ${manifestResponse.status}`);
                 const manifest = await manifestResponse.json();
 
                 if (!manifest.builds || !manifest.builds[0] || !Array.isArray(manifest.builds[0].parts)) {
@@ -667,49 +709,21 @@
                     } : null
                 };
 
-                console.debug('Detected firmware parts from manifest:', firmwareFiles);
+                flashBtn.disabled = false;
+                const modeText = preserveData ? 'Update (preserve data)' : 'Full installation';
+                flashBtn.textContent = `Flash ${version}`;
+                statusDiv.textContent = `Ready to flash ${version} - ${modeText}`;
 
-                versionsToShow.forEach(version => {
-                    const option = document.createElement('option');
-                    option.value = version;
-                    option.textContent = version;
-                    versionSelect.appendChild(option);
-                });
-
-                versionSelect.value = versionsToShow[0];
-                updateStatus();
-                
+                const devFormatted = formatDevBuild(version);
+                if (devFormatted) {
+                    devInfo.style.display = 'block';
+                    devInfo.title = devFormatted;
+                    devInfo.textContent = `Dev Build: ${devFormatted}`;
+                }
             } catch (error) {
-                console.error('Failed to load versions:', error);
-                versionSelect.innerHTML = '<option value="">Error loading versions</option>';
-                statusDiv.textContent = 'Failed to load version list';
-            }
-        }
-
-        function updateStatus() {
-            const version = versionSelect.value;
-            const preserveData = preserveDataCheckbox.checked;
-
-            devInfo.style.display = 'none';
-            devInfo.textContent = '';
-
-            if (!version) {
+                console.error('Manifest load error:', error);
                 flashBtn.disabled = true;
-                flashBtn.textContent = 'Select firmware version';
-                statusDiv.textContent = 'Please select a version';
-                return;
-            }
-
-            flashBtn.disabled = false;
-            const modeText = preserveData ? 'Update (preserve data)' : 'Full installation';
-            flashBtn.textContent = `Flash ${version}`;
-            statusDiv.textContent = `Ready to flash ${version} - ${modeText}`;
-
-            const devFormatted = formatDevBuild(version);
-            if (devFormatted) {
-                devInfo.style.display = 'block';
-                devInfo.title = devFormatted;
-                devInfo.textContent = `Dev Build: ${devFormatted}`;
+                statusDiv.textContent = 'Hardware manifest not found for this version.';
             }
         }
 
@@ -745,6 +759,7 @@
 
         async function flashFirmware() {
             const version = versionSelect.value;
+            const hardwareValue = hardwareSelect.value;
             const preserveData = preserveDataCheckbox.checked;
 
             if (!version) {
@@ -769,6 +784,7 @@
                 statusDiv.textContent = 'Loading firmware files...';
 
                 const preparedFiles = [];
+                const hwFolder = hardwareFolderMap[hardwareValue];
 
                 async function fetchUint8(path) {
                     const r = await fetch(path);
@@ -779,7 +795,7 @@
 
                 if (!preserveData) {
                     if (firmwareFiles.bootloader && firmwareFiles.bootloader.path) {
-                        const bootloaderU8 = await fetchUint8(`./firmware/${version}/${firmwareFiles.bootloader.path}`);
+                        const bootloaderU8 = await fetchUint8(`./firmware/${version}/${hwFolder}/${firmwareFiles.bootloader.path}`);
                         preparedFiles.push({
                             dataU8: bootloaderU8,
                             address: firmwareFiles.bootloader.offset
@@ -789,7 +805,7 @@
                     }
 
                     if (firmwareFiles.partitions && firmwareFiles.partitions.path) {
-                        const partitionsU8 = await fetchUint8(`./firmware/${version}/${firmwareFiles.partitions.path}`);
+                        const partitionsU8 = await fetchUint8(`./firmware/${version}/${hwFolder}/${firmwareFiles.partitions.path}`);
                         preparedFiles.push({
                             dataU8: partitionsU8,
                             address: firmwareFiles.partitions.offset
@@ -799,7 +815,7 @@
                     }
                 }
 
-                const appU8 = await fetchUint8(`./firmware/${version}/${firmwareFiles.application.path}`);
+                const appU8 = await fetchUint8(`./firmware/${version}/${hwFolder}/${firmwareFiles.application.path}`);
                 preparedFiles.push({
                     dataU8: appU8,
                     address: firmwareFiles.application.offset
@@ -855,6 +871,7 @@
         }
 
         versionSelect.addEventListener('change', updateStatus);
+        hardwareSelect.addEventListener('change', updateStatus);
         preserveDataCheckbox.addEventListener('change', updateStatus);
         flashBtn.addEventListener('click', flashFirmware);
 
