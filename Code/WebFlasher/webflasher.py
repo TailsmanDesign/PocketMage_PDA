@@ -57,7 +57,6 @@ class FirmwareReleaseManager:
         release_dirs = [d for d in release_dirs if not self.is_dev_version(d)]
         
         for release in release_dirs:
-            # FIX: Do not overwrite the current build with the gh-pages backup
             if release == current_version:
                 print(f"  Skipping preservation of {release} (current build)")
                 continue

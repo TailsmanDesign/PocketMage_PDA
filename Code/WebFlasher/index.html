@@ -480,7 +480,7 @@
                         <div id="latest-version-text" class="latest-version-text"></div>
                     </div>
                     <div class="form-group">
-                        <label for="hardware-select">Select your PocketMage hardware version</label>
+                        <label for="hardware-select">Hardware Version</label>
                         <div class="select-wrapper">
                             <select id="hardware-select" aria-label="Hardware Version">
                                 <option value="Beta V3.2">Beta V3.2</option>
@@ -679,18 +679,27 @@
 
             try {
                 const hwFolder = hardwareFolderMap[hardwareValue];
+                const oldHwFolder = hardwareValue === "Beta V3.2" ? "beta" : "production";
+
                 let manifestUrl = `./firmware/${version}/${hwFolder}/manifest.json`;
                 let manifestResponse = await fetch(manifestUrl, { cache: 'no-store' });
 
                 if (manifestResponse.ok) {
                     currentFirmwareBaseUrl = `./firmware/${version}/${hwFolder}`;
                 } else {
-                    manifestUrl = `./firmware/${version}/manifest.json`;
+                    manifestUrl = `./firmware/${version}/${oldHwFolder}/manifest.json`;
                     manifestResponse = await fetch(manifestUrl, { cache: 'no-store' });
-                    if (!manifestResponse.ok) {
-                        throw new Error(`Failed to fetch manifest: ${manifestResponse.status}`);
+                    
+                    if (manifestResponse.ok) {
+                        currentFirmwareBaseUrl = `./firmware/${version}/${oldHwFolder}`;
+                    } else {
+                        manifestUrl = `./firmware/${version}/manifest.json`;
+                        manifestResponse = await fetch(manifestUrl, { cache: 'no-store' });
+                        if (!manifestResponse.ok) {
+                            throw new Error(`Failed to fetch manifest: ${manifestResponse.status}`);
+                        }
+                        currentFirmwareBaseUrl = `./firmware/${version}`;
                     }
-                    currentFirmwareBaseUrl = `./firmware/${version}`;
                 }
                 
                 const manifest = await manifestResponse.json();
