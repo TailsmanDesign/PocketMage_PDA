@@ -2,11 +2,13 @@
 #include <esp_sleep.h>
 
 // Registers
+#define MP2722_REG02 0x02
 #define MP2722_REG08 0x08
 #define MP2722_REG09 0x09
 #define MP2722_REG11 0x11
 #define MP2722_REG13 0x13
 #define MP2722_REG16 0x16
+
 
 // Initialization of MP2722 Class
 MP2722 PowerSystem;
@@ -186,6 +188,20 @@ bool MP2722::getOTGNeed(bool &boostNeeded) {
     return true;
 }
 
+bool MP2722::setFastChargeCurrent(uint16_t mA) {
+  if (mA > 5040) return false; // Exceeds maximum possible 6-bit value (63 * 80mA)
+
+  uint8_t code = mA / 80;
+
+  uint8_t reg;
+  if (!readReg(MP2722_REG02, reg)) return false;
+
+  reg &= 0xC0;          // Clear bits 5:0 (ICC), preserve bits 7:6 (VPRE)
+  reg |= (code & 0x3F); // Apply the new 6-bit current limit
+
+  return writeReg(MP2722_REG02, reg);
+}
+
 void MP2722::printDiagnostics() {
     Serial.println(F("=== MP2722 Diagnostics ==="));
 
@@ -252,6 +268,9 @@ bool MP2722::init(uint8_t sda, uint8_t scl) {
 
   // Give USB control to BMS
   setUSBControlBMS();
+
+  // Set fast charge current limit to 1200mA
+  if (!setFastChargeCurrent(1200)) return false;
 
   // Set CC mode: 011 = Dual Role Power, try SNK
   // Set CC mode: 100 = Dual Role Power, try SRC

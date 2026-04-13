@@ -45,6 +45,7 @@ public:
   bool getBoostState(bool &enabled);
   bool getDPDMStatus(DPDMResult &out);
   bool getOTGNeed(bool &boostNeeded);
+  bool setFastChargeCurrent(uint16_t mA);
 
   void setUSBControlESP();
   void setUSBControlBMS();
