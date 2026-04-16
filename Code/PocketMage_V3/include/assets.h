@@ -180,5 +180,7 @@ extern const unsigned char leftRightIndicator2[] PROGMEM;
 extern const unsigned char timeInput[] PROGMEM;
 extern const unsigned char dateInput[] PROGMEM;
 
+extern const unsigned char noIcon [] PROGMEM;
+
 #endif // POCKETMAGE_OS
 #endif
