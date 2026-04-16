@@ -193,19 +193,32 @@ void loadAndDrawAppIcon(int x, int y, int otaIndex, bool showName, int maxNameCh
   pocketmage::setCpuSpeed(240);
 
   AppInfo app;
-  if (!loadAppInfo(otaIndex, app)) return;
-  if (!global_fs->exists(app.iconPath)) return;
+  if (!loadAppInfo(otaIndex, app)) {
+    // Ensure CPU speed is reset if we abort early
+    if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+    return;
+  }
 
-  File f = global_fs->open(app.iconPath, "r");
-  if (!f) return;
-
+  bool iconLoaded = false;
   uint8_t buf[40 * 5]; // 40x40 1-bit = 200 bytes
-  if (f.read(buf, sizeof(buf)) != sizeof(buf)) { f.close(); return; }
-  f.close();
+
+  if (global_fs->exists(app.iconPath)) {
+    File f = global_fs->open(app.iconPath, "r");
+    if (f) {
+      if (f.read(buf, sizeof(buf)) == sizeof(buf)) {
+        iconLoaded = true;
+      }
+      f.close();
+    }
+  }
 
   display.fillRect(x, y, 40, 40, GxEPD_WHITE);
 
-  display.drawBitmap(x, y, buf, 40, 40, GxEPD_BLACK);
+  if (iconLoaded) {
+    display.drawBitmap(x, y, buf, 40, 40, GxEPD_BLACK);
+  } else {
+    display.drawBitmap(x, y, noIcon, 40, 40, GxEPD_BLACK);
+  }
 
   if (showName) {
     // Make a copy and truncate
