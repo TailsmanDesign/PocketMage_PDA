@@ -1,6 +1,6 @@
 {
-  "name": "PocketMage OS",
-  "version": "BETA_V1.8.2",
+  "name": "PocketMage OS (Beta)",
+  "version": "BETA_V1.8.2 (BETA)",
   "home_assistant_domain": "",
   "new_install_prompt_erase": true,
   "builds": [
