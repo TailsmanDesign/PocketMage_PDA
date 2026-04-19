@@ -283,6 +283,12 @@ int daysInMonth(int year, int month) {
   }
 }
 
+void invertOledRect(int x, int y, int w, int h) {
+  u8g2.setDrawColor(2);         // 2 sets the drawing mode to XOR
+  u8g2.drawBox(x, y, w, h);     // Draw the box (inverts the pixels)
+  u8g2.setDrawColor(1);         // Return to standard solid drawing mode
+}
+
 String repeatPrompt(String startDateStr) {
   int year  = startDateStr.substring(0, 4).toInt();
   int month = startDateStr.substring(4, 6).toInt();
@@ -310,12 +316,9 @@ String repeatPrompt(String startDateStr) {
 
   while(true) {
     u8g2.clearBuffer();
-    u8g2.setFont(u8g2_font_6x10_tf);
-    u8g2.drawStr(0, 10, "Select Repeat:");
-    
-    u8g2.drawStr(15, 25, modes[mode]);
-    u8g2.drawStr(0, 25, "<");
-    u8g2.drawStr(120, 25, ">");
+    u8g2.drawXBMP(0,0,256,32,_repeatGUI0);
+    u8g2.drawTriangle(20+(54*mode),26,17+(54*mode),31,23+(54*mode),31);
+
     u8g2.sendBuffer();
 
     char c = KB().updateKeypress();
@@ -342,25 +345,22 @@ String repeatPrompt(String startDateStr) {
     
     while(true) {
       u8g2.clearBuffer();
-      u8g2.setFont(u8g2_font_5x8_tf);
-      u8g2.drawStr(0, 8, "Select Weekly Days:");
+      u8g2.drawXBMP(0,0,256,32,_repeatGUI1);
 
-      // Placeholder Assets for Weekday Grid
+      // Weekday Grid
       for(int i = 0; i < 7; i++) {
-        int bx = 2 + (i * 18);
-        int by = 14;
+        int bx = 62 + (i * 28);
+        int by = 3;
         if(days[i]) {
-          u8g2.drawBox(bx, by, 16, 14); // Selected: Filled box
-          u8g2.setDrawColor(0);
-          u8g2.drawStr(bx+3, by+10, dowNames[i]);
-          u8g2.setDrawColor(1);
+          // Selected: Invert colors
+          invertOledRect(bx, by, 18, 18);
         } else {
-          u8g2.drawFrame(bx, by, 16, 14); // Unselected: Empty outline
-          u8g2.drawStr(bx+3, by+10, dowNames[i]);
+          // Unselected: Do nothing
         }
         if(i == cursor) {
           // Cursor indicator (Triangle)
-          u8g2.drawTriangle(bx+8, by+15, bx+4, by+19, bx+12, by+19);
+          u8g2.setDrawColor(1);
+          u8g2.drawTriangle(bx+9, by+22, bx+12, by+27, bx+6, by+27);
         }
       }
       u8g2.sendBuffer();
@@ -405,26 +405,37 @@ String repeatPrompt(String startDateStr) {
 
     while(true) {
       u8g2.clearBuffer();
-      u8g2.setFont(u8g2_font_5x8_tf);
-      u8g2.drawStr(0, 8, mode == 3 ? "Monthly Repeat:" : "Yearly Repeat:");
+      //u8g2.setFont(u8g2_font_5x8_tf);
+      //u8g2.drawStr(0, 8, mode == 3 ? "Monthly Repeat:" : "Yearly Repeat:");
+      u8g2.drawXBMP(0,0,256,32,_repeatGUI2);
+      u8g2.setFont(u8g2_font_ncenB10_tr);
 
-      // Placeholder Assets for Date vs Ordinal selection
+      // Calculate X coordinates for perfectly centered text
+      int dateWidth = u8g2.getStrWidth(dateStr.c_str());
+      int dateX = 0 + (107 - dateWidth) / 2; // Box starts at 0, width is 107
+
+      int ordWidth = u8g2.getStrWidth(ordStr.c_str());
+      int ordX = 151 + (107 - ordWidth) / 2; // Box starts at 151, width is 107
+
+      // Date vs Ordinal selection
       if (sel == 0) { // Date pill selected
-        u8g2.drawRBox(0, 15, 60, 14, 3);
+        u8g2.drawRBox(0, 10, 107, 22, 8);
         u8g2.setDrawColor(0);
-        u8g2.drawStr(4, 25, dateStr.c_str());
+        u8g2.drawStr(dateX, 26, dateStr.c_str());
         u8g2.setDrawColor(1);
       } else {
-        u8g2.drawStr(4, 25, dateStr.c_str());
+        u8g2.drawRFrame(0, 10, 107, 22, 8);
+        u8g2.drawStr(dateX, 26, dateStr.c_str());
       }
 
       if (sel == 1) { // Ordinal pill selected
-        u8g2.drawRBox(64, 15, 64, 14, 3);
+        u8g2.drawRBox(151, 10, 106, 22, 8);
         u8g2.setDrawColor(0);
-        u8g2.drawStr(68, 25, ordStr.c_str());
+        u8g2.drawStr(ordX, 26, ordStr.c_str());
         u8g2.setDrawColor(1);
       } else {
-        u8g2.drawStr(68, 25, ordStr.c_str());
+        u8g2.drawRFrame(151, 10, 106, 22, 8);
+        u8g2.drawStr(ordX, 26, ordStr.c_str());
       }
       u8g2.sendBuffer();
 

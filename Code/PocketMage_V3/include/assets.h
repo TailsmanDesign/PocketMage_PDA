@@ -182,5 +182,9 @@ extern const unsigned char dateInput[] PROGMEM;
 
 extern const unsigned char noIcon [] PROGMEM;
 
+extern const unsigned char _repeatGUI0 [] PROGMEM;
+extern const unsigned char _repeatGUI1 [] PROGMEM;
+extern const unsigned char _repeatGUI2 [] PROGMEM;
+
 #endif // POCKETMAGE_OS
 #endif
