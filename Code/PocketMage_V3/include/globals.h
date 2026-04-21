@@ -148,3 +148,8 @@ void einkHandler_TERMINAL();
 // Wrench
 const char* readCFile(const String& path);
 void compileWrench(const char* wrenchCode);
+
+// Battery Voltage Helper
+inline float getBatteryVoltage() {
+  return (analogRead(BAT_SENS) * (3.3 / 4095.0) * 2) + 0.2;
+}

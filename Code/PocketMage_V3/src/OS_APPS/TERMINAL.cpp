@@ -1,5 +1,7 @@
 // AUDIT 1
 #include <globals.h>
+
+#if !OTA_APP // PocketMage OS Only
 #include "wrench.h"
 
 // --- UTF-8 Helpers ---
@@ -869,6 +871,31 @@ void wr_prompt(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* 
   wr_makeString(c, &ret, retbuf);
 }
 
+void wr_boolPrompt(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  char buf[128];
+  int result = boolPrompt(argv[0].asString(buf, 128));
+  wr_makeInt(&ret, result);
+}
+
+void wr_timePrompt(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  int defaultTime = argv[0].asInt();
+  wr_makeInt(&ret, timePrompt(defaultTime));
+}
+
+void wr_datePrompt(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  char buf[16];
+  char retbuf[16];
+  String defaultDate = argv[0].asString(buf, 16);
+  String result = datePrompt(defaultDate);
+  result.toCharArray(retbuf, sizeof(retbuf));
+  wr_makeString(c, &ret, retbuf);
+}
+
+void wr_waitForKeypress(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  char buf[128];
+  waitForKeypress(argv[0].asString(buf, 128));
+}
+
 void wr_updateTerm(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
   updateTerminalDisp();
 }
@@ -892,15 +919,12 @@ void wr_inkRect(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void*
   bool borderColor  = (argv[4].asInt() == 0);
   bool fillColor    = (argv[5].asInt() == 0);
   
-  // Black on black or white on white
   if ((fillColor && borderColor) || (!fillColor && !borderColor)) {
     display.fillRect(x_origin, y_origin, width, height, !fillColor);
   }
-  // Black border white fill
   else if (borderColor && !fillColor) {
     display.drawRect(x_origin, y_origin, width, height, 1);
   }
-  //White border, black fill
   else if (!borderColor && fillColor) {
     display.drawRect(x_origin, y_origin, width, height, 0);
     display.fillRect(x_origin+1, y_origin+1, width-2, height-2, 1);
@@ -914,15 +938,12 @@ void wr_inkCircle(WRContext* c, const WRValue* argv, int argn, WRValue& ret, voi
   bool borderColor  = (argv[3].asInt() == 0);
   bool fillColor    = (argv[4].asInt() == 0);
   
-  // Black on black or white on white
   if ((fillColor && borderColor) || (!fillColor && !borderColor)) {
     display.fillCircle(x_origin, y_origin, radius, fillColor);
   }
-  // Black border white fill
   else if (borderColor && !fillColor) {
     display.drawCircle(x_origin, y_origin, radius, 1);
   }
-  //White border, black fill
   else if (!borderColor && fillColor) {
     display.drawCircle(x_origin, y_origin, radius, 0);
     display.fillCircle(x_origin, y_origin, radius-2, 1);
@@ -938,11 +959,9 @@ void wr_inkText(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void*
   bool color        = (argv[3].asInt() != 0);
   const char* text  = argv[4].asString(buf, 1024);
   
-  // Set color
   if (color) display.setTextColor(GxEPD_BLACK);
   else display.setTextColor(GxEPD_WHITE);
 
-  // Set font
   switch (size) {
     case 1:
       display.setFont(&Font5x7Fixed);
@@ -984,17 +1003,14 @@ void wr_oledRect(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void
   bool borderColor  = (argv[4].asInt() == 0);
   bool fillColor    = (argv[5].asInt() == 0);
   
-  // Black on black or white on white
   if ((fillColor && borderColor) || (!fillColor && !borderColor)) {
     u8g2.setDrawColor(!fillColor);
     u8g2.drawBox(x_origin, y_origin, width, height);
   }
-  // Black border white fill
   else if (borderColor && !fillColor) {
     u8g2.setDrawColor(1);
     u8g2.drawFrame(x_origin, y_origin, width, height);
   }
-  //White border, black fill
   else if (!borderColor && fillColor) {
     u8g2.setDrawColor(0);
     u8g2.drawFrame(x_origin, y_origin, width, height);
@@ -1026,10 +1042,8 @@ void wr_oledText(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void
   bool color        = (argv[3].asInt() == 0);
   const char* text  = argv[4].asString(buf, 1024);
   
-  // Set color
   u8g2.setDrawColor(color);
 
-  // Set font
   switch (size) {
     case 1:
       u8g2.setFont(u8g2_font_5x7_tf);
@@ -1041,13 +1055,80 @@ void wr_oledText(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void
       u8g2.setFont(u8g2_font_helvB14_tf);
       break;
     default:
-      u8g2.setFont(u8g2_font_lubR18_tf);  // regular
+      u8g2.setFont(u8g2_font_lubR18_tf);
       break;
   }
   
   u8g2.drawUTF8(x_origin, y_origin, text);
 
   u8g2.setDrawColor(1);
+}
+
+void wr_sysMessage(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  char buf[128];
+  const char* msg = argv[0].asString(buf, 128);
+  int delayMs = argv[1].asInt();
+  
+  OLED().sysMessage(String(msg), delayMs);
+}
+
+// ----- Hardware / System ----- //
+void wr_getKey(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  char key = KB().updateKeypress();
+  wr_makeInt(&ret, (int)key);
+}
+
+void wr_getTouch(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  int vector = TOUCH().getScrollVector();
+  wr_makeInt(&ret, vector);
+}
+
+void wr_getBattery(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  extern volatile int battState;
+  wr_makeInt(&ret, battState);
+}
+
+void wr_getBatteryVoltage(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  wr_makeFloat(&ret, getBatteryVoltage());
+}
+
+void wr_setCpuSpeed(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  int freq = argv[0].asInt();
+  pocketmage::setCpuSpeed(freq);
+}
+
+void wr_sleep(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  pocketmage::deepSleep(false);
+}
+
+void wr_getTime(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  DateTime now = CLOCK().nowDT();
+  char buf[16];
+  snprintf(buf, sizeof(buf), "%02d:%02d:%02d", now.hour(), now.minute(), now.second());
+  wr_makeString(c, &ret, buf);
+}
+
+void wr_getDate(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  DateTime now = CLOCK().nowDT();
+  char buf[16];
+  snprintf(buf, sizeof(buf), "%04d-%02d-%02d", now.year(), now.month(), now.day());
+  wr_makeString(c, &ret, buf);
+}
+
+// ----- Filesystem ----- //
+void wr_readFile(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  char path[256];
+  argv[0].asString(path, 256);
+  String content = PM_SDAUTO().readFileToString(*global_fs, path);
+  wr_makeString(c, &ret, content.c_str());
+}
+
+void wr_writeFile(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* usr) {
+  char path[256];
+  char content[1024];
+  argv[0].asString(path, 256);
+  argv[1].asString(content, 1024);
+  PM_SDAUTO().writeFile(*global_fs, path, content);
 }
 
 // ----- Helpers ----- //
@@ -1076,33 +1157,31 @@ void wr_random(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void* 
 const char* readCFile(const String& path) {
   File f = global_fs->open(path);
   if (!f || f.isDirectory()) {
-    return nullptr;  // file doesn't exist or is a directory
+    return nullptr;
   }
 
   size_t len = f.size();
   if (len == 0) {
     f.close();
-    return nullptr;  // empty file
+    return nullptr;
   }
 
   char* buf = (char*)malloc(len + 1);
   if (!buf) {
     f.close();
-    return nullptr;  // allocation failed
+    return nullptr;
   }
 
   size_t readBytes = f.readBytes(buf, len);
-  buf[readBytes] = '\0';  // null-terminate
+  buf[readBytes] = '\0';
   f.close();
 
-  return buf;  // caller must free()
+  return buf;
 }
 
 void compileWrench(const char* wrenchCode) {
-  // Create a state
   WRState* w = wr_newState();
 
-  // Register functions
   wr_registerFunction(w, "oledWord", wr_oledWord);
   wr_registerFunction(w, "print", wr_print);
   wr_registerFunction(w, "prompt", wr_prompt);
@@ -1120,21 +1199,32 @@ void compileWrench(const char* wrenchCode) {
   wr_registerFunction(w, "oledBackground", wr_oledBackground);
   wr_registerFunction(w, "oledText", wr_oledText);
   wr_registerFunction(w, "random", wr_random);
+  wr_registerFunction(w, "sysMessage", wr_sysMessage);
+  wr_registerFunction(w, "getKey", wr_getKey);
+  wr_registerFunction(w, "getTouch", wr_getTouch);
+  wr_registerFunction(w, "getBattery", wr_getBattery);
+  wr_registerFunction(w, "getBatteryVoltage", wr_getBatteryVoltage);
+  wr_registerFunction(w, "setCpuSpeed", wr_setCpuSpeed);
+  wr_registerFunction(w, "sleep", wr_sleep);
+  wr_registerFunction(w, "getTime", wr_getTime);
+  wr_registerFunction(w, "getDate", wr_getDate);
+  wr_registerFunction(w, "readFile", wr_readFile);
+  wr_registerFunction(w, "writeFile", wr_writeFile);
+  wr_registerFunction(w, "boolPrompt", wr_boolPrompt);
+  wr_registerFunction(w, "timePrompt", wr_timePrompt);
+  wr_registerFunction(w, "datePrompt", wr_datePrompt);
+  wr_registerFunction(w, "waitForKeypress", wr_waitForKeypress);
 
-  // Allocate compiled code
   unsigned char* outBytes;
   int outLen;
 
-  // Compile code
   WRstr errMsg;
   int err = wr_compile(wrenchCode, strlen(wrenchCode), &outBytes, &outLen, &errMsg);
 
-  // Run the code
   if (err == 0) {
-    wr_run(w, outBytes, outLen, true);  // load and run the code!
+    wr_run(w, outBytes, outLen, true);
   }
 
-  // Output error message
   if (errMsg.c_str() && errMsg[0] != '\0') {
     const char* p = errMsg;
     const char* lineStart = p;
@@ -1143,10 +1233,9 @@ void compileWrench(const char* wrenchCode) {
       if (*p == '\n') {
         int len = p - lineStart;
         if (len > 0 && lineStart[len - 1] == '\r') {
-          len--; // handle CRLF
+          len--;
         }
 
-        // limit to 29 chars
         int outLen = (len > 29) ? 29 : len;
         terminalOutputs.push_back(String(lineStart).substring(0, outLen));
 
@@ -1155,7 +1244,6 @@ void compileWrench(const char* wrenchCode) {
       p++;
     }
 
-    // last line (if no trailing newline)
     if (lineStart != p) {
       int len = p - lineStart;
       int outLen = (len > 29) ? 29 : len;
@@ -1163,7 +1251,6 @@ void compileWrench(const char* wrenchCode) {
     }
   }
 
-  // Close code
   wr_destroyState(w);
 
   newState = true;
@@ -1507,3 +1594,5 @@ void einkHandler_TERMINAL() {
       break;
   }
 }
+
+#endif

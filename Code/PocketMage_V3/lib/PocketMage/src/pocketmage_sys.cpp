@@ -244,7 +244,13 @@ void hardReset(void* parameter) {
     // Hold power button for 3s to return home
     if ((millis() - heldSince) > 3000) {
       OLED().sysMessage("Process Interrupted",1000);
+      
+#if !OTA_APP_FLAG
       HOME_INIT();
+#else
+      pocketmage::deepSleep(); // OTA App has no home screen, so we just sleep
+#endif
+      
       heldSince = millis(); // Reset so it doesn't constantly trigger
     }
     
