@@ -347,6 +347,7 @@ void updateBattState() {
 
 #pragma region Basic Inputs
 // Prompt the user for text input, return the text
+#if !OTA_APP // PocketMage OS Only
 String textPrompt(String promptText, String prefix) {
   String currentLine = "";
   int cursor_pos = 0;
@@ -833,6 +834,7 @@ int timePrompt(int defaultTime) {
     yield();
   }
 }
+#endif
 
 // Helper function to calculate max days in a month (handles Leap Years)
 static int getDaysInMonth(int month, int year) {
@@ -843,6 +845,7 @@ static int getDaysInMonth(int month, int year) {
   return 31;
 }
 
+#if !OTA_APP // PocketMage OS Only
 String datePrompt(String defaultYYYYMMDD) {
   uint8_t digits[8] = {0,0,0,0,0,0,0,0};
   ulong currentIndex = 0;
@@ -1046,6 +1049,7 @@ String datePrompt(String defaultYYYYMMDD) {
     yield();
   }
 }
+#endif
 
 void waitForKeypress(String message) {
   KB().setKeyboardState(NORMAL); 
@@ -1219,6 +1223,7 @@ void checkRTCPowerLoss() {
   }
 
   if (in) {
+#if !OTA_APP_FLAG
     // Temporarily disable the sleep timeout so the setup prompts don't force a sleep loop
     bool previousTimeoutState = noTimeout;
     noTimeout = true;
@@ -1263,6 +1268,7 @@ void checkRTCPowerLoss() {
 
     // Restore the timeout state before continuing boot
     noTimeout = previousTimeoutState;
+#endif
   }
 }
 

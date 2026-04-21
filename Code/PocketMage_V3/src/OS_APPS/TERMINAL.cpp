@@ -1,5 +1,7 @@
 // AUDIT 1
 #include <globals.h>
+
+#if !OTA_APP // PocketMage OS Only
 #include "wrench.h"
 
 // --- UTF-8 Helpers ---
@@ -1592,3 +1594,5 @@ void einkHandler_TERMINAL() {
       break;
   }
 }
+
+#endif

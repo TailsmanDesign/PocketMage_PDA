@@ -867,6 +867,7 @@ char PocketmageKB::updateKeypress() {
 
                     // --- APP SWITCHER HOOK ---
                     if (activeCycleLen == 11 && CurrentAppState != USB_APP) { // cyc_appSwitch trigger length
+#if !OTA_APP_FLAG
                         if (cycleIndex == 1) TXT_INIT("");
                         else if (cycleIndex == 2) FILEWIZ_INIT();
                         else if (cycleIndex == 3) USB_INIT();
@@ -877,6 +878,7 @@ char PocketmageKB::updateKeypress() {
                         else if (cycleIndex == 8) LEXICON_INIT();
                         else if (cycleIndex == 9) TERMINAL_INIT();
                         else if (cycleIndex == 10) APPLOADER_INIT();
+#endif
                         // If 0 ("cancel"), do nothing.
                         if (cycleIndex == 0) return 0;
                         else return 23; // Return 23 so we can tell the loop to break
