@@ -1,0 +1,3 @@
+[submodule "Code/PocketMage_V3/third_party/Mesh-NOW"]
+	path = Code/PocketMage_V3/third_party/Mesh-NOW
+	url = https://github.com/NellowTCS/Mesh-NOW.git
