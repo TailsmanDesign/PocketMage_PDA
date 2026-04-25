@@ -218,5 +218,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
-          keep_files: false
+          keep_files: true
           commit_message: "chore(pages): deploy docs from run ${{ github.run_number }}"

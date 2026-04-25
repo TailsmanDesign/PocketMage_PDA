@@ -1,0 +1,43 @@
+name: Deploy GitHub Pages
+
+on:
+  workflow_dispatch: 
+  push:
+    branches: [main]
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Build everything
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20.19.0"
+
+      # Build core library
+      - name: Build Docs
+        run: |
+          cd ../Docs
+          npm ci
+          npm run build
+          cd ../
+
+      # Prepare full page deploy directory
+      - name: Prepare Pages assets
+        run: |
+          mkdir -p gh-pages-root
+          # Docs at docs/
+          mkdir -p gh-pages-root/docs
+          cp -r Docs/site/* gh-pages-root/docs/
+
+      - name: Deploy all assets to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: gh-pages-root
+          keep_files: true
+          commit_message: Deploy Docs

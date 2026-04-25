@@ -1,0 +1,13 @@
+{
+  "name": "pocketmage-docs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "docmd dev",
+    "build": "docmd build",
+    "preview": "npx serve site"
+  },
+  "dependencies": {
+    "@mgks/docmd": "^0.3.11"
+  }
+}

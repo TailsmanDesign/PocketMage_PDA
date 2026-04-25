@@ -17,11 +17,11 @@
 # [Getting Started]
 **Helpful Resources:**
 
-[FAQ](https://github.com/ashtf8/PocketMage_PDA/tree/main/Docs/Getting%20Started/FAQ)
+[FAQ](https://ashtf8.github.io/PocketMage_PDA/docs/faq)
 
-[Tutorials](https://github.com/ashtf8/PocketMage_PDA/tree/main/Docs/Getting%20Started/Tutorials)
+[Tutorials](https://ashtf8.github.io/PocketMage_PDA/docs/tutorials)
 
-[PocketMage Command & Keystroke Manual](https://github.com/ashtf8/PocketMage_PDA/tree/main/Docs/Getting%20Started/Command%20Manual)
+[PocketMage Command & Keystroke Manual](https://ashtf8.github.io/PocketMage_PDA/docs/command-manual)
 
 [3rd Party App Template](https://github.com/ashtf8/PocketMage_PDA/blob/main/Code/PocketMage_V3/src/APP_TEMPLATE.cpp)
 
