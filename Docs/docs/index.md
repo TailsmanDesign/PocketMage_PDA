@@ -10,9 +10,9 @@ Welcome to the official docs for the PocketMage open-source PDA! Here you'll fin
 
 ## Sections
 
-- [FAQ](faq/index.md): Frequently asked questions about PocketMage.
-- [Command Manual](command-manual/index.md): Keystrokes and command reference.
-- [Tutorials](tutorials/index.md): Step-by-step guides and scripting examples.
+- [FAQ](faq/): Frequently asked questions about PocketMage.
+- [Command Manual](command-manual/): Keystrokes and command reference.
+- [Tutorials](tutorials/): Step-by-step guides and scripting examples.
 
 ## Quick Links
 
