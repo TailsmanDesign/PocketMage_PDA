@@ -297,60 +297,67 @@
 <ul>
 <li><strong>Parameters:</strong> <code>text</code> (String) - The string to print.</li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-print(“Hello, terminal!”);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>print(<span class="hljs-string">&quot;Hello, terminal!&quot;</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="updateterm"><code>updateTerm()</code></h3>
 <p>Refreshes the terminal display to show the latest buffer contents.</p>
 <ul>
 <li><strong>Parameters:</strong> None.</li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-print(“Loading…”);<br>
-updateTerm();</li>
+<li><strong>Example:</strong><pre class="hljs"><code>print(<span class="hljs-string">&quot;Loading...&quot;</span>);
+updateTerm();
+</code></pre>
+</li>
 </ul>
 <h3 id="promptprompttext"><code>prompt(promptText)</code></h3>
 <p>Opens a text input prompt interface and pauses script execution until the user submits or cancels.</p>
 <ul>
 <li><strong>Parameters:</strong> <code>promptText</code> (String) - The message displayed to the user.</li>
 <li><strong>Returns:</strong> (String) The entered text, or an empty string <code>&quot;&quot;</code> if the user cancels (<code>_EXIT_</code>).</li>
-<li><strong>Example:</strong><br>
-name = prompt(“Enter your name:”);<br>
-print(&quot;Hello &quot; + name);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>name = prompt(<span class="hljs-string">&quot;Enter your name:&quot;</span>);
+print(<span class="hljs-string">&quot;Hello &quot;</span> + name);
+</code></pre>
+</li>
 </ul>
 <h3 id="boolpromptprompttext"><code>boolPrompt(promptText)</code></h3>
 <p>Opens a yes/no boolean prompt interface.</p>
 <ul>
 <li><strong>Parameters:</strong> <code>promptText</code> (String) - The question displayed to the user.</li>
 <li><strong>Returns:</strong> (Int) <code>1</code> for yes/true, <code>0</code> for no/false.</li>
-<li><strong>Example:</strong><br>
-if (boolPrompt(“Save file?”)) {<br>
-writeFile(“/data.txt”, “saved”);<br>
-}</li>
+<li><strong>Example:</strong><pre class="hljs"><code><span class="hljs-keyword">if</span> (boolPrompt(<span class="hljs-string">&quot;Save file?&quot;</span>)) {
+    writeFile(<span class="hljs-string">&quot;/data.txt&quot;</span>, <span class="hljs-string">&quot;saved&quot;</span>);
+}
+</code></pre>
+</li>
 </ul>
 <h3 id="timepromptdefaulttime"><code>timePrompt(defaultTime)</code></h3>
 <p>Opens a time selection interface.</p>
 <ul>
 <li><strong>Parameters:</strong> <code>defaultTime</code> (Int) - The initial time value to display.</li>
 <li><strong>Returns:</strong> (Int) The selected time.</li>
-<li><strong>Example:</strong><br>
-alarm = timePrompt(1200);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>alarm = timePrompt(<span class="hljs-number">1200</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="datepromptdefaultdate"><code>datePrompt(defaultDate)</code></h3>
 <p>Opens a date selection interface.</p>
 <ul>
 <li><strong>Parameters:</strong> <code>defaultDate</code> (String) - The initial date to display (format: max 15 chars).</li>
 <li><strong>Returns:</strong> (String) The selected date.</li>
-<li><strong>Example:</strong><br>
-dueDate = datePrompt(“2026-05-01”);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>dueDate = datePrompt(<span class="hljs-string">&quot;2026-05-01&quot;</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="waitforkeypressmessage"><code>waitForKeypress(message)</code></h3>
 <p>Halts script execution and waits for the user to press a key.</p>
 <ul>
 <li><strong>Parameters:</strong> <code>message</code> (String) - Text to display while waiting.</li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-waitForKeypress(“Press any key to continue…”);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>waitForKeypress(<span class="hljs-string">&quot;Press any key to continue...&quot;</span>);
+</code></pre>
+</li>
 </ul>
 <hr>
 <h2 id="2-main-e-paper-display">2. Main E-Paper Display</h2>
@@ -359,17 +366,19 @@ waitForKeypress(“Press any key to continue…”);</li>
 <ul>
 <li><strong>Parameters:</strong> None.</li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-inkText(10, 20, 2, 1, “Hello E-Ink”);<br>
-updateInk();</li>
+<li><strong>Example:</strong><pre class="hljs"><code>inkText(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;Hello E-Ink&quot;</span>);
+updateInk();
+</code></pre>
+</li>
 </ul>
 <h3 id="inkbackgroundcolor"><code>inkBackground(color)</code></h3>
 <p>Fills the entire E-Ink screen with a solid color.</p>
 <ul>
 <li><strong>Parameters:</strong> <code>color</code> (Int) - <code>0</code> for black, <code>1</code> (or non-zero) for white.</li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-inkBackground(1);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>inkBackground(<span class="hljs-number">1</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="inkrectx-y-width-height-bordercolor-fillcolor"><code>inkRect(x, y, width, height, borderColor, fillColor)</code></h3>
 <p>Draws a rectangle on the E-Ink display buffer.</p>
@@ -383,8 +392,9 @@ inkBackground(1);</li>
 </ul>
 </li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-inkRect(10, 10, 100, 50, 0, 1);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>inkRect(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">100</span>, <span class="hljs-number">50</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="inkcirclex-y-radius-bordercolor-fillcolor"><code>inkCircle(x, y, radius, borderColor, fillColor)</code></h3>
 <p>Draws a circle on the E-Ink display buffer.</p>
@@ -398,8 +408,9 @@ inkRect(10, 10, 100, 50, 0, 1);</li>
 </ul>
 </li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-inkCircle(100, 100, 25, 0, 0);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>inkCircle(<span class="hljs-number">100</span>, <span class="hljs-number">100</span>, <span class="hljs-number">25</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="inktextx-y-size-color-text"><code>inkText(x, y, size, color, text)</code></h3>
 <p>Renders text to the E-Ink display buffer.</p>
@@ -413,8 +424,9 @@ inkCircle(100, 100, 25, 0, 0);</li>
 </ul>
 </li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-inkText(5, 50, 3, 1, “PocketMage”);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>inkText(<span class="hljs-number">5</span>, <span class="hljs-number">50</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;PocketMage&quot;</span>);
+</code></pre>
+</li>
 </ul>
 <hr>
 <h2 id="3-secondary-oled-display">3. Secondary OLED Display</h2>
@@ -423,17 +435,19 @@ inkText(5, 50, 3, 1, “PocketMage”);</li>
 <ul>
 <li><strong>Parameters:</strong> None.</li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-oledText(0, 10, 2, 0, “OLED Active”);<br>
-updateOled();</li>
+<li><strong>Example:</strong><pre class="hljs"><code>oledText(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;OLED Active&quot;</span>);
+updateOled();
+</code></pre>
+</li>
 </ul>
 <h3 id="oledwordtext"><code>oledWord(text)</code></h3>
 <p>Abstracted wrapper to quickly print a formatted string directly to the OLED display.</p>
 <ul>
 <li><strong>Parameters:</strong> <code>text</code> (String) - Text to display.</li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-oledWord(“Processing…”);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>oledWord(<span class="hljs-string">&quot;Processing...&quot;</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="sysmessagemsg-delayms"><code>sysMessage(msg, delayMs)</code></h3>
 <p>Flashes a high-priority system message on the OLED and blocks execution for the specified time.</p>
@@ -445,16 +459,18 @@ oledWord(“Processing…”);</li>
 </ul>
 </li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-sysMessage(“Script Error”, 2000);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>sysMessage(<span class="hljs-string">&quot;Script Error&quot;</span>, <span class="hljs-number">2000</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="oledbackgroundcolor"><code>oledBackground(color)</code></h3>
 <p>Fills the OLED screen buffer.</p>
 <ul>
 <li><strong>Parameters:</strong> <code>color</code> (Int) - <code>0</code> to turn pixels ON, <code>1</code> to turn pixels OFF.</li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-oledBackground(1);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>oledBackground(<span class="hljs-number">1</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="oledrectx-y-width-height-bordercolor-fillcolor"><code>oledRect(x, y, width, height, borderColor, fillColor)</code></h3>
 <p>Draws a rectangle on the OLED buffer.</p>
@@ -468,8 +484,9 @@ oledBackground(1);</li>
 </ul>
 </li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-oledRect(0, 0, 128, 32, 0, 1);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>oledRect(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">128</span>, <span class="hljs-number">32</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="oledcirclex-y-radius-bordercolor"><code>oledCircle(x, y, radius, borderColor)</code></h3>
 <p>Draws a circle outline on the OLED buffer. (No fill option supported).</p>
@@ -482,8 +499,9 @@ oledRect(0, 0, 128, 32, 0, 1);</li>
 </ul>
 </li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-oledCircle(64, 16, 10, 0);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>oledCircle(<span class="hljs-number">64</span>, <span class="hljs-number">16</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="oledtextx-y-size-color-text"><code>oledText(x, y, size, color, text)</code></h3>
 <p>Renders text to the OLED buffer.</p>
@@ -497,8 +515,9 @@ oledCircle(64, 16, 10, 0);</li>
 </ul>
 </li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-oledText(0, 15, 1, 0, “Status: OK”);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>oledText(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Status: OK&quot;</span>);
+</code></pre>
+</li>
 </ul>
 <hr>
 <h2 id="4-hardware-system">4. Hardware &amp; System</h2>
@@ -507,65 +526,73 @@ oledText(0, 15, 1, 0, “Status: OK”);</li>
 <ul>
 <li><strong>Parameters:</strong> None.</li>
 <li><strong>Returns:</strong> (Int) The ASCII keycode value of the pressed key. Returns <code>0</code> if no key is pressed.</li>
-<li><strong>Example:</strong><br>
-k = getKey();<br>
-if (k == 13)</li>
+<li><strong>Example:</strong><pre class="hljs"><code>k = getKey();
+<span class="hljs-keyword">if</span> (k == <span class="hljs-number">13</span>) { print(<span class="hljs-string">&quot;Enter pressed&quot;</span>); }
+</code></pre>
+</li>
 </ul>
 <h3 id="gettouch"><code>getTouch()</code></h3>
 <p>Retrieves the scroll vector direction from the hardware touch sensor.</p>
 <ul>
 <li><strong>Parameters:</strong> None.</li>
 <li><strong>Returns:</strong> (Int) The directional scroll vector.</li>
-<li><strong>Example:</strong><br>
-scrollDir = getTouch();</li>
+<li><strong>Example:</strong><pre class="hljs"><code>scrollDir = getTouch();
+</code></pre>
+</li>
 </ul>
 <h3 id="getbattery"><code>getBattery()</code></h3>
 <p>Retrieves the raw integer state of the battery monitor.</p>
 <ul>
 <li><strong>Parameters:</strong> None.</li>
 <li><strong>Returns:</strong> (Int) Battery state enum/integer.</li>
-<li><strong>Example:</strong><br>
-state = getBattery();</li>
+<li><strong>Example:</strong><pre class="hljs"><code>state = getBattery();
+</code></pre>
+</li>
 </ul>
 <h3 id="getbatteryvoltage"><code>getBatteryVoltage()</code></h3>
 <p>Retrieves the live battery voltage reading.</p>
 <ul>
 <li><strong>Parameters:</strong> None.</li>
 <li><strong>Returns:</strong> (Float) Battery voltage.</li>
-<li><strong>Example:</strong><br>
-volts = getBatteryVoltage();</li>
+<li><strong>Example:</strong><pre class="hljs"><code>volts = getBatteryVoltage();
+</code></pre>
+</li>
 </ul>
 <h3 id="setcpuspeedfreq"><code>setCpuSpeed(freq)</code></h3>
 <p>Dynamically scales the CPU frequency.</p>
 <ul>
 <li><strong>Parameters:</strong> <code>freq</code> (Int) - Target frequency in MHz.</li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-setCpuSpeed(80);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>setCpuSpeed(<span class="hljs-number">80</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="sleep"><code>sleep()</code></h3>
 <p>Triggers the device to enter deep sleep immediately.</p>
 <ul>
 <li><strong>Parameters:</strong> None.</li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-sleep();</li>
+<li><strong>Example:</strong><pre class="hljs"><code>sleep();
+</code></pre>
+</li>
 </ul>
 <h3 id="gettime"><code>getTime()</code></h3>
 <p>Gets the current system RTC time.</p>
 <ul>
 <li><strong>Parameters:</strong> None.</li>
 <li><strong>Returns:</strong> (String) Formatted time string <code>HH:MM:SS</code>.</li>
-<li><strong>Example:</strong><br>
-t = getTime();</li>
+<li><strong>Example:</strong><pre class="hljs"><code>t = getTime();
+</code></pre>
+</li>
 </ul>
 <h3 id="getdate"><code>getDate()</code></h3>
 <p>Gets the current system RTC date.</p>
 <ul>
 <li><strong>Parameters:</strong> None.</li>
 <li><strong>Returns:</strong> (String) Formatted date string <code>YYYY-MM-DD</code>.</li>
-<li><strong>Example:</strong><br>
-d = getDate();</li>
+<li><strong>Example:</strong><pre class="hljs"><code>d = getDate();
+</code></pre>
+</li>
 </ul>
 <hr>
 <h2 id="5-filesystem-sd-card">5. Filesystem (SD Card)</h2>
@@ -574,8 +601,9 @@ d = getDate();</li>
 <ul>
 <li><strong>Parameters:</strong> <code>path</code> (String) - Absolute path to the file.</li>
 <li><strong>Returns:</strong> (String) File contents.</li>
-<li><strong>Example:</strong><br>
-data = readFile(“/data/config.txt”);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>data = readFile(<span class="hljs-string">&quot;/data/config.txt&quot;</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="writefilepath-content"><code>writeFile(path, content)</code></h3>
 <p>Writes a string to a file on the SD card. Overwrites existing files.</p>
@@ -587,8 +615,9 @@ data = readFile(“/data/config.txt”);</li>
 </ul>
 </li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-writeFile(“/data/log.txt”, “Event recorded”);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>writeFile(<span class="hljs-string">&quot;/data/log.txt&quot;</span>, <span class="hljs-string">&quot;Event recorded&quot;</span>);
+</code></pre>
+</li>
 </ul>
 <hr>
 <h2 id="6-general-helpers">6. General Helpers</h2>
@@ -597,16 +626,18 @@ writeFile(“/data/log.txt”, “Event recorded”);</li>
 <ul>
 <li><strong>Parameters:</strong> <code>ms</code> (Int) - Milliseconds to wait.</li>
 <li><strong>Returns:</strong> None.</li>
-<li><strong>Example:</strong><br>
-delay(500);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>delay(<span class="hljs-number">500</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="tointstring"><code>toInt(string)</code></h3>
 <p>Converts a string representation of a number into an integer.</p>
 <ul>
 <li><strong>Parameters:</strong> <code>string</code> (String) - The numeric string.</li>
 <li><strong>Returns:</strong> (Int) The parsed integer value.</li>
-<li><strong>Example:</strong><br>
-val = toInt(“1024”);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>val = toInt(<span class="hljs-string">&quot;1024&quot;</span>);
+</code></pre>
+</li>
 </ul>
 <h3 id="randommin-max"><code>random(min, max)</code></h3>
 <p>Generates a pseudo-random integer within a specific range.</p>
@@ -618,8 +649,9 @@ val = toInt(“1024”);</li>
 </ul>
 </li>
 <li><strong>Returns:</strong> (Int) Random number between min and max (inclusive).</li>
-<li><strong>Example:</strong><br>
-diceRoll = random(1, 6);</li>
+<li><strong>Example:</strong><pre class="hljs"><code>diceRoll = random(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>);
+</code></pre>
+</li>
 </ul>
 
 
