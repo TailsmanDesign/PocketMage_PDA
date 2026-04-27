@@ -1,5 +1,6 @@
 // AUDIT 1
 #include <globals.h>
+#include <map>
 
 #if !OTA_APP // PocketMage OS Only
 #include "wrench.h"
@@ -53,7 +54,44 @@ static ulong currentPotionLine = 0;
 static std::vector<String> potionLines;
 static long lastInput = millis();
 
+// Command Links
+static std::map<String, String> potLinks;
+static bool potLinksLoaded = false;
+
 // Functions
+
+void loadPotLinks() {
+  potLinks.clear();
+  if (!global_fs->exists("/sys/pot_links.txt")) return;
+  
+  File f = global_fs->open("/sys/pot_links.txt", FILE_READ);
+  if (!f) return;
+  
+  while (f.available()) {
+    String line = f.readStringUntil('\n');
+    line.trim();
+    int comma = line.indexOf(',');
+    if (comma != -1) {
+      String alias = line.substring(0, comma);
+      String path = line.substring(comma + 1);
+      potLinks[alias] = path;
+    }
+  }
+  f.close();
+  potLinksLoaded = true;
+}
+
+void savePotLinks() {
+  if (!global_fs->exists("/sys")) global_fs->mkdir("/sys");
+  File f = global_fs->open("/sys/pot_links.txt", FILE_WRITE);
+  if (!f) return;
+  
+  for (auto const& x : potLinks) {
+    f.println(x.first + "," + x.second);
+  }
+  f.close();
+}
+
 #pragma region POTION
 void potionScrollPreview() {
   u8g2.clearBuffer();
@@ -280,17 +318,19 @@ void funcSelect(String command) {
   // Help
   else if (command == "help") {
     terminalOutputs.push_back("Available commands:");
-    terminalOutputs.push_back("ls                  List dir");
-    terminalOutputs.push_back("cd <dir>          Change dir");
-    terminalOutputs.push_back("rm <file>        Remove file");
-    terminalOutputs.push_back("rm -r <dir>       Remove dir");
+    terminalOutputs.push_back("ls                 List dir");
+    terminalOutputs.push_back("cd <dir>           Change dir");
+    terminalOutputs.push_back("rm <file>         Remove file");
+    terminalOutputs.push_back("rm -r <dir>        Remove dir");
     terminalOutputs.push_back("cp <src> <dest>    Copy file");
     terminalOutputs.push_back("mv <src> <dest>  Move/rename");
-    terminalOutputs.push_back("touch <file>     Create file");
-    terminalOutputs.push_back("clear         Clear terminal");
-    terminalOutputs.push_back("txt <file>       Open in TXT");
-    terminalOutputs.push_back("potion/pot <file>  Edit prgm");
-    terminalOutputs.push_back("brew <file>         Run prgm");
+    terminalOutputs.push_back("touch <file>      Create file");
+    terminalOutputs.push_back("clear          Clear terminal");
+    terminalOutputs.push_back("txt <file>        Open in TXT");
+    terminalOutputs.push_back("potion/pot <file>   Edit prgm");
+    terminalOutputs.push_back("brew <file>          Run prgm");
+    terminalOutputs.push_back("pot link <file> <alias>");
+    terminalOutputs.push_back("pot unlink <alias>");
 
     newState = true;
     return;
@@ -711,6 +751,73 @@ void funcSelect(String command) {
     return;
   }
 
+  // Link Program
+  else if (command.startsWith("pot link ")) {
+    pocketmage::setCpuSpeed(240);
+
+    String args = command.substring(9);
+    args.trim();
+
+    int spaceIdx = args.indexOf(' ');
+    if (spaceIdx == -1) {
+      returnText = "Usage: pot link <file> <alias>";
+    } else {
+      String fileArg = args.substring(0, spaceIdx);
+      String aliasArg = args.substring(spaceIdx + 1);
+      fileArg.trim();
+      aliasArg.trim();
+
+      // Compute full path for file
+      String filePath = fileArg.startsWith("/") ? fileArg : (currentDir + (currentDir.endsWith("/") ? "" : "/") + fileArg);
+      
+      // Ensure .c extension if none provided
+      if (!filePath.endsWith(".c")) {
+        int dotIdx = fileArg.lastIndexOf('.');
+        if (dotIdx == -1) filePath += ".c";
+      }
+
+      if (!global_fs->exists(filePath)) {
+        returnText = "File not found";
+      } else {
+        potLinks[aliasArg] = filePath;
+        savePotLinks();
+        returnText = "Linked " + aliasArg + " -> " + fileArg;
+      }
+    }
+
+    pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+    if (returnText != "") {
+      terminalOutputs.push_back(returnText);
+      OLED().sysMessage(returnText, 1000);
+    }
+    newState = true;
+    return;
+  }
+
+  // Unlink Program
+  else if (command.startsWith("pot unlink ")) {
+    pocketmage::setCpuSpeed(240);
+    
+    String aliasArg = command.substring(11);
+    aliasArg.trim();
+
+    if (potLinks.count(aliasArg)) {
+      potLinks.erase(aliasArg);
+      savePotLinks();
+      returnText = "Unlinked " + aliasArg;
+    } else {
+      returnText = "Link not found";
+    }
+
+    pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+    if (returnText != "") {
+      terminalOutputs.push_back(returnText);
+      OLED().sysMessage(returnText, 1000);
+    }
+    newState = true;
+    return;
+  }
+
   // Open in potion
   else if (command.startsWith("potion") || command.startsWith("pot")) {
     pocketmage::setCpuSpeed(240);
@@ -825,6 +932,34 @@ void funcSelect(String command) {
     if (returnText != "") {
       terminalOutputs.push_back(returnText);
       OLED().sysMessage(returnText,1000);
+    }
+    newState = true;
+    return;
+  }
+
+  // Check whether command is a linked alias
+  if (potLinks.count(command)) {
+    pocketmage::setCpuSpeed(240);
+    String filePath = potLinks[command];
+
+    if (!global_fs->exists(filePath)) {
+      returnText = "Linked file missing";
+    } else {
+      const char* wrenchCode = readCFile(filePath);
+      if (wrenchCode) {
+        compileWrench(wrenchCode);
+        free((void*)wrenchCode);
+      } else {
+        returnText = "Failed to read linked file";
+      }
+      pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+      return;
+    }
+
+    pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
+    if (returnText != "") {
+      terminalOutputs.push_back(returnText);
+      OLED().sysMessage(returnText, 1000);
     }
     newState = true;
     return;
@@ -1262,6 +1397,7 @@ void TERMINAL_INIT() {
   CurrentTERMfunc = PROMPT;
   potionLines.push_back("");
   KB().setKeyboardState(NORMAL);
+  if (!potLinksLoaded) loadPotLinks();
   newState = true;
 }
 
