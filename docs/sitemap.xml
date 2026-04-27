@@ -26,6 +26,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/fullPotionCommandList/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
