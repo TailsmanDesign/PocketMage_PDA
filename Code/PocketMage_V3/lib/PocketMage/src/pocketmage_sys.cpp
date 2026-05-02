@@ -21,6 +21,7 @@
 #include "esp_partition.h"
 #include "esp_system.h"
 #include "esp_task_wdt.h"
+#include "driver/gpio.h"
 
 static constexpr const char* TAG = "SYSTEM";
 
@@ -370,6 +371,29 @@ void PocketMage_INIT() {
 }
 
 void setLoadSwitch(bool state) {
+  if (!state) {
+    int isolation_pins[] = {SPI_MOSI, SPI_SCK, OLED_CS, OLED_DC, OLED_RST, 
+                            EPD_CS, EPD_DC, EPD_RST, EPD_BUSY, SD_CLK, 
+                            SD_CMD, SD_D0, SD_D1, SD_D2, SD_D3, 
+                            I2C_SCL, I2C_SDA, USB_MUX_PIN, BZ_PIN};
+
+    for (int p : isolation_pins) {
+      // Set to high-Z
+      pinMode(p, INPUT);
+      // Disable internal pull-ups/pull-downs explicitly
+      gpio_pullup_dis((gpio_num_t)p);
+      gpio_pulldown_dis((gpio_num_t)p);
+      // Tell the ESP32 to FREEZE this pin's state during deep sleep
+      gpio_hold_en((gpio_num_t)p); 
+    }
+    
+    // Enable global deep sleep isolation
+    gpio_deep_sleep_hold_en();
+  } else {
+    // If turning back on, you would need to unhold them:
+    // gpio_hold_dis(...) 
+  }
+
   digitalWrite(LOAD_SWITCH, state);
 }
 
