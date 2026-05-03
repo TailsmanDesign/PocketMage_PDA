@@ -21,6 +21,7 @@
 #include "esp_partition.h"
 #include "esp_system.h"
 #include "esp_task_wdt.h"
+#include "driver/rtc_io.h"
 #include "driver/gpio.h"
 
 static constexpr const char* TAG = "SYSTEM";
@@ -266,6 +267,24 @@ void hardReset(void* parameter) {
 }
 
 void PocketMage_INIT() {
+  // Release any held GPIOs
+  gpio_deep_sleep_hold_dis();
+
+  int isolation_pins[] = {SPI_MOSI, SPI_SCK, OLED_CS, OLED_DC, OLED_RST, 
+                          EPD_CS, EPD_DC, EPD_RST, EPD_BUSY, SD_CLK, 
+                          SD_CMD, SD_D0, SD_D1, SD_D2, SD_D3, 
+                          I2C_SCL, I2C_SDA, USB_MUX_PIN, BZ_PIN, LOAD_SWITCH};
+
+  for (int p : isolation_pins) {
+    gpio_hold_dis((gpio_num_t)p);
+    
+    // If the pin is 0-21, it is an RTC pin on the S3. 
+    // We must release the RTC lock as well to be safe.
+    if (p <= 21) {
+      rtc_gpio_hold_dis((gpio_num_t)p);
+    }
+  }
+
   // Enable peripherals (prod only)
   #if POCKETMAGE_HW_VERSION == 2
     pinMode(LOAD_SWITCH, OUTPUT);

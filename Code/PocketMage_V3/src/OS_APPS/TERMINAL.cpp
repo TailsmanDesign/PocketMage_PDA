@@ -278,10 +278,10 @@ void updateTerminalDisp() {
 
   // Draw Terminal Scrollbar
   if (maxScroll > 0) {
-    int barWidth = 4;
-    int barX = display.width() - barWidth;
+    int barWidth = 3;
+    int barX = display.width() - barWidth - 1;
     
-    display.drawFastVLine(barX + (barWidth / 2), 0, display.height(), GxEPD_WHITE);
+    //display.drawFastVLine(barX + (barWidth / 2), 0, display.height(), GxEPD_WHITE);
     
     float visibleRatio = 14.0 / terminalOutputs.size();
     int handleHeight = max((int)(display.height() * visibleRatio), 15);
@@ -290,6 +290,10 @@ void updateTerminalDisp() {
     int handleY = scrollFraction * (display.height() - handleHeight);
     
     display.fillRect(barX, handleY, barWidth, handleHeight, GxEPD_WHITE);
+
+    // Ensure bar never visually touches top/bottom edges
+    display.drawFastHLine(barX, display.height()-1,barWidth, GxEPD_BLACK);
+    display.drawFastHLine(barX, 0,barWidth, GxEPD_BLACK);
   }
 
   display.setTextColor(GxEPD_BLACK);
