@@ -31,11 +31,13 @@ static inline uint8_t mapUnicodeToFontIndex(uint16_t unicode) {
   return 0x7F; // Replacement char
 }
 
-static void printUTF8ToEink(const String& s) {
+static void printUTF8ToEink(const String& s, int maxChars = 9999) {
   uint16_t i = 0;
-  while (i < s.length()) {
+  int charCount = 0;
+  while (i < s.length() && charCount < maxChars) {
     uint16_t unicode = decodeUTF8(s.c_str(), &i, s.length());
     display.write(mapUnicodeToFontIndex(unicode));
+    charCount++;
   }
 }
 
@@ -135,7 +137,11 @@ void terminalScrollPreview() {
     }
 
     u8g2.setFont(u8g2_font_5x7_tf);
-    u8g2.drawUTF8(6, y, terminalOutputs[i].c_str());
+    
+    // Truncate preview for OLED
+    String dispStr = terminalOutputs[i];
+    if (dispStr.length() > 21) dispStr = dispStr.substring(0, 21);
+    u8g2.drawUTF8(6, y, dispStr.c_str());
 
     y += 8;
   }
@@ -281,7 +287,7 @@ void updateTerminalDisp() {
     if (termLargeFont) display.setFont(&FreeMonoBold9pt7b);
     else display.setFont(&Font5x7Fixed);
     display.setCursor(5, y);
-    printUTF8ToEink(s);
+    printUTF8ToEink(s, termMaxLineLen); // Use the length limiter inside our renderer
     y += yStep;
   }
 
@@ -339,8 +345,6 @@ void funcSelect(String command) {
   String returnText = "";
 
   String totalMsg = currentDir + ">" + command;
-  if (totalMsg.length() > termMaxLineLen)
-    totalMsg = totalMsg.substring(0, termMaxLineLen);
   terminalOutputs.push_back(totalMsg);
 
   command.toLowerCase();
@@ -457,8 +461,7 @@ void funcSelect(String command) {
             lineOutput += " * ";
             lineOutput += String(file.size()) + "b";
           }
-          if (lineOutput.length() > termMaxLineLen)
-            lineOutput = lineOutput.substring(0, termMaxLineLen);
+
           terminalOutputs.push_back(lineOutput);
 
           lineOutput = "";
@@ -998,6 +1001,12 @@ void funcSelect(String command) {
       returnText = "Usage: setfont <l/s>";
     }
 
+    if (returnText.startsWith("Font")) {
+      prefs.begin("PocketMage", false);
+      prefs.putBool("termLargeFont", termLargeFont);
+      prefs.end();
+    }
+
     if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
     if (returnText != "") {
       terminalOutputs.push_back(returnText);
@@ -1021,6 +1030,12 @@ void funcSelect(String command) {
       returnText = "Theme set to Dark";
     } else {
       returnText = "Usage: theme <light/dark>";
+    }
+
+    if (returnText.startsWith("Theme")) {
+      prefs.begin("PocketMage", false);
+      prefs.putBool("termDarkTheme", termDarkTheme);
+      prefs.end();
     }
 
     if (SAVE_POWER) pocketmage::setCpuSpeed(POWER_SAVE_FREQ);
@@ -1481,8 +1496,7 @@ void compileWrench(const char* wrenchCode) {
           len--;
         }
 
-        int outLen = (len > termMaxLineLen) ? termMaxLineLen : len;
-        terminalOutputs.push_back(String(lineStart).substring(0, outLen));
+        terminalOutputs.push_back(String(lineStart).substring(0, len));
 
         lineStart = p + 1;
       }
@@ -1491,8 +1505,7 @@ void compileWrench(const char* wrenchCode) {
 
     if (lineStart != p) {
       int len = p - lineStart;
-      int outLen = (len > termMaxLineLen) ? termMaxLineLen : len;
-      terminalOutputs.push_back(String(lineStart).substring(0, outLen));
+      terminalOutputs.push_back(String(lineStart).substring(0, len));
     }
   }
 
@@ -1509,6 +1522,19 @@ void TERMINAL_INIT() {
   potionLines.clear();
   potionLines.push_back("");
   terminalCommand = "";
+  
+  prefs.begin("PocketMage", true);
+  termLargeFont = prefs.getBool("termLargeFont", true);
+  termDarkTheme = prefs.getBool("termDarkTheme", true);
+  prefs.end();
+
+  if (termLargeFont) {
+    termLinesPerPage = 14;
+    termMaxLineLen = 28;
+  } else {
+    termLinesPerPage = 23;
+    termMaxLineLen = 52;
+  }
   
   if (terminalOutputs.size() > termLinesPerPage) {
       termScrollIndex = (ulong)(terminalOutputs.size() - termLinesPerPage);
