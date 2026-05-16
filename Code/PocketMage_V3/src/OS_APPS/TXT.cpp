@@ -4,7 +4,7 @@
 //       888          `8888'          888       //
 //       888         .8PY888.         888       //
 //       888        d8'  `888b        888       //
-//      o888o      o888o  o88888o      o888o      //
+//      o888o      o888o  o88888o      o888o    //
 
 #include <globals.h>
 #if !OTA_APP  // POCKETMAGE_OS
