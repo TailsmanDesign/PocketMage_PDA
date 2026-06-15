@@ -24,9 +24,9 @@
 
 // Full refresh after N partial refreshes (CHANGE WITH CAUTION)
 #if POCKETMAGE_HW_VERSION == 2
-  #define FULL_REFRESH_AFTER 10 // Prod uses N=10                    
+  #define FULL_REFRESH_AFTER 3  // Prod: slow refresh every 3 pages
 #else
-  #define FULL_REFRESH_AFTER 5  // Beta needs N=5
+  #define FULL_REFRESH_AFTER 2  // Beta: slow refresh every 2 pages
 #endif
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////|
 

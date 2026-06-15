@@ -42,7 +42,6 @@ void PocketmageEink::refresh() {
 
   display_.setFullWindow();
   display_.fillScreen(GxEPD_WHITE);
-  display_.hibernate();
 }
 
 void PocketmageEink::multiPassRefresh(int passes) {
