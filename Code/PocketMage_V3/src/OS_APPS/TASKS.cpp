@@ -23,9 +23,12 @@ String newTaskName = "";
 String newTaskDueDate = "";
 uint8_t selectedTask = 0;
 
+static ulong taskScrollIndex = 0; // State for task list scrolling
+
 void TASKS_INIT() {
   CurrentAppState = TASKS;
   CurrentTasksState = TASKS0;
+  taskScrollIndex = 0;
   
   updateTaskArray();
   sortTasksByDueDate(tasks);
@@ -167,12 +170,62 @@ String convertDateFormat(String yyyymmdd) {
   return month + "/" + day + "/" + year;
 }
 
+void tasksScrollPreview() {
+  u8g2.clearBuffer();
+  u8g2.setDrawColor(1);
+
+  int startLine = 0;
+  if (taskScrollIndex >= 1) {
+    startLine = taskScrollIndex - 1;
+  }
+
+  int y = 7; 
+  for (int i = startLine; i < startLine + 4; i++) {
+    if (i >= (int)tasks.size()) {
+      break;
+    }
+
+    if (i == (int)taskScrollIndex) {
+      u8g2.drawTriangle(0, y - 6, 0, y, 4, y - 3);
+    }
+
+    u8g2.setFont(u8g2_font_5x7_tf);
+    
+    String tName = tasks[i][0];
+    String tDate = convertDateFormat(tasks[i][1]);
+    String dispStr = tName + " " + tDate;
+    
+    // OLED is ~128px wide. 21 characters in 5x7 fits perfectly.
+    if (dispStr.length() > 21) {
+       // Protect the date (8 chars + 1 space = 9 chars). Truncate task name.
+       if (tName.length() > 10) {
+          tName = tName.substring(0, 10) + "..";
+       }
+       dispStr = tName + " " + tDate;
+    }
+    
+    u8g2.drawUTF8(6, y, dispStr.c_str());
+
+    y += 8;
+  }
+
+  u8g2.sendBuffer();
+}
+
 void processKB_TASKS() {
   OLED().setPowerSave(false);
   int currentMillis = millis();
   disableTimeout = false;
   char inchar = 0;
   String input = "";
+
+  // Handle hardware scrollbar slider
+  if (CurrentTasksState == TASKS0 || CurrentTasksState == TASKS0_NEWTASK) {
+    int maxScroll = tasks.size() > MAX_FILES ? tasks.size() - MAX_FILES : 0;
+    if (TOUCH().updateScroll(maxScroll, taskScrollIndex)) {
+      newState = true;
+    }
+  }
 
   switch (CurrentTasksState) {
     case TASKS0:
@@ -202,9 +255,12 @@ void processKB_TASKS() {
           else if (inchar >= '0' && inchar <= '9') {
             int taskIndex = (inchar == '0') ? 9 : (inchar - '1');  
 
+            // Add the scroll offset so pressing 1 selects the first *visible* task
+            int actualTaskIndex = taskScrollIndex + taskIndex;
+
             // SET SELECTED TASK
-            if (taskIndex < tasks.size()) {
-              selectedTask = taskIndex;
+            if (actualTaskIndex < tasks.size()) {
+              selectedTask = actualTaskIndex;
               // GO TO TASKS1
               CurrentTasksState = TASKS1;
               editTaskState = 0;
@@ -219,7 +275,11 @@ void processKB_TASKS() {
       if (currentMillis - OLEDFPSMillis >= (1000/OLED_MAX_FPS)) {
         OLEDFPSMillis = currentMillis;
         if (CurrentTasksState == TASKS0) { // Make sure we didn't just jump to another menu
-          OLED().oledWord(currentWord);
+          if (TOUCH().getLastTouch() == -1) {
+            OLED().oledWord(currentWord);
+          } else {
+            tasksScrollPreview();
+          }
         }
       }
       break;
@@ -373,17 +433,48 @@ void einkHandler_TASKS() {
           ESP_LOGV(TAG, "Printing Tasks");
           EINK().drawStatusBar("Select (1-0),New Task (N)");
 
-          int loopCount = std::min((int)tasks.size(), MAX_FILES);
-          for (int i = 0; i < loopCount; i++) {
-            display.setFont(&FreeSerif9pt7b);
+          int maxScroll = tasks.size() > MAX_FILES ? tasks.size() - MAX_FILES : 0;
+          if (taskScrollIndex > maxScroll) taskScrollIndex = maxScroll;
+
+          int startIdx = taskScrollIndex;
+          int endIdx = std::min((int)tasks.size(), startIdx + MAX_FILES);
+          int displayRow = 0;
+
+          display.setFont(&FreeSerif9pt7b);
+          for (int i = startIdx; i < endIdx; i++) {
+            
+            // Dynamic Truncation Calculation (Max 198px width)
+            String tName = tasks[i][0];
+            int16_t x1, y1; uint16_t w, h;
+            display.getTextBounds(tName, 0, 0, &x1, &y1, &w, &h);
+            
+            if (w > 192) { // 227-29 = 198px, using 192px to allow room for ".."
+              while (w > 180 && tName.length() > 0) {
+                tName.remove(tName.length() - 1);
+                display.getTextBounds(tName, 0, 0, &x1, &y1, &w, &h);
+              }
+              tName += "..";
+            }
+
             // PRINT TASK NAME
-            display.setCursor(29, 54 + (17 * i));
-            display.print(tasks[i][0].c_str());
+            display.setCursor(29, 54 + (17 * displayRow));
+            display.print(tName.c_str());
+            
             // PRINT TASK DUE DATE
-            display.setCursor(231, 54 + (17 * i));
+            display.setCursor(231, 54 + (17 * displayRow));
             display.print(convertDateFormat(tasks[i][1]).c_str());
 
-            ESP_LOGI("TASKS", "%s, %s", tasks[i][0].c_str(), convertDateFormat(tasks[i][1]).c_str()); 
+            displayRow++;
+          }
+
+          // DRAW SCROLLBAR
+          if (maxScroll > 0) {
+            float visibleRatio = (float)MAX_FILES / tasks.size();
+            int handleHeight = max((int)(174 * visibleRatio), 15);
+            float scrollFraction = (float)taskScrollIndex / maxScroll;
+            int handleY = 38 + scrollFraction * (174 - handleHeight);
+            
+            display.fillRect(311, handleY, 3, handleHeight, GxEPD_BLACK);
           }
         }
         else EINK().drawStatusBar("No Tasks! Add New Task (N)");
@@ -403,17 +494,48 @@ void einkHandler_TASKS() {
         if (!tasks.empty()) {
           ESP_LOGV(TAG, "Printing Tasks");
 
-          int loopCount = std::min((int)tasks.size(), MAX_FILES);
-          for (int i = 0; i < loopCount; i++) {
-            display.setFont(&FreeSerif9pt7b);
+          int maxScroll = tasks.size() > MAX_FILES ? tasks.size() - MAX_FILES : 0;
+          if (taskScrollIndex > maxScroll) taskScrollIndex = maxScroll;
+
+          int startIdx = taskScrollIndex;
+          int endIdx = std::min((int)tasks.size(), startIdx + MAX_FILES);
+          int displayRow = 0;
+
+          display.setFont(&FreeSerif9pt7b);
+          for (int i = startIdx; i < endIdx; i++) {
+            
+            // Dynamic Truncation Calculation (Max 198px width)
+            String tName = tasks[i][0];
+            int16_t x1, y1; uint16_t w, h;
+            display.getTextBounds(tName, 0, 0, &x1, &y1, &w, &h);
+            
+            if (w > 192) { // 227-29 = 198px, using 192px to allow room for ".."
+              while (w > 180 && tName.length() > 0) {
+                tName.remove(tName.length() - 1);
+                display.getTextBounds(tName, 0, 0, &x1, &y1, &w, &h);
+              }
+              tName += "..";
+            }
+
             // PRINT TASK NAME
-            display.setCursor(29, 54 + (17 * i));
-            display.print(tasks[i][0].c_str());
+            display.setCursor(29, 54 + (17 * displayRow));
+            display.print(tName.c_str());
+            
             // PRINT TASK DUE DATE
-            display.setCursor(231, 54 + (17 * i));
+            display.setCursor(231, 54 + (17 * displayRow));
             display.print(convertDateFormat(tasks[i][1]).c_str());
 
-            ESP_LOGI("TASKS", "%s, %s", tasks[i][0].c_str(), convertDateFormat(tasks[i][1]).c_str()); 
+            displayRow++;
+          }
+
+          // DRAW SCROLLBAR
+          if (maxScroll > 0) {
+            float visibleRatio = (float)MAX_FILES / tasks.size();
+            int handleHeight = max((int)(174 * visibleRatio), 15);
+            float scrollFraction = (float)taskScrollIndex / maxScroll;
+            int handleY = 38 + scrollFraction * (174 - handleHeight);
+            
+            display.fillRect(311, handleY, 3, handleHeight, GxEPD_BLACK);
           }
         }
         
