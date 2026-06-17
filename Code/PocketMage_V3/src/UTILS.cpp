@@ -428,6 +428,8 @@ String textPrompt(String promptText, String prefix) {
           }
         }
         else if (inchar == 20) {
+          currentLine = "_CENTER_";
+          break;
         }
         else if (inchar == 28) {
           cursor_pos = 0;

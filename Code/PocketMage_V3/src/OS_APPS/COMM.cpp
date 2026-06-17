@@ -3,6 +3,7 @@
 #include <globals.h>
 #include <WiFi.h>
 #include <esp_wifi.h>
+#include <vector>
 
 extern "C" {
   #include "mesh_now.h"
@@ -13,15 +14,17 @@ static constexpr const char* TAG = "COMM";
 
 // CONFIG
 #define MAX_CHAT_MSGS 50
-#define MAX_INPUT_LEN 120
-#define MAX_VISIBLE_LINES 18
+#define BUBBLE_MAX_CHARS 46
+#define MAX_VISIBLE_LINES 10
 
 // TYPES
-enum CommState { PEER_LIST, CHAT_VIEW, CHAT_COMPOSE };
+enum CommState { PEER_LIST, CHAT_VIEW };
 enum ChatMode { LOCAL_CHAT, DIRECT_CHAT };
 
 struct ChatMsg {
   uint32_t timestamp;
+  uint8_t hr;
+  uint8_t mn;
   char sender[18];
   char content[128];
   bool sentByLocal;
@@ -34,18 +37,24 @@ static ChatMode chatMode = LOCAL_CHAT;
 
 static ChatMsg msgs[MAX_CHAT_MSGS];
 static int msgCount = 0;
-static int scrollOff = 0;
 static bool autoScroll = true;
-
-static char inputBuf[MAX_INPUT_LEN + 1];
-static int inputLen = 0;
 
 static uint8_t myMAC[6];
 static char myMacStr[18] = "00:00:00:00:00:00";
 static uint8_t peerMAC[6];
 static char peerMacStr[18] = "00:00:00:00:00:00";
 static int selPeer = 0;
+static int prevSelPeer = 0;
 static bool comm_first_draw = true;
+static int last_peer_count = -1;
+
+// UI FLAGS
+static bool cursor_moved = false;
+
+// CHAT INPUT STATE
+static String chatInputBuffer = "";
+static int chatCursorPos = 0;
+static ulong chatScrollIndex = 0;
 
 // MAC HELPERS
 static void macToStr(const uint8_t* m, char* out) {
@@ -57,6 +66,33 @@ static String displayName(const char* mac) {
   if (strcmp(mac, myMacStr) == 0) return "Me";
   if (strcmp(mac, "00:1A:2B:3C:4D:5E") == 0) return "Chris";
   return String(mac);
+}
+
+// TEXT WRAPPER
+static std::vector<String> wrapText(String text, int maxLineChars) {
+  std::vector<String> lines;
+  while (text.length() > maxLineChars) {
+    int split = -1;
+    // Look backwards for a space or hyphen to split cleanly
+    for (int i = maxLineChars; i >= 0; i--) {
+      if (text[i] == ' ' || text[i] == '-') {
+        split = i + 1; 
+        break;
+      }
+    }
+    if (split == -1) split = maxLineChars; // Force split if one giant word
+    
+    String line = text.substring(0, split);
+    line.trim();
+    lines.push_back(line);
+    text = text.substring(split);
+    text.trim();
+  }
+  if (text.length() > 0) {
+    text.trim();
+    if(text.length() > 0) lines.push_back(text);
+  }
+  return lines;
 }
 
 // SD LOGGING
@@ -87,7 +123,6 @@ static void addMsg(const char* sender, const char* content, bool local) {
     int mv = MAX_CHAT_MSGS - 1;
     memmove(&msgs[0], &msgs[1], mv * sizeof(ChatMsg));
     msgCount = mv;
-    if (scrollOff > 0) scrollOff--;
   }
   ChatMsg* m = &msgs[msgCount++];
   strncpy(m->sender, sender, sizeof(m->sender));
@@ -95,42 +130,32 @@ static void addMsg(const char* sender, const char* content, bool local) {
   strncpy(m->content, content, sizeof(m->content));
   m->content[sizeof(m->content) - 1] = '\0';
   m->sentByLocal = local;
-  m->timestamp = millis() / 1000;
-
-  if (autoScroll) {
-    int vis = msgCount;
-    if (vis > MAX_VISIBLE_LINES) vis = MAX_VISIBLE_LINES;
-    scrollOff = msgCount - vis;
-    if (scrollOff < 0) scrollOff = 0;
-  }
+  
+  DateTime now = CLOCK().nowDT();
+  m->timestamp = now.unixtime();
+  m->hr = now.hour();
+  m->mn = now.minute();
 
   logToSD(m);
-  newState = true;
+  newState = true; // Incoming message forces an E-ink refresh
 }
 
 // MESH-NOW RECEIVE CALLBACK
-// Runs in WiFi task context so must be thread-safe, no blocking
 static void meshRecvCb(const mesh_message_t* msg) {
   if (msg->type != MSG_TYPE_CHAT && msg->type != MSG_TYPE_DIRECT) {
-    ESP_LOGD(TAG, "recvCb: ignored type=%d", msg->type);
     return;
   }
   if (msg->type == MSG_TYPE_DIRECT) {
     if (memcmp(msg->target_mac, myMAC, 6) != 0) {
-      ESP_LOGD(TAG, "recvCb: direct msg not for us");
       return;
     }
   }
-  ESP_LOGI(TAG, "recvCb: type=%d msg='%s'", msg->type, msg->message);
   message_t q{};
   strncpy(q.message, msg->message, sizeof(q.message));
   q.message[sizeof(q.message) - 1] = '\0';
   memcpy(q.sender_mac, msg->sender_mac, 6);
   q.timestamp = msg->timestamp;
-  esp_err_t qret = message_queue_send(&q);
-  if (qret != ESP_OK) {
-    ESP_LOGE(TAG, "recvCb: queue_send failed");
-  }
+  message_queue_send(&q);
 }
 
 // INIT
@@ -140,9 +165,14 @@ void COMM_INIT() {
   currentState = PEER_LIST;
   chatMode = LOCAL_CHAT;
   msgCount = 0;
-  scrollOff = 0;
   autoScroll = true;
   selPeer = 0;
+  prevSelPeer = 0;
+  cursor_moved = false;
+  chatInputBuffer = "";
+  chatCursorPos = 0;
+  chatScrollIndex = 0;
+  last_peer_count = -1;
   newState = true;
 
   comm_first_draw = true;
@@ -154,26 +184,16 @@ void COMM_INIT() {
 
   WiFi.mode(WIFI_AP_STA);
   esp_wifi_set_ps(WIFI_PS_NONE);
-
-  // Set WiFi channel to match Mesh-NOW nodes (channel 1)
   esp_wifi_set_channel(1, WIFI_SECOND_CHAN_NONE);
 
   esp_read_mac(myMAC, ESP_MAC_WIFI_STA);
   macToStr(myMAC, myMacStr);
-  ESP_LOGI(TAG, "Host MAC: %s", myMacStr);
 
   message_queue_init();
-
   mesh_now_set_receive_callback(meshRecvCb);
-
   mesh_now_deinit();
-  esp_err_t err = mesh_now_init();
-  if (err == ESP_OK) {
+  if (mesh_now_init() == ESP_OK) {
     meshReady = true;
-    ESP_LOGI(TAG, "Mesh-NOW ready");
-    { uint8_t ch; wifi_second_chan_t sc; esp_wifi_get_channel(&ch, &sc); ESP_LOGI(TAG, "WiFi mode=%d channel=%d", WiFi.getMode(), ch); }
-  } else {
-    ESP_LOGE(TAG, "mesh_now_init failed: %s", esp_err_to_name(err));
   }
 }
 
@@ -186,148 +206,242 @@ static void drainQueue() {
     macToStr(q.sender_mac, s);
     bool fromMe = (memcmp(q.sender_mac, myMAC, 6) == 0);
     if (chatMode == LOCAL_CHAT) {
-      if (!fromMe) {
-        ESP_LOGI(TAG, "drain: local from %s '%s'", s, q.message);
-        addMsg(s, q.message, false);
-      }
+      if (!fromMe) addMsg(s, q.message, false);
     } else {
-      if (memcmp(q.sender_mac, peerMAC, 6) == 0) {
-        ESP_LOGI(TAG, "drain: direct from %s '%s'", s, q.message);
-        addMsg(s, q.message, false);
-      }
+      if (memcmp(q.sender_mac, peerMAC, 6) == 0) addMsg(s, q.message, false);
     }
   }
 }
 
+void chatScrollPreview() {
+  u8g2.clearBuffer();
+  u8g2.setDrawColor(1);
+  int startLine = 0;
+  if (chatScrollIndex >= 1) startLine = chatScrollIndex - 1;
+  int y = 7;
+  for (int i = startLine; i < startLine + 4; i++) {
+    if (i >= msgCount) break;
+    if (i == (int)chatScrollIndex) u8g2.drawTriangle(0, y - 6, 0, y, 4, y - 3);
+    u8g2.setFont(u8g2_font_5x7_tf);
+    String dispStr = String(msgs[i].sender) + ": " + String(msgs[i].content);
+    if (dispStr.length() > 38) dispStr = dispStr.substring(0, 38) + "..";
+    u8g2.drawUTF8(6, y, dispStr.c_str());
+    y += 8;
+  }
+  u8g2.sendBuffer();
+}
+
 // KEYBOARD / LOOP
 void processKB_COMM() {
+  drainQueue(); 
+
+  int current_pc = mesh_now_get_peer_count();
+  if (current_pc != last_peer_count) {
+    last_peer_count = current_pc;
+    if (currentState == PEER_LIST) {
+      newState = true;
+    }
+  }
+
   int nowMs = millis();
+
+  // Handle TOUCH scrolling
+  if (currentState == CHAT_VIEW) {
+      int maxScrollIndex = 0;
+      if (msgCount > 0) {
+          int totalH = 0;
+          int top = msgCount - 1;
+          while (top >= 0) {
+              std::vector<String> lines = wrapText(msgs[top].content, BUBBLE_MAX_CHARS);
+              int bH = (lines.size() * 10) + 12 + 10 + 4; 
+              if (totalH + bH > 214) { top++; break; }
+              totalH += bH;
+              if (top == 0) break;
+              top--;
+          }
+          maxScrollIndex = top;
+      }
+      if (TOUCH().updateScroll(maxScrollIndex, chatScrollIndex)) {
+          newState = true;
+          autoScroll = (chatScrollIndex >= maxScrollIndex);
+      }
+  }
 
   if (nowMs - KBBounceMillis >= KB_COOLDOWN) {
     char ch = KB().updateKeypress();
     if (ch != 0) {
       KBBounceMillis = nowMs;
 
-      switch (currentState) {
-        case PEER_LIST: {
-          int totalRooms = 1 + mesh_now_get_peer_count();
-          if (ch == 7 || ch == 29) {
-            if (selPeer > 0) { selPeer--; newState = true; }
-          } else if (ch == 6 || ch == 25 || ch == 30) {
-            if (selPeer < totalRooms - 1) { selPeer++; newState = true; }
-          } else if (ch == 13 || ch == ' ' || ch == 20) {
-            if (selPeer == 0) {
-              chatMode = LOCAL_CHAT;
+      if (currentState == PEER_LIST) {
+        int totalRooms = 1 + mesh_now_get_peer_count();
+        prevSelPeer = selPeer;
+
+        if (ch == 19 || ch == 7 || ch == 29) {
+          if (selPeer > 0) { selPeer--; cursor_moved = true; }
+        } 
+        else if (ch == 21 || ch == 6 || ch == 25 || ch == 30) {
+          if (selPeer < totalRooms - 1) { selPeer++; cursor_moved = true; }
+        } 
+        else if (ch == 13 || ch == ' ' || ch == 20) {
+          chatInputBuffer = "";
+          chatCursorPos = 0;
+          autoScroll = true;
+
+          if (selPeer == 0) {
+            chatMode = LOCAL_CHAT;
+            currentState = CHAT_VIEW;
+            newState = true;
+            OLED().oledWord("Local Chat");
+          } else {
+            mesh_peer_t* peers = mesh_now_get_peers();
+            int pc = mesh_now_get_peer_count();
+            int peerIdx = selPeer - 1;
+            if (pc > 0 && peerIdx < pc) {
+              chatMode = DIRECT_CHAT;
+              memcpy(peerMAC, peers[peerIdx].peer_addr, 6);
+              macToStr(peerMAC, peerMacStr);
               currentState = CHAT_VIEW;
-              OLED().oledWord("Local Chat");
-            } else {
-              mesh_peer_t* peers = mesh_now_get_peers();
-              int pc = mesh_now_get_peer_count();
-              int peerIdx = selPeer - 1;
-              if (pc > 0 && peerIdx < pc) {
-                chatMode = DIRECT_CHAT;
-                memcpy(peerMAC, peers[peerIdx].peer_addr, 6);
-                macToStr(peerMAC, peerMacStr);
-                currentState = CHAT_VIEW;
-                OLED().oledWord(displayName(peerMacStr).c_str());
-              }
+              newState = true;
+              OLED().oledWord(displayName(peerMacStr).c_str());
             }
-            newState = true;
-          } else if (ch == 12 || ch == 8 || ch == 127) {
-            HOME_INIT();
           }
-          break;
+        } 
+        else if (ch == 12 || ch == 8 || ch == 127) {
+          HOME_INIT();
         }
-
-        case CHAT_VIEW: {
-          if (ch == 13 || ch == ' ' || ch == 20) {
-            currentState = CHAT_COMPOSE;
-            inputLen = 0;
-            inputBuf[0] = '\0';
-            newState = true;
-            OLED().oledWord("Type...");
-          } else if (ch == 8 || ch == 127 || ch == 19) {
+      } 
+      else if (currentState == CHAT_VIEW) {
+        if (ch == 13) { 
+            if (chatInputBuffer.length() > 0) {
+                esp_err_t sendRet;
+                if (chatMode == LOCAL_CHAT) sendRet = mesh_now_send_broadcast(chatInputBuffer.c_str());
+                else sendRet = mesh_now_send_direct(peerMAC, chatInputBuffer.c_str());
+                
+                if (sendRet == ESP_OK) {
+                    addMsg(myMacStr, chatInputBuffer.c_str(), true);
+                }
+                chatInputBuffer = "";
+                chatCursorPos = 0;
+                autoScroll = true;
+                newState = true;
+            }
+        }
+        else if (ch == 12) { 
             currentState = PEER_LIST;
+            chatInputBuffer = "";
+            chatCursorPos = 0;
             newState = true;
             OLED().oledWord("Chat");
-          } else if (ch == 12) {
-            HOME_INIT();
-          } else if (ch == 7 || ch == 29) {
-            if (scrollOff > 0) { scrollOff--; autoScroll = false; newState = true; }
-          } else if (ch == 6 || ch == 25 || ch == 30) {
-            int maxOff = msgCount - MAX_VISIBLE_LINES;
-            if (maxOff < 0) maxOff = 0;
-            if (scrollOff < maxOff) { scrollOff++; newState = true; }
-            autoScroll = (scrollOff >= maxOff);
-          }
-          break;
         }
-
-        case CHAT_COMPOSE: {
-          ESP_LOGD(TAG, "COMPOSE: ch=%d inputLen=%d", ch, inputLen);
-          if (ch == 13) {
-            if (inputLen > 0) {
-              inputBuf[inputLen] = '\0';
-              ESP_LOGI(TAG, "SENDING: '%s'", inputBuf);
-              esp_err_t sendRet;
-              if (chatMode == LOCAL_CHAT) sendRet = mesh_now_send_broadcast(inputBuf);
-              else sendRet = mesh_now_send_direct(peerMAC, inputBuf);
-              if (sendRet != ESP_OK) {
-                ESP_LOGE(TAG, "Send failed: %s", esp_err_to_name(sendRet));
-              }
-              addMsg(myMacStr, inputBuf, true);
-              ESP_LOGI(TAG, "addMsg done, msgCount=%d", msgCount);
+        else if (ch == 17) {
+            if (KB().getKeyboardState() == SHIFT || KB().getKeyboardState() == FN_SHIFT) KB().setKeyboardState(NORMAL);
+            else if (KB().getKeyboardState() == FUNC) KB().setKeyboardState(FN_SHIFT);
+            else KB().setKeyboardState(SHIFT);
+        }
+        else if (ch == 18) {
+            if (KB().getKeyboardState() == FUNC || KB().getKeyboardState() == FN_SHIFT) KB().setKeyboardState(NORMAL);
+            else if (KB().getKeyboardState() == SHIFT) KB().setKeyboardState(FN_SHIFT);
+            else KB().setKeyboardState(FUNC);
+        }
+        else if (ch == 8) { 
+            if (chatInputBuffer.length() > 0 && chatCursorPos != 0) {
+                int old_cursor = chatCursorPos;
+                do { chatCursorPos--; } while (chatCursorPos > 0 && (chatInputBuffer[chatCursorPos] & 0xC0) == 0x80);
+                int bytesToDelete = old_cursor - chatCursorPos;
+                chatInputBuffer.remove(chatCursorPos, bytesToDelete);
             }
-            inputLen = 0;
-            inputBuf[0] = '\0';
-            currentState = CHAT_VIEW;
-            newState = true;
-            OLED().oledWord("Chat");
-          } else if (ch == 8 || ch == 127) {
-            if (inputLen > 0) { inputLen--; inputBuf[inputLen] = '\0'; }
-          } else if (ch == 12 || ch == 19) {
-            inputLen = 0;
-            inputBuf[0] = '\0';
-            currentState = CHAT_VIEW;
-            newState = true;
-            OLED().oledWord("Chat");
-          } else if (ch >= 32 && ch <= 126 && inputLen < MAX_INPUT_LEN) {
-            inputBuf[inputLen++] = ch;
-            inputBuf[inputLen] = '\0';
-          }
-          break;
+        }
+        else if (ch == 19) { 
+            if (chatCursorPos > 0) {
+                do { chatCursorPos--; } while (chatCursorPos > 0 && (chatInputBuffer[chatCursorPos] & 0xC0) == 0x80);
+            }
+        }
+        else if (ch == 21) { 
+            if (chatCursorPos < chatInputBuffer.length()) {
+                do { chatCursorPos++; } while (chatCursorPos < chatInputBuffer.length() && (chatInputBuffer[chatCursorPos] & 0xC0) == 0x80);
+            }
+        }
+        else if (ch == 28) { chatCursorPos = 0; KB().setKeyboardState(NORMAL); }
+        else if (ch == 30) { chatCursorPos = chatInputBuffer.length(); KB().setKeyboardState(NORMAL); }
+        else if (ch == 29) { KB().setKeyboardState(NORMAL); }
+        else if (ch == 6) { KB().setKeyboardState(NORMAL); }
+        else if (ch == 7) { chatInputBuffer = ""; chatCursorPos = 0; KB().setKeyboardState(NORMAL); }
+        else if (ch == 24 || ch == 25 || ch == 26) { KB().setKeyboardState(NORMAL); }
+        else if (ch == 9 || ch == 14) { KB().setKeyboardState(NORMAL); } 
+        else if (ch == 20 || ch == 23) {} 
+        else { 
+            if (chatCursorPos == 0) {
+                chatInputBuffer = ch + chatInputBuffer;
+            } else if (chatCursorPos == chatInputBuffer.length()) {
+                chatInputBuffer += ch;
+            } else {
+                String left = chatInputBuffer.substring(0, chatCursorPos);
+                String right = chatInputBuffer.substring(chatCursorPos);
+                chatInputBuffer = left + ch + right;
+            }
+            chatCursorPos++;
+            if (ch >= 48 && ch <= 57) {} 
+            else if (KB().getKeyboardState() != NORMAL) KB().setKeyboardState(NORMAL);
         }
       }
     }
   }
 
-  drainQueue();
   nowMs = millis();
-
   if (nowMs - OLEDFPSMillis >= (1000 / OLED_MAX_FPS)) {
     OLEDFPSMillis = nowMs;
-    if (currentState == CHAT_COMPOSE) {
-      u8g2.clearBuffer();
-      u8g2.setFont(u8g2_font_lubR18_tf);
-      u8g2.setCursor(5, 24);
-      u8g2.print(inputBuf);
-      u8g2.sendBuffer();
-    } else if (currentState == PEER_LIST) {
-      OLED().oledWord("Chat");
+    if (currentState == PEER_LIST) {
+      if (TOUCH().getLastTouch() == -1) OLED().oledWord("Chat");
     } else {
-      if (chatMode == LOCAL_CHAT) OLED().oledWord("Local Chat");
-      else OLED().oledWord(displayName(peerMacStr).c_str());
+      if (TOUCH().getLastTouch() == -1) {
+        OLED().oledLine(chatInputBuffer, chatCursorPos, false, "Message: ");
+      } else {
+        chatScrollPreview();
+      }
     }
   }
 }
 
 // E-INK DRAW
 void einkHandler_COMM() {
+  if (cursor_moved) {
+    cursor_moved = false;
+    
+    int totalRooms = 1 + mesh_now_get_peer_count();
+    int vis = min(totalRooms, MAX_VISIBLE_LINES);
+    
+    int scrollTop = max(selPeer - vis / 2, 0);
+    if (scrollTop + vis > totalRooms) scrollTop = max(totalRooms - vis, 0);
+    
+    int prevScrollTop = max(prevSelPeer - vis / 2, 0);
+    if (prevScrollTop + vis > totalRooms) prevScrollTop = max(totalRooms - vis, 0);
+    
+    if (scrollTop != prevScrollTop || newState) {
+      newState = true; 
+    } else {
+      // Safely perform native partial window update without blanking the rest of the screen
+      display.fillRect(0, 28, 16, 218, GxEPD_WHITE);
+      display.setTextColor(GxEPD_BLACK);
+      display.setFont(&FreeSans9pt7b);
+      
+      for (int i = 0; i < vis; i++) {
+        int idx = scrollTop + i;
+        if (idx == selPeer) {
+          int yPos = 36 + i * 20;
+          display.setCursor(4, yPos);
+          display.print(">");
+        }
+      }
+      
+      // Push only this rectangle to the display
+      display.displayWindow(0, 28, 16, 218); 
+      return;
+    }
+  }
+
   if (!newState && !comm_first_draw) return;
   comm_first_draw = false;
   newState = false;
-  ESP_LOGI(TAG, "einkHandler: state=%d chatMode=%d msgCount=%d scrollOff=%d",
-           currentState, chatMode, msgCount, scrollOff);
 
   display.fillScreen(GxEPD_WHITE);
 
@@ -347,18 +461,22 @@ void einkHandler_COMM() {
 
     int totalRooms = 1 + mesh_now_get_peer_count();
     mesh_peer_t* allPeers = mesh_now_get_peers();
-    int listY = 32;
+    
+    int listY = 36;
     int vis = min(totalRooms, MAX_VISIBLE_LINES);
     int scrollTop = max(selPeer - vis / 2, 0);
     if (scrollTop + vis > totalRooms) scrollTop = max(totalRooms - vis, 0);
+    
     display.setFont(&FreeSans9pt7b);
     for (int i = 0; i < vis; i++) {
       int idx = scrollTop + i;
       if (idx >= totalRooms) break;
-      int yPos = listY + i * 14;
-      if (yPos > 218) break;
+      int yPos = listY + i * 20;
+      if (yPos > 238) break; 
+      
       bool selected = (idx == selPeer);
       String label;
+      
       if (idx == 0) {
         label = "Local Chat";
       } else {
@@ -371,19 +489,21 @@ void einkHandler_COMM() {
           label = "---";
         }
       }
+      
+      display.setTextColor(GxEPD_BLACK);
+      
       if (selected) {
-        display.fillRect(2, yPos - 9, display.width() - 12, 13, GxEPD_BLACK);
-        display.setTextColor(GxEPD_WHITE);
-      } else {
-        display.setTextColor(GxEPD_BLACK);
+        display.setCursor(4, yPos);
+        display.print(">");
       }
-      display.setCursor(8, yPos);
+      display.setCursor(20, yPos);
       display.print(label);
     }
-    // Scrollbar
+    
+    // Scrollbar (Extended to bottom)
     if (totalRooms > vis) {
       int sbY = 26;
-      int sbH = 220 - 26;
+      int sbH = 240 - 26; 
       float step = (float)sbH / totalRooms;
       int thumbY = sbY + (int)(selPeer * step);
       int thumbH = max((int)(vis * step), 8);
@@ -408,39 +528,87 @@ void einkHandler_COMM() {
   // Separator line
   display.drawFastHLine(0, 21, display.width(), GxEPD_BLACK);
 
-  // Message area (CHAT_VIEW / CHAT_COMPOSE only)
-  if (currentState != PEER_LIST) {
-    display.setTextColor(GxEPD_BLACK);
+  // Message area (CHAT_VIEW only)
+  if (currentState == CHAT_VIEW) {
     display.setFont(&Font5x7Fixed);
-    int y = 30;
-    int lineH = 11;
-    for (int i = scrollOff; i < msgCount && y < 220; i++) {
-      ChatMsg* m = &msgs[i];
-      String prefix = displayName(m->sender) + ": ";
-      display.setCursor(2, y);
-      display.print(prefix);
-      int16_t x1, y1;
-      uint16_t pw, ph;
-      display.getTextBounds(prefix, 0, 0, &x1, &y1, &pw, &ph);
-      int cx = 2 + pw;
-      display.setCursor(cx, y);
-      display.print(m->content);
-      y += lineH;
+    
+    int maxScrollIndex = 0;
+    if (msgCount > 0) {
+        int totalH = 0;
+        int top = msgCount - 1;
+        while (top >= 0) {
+            std::vector<String> lines = wrapText(msgs[top].content, BUBBLE_MAX_CHARS);
+            int bH = (lines.size() * 10) + 12 + 10 + 4; 
+            if (totalH + bH > 214) { top++; break; }
+            totalH += bH;
+            if (top == 0) break;
+            top--;
+        }
+        maxScrollIndex = top;
     }
-  }
 
-  // Status bar
-  display.drawFastHLine(0, 220, display.width(), GxEPD_BLACK);
-  display.setCursor(4, 234);
-  display.setFont(&Font5x7Fixed);
-  if (currentState == CHAT_COMPOSE) {
-    display.print("> ");
-    display.print(inputBuf);
-  } else if (currentState == CHAT_VIEW) {
-    if (msgCount == 0) display.print("No messages yet. Press Enter to type.");
-    else display.print("Enter: type  |  Up/Dn: scroll  |  Esc: back");
-  } else {
-    display.print("FN+7/6: up/dn  |  Enter: sel  |  FN+<-: home");
+    if (autoScroll) chatScrollIndex = maxScrollIndex;
+    if (chatScrollIndex > (ulong)maxScrollIndex) chatScrollIndex = maxScrollIndex;
+
+    int y = 26; 
+    int barWidth = 3;
+    
+    for (int i = chatScrollIndex; i < msgCount && y < 240; i++) {
+      ChatMsg* m = &msgs[i];
+      std::vector<String> lines = wrapText(m->content, BUBBLE_MAX_CHARS);
+      
+      String nameText = displayName(m->sender);
+      String timeText = String(m->hr) + ":" + (m->mn < 10 ? "0" : "") + String(m->mn);
+      
+      int nameW = nameText.length() * 6;
+      int timeW = timeText.length() * 6;
+      int metaW = nameW + timeW + 10; // Extra inner-gap between name and time
+      
+      int textW = 0;
+      for (const String& l : lines) {
+        int lw = l.length() * 6;
+        if (lw > textW) textW = lw;
+      }
+
+      int bubbleW = max(textW, metaW) + 16; // 8px padding on both sides
+      int bubbleH = (lines.size() * 10) + 12 + 10;
+      
+      // Shift left to make room for scrollbar
+      int x = m->sentByLocal ? (display.width() - bubbleW - 6 - (barWidth + 2)) : 6;
+      
+      if (m->sentByLocal) {
+          display.fillRoundRect(x, y, bubbleW, bubbleH, 10, GxEPD_BLACK);
+          display.setTextColor(GxEPD_WHITE);
+      } else {
+          display.drawRoundRect(x, y, bubbleW, bubbleH, 10, GxEPD_BLACK);
+          display.setTextColor(GxEPD_BLACK);
+      }
+      
+      display.setCursor(x + 8, y + 11);
+      display.print(nameText);
+      
+      display.setCursor(x + bubbleW - 8 - timeW, y + 11);
+      display.print(timeText);
+      
+      display.drawFastHLine(x + 8, y + 14, bubbleW - 16, m->sentByLocal ? GxEPD_WHITE : GxEPD_BLACK);
+      
+      for(size_t l=0; l<lines.size(); l++){
+          display.setCursor(x + 8, y + 26 + (l*10));
+          display.print(lines[l]);
+      }
+      
+      y += bubbleH + 4; 
+    }
+
+    if (maxScrollIndex > 0) {
+      float visibleRatio = 214.0 / ((maxScrollIndex + 1) * 30.0); 
+      if (visibleRatio > 1.0) visibleRatio = 1.0;
+      int handleHeight = max((int)(214 * visibleRatio), 15);
+      float scrollFraction = (float)chatScrollIndex / maxScrollIndex;
+      int handleY = 26 + scrollFraction * (214 - handleHeight);
+      
+      display.fillRect(display.width() - barWidth - 1, handleY, barWidth, handleHeight, GxEPD_BLACK);
+    }
   }
 
   EINK().refresh();

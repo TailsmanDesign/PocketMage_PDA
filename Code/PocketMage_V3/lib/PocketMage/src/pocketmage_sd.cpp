@@ -299,7 +299,7 @@ void setupSD() {
 
     // ---------- Filesystem setup ----------
     const char* dirs[] = {"/sys", "/notes", "/journal", "/dict", "/apps",
-                          "/apps/temp", "/assets", "/assets/backgrounds"};
+                          "/apps/temp", "/assets", "/assets/backgrounds", "/chats"};
     for (auto dir : dirs) if (!global_fs->exists(dir)) global_fs->mkdir(dir);
 
     // Create system guides
