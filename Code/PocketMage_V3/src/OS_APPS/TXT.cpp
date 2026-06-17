@@ -1906,110 +1906,110 @@ void initFonts() {
   // Mono (Courier)
   fonts[mono].normal  = u8g2_font_courR10_tf;
   fonts[mono].normal_B = u8g2_font_courB10_tf;
-  fonts[mono].normal_I = u8g2_font_courR10_tf;
-  fonts[mono].normal_BI = u8g2_font_courB10_tf;
+  fonts[mono].normal_I = u8g2_font_courI10_tf;
+  fonts[mono].normal_BI = u8g2_font_courBI10_tf;
 
   fonts[mono].h1   = u8g2_font_courB24_tf;
   fonts[mono].h1_B = u8g2_font_courB24_tf;
-  fonts[mono].h1_I = u8g2_font_courB24_tf;
-  fonts[mono].h1_BI = u8g2_font_courB24_tf;
+  fonts[mono].h1_I = u8g2_font_courBI24_tf;
+  fonts[mono].h1_BI = u8g2_font_courBI24_tf;
 
   fonts[mono].h2   = u8g2_font_courB18_tf;
   fonts[mono].h2_B = u8g2_font_courB18_tf;
-  fonts[mono].h2_I = u8g2_font_courB18_tf;
-  fonts[mono].h2_BI = u8g2_font_courB18_tf;
+  fonts[mono].h2_I = u8g2_font_courBI18_tf;
+  fonts[mono].h2_BI = u8g2_font_courBI18_tf;
 
   fonts[mono].h3   = u8g2_font_courB12_tf;
   fonts[mono].h3_B = u8g2_font_courB12_tf;
-  fonts[mono].h3_I = u8g2_font_courB12_tf;
-  fonts[mono].h3_BI = u8g2_font_courB12_tf;
+  fonts[mono].h3_I = u8g2_font_courBI12_tf;
+  fonts[mono].h3_BI = u8g2_font_courBI12_tf;
 
   fonts[mono].code   = u8g2_font_courR10_tf;
   fonts[mono].code_B = u8g2_font_courR10_tf;
-  fonts[mono].code_I = u8g2_font_courR10_tf;
-  fonts[mono].code_BI = u8g2_font_courR10_tf;
+  fonts[mono].code_I = u8g2_font_courI10_tf;
+  fonts[mono].code_BI = u8g2_font_courI10_tf;
 
   fonts[mono].quote   = u8g2_font_courR10_tf;
   fonts[mono].quote_B = u8g2_font_courB10_tf;
-  fonts[mono].quote_I = u8g2_font_courR10_tf;
-  fonts[mono].quote_BI = u8g2_font_courB10_tf;
+  fonts[mono].quote_I = u8g2_font_courI10_tf;
+  fonts[mono].quote_BI = u8g2_font_courBI10_tf;
 
   fonts[mono].list   = u8g2_font_courR10_tf;
   fonts[mono].list_B = u8g2_font_courB10_tf;
-  fonts[mono].list_I = u8g2_font_courR10_tf;
-  fonts[mono].list_BI = u8g2_font_courB10_tf;
+  fonts[mono].list_I = u8g2_font_courI10_tf;
+  fonts[mono].list_BI = u8g2_font_courBI10_tf;
 
   // Serif (New Century Schoolbook)
   fonts[serif].normal  = u8g2_font_ncenR10_tf;
   fonts[serif].normal_B = u8g2_font_ncenB10_tf;
-  fonts[serif].normal_I = u8g2_font_ncenR10_tf;
-  fonts[serif].normal_BI = u8g2_font_ncenB10_tf;
+  fonts[serif].normal_I = u8g2_font_ncenI10_tf;
+  fonts[serif].normal_BI = u8g2_font_ncenBI10_tf;
 
   fonts[serif].h1   = u8g2_font_ncenB24_tf;
   fonts[serif].h1_B = u8g2_font_ncenB24_tf;
-  fonts[serif].h1_I = u8g2_font_ncenB24_tf;
-  fonts[serif].h1_BI = u8g2_font_ncenB24_tf;
+  fonts[serif].h1_I = u8g2_font_ncenBI24_tf;
+  fonts[serif].h1_BI = u8g2_font_ncenBI24_tf;
 
   fonts[serif].h2   = u8g2_font_ncenB18_tf;
   fonts[serif].h2_B = u8g2_font_ncenB18_tf;
-  fonts[serif].h2_I = u8g2_font_ncenB18_tf;
-  fonts[serif].h2_BI = u8g2_font_ncenB18_tf;
+  fonts[serif].h2_I = u8g2_font_ncenBI18_tf;
+  fonts[serif].h2_BI = u8g2_font_ncenBI18_tf;
 
   fonts[serif].h3   = u8g2_font_ncenB12_tf;
   fonts[serif].h3_B = u8g2_font_ncenB12_tf;
-  fonts[serif].h3_I = u8g2_font_ncenB12_tf;
-  fonts[serif].h3_BI = u8g2_font_ncenB12_tf;
+  fonts[serif].h3_I = u8g2_font_ncenBI12_tf;
+  fonts[serif].h3_BI = u8g2_font_ncenBI12_tf;
 
   fonts[serif].code   = u8g2_font_courR10_tf;
   fonts[serif].code_B = u8g2_font_courR10_tf;
-  fonts[serif].code_I = u8g2_font_courR10_tf;
-  fonts[serif].code_BI = u8g2_font_courR10_tf;
+  fonts[serif].code_I = u8g2_font_courI10_tf;
+  fonts[serif].code_BI = u8g2_font_courI10_tf;
 
   fonts[serif].quote   = u8g2_font_ncenR10_tf;
   fonts[serif].quote_B = u8g2_font_ncenB10_tf;
-  fonts[serif].quote_I = u8g2_font_ncenR10_tf;
-  fonts[serif].quote_BI = u8g2_font_ncenB10_tf;
+  fonts[serif].quote_I = u8g2_font_ncenI10_tf;
+  fonts[serif].quote_BI = u8g2_font_ncenBI10_tf;
 
   fonts[serif].list   = u8g2_font_ncenR10_tf;
   fonts[serif].list_B = u8g2_font_ncenB10_tf;
-  fonts[serif].list_I = u8g2_font_ncenR10_tf;
-  fonts[serif].list_BI = u8g2_font_ncenB10_tf;
+  fonts[serif].list_I = u8g2_font_ncenI10_tf;
+  fonts[serif].list_BI = u8g2_font_ncenBI10_tf;
 
   // Sans (Helvetica)
   fonts[sans].normal  = u8g2_font_helvR10_tf;
   fonts[sans].normal_B = u8g2_font_helvB10_tf;
-  fonts[sans].normal_I = u8g2_font_helvR10_tf;
-  fonts[sans].normal_BI = u8g2_font_helvB10_tf;
+  fonts[sans].normal_I = u8g2_font_helvI10_tf;
+  fonts[sans].normal_BI = u8g2_font_helvBI10_tf;
 
   fonts[sans].h1   = u8g2_font_helvB24_tf;
   fonts[sans].h1_B = u8g2_font_helvB24_tf;
-  fonts[sans].h1_I = u8g2_font_helvB24_tf;
-  fonts[sans].h1_BI = u8g2_font_helvB24_tf;
+  fonts[sans].h1_I = u8g2_font_helvBI24_tf;
+  fonts[sans].h1_BI = u8g2_font_helvBI24_tf;
 
   fonts[sans].h2   = u8g2_font_helvB18_tf;
   fonts[sans].h2_B = u8g2_font_helvB18_tf;
-  fonts[sans].h2_I = u8g2_font_helvB18_tf;
-  fonts[sans].h2_BI = u8g2_font_helvB18_tf;
+  fonts[sans].h2_I = u8g2_font_helvBI18_tf;
+  fonts[sans].h2_BI = u8g2_font_helvBI18_tf;
 
   fonts[sans].h3   = u8g2_font_helvB12_tf;
   fonts[sans].h3_B = u8g2_font_helvB12_tf;
-  fonts[sans].h3_I = u8g2_font_helvB12_tf;
-  fonts[sans].h3_BI = u8g2_font_helvB12_tf;
+  fonts[sans].h3_I = u8g2_font_helvBI12_tf;
+  fonts[sans].h3_BI = u8g2_font_helvBI12_tf;
 
   fonts[sans].code   = u8g2_font_courR10_tf;
   fonts[sans].code_B = u8g2_font_courR10_tf;
-  fonts[sans].code_I = u8g2_font_courR10_tf;
-  fonts[sans].code_BI = u8g2_font_courR10_tf;
+  fonts[sans].code_I = u8g2_font_courI10_tf;
+  fonts[sans].code_BI = u8g2_font_courI10_tf;
 
   fonts[sans].quote   = u8g2_font_helvR10_tf;
   fonts[sans].quote_B = u8g2_font_helvB10_tf;
-  fonts[sans].quote_I = u8g2_font_helvR10_tf;
-  fonts[sans].quote_BI = u8g2_font_helvB10_tf;
+  fonts[sans].quote_I = u8g2_font_helvI10_tf;
+  fonts[sans].quote_BI = u8g2_font_helvBI10_tf;
 
   fonts[sans].list   = u8g2_font_helvR10_tf;
   fonts[sans].list_B = u8g2_font_helvB10_tf;
-  fonts[sans].list_I = u8g2_font_helvR10_tf;
-  fonts[sans].list_BI = u8g2_font_helvB10_tf;
+  fonts[sans].list_I = u8g2_font_helvI10_tf;
+  fonts[sans].list_BI = u8g2_font_helvBI10_tf;
 }
 
 void TXT_INIT(String inPath) {
