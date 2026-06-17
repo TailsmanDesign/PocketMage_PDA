@@ -300,6 +300,7 @@ int drawLineEink(Document& doc, ulong lineIndex, int startX, int startY, bool is
   }
 
   u8g2f.setForegroundColor(fgColor);
+  u8g2f.setFontMode(1);
 
   if (style == 'H') {
     display.drawFastHLine(0, cursorY + 3, display.width(), fgColor);
@@ -353,6 +354,7 @@ int drawLineEink(Document& doc, ulong lineIndex, int startX, int startY, bool is
 
     const uint8_t* font = inlineCode ? pickFont('C', bold, italic) : pickFont(style, bold, italic);
     u8g2f.setFont(font);
+    u8g2f.setFontMode(1);
 
     u8g2f.drawGlyph(xpos, baselineY, unicode);
 
@@ -397,6 +399,7 @@ int drawLineEink(Document& doc, ulong lineIndex, int startX, int startY, bool is
 
     String numStr = String(listNum) + ".";
     u8g2f.setFont(pickFont('O', false, false));
+    u8g2f.setFontMode(1);
     
     int nw = u8g2f.getUTF8Width(numStr.c_str());
     

@@ -173,6 +173,7 @@ void checkTimeout() {
             EINK().setFullRefreshAfter(FULL_REFRESH_AFTER + 1);
             display.setFullWindow();
             u8g2f.setFont(u8g2_font_courB10_tf);
+            u8g2f.setFontMode(1);
 
             display.fillRect(0, display.height() - 26, display.width(), 26, GxEPD_WHITE);
             display.drawRect(0, display.height() - 20, display.width(), 20, GxEPD_BLACK);

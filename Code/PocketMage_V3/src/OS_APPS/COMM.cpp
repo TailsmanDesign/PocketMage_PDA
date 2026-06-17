@@ -421,15 +421,16 @@ void einkHandler_COMM() {
     } else {
       // Safely perform native partial window update without blanking the rest of the screen
       display.fillRect(0, 28, 16, 218, GxEPD_WHITE);
-      display.setTextColor(GxEPD_BLACK);
-      display.setFont(&FreeSans9pt7b);
+      u8g2f.setFont(u8g2_font_ncenR10_tf);
+      u8g2f.setFontMode(1);
+      u8g2f.setForegroundColor(GxEPD_BLACK);
       
       for (int i = 0; i < vis; i++) {
         int idx = scrollTop + i;
         if (idx == selPeer) {
           int yPos = 36 + i * 20;
-          display.setCursor(4, yPos);
-          display.print(">");
+          u8g2f.setCursor(4, yPos);
+          u8g2f.print(">");
         }
       }
       
@@ -447,17 +448,19 @@ void einkHandler_COMM() {
 
   // Top bar
   display.fillRect(0, 0, display.width(), 20, GxEPD_BLACK);
-  display.setTextColor(GxEPD_WHITE);
-  display.setFont(&FreeSans9pt7b);
+  u8g2f.setForegroundColor(GxEPD_WHITE);
 
   if (currentState == PEER_LIST) {
-    display.setCursor(4, 16);
-    display.print("Select Room");
-    display.setFont(&Font5x7Fixed);
-    display.setCursor(164, 14);
-    display.print("Me " + String(myMacStr));
-    display.setCursor(270, 14);
-    display.print("P: " + String(mesh_now_get_peer_count()));
+    u8g2f.setFont(u8g2_font_ncenR10_tf);
+    u8g2f.setFontMode(1);
+    u8g2f.setCursor(4, 16);
+    u8g2f.print("Select Room");
+    u8g2f.setFont(u8g2_font_5x7_tf);
+    u8g2f.setFontMode(1);
+    u8g2f.setCursor(164, 20);
+    u8g2f.print("Me " + String(myMacStr));
+    u8g2f.setCursor(270, 20);
+    u8g2f.print("P: " + String(mesh_now_get_peer_count()));
 
     int totalRooms = 1 + mesh_now_get_peer_count();
     mesh_peer_t* allPeers = mesh_now_get_peers();
@@ -467,7 +470,8 @@ void einkHandler_COMM() {
     int scrollTop = max(selPeer - vis / 2, 0);
     if (scrollTop + vis > totalRooms) scrollTop = max(totalRooms - vis, 0);
     
-    display.setFont(&FreeSans9pt7b);
+    u8g2f.setFont(u8g2_font_ncenR10_tf);
+    u8g2f.setFontMode(1);
     for (int i = 0; i < vis; i++) {
       int idx = scrollTop + i;
       if (idx >= totalRooms) break;
@@ -490,14 +494,14 @@ void einkHandler_COMM() {
         }
       }
       
-      display.setTextColor(GxEPD_BLACK);
+      u8g2f.setForegroundColor(GxEPD_BLACK);
       
       if (selected) {
-        display.setCursor(4, yPos);
-        display.print(">");
+        u8g2f.setCursor(4, yPos);
+        u8g2f.print(">");
       }
-      display.setCursor(20, yPos);
-      display.print(label);
+      u8g2f.setCursor(20, yPos);
+      u8g2f.print(label);
     }
     
     // Scrollbar (Extended to bottom)
@@ -511,18 +515,19 @@ void einkHandler_COMM() {
     }
   } else {
     if (chatMode == LOCAL_CHAT) {
-      display.setCursor(4, 16);
-      display.print("Local Chat");
+      u8g2f.setCursor(4, 16);
+      u8g2f.print("Local Chat");
     } else {
       String name = displayName(peerMacStr);
-      display.setCursor(4, 16);
-      display.print("> " + name);
+      u8g2f.setCursor(4, 16);
+      u8g2f.print("> " + name);
     }
-    display.setFont(&Font5x7Fixed);
-    display.setCursor(164, 14);
-    display.print(chatMode == LOCAL_CHAT ? "ESP-NOW" : "Direct");
-    display.setCursor(270, 14);
-    display.print("P: " + String(mesh_now_get_peer_count()));
+    u8g2f.setFont(u8g2_font_5x7_tf);
+    u8g2f.setFontMode(1);
+    u8g2f.setCursor(164, 20);
+    u8g2f.print(chatMode == LOCAL_CHAT ? "ESP-NOW" : "Direct");
+    u8g2f.setCursor(270, 20);
+    u8g2f.print("P: " + String(mesh_now_get_peer_count()));
   }
 
   // Separator line
@@ -530,8 +535,9 @@ void einkHandler_COMM() {
 
   // Message area (CHAT_VIEW only)
   if (currentState == CHAT_VIEW) {
-    display.setFont(&Font5x7Fixed);
-    
+    u8g2f.setFont(u8g2_font_5x7_tf);
+    u8g2f.setFontMode(1);
+
     int maxScrollIndex = 0;
     if (msgCount > 0) {
         int totalH = 0;
@@ -578,23 +584,23 @@ void einkHandler_COMM() {
       
       if (m->sentByLocal) {
           display.fillRoundRect(x, y, bubbleW, bubbleH, 10, GxEPD_BLACK);
-          display.setTextColor(GxEPD_WHITE);
+          u8g2f.setForegroundColor(GxEPD_WHITE);
       } else {
           display.drawRoundRect(x, y, bubbleW, bubbleH, 10, GxEPD_BLACK);
-          display.setTextColor(GxEPD_BLACK);
+          u8g2f.setForegroundColor(GxEPD_BLACK);
       }
-      
-      display.setCursor(x + 8, y + 11);
-      display.print(nameText);
-      
-      display.setCursor(x + bubbleW - 8 - timeW, y + 11);
-      display.print(timeText);
-      
+
+      u8g2f.setCursor(x + 8, y + 17);
+      u8g2f.print(nameText);
+
+      u8g2f.setCursor(x + bubbleW - 8 - timeW, y + 17);
+      u8g2f.print(timeText);
+
       display.drawFastHLine(x + 8, y + 14, bubbleW - 16, m->sentByLocal ? GxEPD_WHITE : GxEPD_BLACK);
-      
+
       for(size_t l=0; l<lines.size(); l++){
-          display.setCursor(x + 8, y + 26 + (l*10));
-          display.print(lines[l]);
+          u8g2f.setCursor(x + 8, y + 32 + (l*10));
+          u8g2f.print(lines[l]);
       }
       
       y += bubbleH + 4; 

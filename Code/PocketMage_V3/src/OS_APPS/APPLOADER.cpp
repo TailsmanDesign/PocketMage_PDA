@@ -228,6 +228,7 @@ void loadAndDrawAppIcon(int x, int y, int otaIndex, bool showName, int maxNameCh
     }
 
     u8g2f.setFont(u8g2_font_ncenR10_tf);
+    u8g2f.setFontMode(1);
     u8g2f.setForegroundColor(GxEPD_BLACK);
 
     int w = u8g2f.getUTF8Width(appNameStr.c_str());

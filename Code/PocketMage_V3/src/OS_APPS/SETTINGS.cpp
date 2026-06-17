@@ -264,6 +264,7 @@ void einkHandler_settings() {
     display.drawBitmap(0, 0, _settings, 320, 218, GxEPD_BLACK);
 
     u8g2f.setFont(u8g2_font_ncenR10_tf);
+    u8g2f.setFontMode(1);
     
     // First column of settings
     // OLED_BRIGHTNESS

@@ -130,6 +130,7 @@ void deepSleep(bool alternateScreenSaver) {
           // Show file
           display.drawBitmap(0, 0, buf, 320, 240, GxEPD_BLACK);
           u8g2f.setFont(u8g2_font_courB10_tf);
+          u8g2f.setFontMode(1);
           u8g2f.setForegroundColor(GxEPD_BLACK);
           u8g2f.setCursor(5, display.height() - 5);
           u8g2f.print(binFiles[fileIndex].c_str());

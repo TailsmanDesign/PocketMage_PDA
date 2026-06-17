@@ -548,6 +548,7 @@ void einkHandler_FILEWIZ() {
 
         // Draw the file list
         u8g2f.setFont(u8g2_font_5x7_tf);
+        u8g2f.setFontMode(1);
         for (int i = 0; i < 10; i++) {
           String dispPath = PM_SDAUTO().getFilesListIndex(i);
           

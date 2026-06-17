@@ -216,6 +216,7 @@ void drawHome() {
   uint8_t startY = 20;    // Initial Y position
 
   u8g2f.setFont(u8g2_font_ncenR10_tf);
+  u8g2f.setFontMode(1);
   for (int i = 0; i < sizeof(appIcons) / sizeof(appIcons[0]); i++) {
     int row = i / appsPerRow;
     int col = i % appsPerRow;
@@ -452,6 +453,7 @@ void einkHandler_HOME() {
           int loopCount = std::min((int)tasks.size(), 7);
           for (int i = 0; i < loopCount; i++) {
             u8g2f.setFont(u8g2_font_ncenR10_tf);
+            u8g2f.setFontMode(1);
             // PRINT TASK NAME
             u8g2f.setCursor(151, 68 + (25 * i));
             u8g2f.print(tasks[i][0].c_str());

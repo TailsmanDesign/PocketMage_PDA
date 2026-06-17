@@ -442,6 +442,7 @@ void einkHandler_TASKS() {
           int displayRow = 0;
 
           u8g2f.setFont(u8g2_font_ncenR10_tf);
+          u8g2f.setFontMode(1);
           for (int i = startIdx; i < endIdx; i++) {
             
             // Dynamic Truncation Calculation (Max 198px width)
@@ -502,6 +503,7 @@ void einkHandler_TASKS() {
           int displayRow = 0;
 
           u8g2f.setFont(u8g2_font_ncenR10_tf);
+          u8g2f.setFontMode(1);
           for (int i = startIdx; i < endIdx; i++) {
             
             // Dynamic Truncation Calculation (Max 198px width)

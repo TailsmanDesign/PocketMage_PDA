@@ -968,8 +968,10 @@ void drawCalendarMonth(int monthOffset) {
     // Current day
     if (dayNum == now.day() && monthOffset == 0) {
       u8g2f.setFont(u8g2_font_ncenB10_tf);
+      u8g2f.setFontMode(1);
     }
     else u8g2f.setFont(u8g2_font_ncenR10_tf);
+    u8g2f.setFontMode(1);
     
     u8g2f.setForegroundColor(GxEPD_BLACK);
     u8g2f.setCursor(x + 6, y + 15); 
@@ -983,6 +985,7 @@ void drawCalendarMonth(int monthOffset) {
     // Events found
     if (numEvents > 2) {
       u8g2f.setFont(u8g2_font_5x7_tf);
+      u8g2f.setFontMode(1);
       u8g2f.setCursor(x + 32, y + 16);
       u8g2f.print(String(numEvents));
     }
@@ -1041,6 +1044,7 @@ void drawCalendarWeek(int weekOffset) {
 
     // Draw date
     u8g2f.setFont(u8g2_font_ncenR10_tf);
+    u8g2f.setFontMode(1);
     u8g2f.setForegroundColor(GxEPD_BLACK);
     u8g2f.setCursor(9 + (i * 44), 62);
     String dateStr = String(m) + "/" + String(d);
@@ -1061,12 +1065,14 @@ void drawCalendarWeek(int weekOffset) {
 
       // Print Start Time
       u8g2f.setFont(u8g2_font_4x6_tf);
+      u8g2f.setFontMode(1);
       u8g2f.setForegroundColor(GxEPD_BLACK);
       u8g2f.setCursor(12 + (i * 44), 80 + (j * 23));
       u8g2f.print(startTime);
 
       // Print Event Name
       u8g2f.setFont(u8g2_font_5x7_tf);
+      u8g2f.setFontMode(1);
       u8g2f.setCursor(12 + (i * 44), 89 + (j * 23));
       u8g2f.print(eventName);
     }
@@ -1474,6 +1480,7 @@ void einkHandler_CALENDAR() {
 
         display.drawBitmap(0, 0, calendar_allArray[2], 320, 218, GxEPD_BLACK);
         u8g2f.setFont(u8g2_font_ncenR10_tf);
+        u8g2f.setFontMode(1);
 
         u8g2f.setCursor(106, 68);
         u8g2f.print(newEventName);
@@ -1517,6 +1524,7 @@ void einkHandler_CALENDAR() {
         EINK().drawStatusBar("Type 1-6,(D)el, or (S)ave");
         display.drawBitmap(0, 0, calendar_allArray[3], 320, 218, GxEPD_BLACK);
         u8g2f.setFont(u8g2_font_ncenR10_tf);
+        u8g2f.setFontMode(1);
 
         u8g2f.setCursor(106, 68);
         u8g2f.print(newEventName);
@@ -1558,6 +1566,7 @@ void einkHandler_CALENDAR() {
         display.drawBitmap(0, 0, calendar_allArray[CurrentCalendarState], 320, 218, GxEPD_BLACK);
 
         u8g2f.setFont(u8g2_font_ncenR10_tf);
+        u8g2f.setFontMode(1);
         u8g2f.setForegroundColor(GxEPD_BLACK);
         u8g2f.setCursor(9 + (44*(CurrentCalendarState - 4)), 59);
         u8g2f.print(String(currentMonth) + "/" + String(currentDate));
@@ -1576,10 +1585,12 @@ void einkHandler_CALENDAR() {
           String bottomInfo = "Starts: " + startTime + ", Dur: " + duration + ", Rep: " + repeatCode;
 
           u8g2f.setFont(u8g2_font_5x7_tf);
+          u8g2f.setFontMode(1);
           u8g2f.setCursor(48, 74 + (j * 19));
           u8g2f.print(name);
 
           u8g2f.setFont(u8g2_font_5x7_tf);
+          u8g2f.setFontMode(1);
           u8g2f.setCursor(48, 82 + (j * 19));
           u8g2f.print(bottomInfo);
         }

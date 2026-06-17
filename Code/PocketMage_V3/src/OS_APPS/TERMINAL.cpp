@@ -284,8 +284,13 @@ void updateTerminalDisp() {
   for (int i = startIdx; i < endIdx; i++) {
     const String& s = terminalOutputs[i];
     u8g2f.setForegroundColor(fgColor);
-    if (termLargeFont) u8g2f.setFont(u8g2_font_courB10_tf);
-    else u8g2f.setFont(u8g2_font_5x7_tf);
+    if (termLargeFont) {
+      u8g2f.setFont(u8g2_font_courB10_tf);
+      u8g2f.setFontMode(1);
+    } else {
+      u8g2f.setFont(u8g2_font_5x7_tf);
+      u8g2f.setFontMode(1);
+    }
     u8g2f.setCursor(5, y);
     u8g2f.print(s.c_str());
     y += yStep;
@@ -1230,15 +1235,19 @@ void wr_inkText(WRContext* c, const WRValue* argv, int argn, WRValue& ret, void*
   switch (size) {
     case 1:
       u8g2f.setFont(u8g2_font_5x7_tf);
+      u8g2f.setFontMode(1);
       break;
     case 2:
       u8g2f.setFont(u8g2_font_courB10_tf);
+      u8g2f.setFontMode(1);
       break;
     case 3:
       u8g2f.setFont(u8g2_font_courB14_tf);
+      u8g2f.setFontMode(1);
       break;
     default:
       u8g2f.setFont(u8g2_font_courB10_tf);
+      u8g2f.setFontMode(1);
       break;
   }
   
@@ -1898,6 +1907,7 @@ void einkHandler_TERMINAL() {
             } else
               u8g2f.setForegroundColor(fgColor);
             u8g2f.setFont(u8g2_font_5x7_tf);
+            u8g2f.setFontMode(1);
             u8g2f.setCursor(5, y);
             u8g2f.print("[" + lineNum + "]");
             u8g2f.setCursor(35, y);
@@ -1924,6 +1934,7 @@ void einkHandler_TERMINAL() {
               } else
                 u8g2f.setForegroundColor(fgColor);
               u8g2f.setFont(u8g2_font_5x7_tf);
+              u8g2f.setFontMode(1);
               u8g2f.setCursor(5, y);
               u8g2f.print("[" + lineNum + "]");
               u8g2f.setCursor(35, y);
@@ -1949,6 +1960,7 @@ void einkHandler_TERMINAL() {
               } else
                 u8g2f.setForegroundColor(fgColor);
               u8g2f.setFont(u8g2_font_5x7_tf);
+              u8g2f.setFontMode(1);
               u8g2f.setCursor(5, y);
               u8g2f.print("[" + lineNum + "]");
               u8g2f.setCursor(35, y);

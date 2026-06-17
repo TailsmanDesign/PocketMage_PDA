@@ -364,11 +364,13 @@ void einkHandler_LEXICON() {
 
         // Draw Word
         u8g2f.setFont(u8g2_font_ncenR12_tf);
+        u8g2f.setFontMode(1);
         u8g2f.setCursor(12, 50);
         u8g2f.print(defList[definitionIndex].first);
 
         // Draw Definition with Word Wrap
         u8g2f.setFont(u8g2_font_ncenR10_tf);
+        u8g2f.setFontMode(1);
         
         String defText = defList[definitionIndex].second;
         int maxW = display.width() - (2 * LEX_MARGIN);
