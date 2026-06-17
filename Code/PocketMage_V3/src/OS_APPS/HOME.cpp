@@ -143,7 +143,7 @@ String commandSelect(String command) {
     TERMINAL_INIT();
   }
   /////////////////////////////
-  else if (command == "bluetooth" || command == "bt" || command == "4") {
+  else if (command == "bluetooth" || command == "bt") {
     // OPEN BLUETOOTH
   }
   /////////////////////////////
@@ -159,7 +159,7 @@ String commandSelect(String command) {
   else if (command == "journ" || command == "journal" || command == "daily" || command == "8") {
     JOURNAL_INIT();
   }
-  else if (command == "chat" || command == "msg") {
+  else if (command == "chat" || command == "msg" || command == "4") {
     COMM_INIT();
   }
   else if (command == "version" || command == "ver") {

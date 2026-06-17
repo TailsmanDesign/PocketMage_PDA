@@ -809,6 +809,8 @@ void cycleTextStyle(Line& line, uint16_t& cursor) {
     rightStars = 0;
   }
 
+  if (leftBound == rightBound) return;
+
   uint8_t nextStars = (currentStars + 1) % 4; 
   int sizeDiff = (nextStars * 2) - (leftStars + rightStars);
   if (line.len + sizeDiff > LINE_CAP) return;
@@ -845,6 +847,9 @@ void cycleTextStyle(Line& line, uint16_t& cursor) {
   }
 
   cursor = leftBound + nextStars + cursorOffset;
+  if (cursorOffset == contentEnd - contentStart) {
+    cursor += nextStars;
+  }
 }
 
 void cycleParagraphStyle(ulong& currLine, uint16_t& cursor) {
@@ -1783,6 +1788,8 @@ void editor(char inchar) {
 
     else if (inchar == 30) {
       cycleTextStyle(document.lines[currentLineNum], cursor_pos);
+      lastStyleCycleMillis = millis();
+      pendingStyleRefresh = true;
     }
 
     else if (inchar == 29) {

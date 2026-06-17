@@ -462,9 +462,9 @@ void einkHandler_COMM() {
     u8g2f.print("Select Room");
     u8g2f.setFont(u8g2_font_6x10_tf);
     u8g2f.setFontMode(1);
-    u8g2f.setCursor(164, 20);
+    u8g2f.setCursor(164, 16);
     u8g2f.print("Me " + String(myMacStr));
-    u8g2f.setCursor(270, 20);
+    u8g2f.setCursor(290, 16);
     u8g2f.print("P: " + String(mesh_now_get_peer_count()));
 
     int totalRooms = 1 + mesh_now_get_peer_count();
@@ -529,9 +529,9 @@ void einkHandler_COMM() {
     }
     u8g2f.setFont(u8g2_font_6x10_tf);
     u8g2f.setFontMode(1);
-    u8g2f.setCursor(164, 20);
+    u8g2f.setCursor(164, 16);
     u8g2f.print(chatMode == LOCAL_CHAT ? "ESP-NOW" : "Direct");
-    u8g2f.setCursor(270, 20);
+    u8g2f.setCursor(290, 16);
     u8g2f.print("P: " + String(mesh_now_get_peer_count()));
   }
 
@@ -577,8 +577,10 @@ void einkHandler_COMM() {
 
       int nameW = u8g2f.getUTF8Width(nameText.c_str());
       u8g2f.setFont(u8g2_font_6x10_tf);
+      u8g2f.setFontMode(1);
       int timeW = u8g2f.getUTF8Width(timeText.c_str());
       u8g2f.setFont(u8g2_font_courB10_tf);
+      u8g2f.setFontMode(1);
       int metaW = nameW + timeW + 10;
 
       int textW = 0;
@@ -605,9 +607,11 @@ void einkHandler_COMM() {
       u8g2f.print(nameText);
 
       u8g2f.setFont(u8g2_font_6x10_tf);
+      u8g2f.setFontMode(1);
       u8g2f.setCursor(x + bubbleW - 8 - timeW, nameY);
       u8g2f.print(timeText);
       u8g2f.setFont(u8g2_font_courB10_tf);
+      u8g2f.setFontMode(1);
 
       display.drawFastHLine(x + 8, nameY + 2, bubbleW - 16, m->sentByLocal ? GxEPD_WHITE : GxEPD_BLACK);
 
