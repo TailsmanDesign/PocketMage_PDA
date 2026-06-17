@@ -360,6 +360,7 @@ int drawLineEink(Document& doc, ulong lineIndex, int startX, int startY, bool is
   // ---------- Render Text with UTF-8 Support ---------- //
   bool bold = false;
   bool italic = false;
+  bool inlineCode = false;
   int xpos = startX; 
   int baselineY = cursorY + getLineMaxHeight(line); 
 
@@ -385,7 +386,12 @@ int drawLineEink(Document& doc, ulong lineIndex, int startX, int startY, bool is
       continue;
     }
 
-    const GFXfont* font = pickFont(style, bold, italic);
+    if (unicode == '`') {
+      inlineCode = !inlineCode;
+      continue;
+    }
+
+    const GFXfont* font = inlineCode ? pickFont('C', bold, italic) : pickFont(style, bold, italic);
     display.setFont(font);
 
     // Map Unicode code point to the 8-bit glyph index in the custom font
@@ -488,6 +494,7 @@ int getLineEinkWidth(Line& line) {
   // 2. Iterate through the UTF-8 text and measure glyphs
   bool bold = false;
   bool italic = false;
+  bool inlineCode = false;
   uint16_t i = 0;
 
   while (i < line.len) {
@@ -508,8 +515,13 @@ int getLineEinkWidth(Line& line) {
       continue; 
     }
 
+    if (unicode == '`') {
+      inlineCode = !inlineCode;
+      continue;
+    }
+
     // Determine active font and map to your custom 8-bit glyph index
-    const GFXfont* font = pickFont(style, bold, italic);
+    const GFXfont* font = inlineCode ? pickFont('C', bold, italic) : pickFont(style, bold, italic);
     uint8_t mappedChar = mapUnicodeToFontIndex(unicode);
 
     // Add the exact pixel width of this specific character
@@ -531,6 +543,7 @@ int findWrapIndex(const String& content, int startIndex, char style) {
 
   bool bold = false;
   bool italic = false;
+  bool inlineCode = false;
   int currentWidth = 0;
   int lastSpaceIndex = -1;
 
@@ -554,8 +567,14 @@ int findWrapIndex(const String& content, int startIndex, char style) {
         case 2: bold = !bold; break;
         case 3: bold = !bold; italic = !italic; break;
       }
-      activeFont = pickFont(style, bold, italic);
+      activeFont = inlineCode ? pickFont('C', bold, italic) : pickFont(style, bold, italic);
       continue; 
+    }
+
+    if (unicode == '`') {
+      inlineCode = !inlineCode;
+      activeFont = inlineCode ? pickFont('C', bold, italic) : pickFont(style, bold, italic);
+      continue;
     }
 
     uint8_t mappedChar = mapUnicodeToFontIndex(unicode);
@@ -1179,6 +1198,7 @@ void displayScrollPreviewOLED(Document& doc, ulong activeCursorLine) {
       
       uint16_t unicode = decodeUTF8(activeLine.text, &i, activeLine.len);
       if (unicode == '*') continue; 
+      if (unicode == '`') continue;
       
       // FIX: Use our pre-cached fast lookup table instead!
       int charWidth = getFastOledCharWidth(unicode, false, false, false);
@@ -1345,14 +1365,16 @@ bool loadMarkdownFile(const String& path) {
     } else if (line == "---") {
       style = 'H'; 
       content = "";  
-    } else if ((line.startsWith("```")) || (line.startsWith("`") && line.endsWith("`")) || (line.startsWith("```") && line.endsWith("```"))) {
-      if (line.startsWith("```"))
-        content = line.substring(3);
-      else if (line.startsWith("```") && line.endsWith("```"))
+    } else if (line.startsWith("```") || (line.startsWith("`") && line.endsWith("`"))) {
+      if (line.startsWith("```") && line.endsWith("```") && line.length() >= 6) {
         content = line.substring(3, line.length() - 3);
-      else if (line.startsWith("`") && line.endsWith("`"))
+      } else if (line.startsWith("```")) {
+        content = line.substring(3);
+      } else if (line.startsWith("`") && line.endsWith("`") && line.length() >= 2) {
         content = line.substring(1, line.length() - 1);
-
+      } else {
+        content = line;
+      }
       style = 'C'; 
     } else if (line.length() > 2 && isDigit(line.charAt(0)) && line.charAt(1) == '.' && line.charAt(2) == ' ') {
       style = 'O'; 
@@ -1511,6 +1533,7 @@ void editorOledDisplay(Line& line, uint16_t cursor_pos, bool currentlyTyping) {
 
   bool bold = false;
   bool italic = false;
+  bool inlineCode = false;
 
   // --- PASS 1: Single-sweep UTF-8 width and cursor calculation ---
   uint16_t i = 0;
@@ -1531,6 +1554,9 @@ void editorOledDisplay(Line& line, uint16_t cursor_pos, bool currentlyTyping) {
         }
       }
       total_pixel_width += getFastOledCharWidth('*', false, false, true);
+    } else if (unicode == '`') {
+      inlineCode = !inlineCode;
+      total_pixel_width += getFastOledCharWidth('`', false, false, true);
     } else {
       int w = getFastOledCharWidth(unicode, bold, italic, false);
       if (italic) w -= 3; 
@@ -1558,6 +1584,7 @@ void editorOledDisplay(Line& line, uint16_t cursor_pos, bool currentlyTyping) {
   int xpos = line_start;
   bold = false; 
   italic = false;
+  inlineCode = false;
 
   if (cursor_pos == 0) u8g2.drawVLine(xpos, 1, 22);
 
@@ -1582,6 +1609,12 @@ void editorOledDisplay(Line& line, uint16_t cursor_pos, bool currentlyTyping) {
       u8g2.setFont(u8g2_font_5x7_tf);
       int w = getFastOledCharWidth('*', false, false, true);
       if (xpos + w >= 0 && xpos <= display_w) u8g2.drawGlyph(xpos, 8, '*'); 
+      xpos += w;
+    } else if (unicode == '`') {
+      inlineCode = !inlineCode;
+      u8g2.setFont(u8g2_font_5x7_tf);
+      int w = getFastOledCharWidth('`', false, false, true);
+      if (xpos + w >= 0 && xpos <= display_w) u8g2.drawGlyph(xpos, 8, '`'); 
       xpos += w;
     } else {
       setFontOLED(bold, italic);
@@ -2092,8 +2125,7 @@ void processKB_TXT_NEW() {
   }
 
   if (CurrentTXTState_NEW == TXT_ || CurrentTXTState_NEW == JOURNAL_MODE) {
-    int scrollStep = (KB().getKeyboardState() == SHIFT || KB().getKeyboardState() == FN_SHIFT) ? 5 : 1;
-    if (TOUCH().updateScroll(document.lineCount, currentLineNum, scrollStep)) {
+    if (TOUCH().updateScroll(document.lineCount, currentLineNum)) {
       updateScreen = true; 
     }
   }
