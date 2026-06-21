@@ -6,6 +6,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/development/build-environments/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/development/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://ashtf8.github.io/PocketMage_PDA/docs/faq/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -13,10 +23,30 @@
   <url>
     <loc>https://ashtf8.github.io/PocketMage_PDA/docs/</loc>
     <changefreq>weekly</changefreq>
+    <priority>1</priority>
+  </url>
+  <url>
+    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/scripting/example-c/</loc>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/example-c/</loc>
+    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/scripting/fullPotionCommandList/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/scripting/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/scripting/ink-c/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/scripting/oled-c/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -26,32 +56,12 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/fullPotionCommandList/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/ink-c/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/oled-c/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/platformio-config/</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/scripting/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

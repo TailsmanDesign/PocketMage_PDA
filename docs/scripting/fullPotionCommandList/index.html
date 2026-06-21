@@ -1,0 +1,1842 @@
+<!--
+  ---------------------------------------------------------------
+  docmd : the zero-config documentation engine.
+  @website https://docmd.io
+  [docmd-source] - Please do not remove this header.
+  ---------------------------------------------------------------
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="docmd v0.5.x">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>/**
+ * --------------------------------------------------------------------
+ * docmd : the zero-config documentation engine.
+ *
+ * @package     @docmd/core (and ecosystem)
+ * @website     https://docmd.io
+ * @repository  https://github.com/docmd-io/docmd
+ * @license     MIT
+ * @copyright   Copyright (c) 2025-present docmd.io
+ *
+ * [docmd-source] - Please do not remove this header.
+ * --------------------------------------------------------------------
+ */
+
+(function () {
+  try {
+    // 1. Determine Theme
+    var localValue = localStorage.getItem('docmd-theme');
+    var configValue = window.DOCMD_DEFAULT_MODE || 'light';
+    var theme = localValue ? localValue : configValue;
+
+    if (theme === 'system') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // 2. Apply to Root
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // 3. Highlight.js Toggle Strategy
+    var lightLink = document.getElementById('hljs-light');
+    var darkLink = document.getElementById('hljs-dark');
+
+    if (lightLink && darkLink) {
+      if (theme === 'dark') {
+        lightLink.disabled = true;
+        darkLink.disabled = false;
+      } else {
+        lightLink.disabled = false;
+        darkLink.disabled = true;
+      }
+    }
+
+    document.documentElement.style.visibility = "visible";
+  } catch (e) {
+    document.documentElement.style.visibility = "visible";
+    console.error('Theme init failed', e);
+  }
+})();</script>
+    <style>
+      html {
+        visibility: hidden;
+      }
+    </style>
+    
+    <script>
+      var root = "../../";
+      if (root && !root.endsWith('/')) root += '/';
+      if (root === '') root = './';
+      window.DOCMD_ROOT = root;
+
+      var siteRoot = "../../";
+      if (siteRoot && !siteRoot.endsWith('/')) siteRoot += '/';
+      if (siteRoot === '') siteRoot = './';
+      window.DOCMD_SITE_ROOT = siteRoot;
+
+      window.DOCMD_APPEARANCE = "system";
+      window.DOCMD_VERSION_ROOT = "/";
+      window.DOCMD_BASE = "/";
+      window.DOCMD_LOCALE = "";
+      window.DOCMD_DEFAULT_LOCALE = "";
+    </script>
+    <title>
+      PocketMage Scripting Reference : PocketMage
+    </title>
+    <link id="site-favicon" rel="icon" href="../../assets/favicon.png?v=mqob665d">
+    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=mqob665d">
+    
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=mqob665d" id="hljs-light" >
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=mqob665d" id="hljs-dark" disabled>
+    
+    
+<meta name="description" content="Complete API reference for Wrench script bindings on PocketMage.">
+<link rel="canonical" href="https://ashtf8.github.io/PocketMage_PDA/docs/scripting/fullPotionCommandList/">
+<meta property="og:title" content="PocketMage Scripting Reference - PocketMage">
+<meta property="og:description" content="Complete API reference for Wrench script bindings on PocketMage.">
+<meta property="og:url" content="https://ashtf8.github.io/PocketMage_PDA/docs/scripting/fullPotionCommandList/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://ashtf8.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PocketMage Scripting Reference - PocketMage">
+<meta name="twitter:description" content="Complete API reference for Wrench script bindings on PocketMage.">
+<meta name="twitter:image" content="https://ashtf8.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
+
+
+
+<link rel="stylesheet" href="../../assets/css/docmd-theme-ruby.css?v=mqob665d" >
+<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=mqob665d" >
+<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=mqob665d" >
+
+    
+      <link rel="stylesheet" href="../../assets/css/theme.css?v=mqob665d">
+    
+    <script>/**
+ * --------------------------------------------------------------------
+ * docmd : the zero-config documentation engine.
+ *
+ * @package     @docmd/core (and ecosystem)
+ * @website     https://docmd.io
+ * @repository  https://github.com/docmd-io/docmd
+ * @license     MIT
+ * @copyright   Copyright (c) 2025-present docmd.io
+ *
+ * [docmd-source] - Please do not remove this header.
+ * --------------------------------------------------------------------
+ */
+
+(function () {
+  try {
+    // 1. Determine Theme
+    var localValue = localStorage.getItem('docmd-theme');
+    var configValue = window.DOCMD_DEFAULT_MODE || 'light';
+    var theme = localValue ? localValue : configValue;
+
+    if (theme === 'system') {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+
+    // 2. Apply to Root
+    document.documentElement.setAttribute('data-theme', theme);
+
+    // 3. Highlight.js Toggle Strategy
+    var lightLink = document.getElementById('hljs-light');
+    var darkLink = document.getElementById('hljs-dark');
+
+    if (lightLink && darkLink) {
+      if (theme === 'dark') {
+        lightLink.disabled = true;
+        darkLink.disabled = false;
+      } else {
+        lightLink.disabled = false;
+        darkLink.disabled = true;
+      }
+    }
+
+    document.documentElement.style.visibility = "visible";
+  } catch (e) {
+    document.documentElement.style.visibility = "visible";
+    console.error('Theme init failed', e);
+  }
+})();</script>
+  </head>
+  <body
+    class="sidebar-collapsible"
+    data-default-collapsed="false"
+    data-copy-code-enabled="true" data-spa-enabled="true" data-source-file="docs/scripting/fullPotionCommandList.md">
+
+    <a href="#main-content" class="skip-link">skipToContent</a>
+
+    
+    
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          
+            <h1><a href="../../">
+                PocketMage
+              </a></h1>
+          
+          <span class="mobile-view sidebar-menu-button float-right">
+            
+<svg class="lucide-icon icon-menu " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-menu"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 5h16" />
+  <path d="M4 12h16" />
+  <path d="M4 19h16" />
+</svg>
+
+          </span>
+        </div>
+        <div class="sidebar-top-group">
+          
+          
+          
+          
+        </div>
+        
+
+<nav class="sidebar-nav" aria-label="mainNavigation">
+  <ul>
+    
+      <li class="" >
+      
+        <a href="../../" class=" "
+          >
+           
+<svg class="lucide-icon icon-home " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-house"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Home
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../faq/" class=" "
+          >
+           
+<svg class="lucide-icon icon-help-circle " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-circle-question-mark"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+  <path d="M12 17h.01" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            FAQ
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../command-manual/" class=" "
+          >
+           
+<svg class="lucide-icon icon-keyboard " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-keyboard"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 8h.01" />
+  <path d="M12 12h.01" />
+  <path d="M14 8h.01" />
+  <path d="M16 12h.01" />
+  <path d="M18 8h.01" />
+  <path d="M6 8h.01" />
+  <path d="M7 16h10" />
+  <path d="M8 12h.01" />
+  <rect width="20" height="16" x="2" y="4" rx="2" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Command Manual
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <a href="../../tutorials/" class=" nav-group"
+          >
+           
+<svg class="lucide-icon icon-book-open " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-book-open"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 7v14" />
+  <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Tutorials
+            </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+          
+        </a>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../tutorials/format-micro-sd/" class=" "
+          >
+           
+          
+          <span class="nav-item-title">
+            Format MicroSD Card
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../tutorials/platformio-config/" class=" "
+          >
+           
+<svg class="lucide-icon icon-settings " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-settings"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            PlatformIO Config
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <a href="../../development/" class=" nav-group"
+          >
+           
+<svg class="lucide-icon icon-code " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-code"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m16 18 6-6-6-6" />
+  <path d="m8 6-6 6 6 6" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Development
+            </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+          
+        </a>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../development/build-environments/" class=" "
+          >
+           
+<svg class="lucide-icon icon-settings " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-settings"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Build Environments
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="active-parent collapsible expanded nav-group"  aria-expanded="true" >
+      
+        <a href="../../scripting/" class=" nav-group"
+          >
+           
+<svg class="lucide-icon icon-terminal " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-terminal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 19h8" />
+  <path d="m4 17 6-6-6-6" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Scripting
+            </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+          
+        </a>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../scripting/example-c/" class=" "
+          >
+           
+<svg class="lucide-icon icon-terminal " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-terminal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 19h8" />
+  <path d="m4 17 6-6-6-6" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Basic Input/Output
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../scripting/ink-c/" class=" "
+          >
+           
+<svg class="lucide-icon icon-image " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-image"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+  <circle cx="9" cy="9" r="2" />
+  <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            E-Ink Drawing
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../scripting/oled-c/" class=" "
+          >
+           
+<svg class="lucide-icon icon-monitor " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-monitor"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="20" height="14" x="2" y="3" rx="2" />
+  <line x1="8" x2="16" y1="21" y2="21" />
+  <line x1="12" x2="12" y1="17" y2="21" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            OLED Drawing
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="active" >
+      
+        <a href="../../scripting/fullPotionCommandList/" class="active "
+          >
+           
+<svg class="lucide-icon icon-book " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-book"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Full Command Reference
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="https://github.com/ashtf8/PocketMage_PDA" class=" "
+          target=&quot;_blank&quot; rel=&quot;noopener&quot;>
+           
+<svg class="lucide-icon icon-github " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-github"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+  <path d="M9 18c-4.51 2-5-2-7-2" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            GitHub
+            </span>
+          
+           
+<svg class="lucide-icon icon-external-link nav-external-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-external-link"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M15 3h6v6" />
+  <path d="M10 14 21 3" />
+  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+</svg>
+
+          
+        </a>
+        
+
+        
+      </li>
+    
+  </ul>
+</nav>
+        <div class="sidebar-bottom-group mt-auto">
+          
+          
+          
+          
+        </div>
+      </aside>
+      
+      <div class="main-content-wrapper">
+        
+        
+          <header class="page-header">
+            <div class="header-left">
+              
+                <button id="sidebar-toggle-button" class="sidebar-toggle-button"
+                  aria-label="toggleSidebar">
+                  
+<svg class="lucide-icon icon-chevron-left " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m15 18-6-6 6-6" />
+</svg>
+
+                </button>
+              
+              <div class="header-titles-wrapper">
+                <span class="header-title">
+                  PocketMage Scripting Reference
+                </span>
+              </div>
+            </div>
+            <div class="header-right">
+              
+                
+
+
+<div class="docmd-options-menu">
+    
+    <button class="docmd-search-trigger" aria-label="search">
+        
+<svg class="lucide-icon icon-search " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-search"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg>
+
+        <span class="search-label">search</span>
+        <span class="search-keys"><kbd class="docmd-kbd">⌘</kbd><kbd class="docmd-kbd">K</kbd></span>
+    </button>
+    
+
+    
+
+    
+
+    
+    <button class="theme-toggle-button" aria-label="toggleTheme">
+        
+<svg class="lucide-icon icon-sun icon-sun" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-sun"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" />
+</svg>
+ 
+<svg class="lucide-icon icon-moon icon-moon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-moon"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+</svg>
+
+    </button>
+    
+
+    
+</div>
+
+              
+            </div>
+          </header>
+        
+        <div class="content-theme-cover">
+          <main class="content-area" id="main-content">
+            <div class="content-layout">
+              <div class="main-content">
+                <div class="docmd-breadcrumbs-row">
+                  <div id="docmd-raw-markdown" data-content="---%0Atitle%3A%20%22PocketMage%20Scripting%20Reference%22%0Adescription%3A%20%22Complete%20API%20reference%20for%20Wrench%20script%20bindings%20on%20PocketMage.%22%0A---%0A%0A%23%20PocketMage%20Scripting%20Reference%0A%0AThis%20document%20details%20the%20Wrench%20script%20bindings%20available%20in%20the%20PocketMage%20OS.%20Functions%20are%20grouped%20by%20their%20operational%20category.%0A%0A---%0A%0A%23%23%201.%20Input%20%2F%20Output%20%26%20Terminal%0A%0A%23%23%23%20%60print(text)%60%0A%0AAppends%20a%20string%20to%20the%20terminal%20output%20buffer.%20Does%20not%20automatically%20refresh%20the%20screen.%0A%0A*%20**Parameters%3A**%20%60text%60%20(String)%20-%20The%20string%20to%20print.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20print(%22Hello%2C%20terminal!%22)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60updateTerm()%60%0A%0ARefreshes%20the%20terminal%20display%20to%20show%20the%20latest%20buffer%20contents.%0A%0A*%20**Parameters%3A**%20None.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20print(%22Loading...%22)%3B%0A%20%20updateTerm()%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60prompt(promptText)%60%0A%0AOpens%20a%20text%20input%20prompt%20interface%20and%20pauses%20script%20execution%20until%20the%20user%20submits%20or%20cancels.%0A%0A*%20**Parameters%3A**%20%60promptText%60%20(String)%20-%20The%20message%20displayed%20to%20the%20user.%0A*%20**Returns%3A**%20(String)%20The%20entered%20text%2C%20or%20an%20empty%20string%20%60%22%22%60%20if%20the%20user%20cancels%20(%60_EXIT_%60).%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20name%20%3D%20prompt(%22Enter%20your%20name%3A%22)%3B%0A%20%20print(%22Hello%20%22%20%2B%20name)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60boolPrompt(promptText)%60%0A%0AOpens%20a%20yes%2Fno%20boolean%20prompt%20interface.%0A%0A*%20**Parameters%3A**%20%60promptText%60%20(String)%20-%20The%20question%20displayed%20to%20the%20user.%0A*%20**Returns%3A**%20(Int)%20%601%60%20for%20yes%2Ftrue%2C%20%600%60%20for%20no%2Ffalse.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20if%20(boolPrompt(%22Save%20file%3F%22))%20%7B%0A%20%20%20%20%20%20writeFile(%22%2Fdata.txt%22%2C%20%22saved%22)%3B%0A%20%20%7D%0A%20%20%60%60%60%0A%0A%23%23%23%20%60timePrompt(defaultTime)%60%0A%0AOpens%20a%20time%20selection%20interface.%0A%0A*%20**Parameters%3A**%20%60defaultTime%60%20(Int)%20-%20The%20initial%20time%20value%20to%20display.%0A*%20**Returns%3A**%20(Int)%20The%20selected%20time.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20alarm%20%3D%20timePrompt(1200)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60datePrompt(defaultDate)%60%0A%0AOpens%20a%20date%20selection%20interface.%0A%0A*%20**Parameters%3A**%20%60defaultDate%60%20(String)%20-%20The%20initial%20date%20to%20display%20(format%3A%20max%2015%20chars).%0A*%20**Returns%3A**%20(String)%20The%20selected%20date.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20dueDate%20%3D%20datePrompt(%222026-05-01%22)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60waitForKeypress(message)%60%0A%0AHalts%20script%20execution%20and%20waits%20for%20the%20user%20to%20press%20a%20key.%0A%0A*%20**Parameters%3A**%20%60message%60%20(String)%20-%20Text%20to%20display%20while%20waiting.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20waitForKeypress(%22Press%20any%20key%20to%20continue...%22)%3B%0A%20%20%60%60%60%0A%0A---%0A%0A%23%23%202.%20Main%20E-Paper%20Display%0A%0A%23%23%23%20%60updateInk()%60%0A%0APushes%20the%20current%20E-Ink%20drawing%20buffer%20to%20the%20physical%20e-paper%20display.%20This%20is%20a%20slow%2C%20blocking%20hardware%20update.%0A%0A*%20**Parameters%3A**%20None.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20inkText(10%2C%2020%2C%202%2C%201%2C%20%22Hello%20E-Ink%22)%3B%0A%20%20updateInk()%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60inkBackground(color)%60%0A%0AFills%20the%20entire%20E-Ink%20screen%20with%20a%20solid%20color.%0A%0A*%20**Parameters%3A**%20%60color%60%20(Int)%20-%20%600%60%20for%20black%2C%20%601%60%20(or%20non-zero)%20for%20white.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20inkBackground(1)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60inkRect(x%2C%20y%2C%20width%2C%20height%2C%20borderColor%2C%20fillColor)%60%0A%0ADraws%20a%20rectangle%20on%20the%20E-Ink%20display%20buffer.%0A%0A*%20**Parameters%3A**%0A%20%20*%20%60x%60%2C%20%60y%60%20(Int)%20-%20Origin%20coordinates.%0A%20%20*%20%60width%60%2C%20%60height%60%20(Int)%20-%20Dimensions.%0A%20%20*%20%60borderColor%60%20(Int)%20-%20%600%60%20to%20draw%20border%2C%20%601%60%20for%20no%20border.%0A%20%20*%20%60fillColor%60%20(Int)%20-%20%600%60%20to%20fill%20rectangle%2C%20%601%60%20for%20transparent%2Fno%20fill.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20inkRect(10%2C%2010%2C%20100%2C%2050%2C%200%2C%201)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60inkCircle(x%2C%20y%2C%20radius%2C%20borderColor%2C%20fillColor)%60%0A%0ADraws%20a%20circle%20on%20the%20E-Ink%20display%20buffer.%0A%0A*%20**Parameters%3A**%0A%20%20*%20%60x%60%2C%20%60y%60%20(Int)%20-%20Center%20coordinates.%0A%20%20*%20%60radius%60%20(Int)%20-%20Radius%20in%20pixels.%0A%20%20*%20%60borderColor%60%20(Int)%20-%20%600%60%20to%20draw%20border%2C%20%601%60%20for%20no%20border.%0A%20%20*%20%60fillColor%60%20(Int)%20-%20%600%60%20to%20fill%20circle%2C%20%601%60%20for%20transparent%2Fno%20fill.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20inkCircle(100%2C%20100%2C%2025%2C%200%2C%200)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60inkText(x%2C%20y%2C%20size%2C%20color%2C%20text)%60%0A%0ARenders%20text%20to%20the%20E-Ink%20display%20buffer.%0A%0A*%20**Parameters%3A**%0A%20%20*%20%60x%60%2C%20%60y%60%20(Int)%20-%20Cursor%20start%20coordinates.%0A%20%20*%20%60size%60%20(Int)%20-%20Font%20size%20mapping%3A%20%601%60%20%3D%205x7%20Fixed%2C%20%602%60%20%3D%209pt%20Bold%2C%20%603%60%20%3D%2012pt%20Bold.%0A%20%20*%20%60color%60%20(Int)%20-%20%600%60%20for%20white%20text%2C%20%601%60%20(or%20non-zero)%20for%20black%20text.%0A%20%20*%20%60text%60%20(String)%20-%20Text%20to%20display.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20inkText(5%2C%2050%2C%203%2C%201%2C%20%22PocketMage%22)%3B%0A%20%20%60%60%60%0A%0A---%0A%0A%23%23%203.%20Secondary%20OLED%20Display%0A%0A%23%23%23%20%60updateOled()%60%0A%0APushes%20the%20current%20OLED%20drawing%20buffer%20to%20the%20physical%20OLED%20screen%20and%20clears%20the%20internal%20buffer.%0A%0A*%20**Parameters%3A**%20None.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20oledText(0%2C%2010%2C%202%2C%200%2C%20%22OLED%20Active%22)%3B%0A%20%20updateOled()%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60oledWord(text)%60%0A%0AAbstracted%20wrapper%20to%20quickly%20print%20a%20formatted%20string%20directly%20to%20the%20OLED%20display.%0A%0A*%20**Parameters%3A**%20%60text%60%20(String)%20-%20Text%20to%20display.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20oledWord(%22Processing...%22)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60sysMessage(msg%2C%20delayMs)%60%0A%0AFlashes%20a%20high-priority%20system%20message%20on%20the%20OLED%20and%20blocks%20execution%20for%20the%20specified%20time.%0A%0A*%20**Parameters%3A**%0A%20%20*%20%60msg%60%20(String)%20-%20System%20message%20text.%0A%20%20*%20%60delayMs%60%20(Int)%20-%20Time%20in%20milliseconds%20to%20show%20the%20message%20before%20continuing.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20sysMessage(%22Script%20Error%22%2C%202000)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60oledBackground(color)%60%0A%0AFills%20the%20OLED%20screen%20buffer.%0A%0A*%20**Parameters%3A**%20%60color%60%20(Int)%20-%20%600%60%20to%20turn%20pixels%20ON%2C%20%601%60%20to%20turn%20pixels%20OFF.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20oledBackground(1)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60oledRect(x%2C%20y%2C%20width%2C%20height%2C%20borderColor%2C%20fillColor)%60%0A%0ADraws%20a%20rectangle%20on%20the%20OLED%20buffer.%0A%0A*%20**Parameters%3A**%0A%20%20*%20%60x%60%2C%20%60y%60%20(Int)%20-%20Origin%20coordinates.%0A%20%20*%20%60width%60%2C%20%60height%60%20(Int)%20-%20Dimensions.%0A%20%20*%20%60borderColor%60%20(Int)%20-%20%600%60%20to%20draw%20border%2C%20%601%60%20for%20no%20border.%0A%20%20*%20%60fillColor%60%20(Int)%20-%20%600%60%20to%20fill%20rectangle%2C%20%601%60%20for%20transparent%2Fno%20fill.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20oledRect(0%2C%200%2C%20128%2C%2032%2C%200%2C%201)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60oledCircle(x%2C%20y%2C%20radius%2C%20borderColor)%60%0A%0ADraws%20a%20circle%20outline%20on%20the%20OLED%20buffer.%20(No%20fill%20option%20supported).%0A%0A*%20**Parameters%3A**%0A%20%20*%20%60x%60%2C%20%60y%60%20(Int)%20-%20Center%20coordinates.%0A%20%20*%20%60radius%60%20(Int)%20-%20Radius%20in%20pixels.%0A%20%20*%20%60borderColor%60%20(Int)%20-%20%600%60%20to%20draw%20border%2C%20%601%60%20for%20no%20border.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20oledCircle(64%2C%2016%2C%2010%2C%200)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60oledText(x%2C%20y%2C%20size%2C%20color%2C%20text)%60%0A%0ARenders%20text%20to%20the%20OLED%20buffer.%0A%0A*%20**Parameters%3A**%0A%20%20*%20%60x%60%2C%20%60y%60%20(Int)%20-%20Cursor%20start%20coordinates.%0A%20%20*%20%60size%60%20(Int)%20-%20Font%20size%20mapping%3A%20%601%60%20%3D%205x7%2C%20%602%60%20%3D%207x13%20Bold%2C%20%603%60%20%3D%20HelvB14%2C%20%60default%60%20%3D%20LubR18.%0A%20%20*%20%60color%60%20(Int)%20-%20%600%60%20to%20turn%20text%20pixels%20ON%2C%20%601%60%20to%20turn%20text%20pixels%20OFF%20(inverted).%0A%20%20*%20%60text%60%20(String)%20-%20Text%20to%20display.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20oledText(0%2C%2015%2C%201%2C%200%2C%20%22Status%3A%20OK%22)%3B%0A%20%20%60%60%60%0A%0A---%0A%0A%23%23%204.%20Hardware%20%26%20System%0A%0A%23%23%23%20%60getKey()%60%0A%0APulls%20the%20most%20recent%20character%20from%20the%20keyboard%20input%20buffer.%0A%0A*%20**Parameters%3A**%20None.%0A*%20**Returns%3A**%20(Int)%20The%20ASCII%20keycode%20value%20of%20the%20pressed%20key.%20Returns%20%600%60%20if%20no%20key%20is%20pressed.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20k%20%3D%20getKey()%3B%0A%20%20if%20(k%20%3D%3D%2013)%20%7B%20print(%22Enter%20pressed%22)%3B%20%7D%0A%20%20%60%60%60%0A%0A%23%23%23%20%60getTouch()%60%0A%0ARetrieves%20the%20scroll%20vector%20direction%20from%20the%20hardware%20touch%20sensor.%0A%0A*%20**Parameters%3A**%20None.%0A*%20**Returns%3A**%20(Int)%20The%20directional%20scroll%20vector.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20scrollDir%20%3D%20getTouch()%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60getBattery()%60%0A%0ARetrieves%20the%20raw%20integer%20state%20of%20the%20battery%20monitor.%0A%0A*%20**Parameters%3A**%20None.%0A*%20**Returns%3A**%20(Int)%20Battery%20state%20enum%2Finteger.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20state%20%3D%20getBattery()%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60getBatteryVoltage()%60%0A%0ARetrieves%20the%20live%20battery%20voltage%20reading.%0A%0A*%20**Parameters%3A**%20None.%0A*%20**Returns%3A**%20(Float)%20Battery%20voltage.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20volts%20%3D%20getBatteryVoltage()%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60setCpuSpeed(freq)%60%0A%0ADynamically%20scales%20the%20CPU%20frequency.%0A%0A*%20**Parameters%3A**%20%60freq%60%20(Int)%20-%20Target%20frequency%20in%20MHz.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20setCpuSpeed(80)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60sleep()%60%0A%0ATriggers%20the%20device%20to%20enter%20deep%20sleep%20immediately.%0A%0A*%20**Parameters%3A**%20None.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20sleep()%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60getTime()%60%0A%0AGets%20the%20current%20system%20RTC%20time.%0A%0A*%20**Parameters%3A**%20None.%0A*%20**Returns%3A**%20(String)%20Formatted%20time%20string%20%60HH%3AMM%3ASS%60.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20t%20%3D%20getTime()%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60getDate()%60%0A%0AGets%20the%20current%20system%20RTC%20date.%0A%0A*%20**Parameters%3A**%20None.%0A*%20**Returns%3A**%20(String)%20Formatted%20date%20string%20%60YYYY-MM-DD%60.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20d%20%3D%20getDate()%3B%0A%20%20%60%60%60%0A%0A---%0A%0A%23%23%205.%20Filesystem%20(SD%20Card)%0A%0A%23%23%23%20%60readFile(path)%60%0A%0AReads%20the%20entire%20contents%20of%20a%20file%20from%20the%20SD%20card%20into%20a%20string.%0A%0A*%20**Parameters%3A**%20%60path%60%20(String)%20-%20Absolute%20path%20to%20the%20file.%0A*%20**Returns%3A**%20(String)%20File%20contents.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20data%20%3D%20readFile(%22%2Fdata%2Fconfig.txt%22)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60writeFile(path%2C%20content)%60%0A%0AWrites%20a%20string%20to%20a%20file%20on%20the%20SD%20card.%20Overwrites%20existing%20files.%0A%0A*%20**Parameters%3A**%0A%20%20*%20%60path%60%20(String)%20-%20Absolute%20path%20to%20the%20target%20file.%0A%20%20*%20%60content%60%20(String)%20-%20Data%20to%20write.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20writeFile(%22%2Fdata%2Flog.txt%22%2C%20%22Event%20recorded%22)%3B%0A%20%20%60%60%60%0A%0A---%0A%0A%23%23%206.%20General%20Helpers%0A%0A%23%23%23%20%60delay(ms)%60%0A%0AHalts%20script%20execution%20for%20a%20specified%20number%20of%20milliseconds.%0A%0A*%20**Parameters%3A**%20%60ms%60%20(Int)%20-%20Milliseconds%20to%20wait.%0A*%20**Returns%3A**%20None.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20delay(500)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60toInt(string)%60%0A%0AConverts%20a%20string%20representation%20of%20a%20number%20into%20an%20integer.%0A%0A*%20**Parameters%3A**%20%60string%60%20(String)%20-%20The%20numeric%20string.%0A*%20**Returns%3A**%20(Int)%20The%20parsed%20integer%20value.%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20val%20%3D%20toInt(%221024%22)%3B%0A%20%20%60%60%60%0A%0A%23%23%23%20%60random(min%2C%20max)%60%0A%0AGenerates%20a%20pseudo-random%20integer%20within%20a%20specific%20range.%0A%0A*%20**Parameters%3A**%0A%20%20*%20%60min%60%20(Int)%20-%20Minimum%20bounds.%0A%20%20*%20%60max%60%20(Int)%20-%20Maximum%20bounds.%0A*%20**Returns%3A**%20(Int)%20Random%20number%20between%20min%20and%20max%20(inclusive).%0A*%20**Example%3A**%0A%0A%20%20%60%60%60c%0A%20%20diceRoll%20%3D%20random(1%2C%206)%3B%0A%20%20%60%60%60%0A" style="display: none;"></div>
+                  
+                    <nav aria-label="breadcrumb" class="docmd-breadcrumbs">
+                      <ol>
+                        
+                        
+                          <li class="breadcrumb-item " >
+                            
+                              <a href="../../scripting/">Scripting</a>
+                            
+                            
+                              <span class="breadcrumb-separator">
+<svg class="lucide-icon icon-chevron-right " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+                            
+                          </li>
+                        
+                          <li class="breadcrumb-item active" aria-current=&quot;page&quot;>
+                            
+                              <span>Full Command Reference</span>
+                            
+                            
+                          </li>
+                        
+                      </ol>
+                    </nav>
+                  
+
+                  
+                    <div class="docmd-copy-widgets">
+                      
+                        <button class="docmd-copy-btn docmd-copy-raw-btn" data-copied="copiedToClipboard" title="copyMarkdown" aria-label="copyMarkdown">
+                          <span class="docmd-btn-icon">
+<svg class="lucide-icon icon-copy " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-copy"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+  <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+</svg>
+</span>
+                        </button>
+                      
+                      
+                        <button class="docmd-copy-btn docmd-copy-context-btn" data-copied="copiedToClipboard" title="copyContext">
+                          <span class="docmd-btn-icon">
+<svg class="lucide-icon icon-message-square " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-message-square"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
+</svg>
+</span>
+                          <span class="docmd-btn-text">copyContext</span>
+                        </button>
+                      
+                    </div>
+                  
+                </div>
+                
+                <h1 id="pocketmage-scripting-reference" class="docmd-heading"><a href="#pocketmage-scripting-reference" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>PocketMage Scripting Reference</h1>
+<p>This document details the Wrench script bindings available in the PocketMage OS. Functions are grouped by their operational category.</p>
+<hr>
+<h2 id="pocketmage-scripting-reference-1-input-output-terminal" class="docmd-heading"><a href="#pocketmage-scripting-reference-1-input-output-terminal" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>1. Input / Output &amp; Terminal</h2>
+<h3 id="pocketmage-scripting-reference-1-input-output-terminal-printtext" class="docmd-heading"><a href="#pocketmage-scripting-reference-1-input-output-terminal-printtext" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>print(text)</code></h3>
+<p>Appends a string to the terminal output buffer. Does not automatically refresh the screen.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>text</code> (String) - The string to print.</p>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">print</span>(<span class="hljs-string">&quot;Hello, terminal!&quot;</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-1-input-output-terminal-updateterm" class="docmd-heading"><a href="#pocketmage-scripting-reference-1-input-output-terminal-updateterm" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>updateTerm()</code></h3>
+<p>Refreshes the terminal display to show the latest buffer contents.</p>
+<ul>
+<li><p><strong>Parameters:</strong> None.</p>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">print</span>(<span class="hljs-string">&quot;Loading...&quot;</span>);
+<span class="hljs-title function_">updateTerm</span>();
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-1-input-output-terminal-promptprompttext" class="docmd-heading"><a href="#pocketmage-scripting-reference-1-input-output-terminal-promptprompttext" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>prompt(promptText)</code></h3>
+<p>Opens a text input prompt interface and pauses script execution until the user submits or cancels.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>promptText</code> (String) - The message displayed to the user.</p>
+</li>
+<li><p><strong>Returns:</strong> (String) The entered text, or an empty string <code>&quot;&quot;</code> if the user cancels (<code>_EXIT_</code>).</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>name <span class="hljs-punctuation">=</span> <span class="hljs-title function_">prompt</span>(<span class="hljs-string">&quot;Enter your name:&quot;</span>);
+<span class="hljs-title function_">print</span>(<span class="hljs-string">&quot;Hello &quot;</span> <span class="hljs-punctuation">+</span> name);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-1-input-output-terminal-boolpromptprompttext" class="docmd-heading"><a href="#pocketmage-scripting-reference-1-input-output-terminal-boolpromptprompttext" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>boolPrompt(promptText)</code></h3>
+<p>Opens a yes/no boolean prompt interface.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>promptText</code> (String) - The question displayed to the user.</p>
+</li>
+<li><p><strong>Returns:</strong> (Int) <code>1</code> for yes/true, <code>0</code> for no/false.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-keyword">if</span> (<span class="hljs-title function_">boolPrompt</span>(<span class="hljs-string">&quot;Save file?&quot;</span>)) {
+    <span class="hljs-title function_">writeFile</span>(<span class="hljs-string">&quot;/data.txt&quot;</span>, <span class="hljs-string">&quot;saved&quot;</span>);
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-1-input-output-terminal-timepromptdefaulttime" class="docmd-heading"><a href="#pocketmage-scripting-reference-1-input-output-terminal-timepromptdefaulttime" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>timePrompt(defaultTime)</code></h3>
+<p>Opens a time selection interface.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>defaultTime</code> (Int) - The initial time value to display.</p>
+</li>
+<li><p><strong>Returns:</strong> (Int) The selected time.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>alarm <span class="hljs-punctuation">=</span> <span class="hljs-title function_">timePrompt</span>(<span class="hljs-number">1200</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-1-input-output-terminal-datepromptdefaultdate" class="docmd-heading"><a href="#pocketmage-scripting-reference-1-input-output-terminal-datepromptdefaultdate" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>datePrompt(defaultDate)</code></h3>
+<p>Opens a date selection interface.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>defaultDate</code> (String) - The initial date to display (format: max 15 chars).</p>
+</li>
+<li><p><strong>Returns:</strong> (String) The selected date.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>dueDate <span class="hljs-punctuation">=</span> <span class="hljs-title function_">datePrompt</span>(<span class="hljs-string">&quot;2026-05-01&quot;</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-1-input-output-terminal-waitforkeypressmessage" class="docmd-heading"><a href="#pocketmage-scripting-reference-1-input-output-terminal-waitforkeypressmessage" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>waitForKeypress(message)</code></h3>
+<p>Halts script execution and waits for the user to press a key.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>message</code> (String) - Text to display while waiting.</p>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">waitForKeypress</span>(<span class="hljs-string">&quot;Press any key to continue...&quot;</span>);
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="pocketmage-scripting-reference-2-main-e-paper-display" class="docmd-heading"><a href="#pocketmage-scripting-reference-2-main-e-paper-display" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>2. Main E-Paper Display</h2>
+<h3 id="pocketmage-scripting-reference-2-main-e-paper-display-updateink" class="docmd-heading"><a href="#pocketmage-scripting-reference-2-main-e-paper-display-updateink" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>updateInk()</code></h3>
+<p>Pushes the current E-Ink drawing buffer to the physical e-paper display. This is a slow, blocking hardware update.</p>
+<ul>
+<li><p><strong>Parameters:</strong> None.</p>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">inkText</span>(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;Hello E-Ink&quot;</span>);
+<span class="hljs-title function_">updateInk</span>();
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-2-main-e-paper-display-inkbackgroundcolor" class="docmd-heading"><a href="#pocketmage-scripting-reference-2-main-e-paper-display-inkbackgroundcolor" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>inkBackground(color)</code></h3>
+<p>Fills the entire E-Ink screen with a solid color.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>color</code> (Int) - <code>0</code> for black, <code>1</code> (or non-zero) for white.</p>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">inkBackground</span>(<span class="hljs-number">1</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-2-main-e-paper-display-inkrectx-y-width-height-bordercolor-fillcolor" class="docmd-heading"><a href="#pocketmage-scripting-reference-2-main-e-paper-display-inkrectx-y-width-height-bordercolor-fillcolor" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>inkRect(x, y, width, height, borderColor, fillColor)</code></h3>
+<p>Draws a rectangle on the E-Ink display buffer.</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><code>x</code>, <code>y</code> (Int) - Origin coordinates.</li>
+<li><code>width</code>, <code>height</code> (Int) - Dimensions.</li>
+<li><code>borderColor</code> (Int) - <code>0</code> to draw border, <code>1</code> for no border.</li>
+<li><code>fillColor</code> (Int) - <code>0</code> to fill rectangle, <code>1</code> for transparent/no fill.</li>
+</ul>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">inkRect</span>(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">100</span>, <span class="hljs-number">50</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-2-main-e-paper-display-inkcirclex-y-radius-bordercolor-fillcolor" class="docmd-heading"><a href="#pocketmage-scripting-reference-2-main-e-paper-display-inkcirclex-y-radius-bordercolor-fillcolor" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>inkCircle(x, y, radius, borderColor, fillColor)</code></h3>
+<p>Draws a circle on the E-Ink display buffer.</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><code>x</code>, <code>y</code> (Int) - Center coordinates.</li>
+<li><code>radius</code> (Int) - Radius in pixels.</li>
+<li><code>borderColor</code> (Int) - <code>0</code> to draw border, <code>1</code> for no border.</li>
+<li><code>fillColor</code> (Int) - <code>0</code> to fill circle, <code>1</code> for transparent/no fill.</li>
+</ul>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">inkCircle</span>(<span class="hljs-number">100</span>, <span class="hljs-number">100</span>, <span class="hljs-number">25</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-2-main-e-paper-display-inktextx-y-size-color-text" class="docmd-heading"><a href="#pocketmage-scripting-reference-2-main-e-paper-display-inktextx-y-size-color-text" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>inkText(x, y, size, color, text)</code></h3>
+<p>Renders text to the E-Ink display buffer.</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><code>x</code>, <code>y</code> (Int) - Cursor start coordinates.</li>
+<li><code>size</code> (Int) - Font size mapping: <code>1</code> = 5x7 Fixed, <code>2</code> = 9pt Bold, <code>3</code> = 12pt Bold.</li>
+<li><code>color</code> (Int) - <code>0</code> for white text, <code>1</code> (or non-zero) for black text.</li>
+<li><code>text</code> (String) - Text to display.</li>
+</ul>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">inkText</span>(<span class="hljs-number">5</span>, <span class="hljs-number">50</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;PocketMage&quot;</span>);
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="pocketmage-scripting-reference-3-secondary-oled-display" class="docmd-heading"><a href="#pocketmage-scripting-reference-3-secondary-oled-display" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>3. Secondary OLED Display</h2>
+<h3 id="pocketmage-scripting-reference-3-secondary-oled-display-updateoled" class="docmd-heading"><a href="#pocketmage-scripting-reference-3-secondary-oled-display-updateoled" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>updateOled()</code></h3>
+<p>Pushes the current OLED drawing buffer to the physical OLED screen and clears the internal buffer.</p>
+<ul>
+<li><p><strong>Parameters:</strong> None.</p>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">oledText</span>(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;OLED Active&quot;</span>);
+<span class="hljs-title function_">updateOled</span>();
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-3-secondary-oled-display-oledwordtext" class="docmd-heading"><a href="#pocketmage-scripting-reference-3-secondary-oled-display-oledwordtext" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>oledWord(text)</code></h3>
+<p>Abstracted wrapper to quickly print a formatted string directly to the OLED display.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>text</code> (String) - Text to display.</p>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">oledWord</span>(<span class="hljs-string">&quot;Processing...&quot;</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-3-secondary-oled-display-sysmessagemsg-delayms" class="docmd-heading"><a href="#pocketmage-scripting-reference-3-secondary-oled-display-sysmessagemsg-delayms" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>sysMessage(msg, delayMs)</code></h3>
+<p>Flashes a high-priority system message on the OLED and blocks execution for the specified time.</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><code>msg</code> (String) - System message text.</li>
+<li><code>delayMs</code> (Int) - Time in milliseconds to show the message before continuing.</li>
+</ul>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">sysMessage</span>(<span class="hljs-string">&quot;Script Error&quot;</span>, <span class="hljs-number">2000</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-3-secondary-oled-display-oledbackgroundcolor" class="docmd-heading"><a href="#pocketmage-scripting-reference-3-secondary-oled-display-oledbackgroundcolor" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>oledBackground(color)</code></h3>
+<p>Fills the OLED screen buffer.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>color</code> (Int) - <code>0</code> to turn pixels ON, <code>1</code> to turn pixels OFF.</p>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">oledBackground</span>(<span class="hljs-number">1</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-3-secondary-oled-display-oledrectx-y-width-height-bordercolor-fillcolor" class="docmd-heading"><a href="#pocketmage-scripting-reference-3-secondary-oled-display-oledrectx-y-width-height-bordercolor-fillcolor" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>oledRect(x, y, width, height, borderColor, fillColor)</code></h3>
+<p>Draws a rectangle on the OLED buffer.</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><code>x</code>, <code>y</code> (Int) - Origin coordinates.</li>
+<li><code>width</code>, <code>height</code> (Int) - Dimensions.</li>
+<li><code>borderColor</code> (Int) - <code>0</code> to draw border, <code>1</code> for no border.</li>
+<li><code>fillColor</code> (Int) - <code>0</code> to fill rectangle, <code>1</code> for transparent/no fill.</li>
+</ul>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">oledRect</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">128</span>, <span class="hljs-number">32</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-3-secondary-oled-display-oledcirclex-y-radius-bordercolor" class="docmd-heading"><a href="#pocketmage-scripting-reference-3-secondary-oled-display-oledcirclex-y-radius-bordercolor" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>oledCircle(x, y, radius, borderColor)</code></h3>
+<p>Draws a circle outline on the OLED buffer. (No fill option supported).</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><code>x</code>, <code>y</code> (Int) - Center coordinates.</li>
+<li><code>radius</code> (Int) - Radius in pixels.</li>
+<li><code>borderColor</code> (Int) - <code>0</code> to draw border, <code>1</code> for no border.</li>
+</ul>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">oledCircle</span>(<span class="hljs-number">64</span>, <span class="hljs-number">16</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-3-secondary-oled-display-oledtextx-y-size-color-text" class="docmd-heading"><a href="#pocketmage-scripting-reference-3-secondary-oled-display-oledtextx-y-size-color-text" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>oledText(x, y, size, color, text)</code></h3>
+<p>Renders text to the OLED buffer.</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><code>x</code>, <code>y</code> (Int) - Cursor start coordinates.</li>
+<li><code>size</code> (Int) - Font size mapping: <code>1</code> = 5x7, <code>2</code> = 7x13 Bold, <code>3</code> = HelvB14, <code>default</code> = LubR18.</li>
+<li><code>color</code> (Int) - <code>0</code> to turn text pixels ON, <code>1</code> to turn text pixels OFF (inverted).</li>
+<li><code>text</code> (String) - Text to display.</li>
+</ul>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">oledText</span>(<span class="hljs-number">0</span>, <span class="hljs-number">15</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Status: OK&quot;</span>);
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="pocketmage-scripting-reference-4-hardware-system" class="docmd-heading"><a href="#pocketmage-scripting-reference-4-hardware-system" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>4. Hardware &amp; System</h2>
+<h3 id="pocketmage-scripting-reference-4-hardware-system-getkey" class="docmd-heading"><a href="#pocketmage-scripting-reference-4-hardware-system-getkey" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>getKey()</code></h3>
+<p>Pulls the most recent character from the keyboard input buffer.</p>
+<ul>
+<li><p><strong>Parameters:</strong> None.</p>
+</li>
+<li><p><strong>Returns:</strong> (Int) The ASCII keycode value of the pressed key. Returns <code>0</code> if no key is pressed.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>k <span class="hljs-punctuation">=</span> <span class="hljs-title function_">getKey</span>();
+<span class="hljs-keyword">if</span> (k <span class="hljs-punctuation">==</span> <span class="hljs-number">13</span>) { <span class="hljs-title function_">print</span>(<span class="hljs-string">&quot;Enter pressed&quot;</span>); }
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-4-hardware-system-gettouch" class="docmd-heading"><a href="#pocketmage-scripting-reference-4-hardware-system-gettouch" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>getTouch()</code></h3>
+<p>Retrieves the scroll vector direction from the hardware touch sensor.</p>
+<ul>
+<li><p><strong>Parameters:</strong> None.</p>
+</li>
+<li><p><strong>Returns:</strong> (Int) The directional scroll vector.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>scrollDir <span class="hljs-punctuation">=</span> <span class="hljs-title function_">getTouch</span>();
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-4-hardware-system-getbattery" class="docmd-heading"><a href="#pocketmage-scripting-reference-4-hardware-system-getbattery" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>getBattery()</code></h3>
+<p>Retrieves the raw integer state of the battery monitor.</p>
+<ul>
+<li><p><strong>Parameters:</strong> None.</p>
+</li>
+<li><p><strong>Returns:</strong> (Int) Battery state enum/integer.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>state <span class="hljs-punctuation">=</span> <span class="hljs-title function_">getBattery</span>();
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-4-hardware-system-getbatteryvoltage" class="docmd-heading"><a href="#pocketmage-scripting-reference-4-hardware-system-getbatteryvoltage" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>getBatteryVoltage()</code></h3>
+<p>Retrieves the live battery voltage reading.</p>
+<ul>
+<li><p><strong>Parameters:</strong> None.</p>
+</li>
+<li><p><strong>Returns:</strong> (Float) Battery voltage.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>volts <span class="hljs-punctuation">=</span> <span class="hljs-title function_">getBatteryVoltage</span>();
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-4-hardware-system-setcpuspeedfreq" class="docmd-heading"><a href="#pocketmage-scripting-reference-4-hardware-system-setcpuspeedfreq" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>setCpuSpeed(freq)</code></h3>
+<p>Dynamically scales the CPU frequency.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>freq</code> (Int) - Target frequency in MHz.</p>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">setCpuSpeed</span>(<span class="hljs-number">80</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-4-hardware-system-sleep" class="docmd-heading"><a href="#pocketmage-scripting-reference-4-hardware-system-sleep" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>sleep()</code></h3>
+<p>Triggers the device to enter deep sleep immediately.</p>
+<ul>
+<li><p><strong>Parameters:</strong> None.</p>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">sleep</span>();
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-4-hardware-system-gettime" class="docmd-heading"><a href="#pocketmage-scripting-reference-4-hardware-system-gettime" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>getTime()</code></h3>
+<p>Gets the current system RTC time.</p>
+<ul>
+<li><p><strong>Parameters:</strong> None.</p>
+</li>
+<li><p><strong>Returns:</strong> (String) Formatted time string <code>HH:MM:SS</code>.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>t <span class="hljs-punctuation">=</span> <span class="hljs-title function_">getTime</span>();
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-4-hardware-system-getdate" class="docmd-heading"><a href="#pocketmage-scripting-reference-4-hardware-system-getdate" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>getDate()</code></h3>
+<p>Gets the current system RTC date.</p>
+<ul>
+<li><p><strong>Parameters:</strong> None.</p>
+</li>
+<li><p><strong>Returns:</strong> (String) Formatted date string <code>YYYY-MM-DD</code>.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>d <span class="hljs-punctuation">=</span> <span class="hljs-title function_">getDate</span>();
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="pocketmage-scripting-reference-5-filesystem-sd-card" class="docmd-heading"><a href="#pocketmage-scripting-reference-5-filesystem-sd-card" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>5. Filesystem (SD Card)</h2>
+<h3 id="pocketmage-scripting-reference-5-filesystem-sd-card-readfilepath" class="docmd-heading"><a href="#pocketmage-scripting-reference-5-filesystem-sd-card-readfilepath" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>readFile(path)</code></h3>
+<p>Reads the entire contents of a file from the SD card into a string.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>path</code> (String) - Absolute path to the file.</p>
+</li>
+<li><p><strong>Returns:</strong> (String) File contents.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>data <span class="hljs-punctuation">=</span> <span class="hljs-title function_">readFile</span>(<span class="hljs-string">&quot;/data/config.txt&quot;</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-5-filesystem-sd-card-writefilepath-content" class="docmd-heading"><a href="#pocketmage-scripting-reference-5-filesystem-sd-card-writefilepath-content" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>writeFile(path, content)</code></h3>
+<p>Writes a string to a file on the SD card. Overwrites existing files.</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><code>path</code> (String) - Absolute path to the target file.</li>
+<li><code>content</code> (String) - Data to write.</li>
+</ul>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">writeFile</span>(<span class="hljs-string">&quot;/data/log.txt&quot;</span>, <span class="hljs-string">&quot;Event recorded&quot;</span>);
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="pocketmage-scripting-reference-6-general-helpers" class="docmd-heading"><a href="#pocketmage-scripting-reference-6-general-helpers" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>6. General Helpers</h2>
+<h3 id="pocketmage-scripting-reference-6-general-helpers-delayms" class="docmd-heading"><a href="#pocketmage-scripting-reference-6-general-helpers-delayms" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>delay(ms)</code></h3>
+<p>Halts script execution for a specified number of milliseconds.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>ms</code> (Int) - Milliseconds to wait.</p>
+</li>
+<li><p><strong>Returns:</strong> None.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code><span class="hljs-title function_">delay</span>(<span class="hljs-number">500</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-6-general-helpers-tointstring" class="docmd-heading"><a href="#pocketmage-scripting-reference-6-general-helpers-tointstring" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>toInt(string)</code></h3>
+<p>Converts a string representation of a number into an integer.</p>
+<ul>
+<li><p><strong>Parameters:</strong> <code>string</code> (String) - The numeric string.</p>
+</li>
+<li><p><strong>Returns:</strong> (Int) The parsed integer value.</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>val <span class="hljs-punctuation">=</span> <span class="hljs-title function_">toInt</span>(<span class="hljs-string">&quot;1024&quot;</span>);
+</code></pre>
+</li>
+</ul>
+<h3 id="pocketmage-scripting-reference-6-general-helpers-randommin-max" class="docmd-heading"><a href="#pocketmage-scripting-reference-6-general-helpers-randommin-max" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a><code>random(min, max)</code></h3>
+<p>Generates a pseudo-random integer within a specific range.</p>
+<ul>
+<li><p><strong>Parameters:</strong></p>
+<ul>
+<li><code>min</code> (Int) - Minimum bounds.</li>
+<li><code>max</code> (Int) - Maximum bounds.</li>
+</ul>
+</li>
+<li><p><strong>Returns:</strong> (Int) Random number between min and max (inclusive).</p>
+</li>
+<li><p><strong>Example:</strong></p>
+<pre class="hljs"><code>diceRoll <span class="hljs-punctuation">=</span> <span class="hljs-title function_">random</span>(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>);
+</code></pre>
+</li>
+</ul>
+
+                
+                  <div class="page-navigation">
+                    
+                      <a href="../../scripting/oled-c/" class="prev-page">
+                        
+<svg class="lucide-icon icon-arrow-left page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-arrow-left"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m12 19-7-7 7-7" />
+  <path d="M19 12H5" />
+</svg>
+
+                        <span><small>previous</small><strong>
+                            OLED Drawing
+                          </strong></span>
+                      </a>
+                    
+                    
+                      <div class="next-page-placeholder">
+                      </div>
+                    
+                  </div>
+                
+              </div>
+              <div class="toc-sidebar">
+                
+
+
+  <div class="toc-container">
+    <h2 class="toc-title">onThisPage<span class="mobile-view toc-menu-button float-right">
+<svg class="lucide-icon icon-chevron-down " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-down"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m6 9 6 6 6-6" />
+</svg>
+</span></h2>
+    <ul class="toc-list">
+      
+        <li class="toc-item toc-level-1">
+          <a href="#pocketmage-scripting-reference" class="toc-link">PocketMage Scripting Reference</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#pocketmage-scripting-reference-1-input-output-terminal" class="toc-link">1. Input / Output &amp; Terminal</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-1-input-output-terminal-printtext" class="toc-link">print(text)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-1-input-output-terminal-updateterm" class="toc-link">updateTerm()</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-1-input-output-terminal-promptprompttext" class="toc-link">prompt(promptText)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-1-input-output-terminal-boolpromptprompttext" class="toc-link">boolPrompt(promptText)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-1-input-output-terminal-timepromptdefaulttime" class="toc-link">timePrompt(defaultTime)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-1-input-output-terminal-datepromptdefaultdate" class="toc-link">datePrompt(defaultDate)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-1-input-output-terminal-waitforkeypressmessage" class="toc-link">waitForKeypress(message)</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#pocketmage-scripting-reference-2-main-e-paper-display" class="toc-link">2. Main E-Paper Display</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-2-main-e-paper-display-updateink" class="toc-link">updateInk()</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-2-main-e-paper-display-inkbackgroundcolor" class="toc-link">inkBackground(color)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-2-main-e-paper-display-inkrectx-y-width-height-bordercolor-fillcolor" class="toc-link">inkRect(x, y, width, height, borderColor, fillColor)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-2-main-e-paper-display-inkcirclex-y-radius-bordercolor-fillcolor" class="toc-link">inkCircle(x, y, radius, borderColor, fillColor)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-2-main-e-paper-display-inktextx-y-size-color-text" class="toc-link">inkText(x, y, size, color, text)</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#pocketmage-scripting-reference-3-secondary-oled-display" class="toc-link">3. Secondary OLED Display</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-3-secondary-oled-display-updateoled" class="toc-link">updateOled()</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-3-secondary-oled-display-oledwordtext" class="toc-link">oledWord(text)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-3-secondary-oled-display-sysmessagemsg-delayms" class="toc-link">sysMessage(msg, delayMs)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-3-secondary-oled-display-oledbackgroundcolor" class="toc-link">oledBackground(color)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-3-secondary-oled-display-oledrectx-y-width-height-bordercolor-fillcolor" class="toc-link">oledRect(x, y, width, height, borderColor, fillColor)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-3-secondary-oled-display-oledcirclex-y-radius-bordercolor" class="toc-link">oledCircle(x, y, radius, borderColor)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-3-secondary-oled-display-oledtextx-y-size-color-text" class="toc-link">oledText(x, y, size, color, text)</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#pocketmage-scripting-reference-4-hardware-system" class="toc-link">4. Hardware &amp; System</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-4-hardware-system-getkey" class="toc-link">getKey()</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-4-hardware-system-gettouch" class="toc-link">getTouch()</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-4-hardware-system-getbattery" class="toc-link">getBattery()</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-4-hardware-system-getbatteryvoltage" class="toc-link">getBatteryVoltage()</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-4-hardware-system-setcpuspeedfreq" class="toc-link">setCpuSpeed(freq)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-4-hardware-system-sleep" class="toc-link">sleep()</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-4-hardware-system-gettime" class="toc-link">getTime()</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-4-hardware-system-getdate" class="toc-link">getDate()</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#pocketmage-scripting-reference-5-filesystem-sd-card" class="toc-link">5. Filesystem (SD Card)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-5-filesystem-sd-card-readfilepath" class="toc-link">readFile(path)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-5-filesystem-sd-card-writefilepath-content" class="toc-link">writeFile(path, content)</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#pocketmage-scripting-reference-6-general-helpers" class="toc-link">6. General Helpers</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-6-general-helpers-delayms" class="toc-link">delay(ms)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-6-general-helpers-tointstring" class="toc-link">toInt(string)</a>
+        </li>
+      
+        <li class="toc-item toc-level-3">
+          <a href="#pocketmage-scripting-reference-6-general-helpers-randommin-max" class="toc-link">random(min, max)</a>
+        </li>
+      
+    </ul>
+  </div>
+
+              </div>
+            </div>
+            <div class="page-footer-actions">
+              
+              
+                <span class="git-last-updated" data-timestamp="1782077870000">
+                  <svg class="git-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  <span class="git-label">Last updated:</span>
+                  <span class="git-time" data-timestamp="1782077870000"></span>
+                  
+                  <div class="git-commit-tooltip" role="tooltip">
+                    <div class="git-tooltip-title">Recent commits</div>
+                    <ul class="git-commit-list">
+                      
+                        <li class="git-commit-item">
+                          <div class="git-commit-avatar" title="Ashtf">
+                            
+                              <img src="https://www.gravatar.com/avatar/88c69ec22216c441f9cbcc5c230f7123?d=mp&amp;s=64" alt="Ashtf">
+                            
+                          </div>
+                          <div class="git-commit-details">
+                            <div class="git-commit-message" title="Merge pull request #287 from ashtf8/NellowTCS-dev">Merge pull request #287 from ashtf8/N...</div>
+                            <div class="git-commit-meta">
+                              <span class="git-commit-author">Ashtf</span>
+                              <span class="git-commit-date" data-timestamp="1782077870000"></span>
+                            </div>
+                          </div>
+                        </li>
+                      
+                    </ul>
+                  </div>
+                  
+                </span>
+              
+              <span class="git-spacer"></span>
+              
+                <a href="https://github.com/ashtf8/PocketMage_PDA/edit/main/Docs/docs/Docs/docs/scripting/fullPotionCommandList.md" target="_blank" rel="noopener noreferrer" class="edit-link">
+                  
+<svg class="lucide-icon icon-pencil " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-pencil"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+  <path d="m15 5 4 4" />
+</svg>
+
+                  Edit this page
+                </a>
+              
+            </div>
+          </main>
+          
+
+
+<footer class="footer-complete">
+  <div class="footer-complete-top">
+      <div class="footer-brand">
+          
+            <span class="footer-title">PocketMage</span>
+          
+          
+            <p class="footer-desc">A clamshell PDA powered by an ESP32-S3 with E-Ink and OLED displays.</p>
+          
+        </div>
+        
+          <div class="footer-columns">
+            
+              <div class="footer-column">
+                <span class="footer-column-title">Resources</span>
+                <ul>
+                  
+                    <li><a href="../../command-manual/" >Command Manual</a></li>
+                  
+                    <li><a href="../../faq/" >FAQ</a></li>
+                  
+                    <li><a href="../../development/build-environments/" >Build Environments</a></li>
+                  
+                </ul>
+              </div>
+            
+              <div class="footer-column">
+                <span class="footer-column-title">Community</span>
+                <ul>
+                  
+                    <li><a href="https://github.com/ashtf8/PocketMage_PDA" >GitHub</a></li>
+                  
+                    <li><a href="https://discord.gg/KSCapSf4XH" >Discord</a></li>
+                  
+                    <li><a href="https://pocketmage.org/" >Website</a></li>
+                  
+                </ul>
+              </div>
+            
+          </div>
+        
+      </div>
+      <div class="footer-complete-bottom">
+        <div class="user-footer">Built with <a href="https://docmd.io">docmd</a>. <a href="https://github.com/ashtf8/PocketMage_PDA">View on GitHub</a>.</div>
+        
+          <div class="branding-footer">
+            builtWith <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg> <a href="https://docmd.io" target="_blank" rel="noopener">docmd.</a>
+          </div>
+        
+      </div>
+  </footer>
+
+        </div>
+      </div>
+      
+      <script src="../../assets/js/docmd-main.js?v=mqob665d"></script>
+      
+      <script src="../../assets/js/docmd-git.js?v=mqob665d"></script>
+      <script src="../../assets/js/docmd-image-lightbox.js?v=mqob665d" ></script>
+<script src="https://cdn.jsdelivr.net/npm/minisearch@7.2.0/dist/umd/index.min.js" ></script>
+<script src="../../assets/js/docmd-search.js?v=mqob665d" ></script>
+<script src="../../assets/js/init-mermaid.js?v=mqob665d" type="module"></script>
+<script src="../../assets/js/docmd-git.js?v=mqob665d" type="module"></script>
+
+  <!-- Search Modal (Injected by @docmd/plugin-search) -->
+  <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;" data-semantic="true" data-show-confidence="true" data-show-filters="true"
+       data-search-placeholder="Search documentation..."
+       data-search-no-results="No results found."
+       data-search-error="Failed to load search index."
+       data-search-initial="Type to start searching..."
+       data-search-navigate="to navigate"
+       data-search-escape="to close">
+      <div class="docmd-search-box">
+          <div class="docmd-search-header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-search"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+              <input type="text" id="docmd-search-input" placeholder="Search documentation..." autocomplete="off" spellcheck="false">
+              <button onclick="window.closeDocmdSearch()" class="docmd-search-close" aria-label="Close search">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon icon-x"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+              </button>
+          </div>
+          <div id="docmd-search-results" class="docmd-search-results"></div>
+          <div class="docmd-search-footer">
+              <span><kbd class="docmd-kbd">↑</kbd> <kbd class="docmd-kbd">↓</kbd> to navigate</span>
+              <span><kbd class="docmd-kbd">ESC</kbd> to close</span>
+          </div>
+      </div>
+  </div>
+
+    <script>
+      (function() {
+        var searchDebounceTimer;
+
+        document.addEventListener('click', function(e) {
+          var link = e.target.closest('a');
+          if (!link || !window.gtag) return;
+          
+          var url = link.href;
+          var hostname = window.location.hostname;
+          var isExternal = link.hostname && link.hostname !== hostname;
+          var isDownload = link.hasAttribute('download') || url.match(/\.(pdf|zip|tar|gz|exe|pkg)$/i);
+          
+          if (isExternal) {
+            gtag('event', 'click_external', { 'url': url, 'link_text': link.innerText.trim() });
+          } else if (isDownload) {
+            gtag('event', 'download', { 'file_name': url.split('/').pop(), 'url': url });
+          }
+
+          // TOC tracking
+          if (link.classList.contains('toc-link')) {
+            gtag('event', 'toc_click', { 'target_id': link.getAttribute('href'), 'title': link.innerText.trim() });
+          }
+
+          // Permalink tracking
+          if (link.classList.contains('heading-anchor')) {
+            gtag('event', 'permalink_click', { 'url': url });
+          }
+        });
+
+        
+        // Search Keyword Tracking
+        document.addEventListener('input', function(e) {
+          if (e.target.id === 'docmd-search-input' && window.gtag) {
+            var query = e.target.value.trim();
+            if (query.length < 3) return;
+            
+            clearTimeout(searchDebounceTimer);
+            searchDebounceTimer = setTimeout(function() {
+              gtag('event', 'search', { 'search_term': query });
+            }, 1000);
+          }
+        });
+        
+      })();
+    </script>
+
+<script>window.__git_config={"repo":"https://github.com/ashtf8/PocketMage_PDA/edit/main/Docs/docs","branch":"main","editLink":true,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
+      
+  </body>
+</html>

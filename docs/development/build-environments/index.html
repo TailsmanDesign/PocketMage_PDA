@@ -67,12 +67,12 @@
     </style>
     
     <script>
-      var root = "../";
+      var root = "../../";
       if (root && !root.endsWith('/')) root += '/';
       if (root === '') root = './';
       window.DOCMD_ROOT = root;
 
-      var siteRoot = "../";
+      var siteRoot = "../../";
       if (siteRoot && !siteRoot.endsWith('/')) siteRoot += '/';
       if (siteRoot === '') siteRoot = './';
       window.DOCMD_SITE_ROOT = siteRoot;
@@ -84,35 +84,35 @@
       window.DOCMD_DEFAULT_LOCALE = "";
     </script>
     <title>
-      PocketMage Tutorials : PocketMage
+      Build Environments &amp; PlatformIO Setup : PocketMage
     </title>
-    <link id="site-favicon" rel="icon" href="../assets/favicon.png?v=mqob665d">
-    <link rel="stylesheet" href="../assets/css/docmd-main.css?v=mqob665d">
+    <link id="site-favicon" rel="icon" href="../../assets/favicon.png?v=mqob665d">
+    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=mqob665d">
     
-    <link rel="stylesheet" href="../assets/css/docmd-highlight-light.css?v=mqob665d" id="hljs-light" >
-    <link rel="stylesheet" href="../assets/css/docmd-highlight-dark.css?v=mqob665d" id="hljs-dark" disabled>
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=mqob665d" id="hljs-light" >
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=mqob665d" id="hljs-dark" disabled>
     
     
-<meta name="description" content="Step-by-step guides for PocketMage setup and configuration.">
-<link rel="canonical" href="https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/">
-<meta property="og:title" content="PocketMage Tutorials - PocketMage">
-<meta property="og:description" content="Step-by-step guides for PocketMage setup and configuration.">
-<meta property="og:url" content="https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/">
+<meta name="description" content="How to set up PlatformIO and build PocketMage firmware on Linux, Mac, and Windows.">
+<link rel="canonical" href="https://ashtf8.github.io/PocketMage_PDA/docs/development/build-environments/">
+<meta property="og:title" content="Build Environments & PlatformIO Setup - PocketMage">
+<meta property="og:description" content="How to set up PlatformIO and build PocketMage firmware on Linux, Mac, and Windows.">
+<meta property="og:url" content="https://ashtf8.github.io/PocketMage_PDA/docs/development/build-environments/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://ashtf8.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PocketMage Tutorials - PocketMage">
-<meta name="twitter:description" content="Step-by-step guides for PocketMage setup and configuration.">
+<meta name="twitter:title" content="Build Environments & PlatformIO Setup - PocketMage">
+<meta name="twitter:description" content="How to set up PlatformIO and build PocketMage firmware on Linux, Mac, and Windows.">
 <meta name="twitter:image" content="https://ashtf8.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
 
 
 
-<link rel="stylesheet" href="../assets/css/docmd-theme-ruby.css?v=mqob665d" >
-<link rel="stylesheet" href="../assets/css/docmd-git.css?v=mqob665d" >
-<link rel="stylesheet" href="../assets/css/docmd-openapi.css?v=mqob665d" >
+<link rel="stylesheet" href="../../assets/css/docmd-theme-ruby.css?v=mqob665d" >
+<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=mqob665d" >
+<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=mqob665d" >
 
     
-      <link rel="stylesheet" href="../assets/css/theme.css?v=mqob665d">
+      <link rel="stylesheet" href="../../assets/css/theme.css?v=mqob665d">
     
     <script>/**
  * --------------------------------------------------------------------
@@ -166,7 +166,7 @@
   <body
     class="sidebar-collapsible"
     data-default-collapsed="false"
-    data-copy-code-enabled="true" data-spa-enabled="true" data-source-file="docs/tutorials/index.md">
+    data-copy-code-enabled="true" data-spa-enabled="true" data-source-file="docs/development/build-environments.md">
 
     <a href="#main-content" class="skip-link">skipToContent</a>
 
@@ -175,7 +175,7 @@
       <aside class="sidebar">
         <div class="sidebar-header">
           
-            <h1><a href="../">
+            <h1><a href="../../">
                 PocketMage
               </a></h1>
           
@@ -213,7 +213,7 @@
     
       <li class="" >
       
-        <a href="../" class=" "
+        <a href="../../" class=" "
           >
            
 <svg class="lucide-icon icon-home " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -246,7 +246,7 @@
     
       <li class="" >
       
-        <a href="../faq/" class=" "
+        <a href="../../faq/" class=" "
           >
            
 <svg class="lucide-icon icon-help-circle " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -280,7 +280,7 @@
     
       <li class="" >
       
-        <a href="../command-manual/" class=" "
+        <a href="../../command-manual/" class=" "
           >
            
 <svg class="lucide-icon icon-keyboard " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -318,9 +318,9 @@
         
       </li>
     
-      <li class="active collapsible expanded nav-group"  aria-expanded="true" >
+      <li class="collapsible nav-group"  aria-expanded="false" >
       
-        <a href="../tutorials/" class="active nav-group"
+        <a href="../../tutorials/" class=" nav-group"
           >
            
 <svg class="lucide-icon icon-book-open " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -370,7 +370,7 @@
             
       <li class="" >
       
-        <a href="../tutorials/format-micro-sd/" class=" "
+        <a href="../../tutorials/format-micro-sd/" class=" "
           >
            
           
@@ -387,7 +387,7 @@
     
       <li class="" >
       
-        <a href="../tutorials/platformio-config/" class=" "
+        <a href="../../tutorials/platformio-config/" class=" "
           >
            
 <svg class="lucide-icon icon-settings " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -422,9 +422,9 @@
         
       </li>
     
-      <li class="collapsible nav-group"  aria-expanded="false" >
+      <li class="active-parent collapsible expanded nav-group"  aria-expanded="true" >
       
-        <a href="../development/" class=" nav-group"
+        <a href="../../development/" class=" nav-group"
           >
            
 <svg class="lucide-icon icon-code " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -472,9 +472,9 @@
         
           <ul class="submenu">
             
-      <li class="" >
+      <li class="active" >
       
-        <a href="../development/build-environments/" class=" "
+        <a href="../../development/build-environments/" class="active "
           >
            
 <svg class="lucide-icon icon-settings " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -511,7 +511,7 @@
     
       <li class="collapsible nav-group"  aria-expanded="false" >
       
-        <a href="../scripting/" class=" nav-group"
+        <a href="../../scripting/" class=" nav-group"
           >
            
 <svg class="lucide-icon icon-terminal " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -561,7 +561,7 @@
             
       <li class="" >
       
-        <a href="../scripting/example-c/" class=" "
+        <a href="../../scripting/example-c/" class=" "
           >
            
 <svg class="lucide-icon icon-terminal " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -594,7 +594,7 @@
     
       <li class="" >
       
-        <a href="../scripting/ink-c/" class=" "
+        <a href="../../scripting/ink-c/" class=" "
           >
            
 <svg class="lucide-icon icon-image " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -628,7 +628,7 @@
     
       <li class="" >
       
-        <a href="../scripting/oled-c/" class=" "
+        <a href="../../scripting/oled-c/" class=" "
           >
            
 <svg class="lucide-icon icon-monitor " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -662,7 +662,7 @@
     
       <li class="" >
       
-        <a href="../scripting/fullPotionCommandList/" class=" "
+        <a href="../../scripting/fullPotionCommandList/" class=" "
           >
            
 <svg class="lucide-icon icon-book " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -785,7 +785,7 @@
               
               <div class="header-titles-wrapper">
                 <span class="header-title">
-                  PocketMage Tutorials
+                  Build Environments &amp; PlatformIO Setup
                 </span>
               </div>
             </div>
@@ -879,15 +879,39 @@
             <div class="content-layout">
               <div class="main-content">
                 <div class="docmd-breadcrumbs-row">
-                  <div id="docmd-raw-markdown" data-content="---%0Atitle%3A%20%22PocketMage%20Tutorials%22%0Adescription%3A%20%22Step-by-step%20guides%20for%20PocketMage%20setup%20and%20configuration.%22%0A---%0A%0A%23%20Tutorials%0A%0AWelcome%20to%20the%20PocketMage%20tutorials%20section!%20Here%20you&#039;ll%20find%20guides%20for%20setup%2C%20SD%20card%20formatting%2C%20and%20PlatformIO%20configuration.%0A%0A%23%23%20Guides%0A%0A-%20%5BFormat%20a%20MicroSD%20Card%5D(format-micro-sd.md)%0A-%20%5BPlatformIO%20Build%20Environment%5D(platformio-config.md)%0A%0A%23%23%20Development%0A%0A-%20%5BBuild%20Environments%20%26%20PlatformIO%20Setup%5D(..%2Fdevelopment%2Fbuild-environments.md)%0A-%20%5BOTA%20App%20Template%5D(https%3A%2F%2Fgithub.com%2Fashtf8%2FPocketMage_PDA%2Fblob%2Fmain%2FCode%2FPocketMage_V3%2Fsrc%2FAPP_TEMPLATE.cpp)%0A%0A%23%23%20Scripting%0A%0A-%20%5BScripting%20Overview%5D(..%2Fscripting%2Findex.md)%0A-%20%5BFull%20Wrench%20Command%20List%5D(..%2Fscripting%2FfullPotionCommandList.md)%0A" style="display: none;"></div>
+                  <div id="docmd-raw-markdown" data-content="---%0Atitle%3A%20%22Build%20Environments%20%26%20PlatformIO%20Setup%22%0Adescription%3A%20%22How%20to%20set%20up%20PlatformIO%20and%20build%20PocketMage%20firmware%20on%20Linux%2C%20Mac%2C%20and%20Windows.%22%0A---%0A%0A%23%20Build%20Environments%20%26%20PlatformIO%20Setup%0A%0APocketMage%20firmware%20is%20built%20with%20%5BPlatformIO%5D(https%3A%2F%2Fplatformio.org%2F).%20There%20are%20three%20build%20environments%20(envelopes)%20defined%20in%20%60platformio.ini%60.%0A%0A%23%23%20Build%20Environments%0A%0A%7C%20Environment%20%7C%20Purpose%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%7C-------------%7C--------------------------------------------------------------------------------------------------------------------------------------------------------------------%7C%0A%7C%20%60PM_V3%60%20%20%20%20%20%7C%20Main%20firmware%20-%20the%20full%20PocketMage%20OS%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%7C%20%60OTA_APP%60%20%20%20%7C%20Framework%20for%20developing%20OTA-sideloaded%20apps.%20The%20compiled%20binary%20and%20icon%20are%20packaged%20as%20a%20%60.tar%60%20file%20and%20placed%20into%20%60apps%2F%60%20for%20loading%20into%20an%20OTA%20partition%20%7C%0A%7C%20%60native%60%20%20%20%20%7C%20Local%20testing%20environment.%20Run%20tests%20with%20%60pio%20test%20-e%20native%60%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%7C%0A%0A%23%23%20Prerequisites%0A%0A-%20%5BVS%20Code%5D(https%3A%2F%2Fcode.visualstudio.com%2F)%20installed%0A-%20Python%203%20installed%0A-%20The%20PocketMage%20source%20code%20(clone%20from%20%5BGitHub%5D(https%3A%2F%2Fgithub.com%2Fashtf8%2FPocketMage_PDA))%0A%0A%23%23%20Linux%0A%0A1.%20Install%20%60python3-venv%60%20if%20missing%3A%0A%0A%20%20%20%60%60%60bash%0A%20%20%20sudo%20apt%20install%20python3-venv%0A%20%20%20%60%60%60%0A%0A2.%20Install%20the%20%5BPlatformIO%20IDE%5D(https%3A%2F%2Fdocs.platformio.org%2Fen%2Flatest%2Fintegration%2Fide%2Fvscode.html%23ide-vscode)%20extension%20in%20VS%20Code.%0A3.%20Open%20the%20PocketMage%20source%20folder%20in%20VS%20Code.%20PlatformIO%20will%20detect%20the%20%60platformio.ini%60%20and%20prompt%20you%20to%20pick%20a%20folder%20-%20select%20%60Code%2FPocketMage_V3%2F%60.%0A4.%20Build%20using%20the%20PlatformIO%20toolbar%20(checkmark%20icon)%20or%20the%20command%20palette.%0A5.%20The%20first%20build%20takes%20longer%20as%20it%20downloads%20toolchains%20and%20compiles%20libraries.%0A%0A%23%23%20macOS%0A%0AThe%20same%20steps%20as%20Linux%20work%20on%20macOS.%20No%20additional%20setup%20required.%0A%0A%23%23%20Windows%0A%0A1.%20Install%20%5BGit%5D(https%3A%2F%2Fgit-scm.com%2F)%20to%20clone%20the%20repository.%0A2.%20Follow%20the%20same%20PlatformIO%20IDE%20steps%20as%20Linux.%0A3.%20Build%20using%20the%20PlatformIO%20toolbar%20in%20VS%20Code.%0A%0A%23%23%20OTA%20Apps%0A%0AOTA%20apps%20are%20compiled%20with%20the%20%60OTA_APP%60%20environment.%20The%20entry%20point%20API%20is%20defined%20in%20%5BAPP_TEMPLATE.cpp%5D(https%3A%2F%2Fgithub.com%2Fashtf8%2FPocketMage_PDA%2Fblob%2Fmain%2FCode%2FPocketMage_V3%2Fsrc%2FAPP_TEMPLATE.cpp).%0A%0AFor%20a%20full%20walkthrough%2C%20watch%20the%20%5BOTA%20app%20development%20video%5D(https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D3Ytc-3-BbMM).%0A%0A%23%23%20Testing%0A%0AUnit%20tests%20can%20be%20run%20locally%20with%3A%0A%0A%60%60%60bash%0Apio%20test%20-e%20native%0A%60%60%60%0A%0ARefer%20to%20the%20%5BPlatformIO%20test%20documentation%5D(https%3A%2F%2Fdocs.platformio.org%2Fen%2Flatest%2Fcore%2Fuserguide%2Fcmd_test.html)%20for%20more%20details.%0A" style="display: none;"></div>
                   
                     <nav aria-label="breadcrumb" class="docmd-breadcrumbs">
                       <ol>
                         
                         
+                          <li class="breadcrumb-item " >
+                            
+                              <a href="../../development/">Development</a>
+                            
+                            
+                              <span class="breadcrumb-separator">
+<svg class="lucide-icon icon-chevron-right " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+                            
+                          </li>
+                        
                           <li class="breadcrumb-item active" aria-current=&quot;page&quot;>
                             
-                              <span>Tutorials</span>
+                              <span>Build Environments</span>
                             
                             
                           </li>
@@ -944,28 +968,73 @@
                   
                 </div>
                 
-                <h1 id="tutorials" class="docmd-heading"><a href="#tutorials" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Tutorials</h1>
-<p>Welcome to the PocketMage tutorials section! Here you’ll find guides for setup, SD card formatting, and PlatformIO configuration.</p>
-<h2 id="tutorials-guides" class="docmd-heading"><a href="#tutorials-guides" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Guides</h2>
+                <h1 id="build-environments-platformio-setup" class="docmd-heading"><a href="#build-environments-platformio-setup" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Build Environments &amp; PlatformIO Setup</h1>
+<p>PocketMage firmware is built with <a href="https://platformio.org/">PlatformIO</a>. There are three build environments (envelopes) defined in <code>platformio.ini</code>.</p>
+<h2 id="build-environments-platformio-setup-build-environments" class="docmd-heading"><a href="#build-environments-platformio-setup-build-environments" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Build Environments</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>Environment</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PM_V3</code></td>
+<td>Main firmware - the full PocketMage OS</td>
+</tr>
+<tr>
+<td><code>OTA_APP</code></td>
+<td>Framework for developing OTA-sideloaded apps. The compiled binary and icon are packaged as a <code>.tar</code> file and placed into <code>apps/</code> for loading into an OTA partition</td>
+</tr>
+<tr>
+<td><code>native</code></td>
+<td>Local testing environment. Run tests with <code>pio test -e native</code></td>
+</tr>
+</tbody>
+</table>
+</div><h2 id="build-environments-platformio-setup-prerequisites" class="docmd-heading"><a href="#build-environments-platformio-setup-prerequisites" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Prerequisites</h2>
 <ul>
-<li><a href="format-micro-sd/">Format a MicroSD Card</a></li>
-<li><a href="platformio-config/">PlatformIO Build Environment</a></li>
+<li><a href="https://code.visualstudio.com/">VS Code</a> installed</li>
+<li>Python 3 installed</li>
+<li>The PocketMage source code (clone from <a href="https://github.com/ashtf8/PocketMage_PDA">GitHub</a>)</li>
 </ul>
-<h2 id="tutorials-development" class="docmd-heading"><a href="#tutorials-development" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Development</h2>
-<ul>
-<li><a href="../development/build-environments/">Build Environments &amp; PlatformIO Setup</a></li>
-<li><a href="https://github.com/ashtf8/PocketMage_PDA/blob/main/Code/PocketMage_V3/src/APP_TEMPLATE.cpp">OTA App Template</a></li>
-</ul>
-<h2 id="tutorials-scripting" class="docmd-heading"><a href="#tutorials-scripting" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Scripting</h2>
-<ul>
-<li><a href="../scripting/">Scripting Overview</a></li>
-<li><a href="../scripting/fullPotionCommandList/">Full Wrench Command List</a></li>
-</ul>
+<h2 id="build-environments-platformio-setup-linux" class="docmd-heading"><a href="#build-environments-platformio-setup-linux" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Linux</h2>
+<ol>
+<li><p>Install <code>python3-venv</code> if missing:</p>
+<pre class="hljs"><code><span class="hljs-keyword">sudo</span> <span class="hljs-keyword">apt</span> install python3<span class="hljs-punctuation">-</span>venv
+</code></pre>
+</li>
+<li><p>Install the <a href="https://docs.platformio.org/en/latest/integration/ide/vscode.html#ide-vscode">PlatformIO IDE</a> extension in VS Code.</p>
+</li>
+<li><p>Open the PocketMage source folder in VS Code. PlatformIO will detect the <code>platformio.ini</code> and prompt you to pick a folder - select <code>Code/PocketMage_V3/</code>.</p>
+</li>
+<li><p>Build using the PlatformIO toolbar (checkmark icon) or the command palette.</p>
+</li>
+<li><p>The first build takes longer as it downloads toolchains and compiles libraries.</p>
+</li>
+</ol>
+<h2 id="build-environments-platformio-setup-macos" class="docmd-heading"><a href="#build-environments-platformio-setup-macos" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>macOS</h2>
+<p>The same steps as Linux work on macOS. No additional setup required.</p>
+<h2 id="build-environments-platformio-setup-windows" class="docmd-heading"><a href="#build-environments-platformio-setup-windows" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Windows</h2>
+<ol>
+<li>Install <a href="https://git-scm.com/">Git</a> to clone the repository.</li>
+<li>Follow the same PlatformIO IDE steps as Linux.</li>
+<li>Build using the PlatformIO toolbar in VS Code.</li>
+</ol>
+<h2 id="build-environments-platformio-setup-ota-apps" class="docmd-heading"><a href="#build-environments-platformio-setup-ota-apps" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>OTA Apps</h2>
+<p>OTA apps are compiled with the <code>OTA_APP</code> environment. The entry point API is defined in <a href="https://github.com/ashtf8/PocketMage_PDA/blob/main/Code/PocketMage_V3/src/APP_TEMPLATE.cpp">APP_TEMPLATE.cpp</a>.</p>
+<p>For a full walkthrough, watch the <a href="https://www.youtube.com/watch?v=3Ytc-3-BbMM">OTA app development video</a>.</p>
+<h2 id="build-environments-platformio-setup-testing" class="docmd-heading"><a href="#build-environments-platformio-setup-testing" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Testing</h2>
+<p>Unit tests can be run locally with:</p>
+<pre class="hljs"><code>pio test <span class="hljs-punctuation">-</span>e native
+</code></pre>
+<p>Refer to the <a href="https://docs.platformio.org/en/latest/core/userguide/cmd_test.html">PlatformIO test documentation</a> for more details.</p>
 
                 
                   <div class="page-navigation">
                     
-                      <a href="../command-manual/" class="prev-page">
+                      <a href="../../development/" class="prev-page">
                         
 <svg class="lucide-icon icon-arrow-left page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-arrow-left"
@@ -984,15 +1053,15 @@
 </svg>
 
                         <span><small>previous</small><strong>
-                            Command Manual
+                            Development
                           </strong></span>
                       </a>
                     
                     
-                      <a href="../tutorials/format-micro-sd/" class="next-page">
+                      <a href="../../scripting/" class="next-page">
                         <span><small>next</small>
                           <strong>
-                            Format MicroSD Card
+                            Scripting
                           </strong></span>
                         
 <svg class="lucide-icon icon-arrow-right page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -1040,19 +1109,35 @@
     <ul class="toc-list">
       
         <li class="toc-item toc-level-1">
-          <a href="#tutorials" class="toc-link">Tutorials</a>
+          <a href="#build-environments-platformio-setup" class="toc-link">Build Environments &amp; PlatformIO Setup</a>
         </li>
       
         <li class="toc-item toc-level-2">
-          <a href="#tutorials-guides" class="toc-link">Guides</a>
+          <a href="#build-environments-platformio-setup-build-environments" class="toc-link">Build Environments</a>
         </li>
       
         <li class="toc-item toc-level-2">
-          <a href="#tutorials-development" class="toc-link">Development</a>
+          <a href="#build-environments-platformio-setup-prerequisites" class="toc-link">Prerequisites</a>
         </li>
       
         <li class="toc-item toc-level-2">
-          <a href="#tutorials-scripting" class="toc-link">Scripting</a>
+          <a href="#build-environments-platformio-setup-linux" class="toc-link">Linux</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#build-environments-platformio-setup-macos" class="toc-link">macOS</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#build-environments-platformio-setup-windows" class="toc-link">Windows</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#build-environments-platformio-setup-ota-apps" class="toc-link">OTA Apps</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#build-environments-platformio-setup-testing" class="toc-link">Testing</a>
         </li>
       
     </ul>
@@ -1097,7 +1182,7 @@
               
               <span class="git-spacer"></span>
               
-                <a href="https://github.com/ashtf8/PocketMage_PDA/edit/main/Docs/docs/Docs/docs/tutorials/index.md" target="_blank" rel="noopener noreferrer" class="edit-link">
+                <a href="https://github.com/ashtf8/PocketMage_PDA/edit/main/Docs/docs/Docs/docs/development/build-environments.md" target="_blank" rel="noopener noreferrer" class="edit-link">
                   
 <svg class="lucide-icon icon-pencil " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-pencil"
@@ -1140,11 +1225,11 @@
                 <span class="footer-column-title">Resources</span>
                 <ul>
                   
-                    <li><a href="../command-manual/" >Command Manual</a></li>
+                    <li><a href="../../command-manual/" >Command Manual</a></li>
                   
-                    <li><a href="../faq/" >FAQ</a></li>
+                    <li><a href="../../faq/" >FAQ</a></li>
                   
-                    <li><a href="../development/build-environments/" >Build Environments</a></li>
+                    <li><a href="../../development/build-environments/" >Build Environments</a></li>
                   
                 </ul>
               </div>
@@ -1178,14 +1263,14 @@
         </div>
       </div>
       
-      <script src="../assets/js/docmd-main.js?v=mqob665d"></script>
+      <script src="../../assets/js/docmd-main.js?v=mqob665d"></script>
       
-      <script src="../assets/js/docmd-git.js?v=mqob665d"></script>
-      <script src="../assets/js/docmd-image-lightbox.js?v=mqob665d" ></script>
+      <script src="../../assets/js/docmd-git.js?v=mqob665d"></script>
+      <script src="../../assets/js/docmd-image-lightbox.js?v=mqob665d" ></script>
 <script src="https://cdn.jsdelivr.net/npm/minisearch@7.2.0/dist/umd/index.min.js" ></script>
-<script src="../assets/js/docmd-search.js?v=mqob665d" ></script>
-<script src="../assets/js/init-mermaid.js?v=mqob665d" type="module"></script>
-<script src="../assets/js/docmd-git.js?v=mqob665d" type="module"></script>
+<script src="../../assets/js/docmd-search.js?v=mqob665d" ></script>
+<script src="../../assets/js/init-mermaid.js?v=mqob665d" type="module"></script>
+<script src="../../assets/js/docmd-git.js?v=mqob665d" type="module"></script>
 
   <!-- Search Modal (Injected by @docmd/plugin-search) -->
   <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;" data-semantic="true" data-show-confidence="true" data-show-filters="true"

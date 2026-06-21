@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ashtf8.github.io/PocketMage_PDA/docs/sitemap.xml

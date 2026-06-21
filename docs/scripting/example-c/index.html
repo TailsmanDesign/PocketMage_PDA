@@ -67,12 +67,12 @@
     </style>
     
     <script>
-      var root = "../";
+      var root = "../../";
       if (root && !root.endsWith('/')) root += '/';
       if (root === '') root = './';
       window.DOCMD_ROOT = root;
 
-      var siteRoot = "../";
+      var siteRoot = "../../";
       if (siteRoot && !siteRoot.endsWith('/')) siteRoot += '/';
       if (siteRoot === '') siteRoot = './';
       window.DOCMD_SITE_ROOT = siteRoot;
@@ -84,35 +84,35 @@
       window.DOCMD_DEFAULT_LOCALE = "";
     </script>
     <title>
-      PocketMage Tutorials : PocketMage
+      PocketMage Script Example: Basic Input/Output : PocketMage
     </title>
-    <link id="site-favicon" rel="icon" href="../assets/favicon.png?v=mqob665d">
-    <link rel="stylesheet" href="../assets/css/docmd-main.css?v=mqob665d">
+    <link id="site-favicon" rel="icon" href="../../assets/favicon.png?v=mqob665d">
+    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=mqob665d">
     
-    <link rel="stylesheet" href="../assets/css/docmd-highlight-light.css?v=mqob665d" id="hljs-light" >
-    <link rel="stylesheet" href="../assets/css/docmd-highlight-dark.css?v=mqob665d" id="hljs-dark" disabled>
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=mqob665d" id="hljs-light" >
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=mqob665d" id="hljs-dark" disabled>
     
     
-<meta name="description" content="Step-by-step guides for PocketMage setup and configuration.">
-<link rel="canonical" href="https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/">
-<meta property="og:title" content="PocketMage Tutorials - PocketMage">
-<meta property="og:description" content="Step-by-step guides for PocketMage setup and configuration.">
-<meta property="og:url" content="https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/">
+<meta name="description" content="A simple PocketMage script demonstrating user input, OLED output, and terminal printing.">
+<link rel="canonical" href="https://ashtf8.github.io/PocketMage_PDA/docs/scripting/example-c/">
+<meta property="og:title" content="PocketMage Script Example: Basic Input/Output - PocketMage">
+<meta property="og:description" content="A simple PocketMage script demonstrating user input, OLED output, and terminal printing.">
+<meta property="og:url" content="https://ashtf8.github.io/PocketMage_PDA/docs/scripting/example-c/">
 <meta property="og:type" content="website">
 <meta property="og:image" content="https://ashtf8.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PocketMage Tutorials - PocketMage">
-<meta name="twitter:description" content="Step-by-step guides for PocketMage setup and configuration.">
+<meta name="twitter:title" content="PocketMage Script Example: Basic Input/Output - PocketMage">
+<meta name="twitter:description" content="A simple PocketMage script demonstrating user input, OLED output, and terminal printing.">
 <meta name="twitter:image" content="https://ashtf8.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
 
 
 
-<link rel="stylesheet" href="../assets/css/docmd-theme-ruby.css?v=mqob665d" >
-<link rel="stylesheet" href="../assets/css/docmd-git.css?v=mqob665d" >
-<link rel="stylesheet" href="../assets/css/docmd-openapi.css?v=mqob665d" >
+<link rel="stylesheet" href="../../assets/css/docmd-theme-ruby.css?v=mqob665d" >
+<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=mqob665d" >
+<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=mqob665d" >
 
     
-      <link rel="stylesheet" href="../assets/css/theme.css?v=mqob665d">
+      <link rel="stylesheet" href="../../assets/css/theme.css?v=mqob665d">
     
     <script>/**
  * --------------------------------------------------------------------
@@ -166,7 +166,7 @@
   <body
     class="sidebar-collapsible"
     data-default-collapsed="false"
-    data-copy-code-enabled="true" data-spa-enabled="true" data-source-file="docs/tutorials/index.md">
+    data-copy-code-enabled="true" data-spa-enabled="true" data-source-file="docs/scripting/example-c.md">
 
     <a href="#main-content" class="skip-link">skipToContent</a>
 
@@ -175,7 +175,7 @@
       <aside class="sidebar">
         <div class="sidebar-header">
           
-            <h1><a href="../">
+            <h1><a href="../../">
                 PocketMage
               </a></h1>
           
@@ -213,7 +213,7 @@
     
       <li class="" >
       
-        <a href="../" class=" "
+        <a href="../../" class=" "
           >
            
 <svg class="lucide-icon icon-home " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -246,7 +246,7 @@
     
       <li class="" >
       
-        <a href="../faq/" class=" "
+        <a href="../../faq/" class=" "
           >
            
 <svg class="lucide-icon icon-help-circle " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -280,7 +280,7 @@
     
       <li class="" >
       
-        <a href="../command-manual/" class=" "
+        <a href="../../command-manual/" class=" "
           >
            
 <svg class="lucide-icon icon-keyboard " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -318,9 +318,9 @@
         
       </li>
     
-      <li class="active collapsible expanded nav-group"  aria-expanded="true" >
+      <li class="collapsible nav-group"  aria-expanded="false" >
       
-        <a href="../tutorials/" class="active nav-group"
+        <a href="../../tutorials/" class=" nav-group"
           >
            
 <svg class="lucide-icon icon-book-open " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -370,7 +370,7 @@
             
       <li class="" >
       
-        <a href="../tutorials/format-micro-sd/" class=" "
+        <a href="../../tutorials/format-micro-sd/" class=" "
           >
            
           
@@ -387,7 +387,7 @@
     
       <li class="" >
       
-        <a href="../tutorials/platformio-config/" class=" "
+        <a href="../../tutorials/platformio-config/" class=" "
           >
            
 <svg class="lucide-icon icon-settings " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -424,7 +424,7 @@
     
       <li class="collapsible nav-group"  aria-expanded="false" >
       
-        <a href="../development/" class=" nav-group"
+        <a href="../../development/" class=" nav-group"
           >
            
 <svg class="lucide-icon icon-code " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -474,7 +474,7 @@
             
       <li class="" >
       
-        <a href="../development/build-environments/" class=" "
+        <a href="../../development/build-environments/" class=" "
           >
            
 <svg class="lucide-icon icon-settings " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -509,9 +509,9 @@
         
       </li>
     
-      <li class="collapsible nav-group"  aria-expanded="false" >
+      <li class="active-parent collapsible expanded nav-group"  aria-expanded="true" >
       
-        <a href="../scripting/" class=" nav-group"
+        <a href="../../scripting/" class=" nav-group"
           >
            
 <svg class="lucide-icon icon-terminal " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -559,9 +559,9 @@
         
           <ul class="submenu">
             
-      <li class="" >
+      <li class="active" >
       
-        <a href="../scripting/example-c/" class=" "
+        <a href="../../scripting/example-c/" class="active "
           >
            
 <svg class="lucide-icon icon-terminal " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -594,7 +594,7 @@
     
       <li class="" >
       
-        <a href="../scripting/ink-c/" class=" "
+        <a href="../../scripting/ink-c/" class=" "
           >
            
 <svg class="lucide-icon icon-image " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -628,7 +628,7 @@
     
       <li class="" >
       
-        <a href="../scripting/oled-c/" class=" "
+        <a href="../../scripting/oled-c/" class=" "
           >
            
 <svg class="lucide-icon icon-monitor " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -662,7 +662,7 @@
     
       <li class="" >
       
-        <a href="../scripting/fullPotionCommandList/" class=" "
+        <a href="../../scripting/fullPotionCommandList/" class=" "
           >
            
 <svg class="lucide-icon icon-book " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -785,7 +785,7 @@
               
               <div class="header-titles-wrapper">
                 <span class="header-title">
-                  PocketMage Tutorials
+                  PocketMage Script Example: Basic Input/Output
                 </span>
               </div>
             </div>
@@ -879,15 +879,39 @@
             <div class="content-layout">
               <div class="main-content">
                 <div class="docmd-breadcrumbs-row">
-                  <div id="docmd-raw-markdown" data-content="---%0Atitle%3A%20%22PocketMage%20Tutorials%22%0Adescription%3A%20%22Step-by-step%20guides%20for%20PocketMage%20setup%20and%20configuration.%22%0A---%0A%0A%23%20Tutorials%0A%0AWelcome%20to%20the%20PocketMage%20tutorials%20section!%20Here%20you&#039;ll%20find%20guides%20for%20setup%2C%20SD%20card%20formatting%2C%20and%20PlatformIO%20configuration.%0A%0A%23%23%20Guides%0A%0A-%20%5BFormat%20a%20MicroSD%20Card%5D(format-micro-sd.md)%0A-%20%5BPlatformIO%20Build%20Environment%5D(platformio-config.md)%0A%0A%23%23%20Development%0A%0A-%20%5BBuild%20Environments%20%26%20PlatformIO%20Setup%5D(..%2Fdevelopment%2Fbuild-environments.md)%0A-%20%5BOTA%20App%20Template%5D(https%3A%2F%2Fgithub.com%2Fashtf8%2FPocketMage_PDA%2Fblob%2Fmain%2FCode%2FPocketMage_V3%2Fsrc%2FAPP_TEMPLATE.cpp)%0A%0A%23%23%20Scripting%0A%0A-%20%5BScripting%20Overview%5D(..%2Fscripting%2Findex.md)%0A-%20%5BFull%20Wrench%20Command%20List%5D(..%2Fscripting%2FfullPotionCommandList.md)%0A" style="display: none;"></div>
+                  <div id="docmd-raw-markdown" data-content="---%0Atitle%3A%20%22PocketMage%20Script%20Example%3A%20Basic%20Input%2FOutput%22%0Adescription%3A%20%22A%20simple%20PocketMage%20script%20demonstrating%20user%20input%2C%20OLED%20output%2C%20and%20terminal%20printing.%22%0A---%0A%0A%23%20Scripting%20Example%3A%20Basic%20Input%2FOutput%0A%0A%60%60%60c%0A%2F%2F%20PocketMage%20scripting%20example%0A%2F%2F%20Based%20on%20Wrench%20by%20jingoro2112%20(GH)%0A%2F%2F%20Edit%20with%20potion%3A%20pot%20example.c%0A%2F%2F%20Compile%20and%20run%3A%20brew%20example.c%0A%0A%2F%2F%20Declare%20a%20variable%0Avar%20x%20%3D%20%22%22%3B%20%2F%2F%20%22%22%20indicates%20str%0A%0A%2F%2F%20Prompt%20user%20to%20enter%20number%0A%2F%2F%20Set%20x%20to%20entered%20number%0Ax%20%3D%20prompt(%22Enter%20a%20number%22)%3B%0A%0A%2F%2F%20Display%20x%20on%20OLED%0AoledWord(x)%3B%0A%0A%2F%2F%20Print%20x%20to%20terminal%0Aprint(x)%3B%0A%0A%2F%2F%20Update%20the%20terminal%0A%2F%2F%20(refresh%20the%20OLED)%0AupdateTerm()%3B%0A%0A%2F%2F%20Initialize%20an%20iteration%20var%20i%0Avar%20i%20%3D%200%3B%0A%0A%2F%2F%20Loop%20while%20i%20%3C%20x%0A%2F%2F%20Us%20toInt%20to%20convert%20str%20to%20int%0Awhile%20(i%20%3C%20toInt(x))%20%7B%0A%20%20%2F%2F%20Iterate%0A%20%20i%20%3D%20i%20%2B%201%3B%0A%0A%20%20%2F%2F%20Display%20i%20on%20OLED%0A%20%20oledWord(i)%3B%0A%0A%20%20%2F%2F%20Wait%20500ms%0A%20%20delay(500)%3B%0A%7D%0A%0A%2F%2F%20Print%20the%20final%20i%20to%20the%20term%0Aprint(i)%3B%0A%0A%2F%2F%20Generate%20a%20random%20number%0Avar%20randomInt%20%3D%20random(0%2C%20100)%3B%0Aprint(%22Random%20Number%3A%20%22%20%2B%20randomInt)%3B%0A%0A%2F%2F%20Update%20the%20terminal%0A%2F%2F%20(refresh%20the%20OLED)%0AupdateTerm()%3B%0A%60%60%60%0A" style="display: none;"></div>
                   
                     <nav aria-label="breadcrumb" class="docmd-breadcrumbs">
                       <ol>
                         
                         
+                          <li class="breadcrumb-item " >
+                            
+                              <a href="../../scripting/">Scripting</a>
+                            
+                            
+                              <span class="breadcrumb-separator">
+<svg class="lucide-icon icon-chevron-right " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+                            
+                          </li>
+                        
                           <li class="breadcrumb-item active" aria-current=&quot;page&quot;>
                             
-                              <span>Tutorials</span>
+                              <span>Basic Input/Output</span>
                             
                             
                           </li>
@@ -944,28 +968,61 @@
                   
                 </div>
                 
-                <h1 id="tutorials" class="docmd-heading"><a href="#tutorials" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Tutorials</h1>
-<p>Welcome to the PocketMage tutorials section! Here you’ll find guides for setup, SD card formatting, and PlatformIO configuration.</p>
-<h2 id="tutorials-guides" class="docmd-heading"><a href="#tutorials-guides" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Guides</h2>
-<ul>
-<li><a href="format-micro-sd/">Format a MicroSD Card</a></li>
-<li><a href="platformio-config/">PlatformIO Build Environment</a></li>
-</ul>
-<h2 id="tutorials-development" class="docmd-heading"><a href="#tutorials-development" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Development</h2>
-<ul>
-<li><a href="../development/build-environments/">Build Environments &amp; PlatformIO Setup</a></li>
-<li><a href="https://github.com/ashtf8/PocketMage_PDA/blob/main/Code/PocketMage_V3/src/APP_TEMPLATE.cpp">OTA App Template</a></li>
-</ul>
-<h2 id="tutorials-scripting" class="docmd-heading"><a href="#tutorials-scripting" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Scripting</h2>
-<ul>
-<li><a href="../scripting/">Scripting Overview</a></li>
-<li><a href="../scripting/fullPotionCommandList/">Full Wrench Command List</a></li>
-</ul>
+                <h1 id="scripting-example-basic-inputoutput" class="docmd-heading"><a href="#scripting-example-basic-inputoutput" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Scripting Example: Basic Input/Output</h1>
+<pre class="hljs"><code><span class="hljs-comment">// PocketMage scripting example</span>
+<span class="hljs-comment">// Based on Wrench by jingoro2112 (GH)</span>
+<span class="hljs-comment">// Edit with potion: pot example.c</span>
+<span class="hljs-comment">// Compile and run: brew example.c</span>
+
+<span class="hljs-comment">// Declare a variable</span>
+<span class="hljs-keyword">var</span> x <span class="hljs-punctuation">=</span> <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">// &quot;&quot; indicates str</span>
+
+<span class="hljs-comment">// Prompt user to enter number</span>
+<span class="hljs-comment">// Set x to entered number</span>
+x <span class="hljs-punctuation">=</span> <span class="hljs-title function_">prompt</span>(<span class="hljs-string">&quot;Enter a number&quot;</span>);
+
+<span class="hljs-comment">// Display x on OLED</span>
+<span class="hljs-title function_">oledWord</span>(x);
+
+<span class="hljs-comment">// Print x to terminal</span>
+<span class="hljs-title function_">print</span>(x);
+
+<span class="hljs-comment">// Update the terminal</span>
+<span class="hljs-comment">// (refresh the OLED)</span>
+<span class="hljs-title function_">updateTerm</span>();
+
+<span class="hljs-comment">// Initialize an iteration var i</span>
+<span class="hljs-keyword">var</span> i <span class="hljs-punctuation">=</span> <span class="hljs-number">0</span>;
+
+<span class="hljs-comment">// Loop while i &lt; x</span>
+<span class="hljs-comment">// Us toInt to convert str to int</span>
+<span class="hljs-keyword">while</span> (i <span class="hljs-punctuation">&lt;</span> <span class="hljs-title function_">toInt</span>(x)) {
+  <span class="hljs-comment">// Iterate</span>
+  i <span class="hljs-punctuation">=</span> i <span class="hljs-punctuation">+</span> <span class="hljs-number">1</span>;
+
+  <span class="hljs-comment">// Display i on OLED</span>
+  <span class="hljs-title function_">oledWord</span>(i);
+
+  <span class="hljs-comment">// Wait 500ms</span>
+  <span class="hljs-title function_">delay</span>(<span class="hljs-number">500</span>);
+}
+
+<span class="hljs-comment">// Print the final i to the term</span>
+<span class="hljs-title function_">print</span>(i);
+
+<span class="hljs-comment">// Generate a random number</span>
+<span class="hljs-keyword">var</span> randomInt <span class="hljs-punctuation">=</span> <span class="hljs-title function_">random</span>(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>);
+<span class="hljs-title function_">print</span>(<span class="hljs-string">&quot;Random Number: &quot;</span> <span class="hljs-punctuation">+</span> randomInt);
+
+<span class="hljs-comment">// Update the terminal</span>
+<span class="hljs-comment">// (refresh the OLED)</span>
+<span class="hljs-title function_">updateTerm</span>();
+</code></pre>
 
                 
                   <div class="page-navigation">
                     
-                      <a href="../command-manual/" class="prev-page">
+                      <a href="../../scripting/" class="prev-page">
                         
 <svg class="lucide-icon icon-arrow-left page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-arrow-left"
@@ -984,15 +1041,15 @@
 </svg>
 
                         <span><small>previous</small><strong>
-                            Command Manual
+                            Scripting
                           </strong></span>
                       </a>
                     
                     
-                      <a href="../tutorials/format-micro-sd/" class="next-page">
+                      <a href="../../scripting/ink-c/" class="next-page">
                         <span><small>next</small>
                           <strong>
-                            Format MicroSD Card
+                            E-Ink Drawing
                           </strong></span>
                         
 <svg class="lucide-icon icon-arrow-right page-nav-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -1019,44 +1076,6 @@
               <div class="toc-sidebar">
                 
 
-
-  <div class="toc-container">
-    <h2 class="toc-title">onThisPage<span class="mobile-view toc-menu-button float-right">
-<svg class="lucide-icon icon-chevron-down " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
-  class="lucide lucide-chevron-down"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m6 9 6 6 6-6" />
-</svg>
-</span></h2>
-    <ul class="toc-list">
-      
-        <li class="toc-item toc-level-1">
-          <a href="#tutorials" class="toc-link">Tutorials</a>
-        </li>
-      
-        <li class="toc-item toc-level-2">
-          <a href="#tutorials-guides" class="toc-link">Guides</a>
-        </li>
-      
-        <li class="toc-item toc-level-2">
-          <a href="#tutorials-development" class="toc-link">Development</a>
-        </li>
-      
-        <li class="toc-item toc-level-2">
-          <a href="#tutorials-scripting" class="toc-link">Scripting</a>
-        </li>
-      
-    </ul>
-  </div>
 
               </div>
             </div>
@@ -1097,7 +1116,7 @@
               
               <span class="git-spacer"></span>
               
-                <a href="https://github.com/ashtf8/PocketMage_PDA/edit/main/Docs/docs/Docs/docs/tutorials/index.md" target="_blank" rel="noopener noreferrer" class="edit-link">
+                <a href="https://github.com/ashtf8/PocketMage_PDA/edit/main/Docs/docs/Docs/docs/scripting/example-c.md" target="_blank" rel="noopener noreferrer" class="edit-link">
                   
 <svg class="lucide-icon icon-pencil " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-pencil"
@@ -1140,11 +1159,11 @@
                 <span class="footer-column-title">Resources</span>
                 <ul>
                   
-                    <li><a href="../command-manual/" >Command Manual</a></li>
+                    <li><a href="../../command-manual/" >Command Manual</a></li>
                   
-                    <li><a href="../faq/" >FAQ</a></li>
+                    <li><a href="../../faq/" >FAQ</a></li>
                   
-                    <li><a href="../development/build-environments/" >Build Environments</a></li>
+                    <li><a href="../../development/build-environments/" >Build Environments</a></li>
                   
                 </ul>
               </div>
@@ -1178,14 +1197,14 @@
         </div>
       </div>
       
-      <script src="../assets/js/docmd-main.js?v=mqob665d"></script>
+      <script src="../../assets/js/docmd-main.js?v=mqob665d"></script>
       
-      <script src="../assets/js/docmd-git.js?v=mqob665d"></script>
-      <script src="../assets/js/docmd-image-lightbox.js?v=mqob665d" ></script>
+      <script src="../../assets/js/docmd-git.js?v=mqob665d"></script>
+      <script src="../../assets/js/docmd-image-lightbox.js?v=mqob665d" ></script>
 <script src="https://cdn.jsdelivr.net/npm/minisearch@7.2.0/dist/umd/index.min.js" ></script>
-<script src="../assets/js/docmd-search.js?v=mqob665d" ></script>
-<script src="../assets/js/init-mermaid.js?v=mqob665d" type="module"></script>
-<script src="../assets/js/docmd-git.js?v=mqob665d" type="module"></script>
+<script src="../../assets/js/docmd-search.js?v=mqob665d" ></script>
+<script src="../../assets/js/init-mermaid.js?v=mqob665d" type="module"></script>
+<script src="../../assets/js/docmd-git.js?v=mqob665d" type="module"></script>
 
   <!-- Search Modal (Injected by @docmd/plugin-search) -->
   <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;" data-semantic="true" data-show-confidence="true" data-show-filters="true"

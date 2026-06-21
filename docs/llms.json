@@ -1,0 +1,84 @@
+{
+  "title": "PocketMage",
+  "description": "",
+  "pages": [
+    {
+      "title": "PocketMage Command Manual",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/command-manual/",
+      "description": "Keystrokes and command reference for the PocketMage PDA.",
+      "priority": "medium"
+    },
+    {
+      "title": "Build Environments & PlatformIO Setup",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/development/build-environments/",
+      "description": "How to set up PlatformIO and build PocketMage firmware on Linux, Mac, and Windows.",
+      "priority": "medium"
+    },
+    {
+      "title": "Development",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/development/",
+      "description": "Guides for building, extending, and contributing to PocketMage.",
+      "priority": "medium"
+    },
+    {
+      "title": "PocketMage FAQ",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/faq/",
+      "description": "Frequently asked questions about the PocketMage PDA device.",
+      "priority": "medium"
+    },
+    {
+      "title": "PocketMage Documentation",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/",
+      "description": "Official documentation for the PocketMage open-source PDA device.",
+      "priority": "high"
+    },
+    {
+      "title": "PocketMage Script Example: Basic Input/Output",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/scripting/example-c/",
+      "description": "A simple PocketMage script demonstrating user input, OLED output, and terminal printing.",
+      "priority": "medium"
+    },
+    {
+      "title": "PocketMage Scripting Reference",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/scripting/fullPotionCommandList/",
+      "description": "Complete API reference for Wrench script bindings on PocketMage.",
+      "priority": "medium"
+    },
+    {
+      "title": "Scripting",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/scripting/",
+      "description": "Scripting reference and examples for the PocketMage TERMINAL app (Wrench).",
+      "priority": "medium"
+    },
+    {
+      "title": "PocketMage Script Example: E-Ink Drawing",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/scripting/ink-c/",
+      "description": "A PocketMage script demonstrating drawing shapes and text on the E-Ink display.",
+      "priority": "medium"
+    },
+    {
+      "title": "PocketMage Script Example: OLED Drawing",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/scripting/oled-c/",
+      "description": "A PocketMage script demonstrating drawing shapes and text on the OLED display.",
+      "priority": "medium"
+    },
+    {
+      "title": "Format a MicroSD Card for PocketMage",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/format-micro-sd/",
+      "description": "Guide to formatting SD cards for compatibility with PocketMage.",
+      "priority": "medium"
+    },
+    {
+      "title": "PocketMage Tutorials",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/",
+      "description": "Step-by-step guides for PocketMage setup and configuration.",
+      "priority": "medium"
+    },
+    {
+      "title": "Setting Up a PocketMage Build Environment",
+      "url": "https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/platformio-config/",
+      "description": "How to set up PlatformIO and build PocketMage firmware on Linux, Mac, and Windows.",
+      "priority": "medium"
+    }
+  ]
+}
