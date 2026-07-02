@@ -1,5 +1,5 @@
 # PocketMage PDA
-PocketMage is Pre-Launch on Crowd Supply! Check it out at [pocketmage.org/back](https://pocketmage.org/back)
+PocketMage is Pre-Launch on Crowd Supply! Check it out [here](https://pocketmage.org/back)!
 
 @Ashtf 2025
 
