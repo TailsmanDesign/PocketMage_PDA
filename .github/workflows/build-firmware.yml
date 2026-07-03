@@ -3,6 +3,12 @@ name: Creare Magicae Ordinationis Fabrica
 
 on:
   workflow_dispatch:
+    inputs:
+      skip_deploy:
+        description: 'Skip Pages deployment (Upload as artifact instead)?'
+        required: false
+        type: boolean
+        default: false
   release:
     types: [published]
 
@@ -239,9 +245,18 @@ jobs:
           echo "Web flasher interface ready for deployment"
 
       - name: Deploy the Artifacts to GitHub Pages
+        if: ${{ github.event.inputs.skip_deploy != 'true' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
           keep_files: false
           commit_message: "chore(pages): deploy docs from run ${{ github.run_number }}"
+
+      - name: Upload Web Flasher Build Artifact
+        if: ${{ github.event.inputs.skip_deploy == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: pocketmage-firmware-${{ steps.version.outputs.release_tag }}
+          path: ./docs
+          retention-days: 14  # Adjust retention window as you see fit
