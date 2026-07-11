@@ -17,7 +17,7 @@ Welcome to the official docs for the PocketMage open-source PDA! Here you'll fin
 ## Quick Links
 
 - [PocketMage.org](https://pocketmage.org/)
-- [GitHub Repository](https://github.com/ashtf8/PocketMage_PDA)
+- [GitHub Repository](https://github.com/TailsmanDesign/PocketMage_PDA)
 - [Discord Community](https://discord.gg/KSCapSf4XH)
 
 Start exploring by choosing a section above!

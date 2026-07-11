@@ -2,7 +2,7 @@
 
 The documentation site for the PocketMage PDA project.
 
-**Live docs: https://ashtf8.github.io/PocketMage_PDA/docs/**
+**Live docs: https://tailsmandesign.github.io/PocketMage_PDA/docs/**
 
 ---
 
@@ -64,6 +64,6 @@ Keep language clear and direct.
 
 ## Project links
 
-- Main repo: https://github.com/ashtf8/PocketMage_PDA
+- Main repo: https://github.com/TailsmanDesign/PocketMage_PDA
 - Discord: https://discord.gg/KSCapSf4XH
 - Website: https://pocketmage.org/
