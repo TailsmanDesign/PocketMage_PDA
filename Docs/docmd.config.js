@@ -1,6 +1,6 @@
 module.exports = {
   siteTitle: "PocketMage Documentation",
-  siteUrl: "https://ashtf8.github.io/PocketMage_PDA/docs",
+  siteUrl: "https://tailsmandesign.github.io/PocketMage_PDA/docs",
   logo: { alt: "PocketMage", href: "./", light: "/assets/favicon.png", dark: "/assets/favicon.png" },
   favicon: "/assets/favicon.png",
   srcDir: "docs",
@@ -34,7 +34,7 @@ module.exports = {
         { title: "OLED Drawing Script", path: "/tutorials/oled-c", icon: "monitor" },
       ],
     },
-    { title: "GitHub", path: "https://github.com/ashtf8/PocketMage_PDA", icon: "github", external: true },
+    { title: "GitHub", path: "https://github.com/TailsmanDesign/PocketMage_PDA", icon: "github", external: true },
   ],
   footer: "Built with docmd.",
 };

@@ -17,11 +17,11 @@ PocketMage is Pre-Launch on Crowd Supply! Check it out [here](https://pocketmage
 # [Getting Started]
 **Helpful Resources:**
 
-[FAQ](https://ashtf8.github.io/PocketMage_PDA/docs/faq)
+[FAQ](https://tailsmandesign.github.io/PocketMage_PDA/docs/faq)
 
-[Tutorials](https://ashtf8.github.io/PocketMage_PDA/docs/tutorials)
+[Tutorials](https://tailsmandesign.github.io/PocketMage_PDA/docs/tutorials)
 
-[PocketMage Command & Keystroke Manual](https://ashtf8.github.io/PocketMage_PDA/docs/command-manual)
+[PocketMage Command & Keystroke Manual](https://tailsmandesign.github.io/PocketMage_PDA/docs/command-manual)
 
 [3rd Party App Template](https://github.com/ashtf8/PocketMage_PDA/blob/main/Code/PocketMage_V3/src/APP_TEMPLATE.cpp)
 
