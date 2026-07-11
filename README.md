@@ -23,7 +23,7 @@ PocketMage is Pre-Launch on Crowd Supply! Check it out [here](https://pocketmage
 
 [PocketMage Command & Keystroke Manual](https://tailsmandesign.github.io/PocketMage_PDA/docs/command-manual)
 
-[3rd Party App Template](https://github.com/ashtf8/PocketMage_PDA/blob/main/Code/PocketMage_V3/src/APP_TEMPLATE.cpp)
+[3rd Party App Template](https://github.com/TailsmanDesign/PocketMage_PDA/blob/main/Code/PocketMage_V3/src/APP_TEMPLATE.cpp)
 
   Check the [APP_TEMPLATE.cpp](./Code/PocketMage_V3/src/APP_TEMPLATE.cpp) and [/Code/PocketMage_V3/src/readme.md](./Code/PocketMage_V3/src/readme.md) file for more information. Check out the following video as a tutorial on how to create and format your app:
 [Developing For the PocketMage](https://www.youtube.com/watch?v=3Ytc-3-BbMM)
