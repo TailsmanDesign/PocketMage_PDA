@@ -232,6 +232,7 @@ void loadState(bool changeState) {
   HOME_ON_BOOT = prefs.getBool("HOME_ON_BOOT", false);
   OLED_BRIGHTNESS = prefs.getInt("OLED_BRIGHTNESS", 255);
   OLED_MAX_FPS = prefs.getInt("OLED_MAX_FPS", 60);
+  WEEK_START_MONDAY = prefs.getBool("WEEK_START_MON", false);
 
   OTA1_APP = prefs.getString("OTA1", "-");
   OTA2_APP = prefs.getString("OTA2", "-");

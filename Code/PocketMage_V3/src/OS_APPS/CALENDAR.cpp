@@ -605,12 +605,14 @@ void commandSelectWeek(String command) {
 
     DateTime now = CLOCK().nowDT();
     int todayDOW = getDayOfWeek(now.year(), now.month(), now.day()); 
-    DateTime currentSunday = now - TimeSpan(todayDOW, 0, 0, 0);
-    DateTime viewedSunday = currentSunday + TimeSpan(weekOffsetCount * 7, 0, 0, 0);
+    int daysBack = WEEK_START_MONDAY ? ((todayDOW == 0) ? 6 : todayDOW - 1) : todayDOW;
+    DateTime weekStart = now - TimeSpan(daysBack, 0, 0, 0);
+    int dayOffset = WEEK_START_MONDAY ? 6 : 0;  // Sun is last day (Mon start) or first day (Sun start)
+    DateTime viewedDay = weekStart + TimeSpan(weekOffsetCount * 7 + dayOffset, 0, 0, 0);
 
-    currentDate  = viewedSunday.day();
-    currentMonth = viewedSunday.month();
-    currentYear  = viewedSunday.year();
+    currentDate  = viewedDay.day();
+    currentMonth = viewedDay.month();
+    currentYear  = viewedDay.year();
 
     newState = true;
     KB().setKeyboardState(NORMAL);
@@ -621,12 +623,14 @@ void commandSelectWeek(String command) {
 
     DateTime now = CLOCK().nowDT();
     int todayDOW = getDayOfWeek(now.year(), now.month(), now.day());
-    DateTime currentSunday = now - TimeSpan(todayDOW, 0, 0, 0);
-    DateTime viewedMonday = currentSunday + TimeSpan(weekOffsetCount * 7 + 1, 0, 0, 0);
+    int daysBack = WEEK_START_MONDAY ? ((todayDOW == 0) ? 6 : todayDOW - 1) : todayDOW;
+    DateTime weekStart = now - TimeSpan(daysBack, 0, 0, 0);
+    int dayOffset = WEEK_START_MONDAY ? 0 : 1;  // Mon is first day (Mon start) or second day (Sun start)
+    DateTime viewedDay = weekStart + TimeSpan(weekOffsetCount * 7 + dayOffset, 0, 0, 0);
 
-    currentDate  = viewedMonday.day();
-    currentMonth = viewedMonday.month();
-    currentYear  = viewedMonday.year();
+    currentDate  = viewedDay.day();
+    currentMonth = viewedDay.month();
+    currentYear  = viewedDay.year();
 
     newState = true;
     KB().setKeyboardState(NORMAL);
@@ -637,12 +641,14 @@ void commandSelectWeek(String command) {
 
     DateTime now = CLOCK().nowDT();
     int todayDOW = getDayOfWeek(now.year(), now.month(), now.day());
-    DateTime currentSunday = now - TimeSpan(todayDOW, 0, 0, 0);
-    DateTime viewedTuesday = currentSunday + TimeSpan(weekOffsetCount * 7 + 2, 0, 0, 0);
+    int daysBack = WEEK_START_MONDAY ? ((todayDOW == 0) ? 6 : todayDOW - 1) : todayDOW;
+    DateTime weekStart = now - TimeSpan(daysBack, 0, 0, 0);
+    int dayOffset = WEEK_START_MONDAY ? 1 : 2;
+    DateTime viewedDay = weekStart + TimeSpan(weekOffsetCount * 7 + dayOffset, 0, 0, 0);
 
-    currentDate  = viewedTuesday.day();
-    currentMonth = viewedTuesday.month();
-    currentYear  = viewedTuesday.year();
+    currentDate  = viewedDay.day();
+    currentMonth = viewedDay.month();
+    currentYear  = viewedDay.year();
 
     newState = true;
     KB().setKeyboardState(NORMAL);
@@ -653,12 +659,14 @@ void commandSelectWeek(String command) {
 
     DateTime now = CLOCK().nowDT();
     int todayDOW = getDayOfWeek(now.year(), now.month(), now.day());
-    DateTime currentSunday = now - TimeSpan(todayDOW, 0, 0, 0);
-    DateTime viewedWednesday = currentSunday + TimeSpan(weekOffsetCount * 7 + 3, 0, 0, 0);
+    int daysBack = WEEK_START_MONDAY ? ((todayDOW == 0) ? 6 : todayDOW - 1) : todayDOW;
+    DateTime weekStart = now - TimeSpan(daysBack, 0, 0, 0);
+    int dayOffset = WEEK_START_MONDAY ? 2 : 3;
+    DateTime viewedDay = weekStart + TimeSpan(weekOffsetCount * 7 + dayOffset, 0, 0, 0);
 
-    currentDate  = viewedWednesday.day();
-    currentMonth = viewedWednesday.month();
-    currentYear  = viewedWednesday.year();
+    currentDate  = viewedDay.day();
+    currentMonth = viewedDay.month();
+    currentYear  = viewedDay.year();
 
     newState = true;
     KB().setKeyboardState(NORMAL);
@@ -669,8 +677,10 @@ void commandSelectWeek(String command) {
 
     DateTime now = CLOCK().nowDT();
     int todayDOW = getDayOfWeek(now.year(), now.month(), now.day());
-    DateTime currentSunday = now - TimeSpan(todayDOW, 0, 0, 0);
-    DateTime viewedThursday = currentSunday + TimeSpan(weekOffsetCount * 7 + 4, 0, 0, 0);
+    int daysBack = WEEK_START_MONDAY ? ((todayDOW == 0) ? 6 : todayDOW - 1) : todayDOW;
+    DateTime weekStart = now - TimeSpan(daysBack, 0, 0, 0);
+    int dayOffset = WEEK_START_MONDAY ? 3 : 4;
+    DateTime viewedDay = weekStart + TimeSpan(weekOffsetCount * 7 + dayOffset, 0, 0, 0);
 
     currentDate  = viewedThursday.day();
     currentMonth = viewedThursday.month();
@@ -685,12 +695,14 @@ void commandSelectWeek(String command) {
 
     DateTime now = CLOCK().nowDT();
     int todayDOW = getDayOfWeek(now.year(), now.month(), now.day());
-    DateTime currentSunday = now - TimeSpan(todayDOW, 0, 0, 0);
-    DateTime viewedFriday = currentSunday + TimeSpan(weekOffsetCount * 7 + 5, 0, 0, 0);
+    int daysBack = WEEK_START_MONDAY ? ((todayDOW == 0) ? 6 : todayDOW - 1) : todayDOW;
+    DateTime weekStart = now - TimeSpan(daysBack, 0, 0, 0);
+    int dayOffset = WEEK_START_MONDAY ? 4 : 5;
+    DateTime viewedDay = weekStart + TimeSpan(weekOffsetCount * 7 + dayOffset, 0, 0, 0);
 
-    currentDate  = viewedFriday.day();
-    currentMonth = viewedFriday.month();
-    currentYear  = viewedFriday.year();
+    currentDate  = viewedDay.day();
+    currentMonth = viewedDay.month();
+    currentYear  = viewedDay.year();
 
     newState = true;
     KB().setKeyboardState(NORMAL);
@@ -701,12 +713,14 @@ void commandSelectWeek(String command) {
 
     DateTime now = CLOCK().nowDT();
     int todayDOW = getDayOfWeek(now.year(), now.month(), now.day());
-    DateTime currentSunday = now - TimeSpan(todayDOW, 0, 0, 0);
-    DateTime viewedSaturday = currentSunday + TimeSpan(weekOffsetCount * 7 + 6, 0, 0, 0);
+    int daysBack = WEEK_START_MONDAY ? ((todayDOW == 0) ? 6 : todayDOW - 1) : todayDOW;
+    DateTime weekStart = now - TimeSpan(daysBack, 0, 0, 0);
+    int dayOffset = WEEK_START_MONDAY ? 5 : 6;
+    DateTime viewedDay = weekStart + TimeSpan(weekOffsetCount * 7 + dayOffset, 0, 0, 0);
 
-    currentDate  = viewedSaturday.day();
-    currentMonth = viewedSaturday.month();
-    currentYear  = viewedSaturday.year();
+    currentDate  = viewedDay.day();
+    currentMonth = viewedDay.month();
+    currentYear  = viewedDay.year();
 
     newState = true;
     KB().setKeyboardState(NORMAL);
@@ -927,9 +941,26 @@ void drawCalendarMonth(int monthOffset) {
   EINK().drawStatusBar(getMonthName(currentMonth) + " " + String(currentYear)+ " | Type a Date:");
   display.drawBitmap(0, 0, calendar_allArray[1], 320, 218, GxEPD_BLACK);
 
+  // Overlay and redraw day-of-week headers if week starts on Monday
+  if (WEEK_START_MONDAY) {
+    const char* dayHeaders[] = { "M", "T", "W", "T", "F", "S", "S" };
+    display.fillRect(GRID_X, 33, 7 * CELL_W, 16, GxEPD_WHITE);
+    display.setFont(&FreeSerif9pt7b);
+    display.setTextColor(GxEPD_BLACK);
+    for (int i = 0; i < 7; i++) {
+      display.setCursor(GRID_X + i * CELL_W + 17, 46);
+      display.print(dayHeaders[i]);
+    }
+  }
+
   // Step 2: Day of the week for the 1st of the month (0 = Sun, 6 = Sat)
   DateTime firstDay(year, month, 1);
   int startDay = firstDay.dayOfTheWeek();  // 0–6, Sun to Sat
+
+  // Adjust for Monday-start weeks: Mon=0, Tue=1, ..., Sun=6
+  if (WEEK_START_MONDAY) {
+    startDay = (startDay + 6) % 7;
+  }
 
   // Step 3: Number of days in the month
   int nextYear  = (month == 12) ? (year + 1) : year;
@@ -999,6 +1030,18 @@ void drawCalendarWeek(int weekOffset) {
   EINK().drawStatusBar("Type Sun, etc. or (N)ew");
   display.drawBitmap(0, 0, calendar_allArray[0], 320, 218, GxEPD_BLACK);
 
+  // Overlay and redraw day-of-week headers if week starts on Monday
+  if (WEEK_START_MONDAY) {
+    const char* dayHeaders[] = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
+    display.fillRect(7, 33, 7 * 44, 16, GxEPD_WHITE);
+    display.setFont(&Font5x7Fixed);
+    display.setTextColor(GxEPD_BLACK);
+    for (int i = 0; i < 7; i++) {
+      display.setCursor(9 + (i * 44) + 8, 45);
+      display.print(dayHeaders[i]);
+    }
+  }
+
   // Get current date
   DateTime now = CLOCK().nowDT();
   int year = now.year();
@@ -1006,8 +1049,14 @@ void drawCalendarWeek(int weekOffset) {
   int day = now.day();
   int dow = now.dayOfTheWeek();  // 0 = Sunday
 
-  // Calculate how many days to go back to get to Sunday, adjusted by weekOffset
-  int totalOffset = -dow + (weekOffset * 7);
+  // Calculate how many days to go back to get to start of week, adjusted by weekOffset
+  int daysBack;
+  if (WEEK_START_MONDAY) {
+    daysBack = (dow == 0) ? 6 : dow - 1;  // Monday = 0 days back, Sunday = 6 days back
+  } else {
+    daysBack = dow;  // Sunday = 0 days back (original behavior)
+  }
+  int totalOffset = -daysBack + (weekOffset * 7);
 
   for (int i = 0; i < 7; i++) {
     // Compute day offset from today

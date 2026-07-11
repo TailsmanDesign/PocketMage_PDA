@@ -27,6 +27,8 @@ extern volatile bool disableTimeout;            // Disable timeout globally
 extern bool fileLoaded;     
 extern unsigned int flashMillis;                // Flash timing
 
+extern bool WEEK_START_MONDAY;                 // Calendar weeks start on Monday
+
 extern String OTA1_APP;
 extern String OTA2_APP;
 extern String OTA3_APP;
