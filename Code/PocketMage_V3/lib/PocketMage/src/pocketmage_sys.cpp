@@ -83,10 +83,25 @@ void deepSleep(bool alternateScreenSaver) {
   // Put OLED to sleep
   u8g2.setPowerSave(1);
 
-  // Stop the einkHandler task safely
+  // Stop the einkHandler task safely: signal it to finish whatever it's
+  // doing and exit on its own, rather than killing it mid-refresh (which
+  // could leave an e-ink SPI transaction half-done — see #278/#280).
+  // Still force-delete as a last resort so a stuck task can't prevent sleep.
   if (einkHandlerTaskHandle != NULL) {
-    vTaskDelete(einkHandlerTaskHandle);
+    einkHandlerExited = false;
+    einkHandlerShouldExit = true;
+
+    uint32_t waitedMs = 0;
+    constexpr uint32_t kMaxWaitMs = 500;
+    while (!einkHandlerExited && waitedMs < kMaxWaitMs) {
+      vTaskDelay(pdMS_TO_TICKS(10));
+      waitedMs += 10;
+    }
+    if (!einkHandlerExited) {
+      vTaskDelete(einkHandlerTaskHandle);
+    }
     einkHandlerTaskHandle = NULL;
+    einkHandlerShouldExit = false;
   }
 
   // Shutdown Jingle
@@ -112,7 +127,12 @@ void deepSleep(bool alternateScreenSaver) {
       dir.close();
     }
 
-    display.setFullWindow();
+    // Force rotation back to the standard orientation before drawing the
+    // screensaver — HOME_INIT() is the only place that overrides it, and
+    // that override would otherwise persist onto the screensaver bitmap if
+    // the device slept without passing through another app that resets it
+    // (see #280 — "renders upside down" depended on navigation history).
+    EINK().resetDisplay(false);
 
     // Use custom screensavers
     if (!binFiles.empty()) {

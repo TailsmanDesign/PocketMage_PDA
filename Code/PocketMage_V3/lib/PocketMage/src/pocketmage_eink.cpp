@@ -13,6 +13,8 @@ static constexpr const char* tag = "EINK";
 GxEPD2_BW<GxEPD2_310_GDEQ031T10, GxEPD2_310_GDEQ031T10::HEIGHT> display(GxEPD2_310_GDEQ031T10(EPD_CS, EPD_DC, EPD_RST, EPD_BUSY));
 
 TaskHandle_t einkHandlerTaskHandle = NULL; // E-Ink handler task
+volatile bool einkHandlerShouldExit = false; // Signal einkHandler to exit cleanly
+volatile bool einkHandlerExited = false;     // Set by einkHandler once it has exited
 
 // Fast full update flag for e-ink
 volatile bool GxEPD2_310_GDEQ031T10::useFastFullUpdate = true;
