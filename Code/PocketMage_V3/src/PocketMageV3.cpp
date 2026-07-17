@@ -180,11 +180,20 @@ void loop() {
 
 // E-Ink Loop
 void einkHandler(void* parameter) {
-  vTaskDelay(pdMS_TO_TICKS(250)); 
+  vTaskDelay(pdMS_TO_TICKS(250));
   for (;;) {
+    // Exit cleanly between operations rather than being vTaskDelete'd
+    // mid-refresh (see issue #278/#280 — killing this task while it's
+    // partway through an e-ink SPI transaction can corrupt the display).
+    if (einkHandlerShouldExit) break;
+
     applicationEinkHandler();
+
+    if (einkHandlerShouldExit) break;
 
     vTaskDelay(pdMS_TO_TICKS(50));
     yield();
   }
+  einkHandlerExited = true;
+  vTaskDelete(NULL);
 }

@@ -20,6 +20,8 @@ extern fs::FS* global_fs;
 // ===================== SYSTEM STATE =====================
 extern Preferences prefs;                       // NVS preferencesv
 extern TaskHandle_t einkHandlerTaskHandle;      // E-Ink handler task
+extern volatile bool einkHandlerShouldExit;     // Signal einkHandler to exit cleanly
+extern volatile bool einkHandlerExited;         // Set by einkHandler once it has exited
 extern int OLEDFPSMillis;                       // Last OLED FPS update time
 extern int KBBounceMillis;                      // Last keyboard debounce time
 extern volatile bool newState;                  // App state changed
