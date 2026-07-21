@@ -10,12 +10,21 @@ static constexpr const char* TAG = "TOUCH";
 
 // Setup for Touch Class
 void setupTouch(){
-  // MPR121 / SLIDER
-  if (!cap.begin(MPR121_ADDR)) {
-    ESP_LOGE(TAG, "TouchPad Failed");
-    OLED().sysMessage("Touchpad Failed",1000);
-  }
-  cap.setAutoconfig(true);
+  // Production Device Setup
+  #if POCKETMAGE_HW_VERSION == 2
+    if (!cap.begin(MPR121_ADDR, &Wire1)) {
+      ESP_LOGE(TAG, "TouchPad Failed");
+      OLED().sysMessage("Touchpad Failed",1000);
+    }
+    cap.setAutoconfig(true);
+  #else
+    // MPR121 / SLIDER
+    if (!cap.begin(MPR121_ADDR)) {
+      ESP_LOGE(TAG, "TouchPad Failed");
+      OLED().sysMessage("Touchpad Failed",1000);
+    }
+    cap.setAutoconfig(true);
+  #endif
 }
 
 // Access for other apps
