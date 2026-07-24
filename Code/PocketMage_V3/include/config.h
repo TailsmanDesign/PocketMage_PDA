@@ -33,6 +33,8 @@
 // PIN DEFINITION
 #define I2C_SCL       35
 #define I2C_SDA       36
+#define SWITCHED_I2C_SDA  42
+#define SWITCHED_I2C_SCL  48
 #define MPR121_ADDR   0x5A
 #define MP2722_ADDR   0x3F
 #define USB_MUX_PIN   7

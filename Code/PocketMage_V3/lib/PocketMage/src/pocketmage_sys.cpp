@@ -313,6 +313,12 @@ void PocketMage_INIT() {
   Serial.begin(115200);
   Wire.begin(I2C_SDA, I2C_SCL);
 
+  // Initialize Second I2C Bus (prod only)
+  #if POCKETMAGE_HW_VERSION == 2
+    Wire1.begin(SWITCHED_I2C_SDA, SWITCHED_I2C_SCL); // Note: Devices on Wire1 - Cap Touch, Expansion Port
+  #endif
+
+
   vspi = new SPIClass(FSPI /*VSPI*/);
   vspi->begin(SPI_SCK, -1, SPI_MOSI, -1);
   pinMode(vspi->pinSS(), OUTPUT);
