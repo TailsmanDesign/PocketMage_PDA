@@ -88,10 +88,6 @@
           ""
         ],
         [
-          "clearance|73747693|62272693|67c5686e-f610-404b-ba3a-d972151899e3|dba3c94d-c9a0-426a-ae4b-cf383415a758",
-          ""
-        ],
-        [
           "clearance|76304533|62122200|40a22d14-ee57-48bf-9f75-f6745c1bb888|231ebb4e-4448-4537-bdda-1c71dc952f76",
           ""
         ],
@@ -168,15 +164,19 @@
           ""
         ],
         [
-          "shorting_items|73073000|66410000|408f29b9-e9fe-42d5-b705-07a7a74a0fd7|a360e769-c57e-4501-9e39-43ad4c60fb58",
+          "shorting_items|73073000|66410000|2b2e77e1-c30e-4c17-8c79-52d6ec52ac9e|a360e769-c57e-4501-9e39-43ad4c60fb58",
           ""
         ],
         [
-          "shorting_items|73747693|62272693|20fbfa20-4acb-4fa7-b614-c175dcf6ba63|67c5686e-f610-404b-ba3a-d972151899e3",
+          "shorting_items|73073000|66410000|a360e769-c57e-4501-9e39-43ad4c60fb58|e80dd13d-c645-4a52-a0cb-c1ef868f35ec",
           ""
         ],
         [
-          "shorting_items|76892999|66410000|06c9246b-073d-4b53-a329-887644bbf52e|ca5ca5aa-d128-44f6-a33c-a8f5ac9238bd",
+          "shorting_items|73747693|62272693|67c5686e-f610-404b-ba3a-d972151899e3|83e442f5-c994-452b-990d-c0cce70f0d23",
+          ""
+        ],
+        [
+          "shorting_items|76892999|66410000|b6bdf336-3fab-4e54-888a-7375ea9b19a4|ca5ca5aa-d128-44f6-a33c-a8f5ac9238bd",
           ""
         ],
         [
@@ -192,15 +192,15 @@
           ""
         ],
         [
-          "solder_mask_bridge|73072999|66409999|06c9246b-073d-4b53-a329-887644bbf52e|a360e769-c57e-4501-9e39-43ad4c60fb58",
+          "solder_mask_bridge|73072999|66409999|b6bdf336-3fab-4e54-888a-7375ea9b19a4|a360e769-c57e-4501-9e39-43ad4c60fb58",
           ""
         ],
         [
-          "solder_mask_bridge|73073000|66410000|408f29b9-e9fe-42d5-b705-07a7a74a0fd7|a360e769-c57e-4501-9e39-43ad4c60fb58",
+          "solder_mask_bridge|73073000|66410000|2b2e77e1-c30e-4c17-8c79-52d6ec52ac9e|a360e769-c57e-4501-9e39-43ad4c60fb58",
           ""
         ],
         [
-          "solder_mask_bridge|73073000|66410000|dba3c94d-c9a0-426a-ae4b-cf383415a758|a360e769-c57e-4501-9e39-43ad4c60fb58",
+          "solder_mask_bridge|73073000|66410000|e80dd13d-c645-4a52-a0cb-c1ef868f35ec|a360e769-c57e-4501-9e39-43ad4c60fb58",
           ""
         ],
         [
@@ -208,7 +208,7 @@
           ""
         ],
         [
-          "solder_mask_bridge|73747693|62272693|20fbfa20-4acb-4fa7-b614-c175dcf6ba63|67c5686e-f610-404b-ba3a-d972151899e3",
+          "solder_mask_bridge|73747693|62272693|83e442f5-c994-452b-990d-c0cce70f0d23|67c5686e-f610-404b-ba3a-d972151899e3",
           ""
         ],
         [
@@ -216,7 +216,7 @@
           ""
         ],
         [
-          "solder_mask_bridge|76892999|66410000|06c9246b-073d-4b53-a329-887644bbf52e|ca5ca5aa-d128-44f6-a33c-a8f5ac9238bd",
+          "solder_mask_bridge|76892999|66410000|b6bdf336-3fab-4e54-888a-7375ea9b19a4|ca5ca5aa-d128-44f6-a33c-a8f5ac9238bd",
           ""
         ],
         [
@@ -300,6 +300,10 @@
           ""
         ],
         [
+          "starved_thermal|67125000|49700000|4333a1f9-94fa-4d23-b5c3-ae7312d75b42|11cbfc02-1b65-42ce-993b-5263850fcc11|B.Cu",
+          ""
+        ],
+        [
           "starved_thermal|69000000|41680000|4333a1f9-94fa-4d23-b5c3-ae7312d75b42|df055c4a-2b52-44e9-95cf-5ce6b9b6f433|B.Cu",
           ""
         ],
@@ -320,15 +324,15 @@
           ""
         ],
         [
-          "unconnected_items|67333000|63900000|e0e3452a-6139-4d9f-ac91-d98c92ff9dd0|dba3c94d-c9a0-426a-ae4b-cf383415a758",
+          "unconnected_items|67333000|63900000|e0e3452a-6139-4d9f-ac91-d98c92ff9dd0|ca8a50b9-bb9b-4ded-a42f-09f0a29d4778",
           ""
         ],
         [
-          "unconnected_items|76233000|62300000|40a22d14-ee57-48bf-9f75-f6745c1bb888|20fbfa20-4acb-4fa7-b614-c175dcf6ba63",
+          "unconnected_items|76233000|62300000|40a22d14-ee57-48bf-9f75-f6745c1bb888|83e442f5-c994-452b-990d-c0cce70f0d23",
           ""
         ],
         [
-          "unconnected_items|76893000|66410000|06c9246b-073d-4b53-a329-887644bbf52e|c3fd67cc-ed5e-4848-b3de-57d36586ddf8",
+          "unconnected_items|76893000|66410000|b6bdf336-3fab-4e54-888a-7375ea9b19a4|c3fd67cc-ed5e-4848-b3de-57d36586ddf8",
           ""
         ]
       ],
