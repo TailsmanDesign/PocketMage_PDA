@@ -1,0 +1,150 @@
+{
+  "tree": [
+    {
+      "title": "Command Manual",
+      "path": "command-manual",
+      "children": [
+        {
+          "title": "Index",
+          "path": "command-manual/index.md"
+        }
+      ]
+    },
+    {
+      "title": "Development",
+      "path": "development",
+      "children": [
+        {
+          "title": "Build Environments",
+          "path": "development/build-environments.md"
+        },
+        {
+          "title": "Index",
+          "path": "development/index.md"
+        }
+      ]
+    },
+    {
+      "title": "Faq",
+      "path": "faq",
+      "children": [
+        {
+          "title": "Index",
+          "path": "faq/index.md"
+        }
+      ]
+    },
+    {
+      "title": "Features",
+      "path": "features",
+      "children": [
+        {
+          "title": "Index",
+          "path": "features/index.md"
+        }
+      ]
+    },
+    {
+      "title": "Getting Started",
+      "path": "getting-started",
+      "children": [
+        {
+          "title": "Index",
+          "path": "getting-started/index.md"
+        },
+        {
+          "title": "What Is Pocketmage",
+          "path": "getting-started/what-is-pocketmage.md"
+        }
+      ]
+    },
+    {
+      "title": "Guides",
+      "path": "guides",
+      "children": [
+        {
+          "title": "Index",
+          "path": "guides/index.md"
+        },
+        {
+          "title": "Making Apps",
+          "path": "guides/making-apps.md"
+        },
+        {
+          "title": "Native Apps",
+          "path": "guides/native-apps.md"
+        },
+        {
+          "title": "Ota Apps",
+          "path": "guides/ota-apps.md"
+        }
+      ]
+    },
+    {
+      "title": "Index",
+      "path": "index.md"
+    },
+    {
+      "title": "Reference",
+      "path": "reference",
+      "children": [
+        {
+          "title": "App Api",
+          "path": "reference/app-api.md"
+        },
+        {
+          "title": "Index",
+          "path": "reference/index.md"
+        },
+        {
+          "title": "Pocketmage Library",
+          "path": "reference/pocketmage-library.md"
+        },
+        {
+          "title": "System State",
+          "path": "reference/system-state.md"
+        }
+      ]
+    },
+    {
+      "title": "Scripting",
+      "path": "scripting",
+      "children": [
+        {
+          "title": "Example C",
+          "path": "scripting/example-c.md"
+        },
+        {
+          "title": "FullPotionCommandList",
+          "path": "scripting/fullPotionCommandList.md"
+        },
+        {
+          "title": "Index",
+          "path": "scripting/index.md"
+        },
+        {
+          "title": "Ink C",
+          "path": "scripting/ink-c.md"
+        },
+        {
+          "title": "Oled C",
+          "path": "scripting/oled-c.md"
+        }
+      ]
+    },
+    {
+      "title": "Tutorials",
+      "path": "tutorials",
+      "children": [
+        {
+          "title": "Format Micro Sd",
+          "path": "tutorials/format-micro-sd.md"
+        },
+        {
+          "title": "Index",
+          "path": "tutorials/index.md"
+        }
+      ]
+    }
+  ]
+}

@@ -4,29 +4,49 @@
 
 ## Documentation Files
 
-- [PocketMage Command Manual](https://ashtf8.github.io/PocketMage_PDA/docs/command-manual/)
+- [PocketMage Command Manual](https://tailsmandesign.github.io/PocketMage_PDA/docs/command-manual/)
   Keystrokes and command reference for the PocketMage PDA.
-- [Build Environments & PlatformIO Setup](https://ashtf8.github.io/PocketMage_PDA/docs/development/build-environments/)
-  How to set up PlatformIO and build PocketMage firmware on Linux, Mac, and Windows.
-- [Development](https://ashtf8.github.io/PocketMage_PDA/docs/development/)
-  Guides for building, extending, and contributing to PocketMage.
-- [PocketMage FAQ](https://ashtf8.github.io/PocketMage_PDA/docs/faq/)
+- [Build Environments & PlatformIO Setup](https://tailsmandesign.github.io/PocketMage_PDA/docs/development/build-environments/)
+  How to set up PlatformIO and build PocketMage firmware on Linux, macOS, and Windows.
+- [PocketMageOS](https://tailsmandesign.github.io/PocketMage_PDA/docs/development/)
+  The PocketMage operating system and app runtime.
+- [PocketMage FAQ](https://tailsmandesign.github.io/PocketMage_PDA/docs/faq/)
   Frequently asked questions about the PocketMage PDA device.
-- [PocketMage Documentation](https://ashtf8.github.io/PocketMage_PDA/docs/)
+- [Features](https://tailsmandesign.github.io/PocketMage_PDA/docs/features/)
+  What PocketMage can do today.
+- [Getting Started](https://tailsmandesign.github.io/PocketMage_PDA/docs/getting-started/)
+  PocketMage overview, setup, and first steps.
+- [What is PocketMage?](https://tailsmandesign.github.io/PocketMage_PDA/docs/getting-started/what-is-pocketmage/)
+  A short explanation of the PocketMage device and firmware stack.
+- [Guides](https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/)
+  Practical guides for building apps and working with PocketMage.
+- [Making Apps](https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/making-apps/)
+  How to create PocketMage apps, both native and OTA.
+- [Native Apps](https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/native-apps/)
+  How PocketMageOS native apps are structured.
+- [OTA Apps](https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/ota-apps/)
+  How third-party PocketMage apps work.
+- [PocketMage Documentation](https://tailsmandesign.github.io/PocketMage_PDA/docs/)
   Official documentation for the PocketMage open-source PDA device.
-- [PocketMage Script Example: Basic Input/Output](https://ashtf8.github.io/PocketMage_PDA/docs/scripting/example-c/)
+- [App API Reference](https://tailsmandesign.github.io/PocketMage_PDA/docs/reference/app-api/)
+  Entry points and helper functions for PocketMage apps.
+- [Reference](https://tailsmandesign.github.io/PocketMage_PDA/docs/reference/)
+  Exact-use reference pages for PocketMage app authors and contributors.
+- [PocketMage Library](https://tailsmandesign.github.io/PocketMage_PDA/docs/reference/pocketmage-library/)
+  Shared hardware, UI, and system modules used by PocketMage.
+- [System State Reference](https://tailsmandesign.github.io/PocketMage_PDA/docs/reference/system-state/)
+  The AppState enum, boot shortcuts, and how the OS dispatches between apps.
+- [Scripting Example: Basic Input/Output](https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/example-c/)
   A simple PocketMage script demonstrating user input, OLED output, and terminal printing.
-- [PocketMage Scripting Reference](https://ashtf8.github.io/PocketMage_PDA/docs/scripting/fullPotionCommandList/)
+- [PocketMage Scripting Reference](https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/fullPotionCommandList/)
   Complete API reference for Wrench script bindings on PocketMage.
-- [Scripting](https://ashtf8.github.io/PocketMage_PDA/docs/scripting/)
+- [Scripting](https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/)
   Scripting reference and examples for the PocketMage TERMINAL app (Wrench).
-- [PocketMage Script Example: E-Ink Drawing](https://ashtf8.github.io/PocketMage_PDA/docs/scripting/ink-c/)
+- [Scripting Example: E-Ink Drawing](https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/ink-c/)
   A PocketMage script demonstrating drawing shapes and text on the E-Ink display.
-- [PocketMage Script Example: OLED Drawing](https://ashtf8.github.io/PocketMage_PDA/docs/scripting/oled-c/)
+- [Scripting Example: OLED Drawing](https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/oled-c/)
   A PocketMage script demonstrating drawing shapes and text on the OLED display.
-- [Format a MicroSD Card for PocketMage](https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/format-micro-sd/)
+- [Format a MicroSD Card for PocketMage](https://tailsmandesign.github.io/PocketMage_PDA/docs/tutorials/format-micro-sd/)
   Guide to formatting SD cards for compatibility with PocketMage.
-- [PocketMage Tutorials](https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/)
+- [PocketMage Tutorials](https://tailsmandesign.github.io/PocketMage_PDA/docs/tutorials/)
   Step-by-step guides for PocketMage setup and configuration.
-- [Setting Up a PocketMage Build Environment](https://ashtf8.github.io/PocketMage_PDA/docs/tutorials/platformio-config/)
-  How to set up PlatformIO and build PocketMage firmware on Linux, Mac, and Windows.

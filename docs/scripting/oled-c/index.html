@@ -10,8 +10,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="generator" content="docmd v0.5.x">
+    <meta name="generator" content="docmd v0.8.17">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script>
+      var root = "../../";
+      if (root && !root.endsWith('/')) root += '/';
+      if (root === '') root = './';
+      window.DOCMD_ROOT = root;
+
+      window.DOCMD_SITE_ROOT = "/PocketMage_PDA/docs/";
+
+      window.DOCMD_APPEARANCE = "system";
+      window.DOCMD_VERSION_ROOT = "/";
+      window.DOCMD_BASE = "/PocketMage_PDA/docs/";
+      window.DOCMD_LOCALE = "";
+      window.DOCMD_DEFAULT_LOCALE = "";
+    </script>
     <script>/**
  * --------------------------------------------------------------------
  * docmd : the zero-config documentation engine.
@@ -29,9 +44,27 @@
 (function () {
   try {
     // 1. Determine Theme
+    //
+    // Resolve from three sources, in priority order:
+    //   1. localStorage explicit user choice (light / dark)
+    //   2. window.DOCMD_APPEARANCE  (current canonical name, set by EJS templates)
+    //   3. window.DOCMD_DEFAULT_MODE (legacy alias kept for pre-0.8.7 outputs)
+    //   4. 'light' as the final fallback
+    //
+    // Note: localStorage is only honoured when it holds an explicit
+    // 'light' or 'dark' value. A stored 'system' value (from a prior
+    // session where the user picked "follow system") must NOT win over
+    // a freshly resolved config value — the resolved value will itself
+    // be 'system' in that case and the OS preference check below takes
+    // over, so this is a no-op for the in-session behaviour but keeps
+    // any future storage migration simple.
     var localValue = localStorage.getItem('docmd-theme');
-    var configValue = window.DOCMD_DEFAULT_MODE || 'light';
-    var theme = localValue ? localValue : configValue;
+    var configValue = window.DOCMD_APPEARANCE
+      || window.DOCMD_DEFAULT_MODE
+      || 'light';
+    var theme = (localValue === 'light' || localValue === 'dark')
+      ? localValue
+      : configValue;
 
     if (theme === 'system') {
       theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -65,117 +98,55 @@
         visibility: hidden;
       }
     </style>
-    
-    <script>
-      var root = "../../";
-      if (root && !root.endsWith('/')) root += '/';
-      if (root === '') root = './';
-      window.DOCMD_ROOT = root;
-
-      var siteRoot = "../../";
-      if (siteRoot && !siteRoot.endsWith('/')) siteRoot += '/';
-      if (siteRoot === '') siteRoot = './';
-      window.DOCMD_SITE_ROOT = siteRoot;
-
-      window.DOCMD_APPEARANCE = "system";
-      window.DOCMD_VERSION_ROOT = "/";
-      window.DOCMD_BASE = "/";
-      window.DOCMD_LOCALE = "";
-      window.DOCMD_DEFAULT_LOCALE = "";
-    </script>
     <title>
-      PocketMage Script Example: OLED Drawing : PocketMage
+      Scripting Example: OLED Drawing : PocketMage
     </title>
-    <link id="site-favicon" rel="icon" href="../../assets/favicon.png?v=mqob665d">
-    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=mqob665d">
     
-    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=mqob665d" id="hljs-light" >
-    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=mqob665d" id="hljs-dark" disabled>
+    
+
+    <link id="site-favicon" rel="icon" href="../../assets/favicon.png?v=mse0xf51">
+    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=mse0xf51">
+    
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=mse0xf51" id="hljs-light" >
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=mse0xf51" id="hljs-dark" disabled>
     
     
 <meta name="description" content="A PocketMage script demonstrating drawing shapes and text on the OLED display.">
-<link rel="canonical" href="https://ashtf8.github.io/PocketMage_PDA/docs/scripting/oled-c/">
-<meta property="og:title" content="PocketMage Script Example: OLED Drawing - PocketMage">
+<link rel="canonical" href="https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/oled-c/">
+<meta property="og:title" content="Scripting Example: OLED Drawing - PocketMage">
 <meta property="og:description" content="A PocketMage script demonstrating drawing shapes and text on the OLED display.">
-<meta property="og:url" content="https://ashtf8.github.io/PocketMage_PDA/docs/scripting/oled-c/">
+<meta property="og:url" content="https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/oled-c/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://ashtf8.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
+<meta property="og:image" content="https://tailsmandesign.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="PocketMage Script Example: OLED Drawing - PocketMage">
+<meta name="twitter:title" content="Scripting Example: OLED Drawing - PocketMage">
 <meta name="twitter:description" content="A PocketMage script demonstrating drawing shapes and text on the OLED display.">
-<meta name="twitter:image" content="https://ashtf8.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
+<meta name="twitter:image" content="https://tailsmandesign.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
 
 
 
-<link rel="stylesheet" href="../../assets/css/docmd-theme-ruby.css?v=mqob665d" >
-<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=mqob665d" >
-<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=mqob665d" >
+<link rel="stylesheet" href="../../assets/css/docmd-theme-ruby.css?v=mse0xf51" >
+<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=mse0xf51" >
+<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=mse0xf51" >
 
     
-      <link rel="stylesheet" href="../../assets/css/theme.css?v=mqob665d">
+      <link rel="stylesheet" href="../../assets/css/theme.css?v=mse0xf51">
     
-    <script>/**
- * --------------------------------------------------------------------
- * docmd : the zero-config documentation engine.
- *
- * @package     @docmd/core (and ecosystem)
- * @website     https://docmd.io
- * @repository  https://github.com/docmd-io/docmd
- * @license     MIT
- * @copyright   Copyright (c) 2025-present docmd.io
- *
- * [docmd-source] - Please do not remove this header.
- * --------------------------------------------------------------------
- */
-
-(function () {
-  try {
-    // 1. Determine Theme
-    var localValue = localStorage.getItem('docmd-theme');
-    var configValue = window.DOCMD_DEFAULT_MODE || 'light';
-    var theme = localValue ? localValue : configValue;
-
-    if (theme === 'system') {
-      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    }
-
-    // 2. Apply to Root
-    document.documentElement.setAttribute('data-theme', theme);
-
-    // 3. Highlight.js Toggle Strategy
-    var lightLink = document.getElementById('hljs-light');
-    var darkLink = document.getElementById('hljs-dark');
-
-    if (lightLink && darkLink) {
-      if (theme === 'dark') {
-        lightLink.disabled = true;
-        darkLink.disabled = false;
-      } else {
-        lightLink.disabled = false;
-        darkLink.disabled = true;
-      }
-    }
-
-    document.documentElement.style.visibility = "visible";
-  } catch (e) {
-    document.documentElement.style.visibility = "visible";
-    console.error('Theme init failed', e);
-  }
-})();</script>
+    
   </head>
   <body
     class="sidebar-collapsible"
     data-default-collapsed="false"
     data-copy-code-enabled="true" data-spa-enabled="true" data-source-file="docs/scripting/oled-c.md">
 
-    <a href="#main-content" class="skip-link">skipToContent</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     
     
       <aside class="sidebar">
         <div class="sidebar-header">
           
-            <h1><a href="../../">
+<h1><a href="../../">
                 PocketMage
               </a></h1>
           
@@ -208,7 +179,7 @@
         </div>
         
 
-<nav class="sidebar-nav" aria-label="mainNavigation">
+<nav class="sidebar-nav" aria-label="Main Navigation">
   <ul>
     
       <li class="" >
@@ -235,6 +206,575 @@
           
           <span class="nav-item-title">
             Home
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <a href="../../getting-started/" class=" nav-group"
+          >
+           
+<svg class="lucide-icon icon-rocket " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-rocket"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09" />
+  <path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" />
+  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Getting Started
+            </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+          
+        </a>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../getting-started/what-is-pocketmage/" class=" "
+          >
+           
+<svg class="lucide-icon icon-info " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-info"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <circle cx="12" cy="12" r="10" />
+  <path d="M12 16v-4" />
+  <path d="M12 8h.01" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            What is PocketMage
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../development/build-environments/" class=" "
+          >
+           
+<svg class="lucide-icon icon-settings " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-settings"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Build Environments
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <a href="../../development/" class=" nav-group"
+          >
+           
+<svg class="lucide-icon icon-cpu " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-cpu"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 20v2" />
+  <path d="M12 2v2" />
+  <path d="M17 20v2" />
+  <path d="M17 2v2" />
+  <path d="M2 12h2" />
+  <path d="M2 17h2" />
+  <path d="M2 7h2" />
+  <path d="M20 12h2" />
+  <path d="M20 17h2" />
+  <path d="M20 7h2" />
+  <path d="M7 20v2" />
+  <path d="M7 2v2" />
+  <rect x="4" y="4" width="16" height="16" rx="2" />
+  <rect x="8" y="8" width="8" height="8" rx="1" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            PocketMageOS
+            </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+          
+        </a>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../features/" class=" "
+          >
+           
+<svg class="lucide-icon icon-star " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-star"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Features
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <a href="../../guides/" class=" nav-group"
+          >
+           
+<svg class="lucide-icon icon-book-open " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-book-open"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 7v14" />
+  <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Guides
+            </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+          
+        </a>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../guides/making-apps/" class=" "
+          >
+           
+<svg class="lucide-icon icon-code " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-code"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m16 18 6-6-6-6" />
+  <path d="m8 6-6 6 6 6" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Making Apps
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../guides/native-apps/" class=" "
+          >
+           
+<svg class="lucide-icon icon-terminal " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-terminal"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M12 19h8" />
+  <path d="m4 17 6-6-6-6" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Native Apps
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../guides/ota-apps/" class=" "
+          >
+           
+<svg class="lucide-icon icon-package " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-package"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+  <path d="M12 22V12" />
+  <polyline points="3.29 7 12 12 20.71 7" />
+  <path d="m7.5 4.27 9 5.15" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            OTA Apps
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="collapsible nav-group"  aria-expanded="false" >
+      
+        <a href="../../reference/" class=" nav-group"
+          >
+           
+<svg class="lucide-icon icon-book " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-book"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Reference
+            </span>
+          
+            <span class="collapse-icon-wrapper">
+<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-right"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m9 18 6-6-6-6" />
+</svg>
+</span>
+          
+          
+        </a>
+        
+
+        
+          <ul class="submenu">
+            
+      <li class="" >
+      
+        <a href="../../reference/app-api/" class=" "
+          >
+           
+<svg class="lucide-icon icon-code " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-code"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m16 18 6-6-6-6" />
+  <path d="m8 6-6 6 6 6" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            App API
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../reference/pocketmage-library/" class=" "
+          >
+           
+<svg class="lucide-icon icon-box " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-box"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+  <path d="m3.3 7 8.7 5 8.7-5" />
+  <path d="M12 22V12" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            PocketMage Library
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../reference/system-state/" class=" "
+          >
+           
+<svg class="lucide-icon icon-settings " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-settings"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+  <circle cx="12" cy="12" r="3" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            System State
+            </span>
+          
+          
+        </a>
+        
+
+        
+      </li>
+    
+          </ul>
+        
+      </li>
+    
+      <li class="" >
+      
+        <a href="../../command-manual/" class=" "
+          >
+           
+<svg class="lucide-icon icon-keyboard " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-keyboard"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 8h.01" />
+  <path d="M12 12h.01" />
+  <path d="M14 8h.01" />
+  <path d="M16 12h.01" />
+  <path d="M18 8h.01" />
+  <path d="M6 8h.01" />
+  <path d="M7 16h10" />
+  <path d="M8 12h.01" />
+  <rect width="20" height="16" x="2" y="4" rx="2" />
+</svg>
+
+          
+          <span class="nav-item-title">
+            Commands
             </span>
           
           
@@ -278,53 +818,13 @@
         
       </li>
     
-      <li class="" >
-      
-        <a href="../../command-manual/" class=" "
-          >
-           
-<svg class="lucide-icon icon-keyboard " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
-  class="lucide lucide-keyboard"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M10 8h.01" />
-  <path d="M12 12h.01" />
-  <path d="M14 8h.01" />
-  <path d="M16 12h.01" />
-  <path d="M18 8h.01" />
-  <path d="M6 8h.01" />
-  <path d="M7 16h10" />
-  <path d="M8 12h.01" />
-  <rect width="20" height="16" x="2" y="4" rx="2" />
-</svg>
-
-          
-          <span class="nav-item-title">
-            Command Manual
-            </span>
-          
-          
-        </a>
-        
-
-        
-      </li>
-    
       <li class="collapsible nav-group"  aria-expanded="false" >
       
         <a href="../../tutorials/" class=" nav-group"
           >
            
-<svg class="lucide-icon icon-book-open " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
-  class="lucide lucide-book-open"
+<svg class="lucide-icon icon-folder-open " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-folder-open"
   xmlns="http://www.w3.org/2000/svg"
   width="24"
   height="24"
@@ -335,8 +835,7 @@
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path d="M12 7v14" />
-  <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z" />
+  <path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2" />
 </svg>
 
           
@@ -376,126 +875,6 @@
           
           <span class="nav-item-title">
             Format MicroSD Card
-            </span>
-          
-          
-        </a>
-        
-
-        
-      </li>
-    
-      <li class="" >
-      
-        <a href="../../tutorials/platformio-config/" class=" "
-          >
-           
-<svg class="lucide-icon icon-settings " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
-  class="lucide lucide-settings"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
-  <circle cx="12" cy="12" r="3" />
-</svg>
-
-          
-          <span class="nav-item-title">
-            PlatformIO Config
-            </span>
-          
-          
-        </a>
-        
-
-        
-      </li>
-    
-          </ul>
-        
-      </li>
-    
-      <li class="collapsible nav-group"  aria-expanded="false" >
-      
-        <a href="../../development/" class=" nav-group"
-          >
-           
-<svg class="lucide-icon icon-code " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
-  class="lucide lucide-code"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m16 18 6-6-6-6" />
-  <path d="m8 6-6 6 6 6" />
-</svg>
-
-          
-          <span class="nav-item-title">
-            Development
-            </span>
-          
-            <span class="collapse-icon-wrapper">
-<svg class="lucide-icon icon-chevron-right collapse-icon" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
-  class="lucide lucide-chevron-right"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="m9 18 6-6-6-6" />
-</svg>
-</span>
-          
-          
-        </a>
-        
-
-        
-          <ul class="submenu">
-            
-      <li class="" >
-      
-        <a href="../../development/build-environments/" class=" "
-          >
-           
-<svg class="lucide-icon icon-settings " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
-  class="lucide lucide-settings"
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  stroke-width="2"
-  stroke-linecap="round"
-  stroke-linejoin="round"
->
-  <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
-  <circle cx="12" cy="12" r="3" />
-</svg>
-
-          
-          <span class="nav-item-title">
-            Build Environments
             </span>
           
           
@@ -698,7 +1077,7 @@
     
       <li class="" >
       
-        <a href="https://github.com/ashtf8/PocketMage_PDA" class=" "
+        <a href="https://github.com/TailsmanDesign/PocketMage_PDA" class=" "
           target=&quot;_blank&quot; rel=&quot;noopener&quot;>
            
 <svg class="lucide-icon icon-github " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -757,6 +1136,8 @@
         </div>
       </aside>
       
+      
+      
       <div class="main-content-wrapper">
         
         
@@ -764,7 +1145,7 @@
             <div class="header-left">
               
                 <button id="sidebar-toggle-button" class="sidebar-toggle-button"
-                  aria-label="toggleSidebar">
+                  aria-label="Toggle Sidebar">
                   
 <svg class="lucide-icon icon-chevron-left " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-chevron-left"
@@ -785,7 +1166,7 @@
               
               <div class="header-titles-wrapper">
                 <span class="header-title">
-                  PocketMage Script Example: OLED Drawing
+                  Scripting Example: OLED Drawing
                 </span>
               </div>
             </div>
@@ -796,7 +1177,7 @@
 
 <div class="docmd-options-menu">
     
-    <button class="docmd-search-trigger" aria-label="search">
+    <button class="docmd-search-trigger" aria-label="Search">
         
 <svg class="lucide-icon icon-search " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-search"
@@ -814,7 +1195,7 @@
   <circle cx="11" cy="11" r="8" />
 </svg>
 
-        <span class="search-label">search</span>
+        <span class="search-label">Search</span>
         <span class="search-keys"><kbd class="docmd-kbd">⌘</kbd><kbd class="docmd-kbd">K</kbd></span>
     </button>
     
@@ -824,7 +1205,7 @@
     
 
     
-    <button class="theme-toggle-button" aria-label="toggleTheme">
+    <button class="theme-toggle-button" aria-label="Toggle theme">
         
 <svg class="lucide-icon icon-sun icon-sun" width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-sun"
@@ -879,7 +1260,7 @@
             <div class="content-layout">
               <div class="main-content">
                 <div class="docmd-breadcrumbs-row">
-                  <div id="docmd-raw-markdown" data-content="---%0Atitle%3A%20%22PocketMage%20Script%20Example%3A%20OLED%20Drawing%22%0Adescription%3A%20%22A%20PocketMage%20script%20demonstrating%20drawing%20shapes%20and%20text%20on%20the%20OLED%20display.%22%0A---%0A%0A%23%20Scripting%20Example%3A%20OLED%20Drawing%0A%0A%60%60%60c%0A%2F%2F%20PocketMage%20OLED%20scripting%20example%0A%2F%2F%20Based%20on%20Wrench%20by%20jingoro2112%20(GH)%0A%2F%2F%20Edit%20with%20potion%3A%20pot%20ink.c%0A%2F%2F%20Compile%20and%20run%3A%20brew%20ink.c%0A%2F%2F%20Colors%2Fclr%3A%201%20-%20Black%2C%200%20-%20White%0A%0Adelay(1000)%3B%0A%0A%2F%2F%20Draw%20shapes%20on%20a%20white%20background%0AoledBackground(0)%3B%20%2F%2FBackground%20clr%0AoledRect(10%2C%2020%2C%2025%2C%205%2C%201%2C%200)%3B%20%2F%2Fx%2Cy%2Cw%2Ch%2Cline%20clr%2Cfill%20clr%0AoledCircle(100%2C%2010%2C%2010%2C%201)%3B%20%2F%2Fx%2Cy%2Cr%2Cline%20clr%0AoledText(180%2C%2020%2C%202%2C%201%2C%20%22PocketMage!%22)%3B%20%2F%2Fx%2Cy%2Cfont%20size%2Ctext%0AupdateOled()%3B%20%2F%2FUpdate%20OLED%20display%0A%0Adelay(3000)%3B%0A%0A%2F%2F%20Draw%20shapes%20on%20a%20black%20background%0AoledBackground(1)%3B%20%2F%2FBackground%20clr%0AoledRect(10%2C%2020%2C%2025%2C%205%2C%200%2C%201)%3B%20%2F%2Fx%2Cy%2Cw%2Ch%2Cline%20clr%2Cfill%20clr%0AoledCircle(100%2C%2010%2C%2010%2C%200)%3B%20%2F%2Fx%2Cy%2Cr%2Cline%20clr%0AoledText(120%2C%2020%2C%203%2C%200%2C%20%22Hello%20World!%22)%3B%20%2F%2Fx%2Cy%2Cfont%20size%2Ctext%0AupdateOled()%3B%20%2F%2FUpdate%20OLED%20display%0A%0Adelay(3000)%3B%0A%60%60%60%0A" style="display: none;"></div>
+                  <div id="docmd-raw-markdown" data-content="---%0Atitle%3A%20%22Scripting%20Example%3A%20OLED%20Drawing%22%0Adescription%3A%20%22A%20PocketMage%20script%20demonstrating%20drawing%20shapes%20and%20text%20on%20the%20OLED%20display.%22%0A---%0A%0A%23%20Scripting%20Example%3A%20OLED%20Drawing%0A%0AThe%20OLED%20is%20256x32%20pixels.%20Coordinates%20use%20the%20top-left%20origin%2C%20so%20the%20horizontal%20center%20is%20x%20%3D%20128.%0A%0A%60%60%60c%0A%2F%2F%20PocketMage%20OLED%20scripting%20example%0A%2F%2F%20Based%20on%20Wrench%20by%20jingoro2112%20(GH)%0A%2F%2F%20Edit%20with%20potion%3A%20pot%20oled-c.c%0A%2F%2F%20Compile%20and%20run%3A%20brew%20oled-c.c%0A%2F%2F%20Colors%2Fclr%3A%201%20-%20Black%2C%200%20-%20White%0A%0Adelay(1000)%3B%0A%0A%2F%2F%20Draw%20shapes%20on%20a%20white%20background%0AoledBackground(0)%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20background%20color%0AoledRect(10%2C%2010%2C%2025%2C%205%2C%201%2C%200)%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20x%2Cy%2Cw%2Ch%2Cline%20clr%2Cfill%20clr%0AoledCircle(128%2C%2010%2C%208%2C%201)%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20x%2Cy%2Cr%2Cline%20clr%0AoledText(10%2C%2020%2C%202%2C%201%2C%20%22PocketMage!%22)%3B%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20x%2Cy%2Csize%2Ccolor%2Ctext%0AupdateOled()%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20update%20OLED%20display%0A%0Adelay(3000)%3B%0A%0A%2F%2F%20Draw%20shapes%20on%20a%20black%20background%0AoledBackground(1)%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20background%20color%0AoledRect(10%2C%2010%2C%2025%2C%205%2C%200%2C%201)%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20x%2Cy%2Cw%2Ch%2Cline%20clr%2Cfill%20clr%0AoledCircle(128%2C%2010%2C%208%2C%200)%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20x%2Cy%2Cr%2Cline%20clr%0AoledText(10%2C%2020%2C%202%2C%200%2C%20%22Hello%20World!%22)%3B%20%20%20%20%20%20%20%20%20%20%2F%2F%20x%2Cy%2Csize%2Ccolor%2Ctext%0AupdateOled()%3B%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%2F%20update%20OLED%20display%0A%0Adelay(3000)%3B%0A%60%60%60%0A%0A%23%23%20What%20it%20shows%0A%0A-%20%60oledBackground()%60%20fills%20the%20OLED%20buffer.%0A-%20%60oledRect()%60%20and%20%60oledCircle()%60%20draw%20into%20the%20buffer.%0A-%20%60oledText()%60%20renders%20text%20at%20a%20font%20size.%0A-%20%60updateOled()%60%20pushes%20the%20buffer%20to%20the%20screen%20and%20clears%20it.%0A%0A%23%23%20Read%20next%0A%0A-%20%5BE-Ink%20Drawing%5D(ink-c.md)%0A-%20%5BBasic%20Input%2FOutput%5D(example-c.md)%0A-%20%5BFull%20Wrench%20Command%20List%5D(fullPotionCommandList.md)%0A" style="display: none;"></div>
                   
                     <nav aria-label="breadcrumb" class="docmd-breadcrumbs">
                       <ol>
@@ -923,7 +1304,7 @@
                   
                     <div class="docmd-copy-widgets">
                       
-                        <button class="docmd-copy-btn docmd-copy-raw-btn" data-copied="copiedToClipboard" title="copyMarkdown" aria-label="copyMarkdown">
+                        <button class="docmd-copy-btn docmd-copy-raw-btn" data-copied="Copied!" title="Copy Markdown" aria-label="Copy Markdown">
                           <span class="docmd-btn-icon">
 <svg class="lucide-icon icon-copy " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-copy"
@@ -944,7 +1325,7 @@
                         </button>
                       
                       
-                        <button class="docmd-copy-btn docmd-copy-context-btn" data-copied="copiedToClipboard" title="copyContext">
+                        <button class="docmd-copy-btn docmd-copy-context-btn" data-copied="Copied!" title="Copy Context">
                           <span class="docmd-btn-icon">
 <svg class="lucide-icon icon-message-square " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-message-square"
@@ -961,7 +1342,7 @@
   <path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" />
 </svg>
 </span>
-                          <span class="docmd-btn-text">copyContext</span>
+                          <span class="docmd-btn-text">Copy Context</span>
                         </button>
                       
                     </div>
@@ -969,32 +1350,46 @@
                 </div>
                 
                 <h1 id="scripting-example-oled-drawing" class="docmd-heading"><a href="#scripting-example-oled-drawing" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Scripting Example: OLED Drawing</h1>
-<pre class="hljs"><code><span class="hljs-comment">// PocketMage OLED scripting example</span>
+<p>The OLED is 256x32 pixels. Coordinates use the top-left origin, so the horizontal center is x = 128.</p>
+<pre class="hljs"><code class="language-c"><span class="hljs-comment">// PocketMage OLED scripting example</span>
 <span class="hljs-comment">// Based on Wrench by jingoro2112 (GH)</span>
-<span class="hljs-comment">// Edit with potion: pot ink.c</span>
-<span class="hljs-comment">// Compile and run: brew ink.c</span>
+<span class="hljs-comment">// Edit with potion: pot oled-c.c</span>
+<span class="hljs-comment">// Compile and run: brew oled-c.c</span>
 <span class="hljs-comment">// Colors/clr: 1 - Black, 0 - White</span>
 
 <span class="hljs-title function_">delay</span>(<span class="hljs-number">1000</span>);
 
 <span class="hljs-comment">// Draw shapes on a white background</span>
-<span class="hljs-title function_">oledBackground</span>(<span class="hljs-number">0</span>); <span class="hljs-comment">//Background clr</span>
-<span class="hljs-title function_">oledRect</span>(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">25</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">//x,y,w,h,line clr,fill clr</span>
-<span class="hljs-title function_">oledCircle</span>(<span class="hljs-number">100</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">//x,y,r,line clr</span>
-<span class="hljs-title function_">oledText</span>(<span class="hljs-number">180</span>, <span class="hljs-number">20</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;PocketMage!&quot;</span>); <span class="hljs-comment">//x,y,font size,text</span>
-<span class="hljs-title function_">updateOled</span>(); <span class="hljs-comment">//Update OLED display</span>
+<span class="hljs-title function_">oledBackground</span>(<span class="hljs-number">0</span>);                               <span class="hljs-comment">// background color</span>
+<span class="hljs-title function_">oledRect</span>(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">25</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);                   <span class="hljs-comment">// x,y,w,h,line clr,fill clr</span>
+<span class="hljs-title function_">oledCircle</span>(<span class="hljs-number">128</span>, <span class="hljs-number">10</span>, <span class="hljs-number">8</span>, <span class="hljs-number">1</span>);                       <span class="hljs-comment">// x,y,r,line clr</span>
+<span class="hljs-title function_">oledText</span>(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-string">&quot;PocketMage!&quot;</span>);           <span class="hljs-comment">// x,y,size,color,text</span>
+<span class="hljs-title function_">updateOled</span>();                                    <span class="hljs-comment">// update OLED display</span>
 
 <span class="hljs-title function_">delay</span>(<span class="hljs-number">3000</span>);
 
 <span class="hljs-comment">// Draw shapes on a black background</span>
-<span class="hljs-title function_">oledBackground</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">//Background clr</span>
-<span class="hljs-title function_">oledRect</span>(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">25</span>, <span class="hljs-number">5</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">//x,y,w,h,line clr,fill clr</span>
-<span class="hljs-title function_">oledCircle</span>(<span class="hljs-number">100</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">//x,y,r,line clr</span>
-<span class="hljs-title function_">oledText</span>(<span class="hljs-number">120</span>, <span class="hljs-number">20</span>, <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Hello World!&quot;</span>); <span class="hljs-comment">//x,y,font size,text</span>
-<span class="hljs-title function_">updateOled</span>(); <span class="hljs-comment">//Update OLED display</span>
+<span class="hljs-title function_">oledBackground</span>(<span class="hljs-number">1</span>);                               <span class="hljs-comment">// background color</span>
+<span class="hljs-title function_">oledRect</span>(<span class="hljs-number">10</span>, <span class="hljs-number">10</span>, <span class="hljs-number">25</span>, <span class="hljs-number">5</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);                   <span class="hljs-comment">// x,y,w,h,line clr,fill clr</span>
+<span class="hljs-title function_">oledCircle</span>(<span class="hljs-number">128</span>, <span class="hljs-number">10</span>, <span class="hljs-number">8</span>, <span class="hljs-number">0</span>);                       <span class="hljs-comment">// x,y,r,line clr</span>
+<span class="hljs-title function_">oledText</span>(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;Hello World!&quot;</span>);          <span class="hljs-comment">// x,y,size,color,text</span>
+<span class="hljs-title function_">updateOled</span>();                                    <span class="hljs-comment">// update OLED display</span>
 
 <span class="hljs-title function_">delay</span>(<span class="hljs-number">3000</span>);
 </code></pre>
+<h2 id="scripting-example-oled-drawing-what-it-shows" class="docmd-heading"><a href="#scripting-example-oled-drawing-what-it-shows" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>What it shows</h2>
+<ul>
+<li><code>oledBackground()</code> fills the OLED buffer.</li>
+<li><code>oledRect()</code> and <code>oledCircle()</code> draw into the buffer.</li>
+<li><code>oledText()</code> renders text at a font size.</li>
+<li><code>updateOled()</code> pushes the buffer to the screen and clears it.</li>
+</ul>
+<h2 id="scripting-example-oled-drawing-read-next" class="docmd-heading"><a href="#scripting-example-oled-drawing-read-next" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Read next</h2>
+<ul>
+<li><a href="../ink-c/">E-Ink Drawing</a></li>
+<li><a href="../example-c/">Basic Input/Output</a></li>
+<li><a href="../fullPotionCommandList/">Full Wrench Command List</a></li>
+</ul>
 
                 
                   <div class="page-navigation">
@@ -1017,14 +1412,14 @@
   <path d="M19 12H5" />
 </svg>
 
-                        <span><small>previous</small><strong>
+                        <span><small>Previous</small><strong>
                             E-Ink Drawing
                           </strong></span>
                       </a>
                     
                     
                       <a href="../../scripting/fullPotionCommandList/" class="next-page">
-                        <span><small>next</small>
+                        <span><small>Next</small>
                           <strong>
                             Full Command Reference
                           </strong></span>
@@ -1050,38 +1445,74 @@
                   </div>
                 
               </div>
+              
               <div class="toc-sidebar">
                 
 
 
+  <div class="toc-container">
+    <h2 class="toc-title">On This Page<span class="mobile-view toc-menu-button float-right">
+<svg class="lucide-icon icon-chevron-down " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
+  class="lucide lucide-chevron-down"
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m6 9 6 6 6-6" />
+</svg>
+</span></h2>
+    <ul class="toc-list">
+      
+        <li class="toc-item toc-level-1">
+          <a href="#scripting-example-oled-drawing" class="toc-link">Scripting Example: OLED Drawing</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#scripting-example-oled-drawing-what-it-shows" class="toc-link">What it shows</a>
+        </li>
+      
+        <li class="toc-item toc-level-2">
+          <a href="#scripting-example-oled-drawing-read-next" class="toc-link">Read next</a>
+        </li>
+      
+    </ul>
+  </div>
+
               </div>
+              
             </div>
             <div class="page-footer-actions">
               
               
-                <span class="git-last-updated" data-timestamp="1782077870000">
+                <span class="git-last-updated" data-timestamp="1785809557000">
                   <svg class="git-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <polyline points="12 6 12 12 16 14"></polyline>
                   </svg>
                   <span class="git-label">Last updated:</span>
-                  <span class="git-time" data-timestamp="1782077870000"></span>
+                  <span class="git-time" data-timestamp="1785809557000"></span>
                   
                   <div class="git-commit-tooltip" role="tooltip">
                     <div class="git-tooltip-title">Recent commits</div>
                     <ul class="git-commit-list">
                       
                         <li class="git-commit-item">
-                          <div class="git-commit-avatar" title="Ashtf">
+                          <div class="git-commit-avatar" title="ashtf8">
                             
-                              <img src="https://www.gravatar.com/avatar/88c69ec22216c441f9cbcc5c230f7123?d=mp&amp;s=64" alt="Ashtf">
+                              <img src="https://www.gravatar.com/avatar/88c69ec22216c441f9cbcc5c230f7123?d=mp&amp;s=64" alt="ashtf8">
                             
                           </div>
                           <div class="git-commit-details">
-                            <div class="git-commit-message" title="Merge pull request #287 from ashtf8/NellowTCS-dev">Merge pull request #287 from ashtf8/N...</div>
+                            <div class="git-commit-message" title="Update settings.gal">Update settings.gal</div>
                             <div class="git-commit-meta">
-                              <span class="git-commit-author">Ashtf</span>
-                              <span class="git-commit-date" data-timestamp="1782077870000"></span>
+                              <span class="git-commit-author">ashtf8</span>
+                              <span class="git-commit-date" data-timestamp="1785809557000"></span>
                             </div>
                           </div>
                         </li>
@@ -1093,7 +1524,7 @@
               
               <span class="git-spacer"></span>
               
-                <a href="https://github.com/ashtf8/PocketMage_PDA/edit/main/Docs/docs/Docs/docs/scripting/oled-c.md" target="_blank" rel="noopener noreferrer" class="edit-link">
+                <a href="https://github.com/TailsmanDesign/PocketMage_PDA/edit/main/Docs/docs/Docs/docs/scripting/oled-c.md" target="_blank" rel="noopener noreferrer" class="edit-link">
                   
 <svg class="lucide-icon icon-pencil " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-pencil"
@@ -1136,11 +1567,11 @@
                 <span class="footer-column-title">Resources</span>
                 <ul>
                   
-                    <li><a href="../../command-manual/" >Command Manual</a></li>
+                    <li><a href="command-manual/" >Command Manual</a></li>
                   
-                    <li><a href="../../faq/" >FAQ</a></li>
+                    <li><a href="faq/" >FAQ</a></li>
                   
-                    <li><a href="../../development/build-environments/" >Build Environments</a></li>
+                    <li><a href="development/build-environments/" >Build Environments</a></li>
                   
                 </ul>
               </div>
@@ -1149,7 +1580,7 @@
                 <span class="footer-column-title">Community</span>
                 <ul>
                   
-                    <li><a href="https://github.com/ashtf8/PocketMage_PDA" >GitHub</a></li>
+                    <li><a href="https://github.com/TailsmanDesign/PocketMage_PDA" >GitHub</a></li>
                   
                     <li><a href="https://discord.gg/KSCapSf4XH" >Discord</a></li>
                   
@@ -1162,10 +1593,10 @@
         
       </div>
       <div class="footer-complete-bottom">
-        <div class="user-footer">Built with <a href="https://docmd.io">docmd</a>. <a href="https://github.com/ashtf8/PocketMage_PDA">View on GitHub</a>.</div>
+        <div class="user-footer">Built with <a href="https://docmd.io">docmd</a>. <a href="https://github.com/TailsmanDesign/PocketMage_PDA">View on GitHub</a>.</div>
         
           <div class="branding-footer">
-            builtWith <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg> <a href="https://docmd.io" target="_blank" rel="noopener">docmd.</a>
+            Built with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg> <a href="https://docmd.io" target="_blank" rel="noopener">docmd.</a>
           </div>
         
       </div>
@@ -1174,20 +1605,21 @@
         </div>
       </div>
       
-      <script src="../../assets/js/docmd-main.js?v=mqob665d"></script>
+      <script src="../../assets/js/docmd-main.js?v=mse0xf51"></script>
       
-      <script src="../../assets/js/docmd-git.js?v=mqob665d"></script>
-      <script src="../../assets/js/docmd-image-lightbox.js?v=mqob665d" ></script>
-<script src="https://cdn.jsdelivr.net/npm/minisearch@7.2.0/dist/umd/index.min.js" ></script>
-<script src="../../assets/js/docmd-search.js?v=mqob665d" ></script>
-<script src="../../assets/js/init-mermaid.js?v=mqob665d" type="module"></script>
-<script src="../../assets/js/docmd-git.js?v=mqob665d" type="module"></script>
+      <script src="../../assets/js/docmd-git.js?v=mse0xf51"></script>
+      <script src="../../assets/js/docmd-image-lightbox.js?v=mse0xf51" ></script>
+<script src="../../assets/js/vendor/minisearch.js?v=mse0xf51" ></script>
+<script src="../../assets/js/docmd-search.js?v=mse0xf51" ></script>
+<script src="../../assets/js/docmd-git.js?v=mse0xf51" type="module"></script>
 
   <!-- Search Modal (Injected by @docmd/plugin-search) -->
   <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;" data-semantic="true" data-show-confidence="true" data-show-filters="true"
        data-search-placeholder="Search documentation..."
        data-search-no-results="No results found."
        data-search-error="Failed to load search index."
+       data-search-offline="Search requires a web server. Open this site via http://localhost instead of file:// to enable search."
+       data-search-offline-build="Search is disabled because these docs were built with the --offline flag. Rebuild the site without the flag to enable search."
        data-search-initial="Type to start searching..."
        data-search-navigate="to navigate"
        data-search-escape="to close">
@@ -1254,7 +1686,9 @@
       })();
     </script>
 
-<script>window.__git_config={"repo":"https://github.com/ashtf8/PocketMage_PDA/edit/main/Docs/docs","branch":"main","editLink":true,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
+<script>window.__git_config={"repo":"https://github.com/TailsmanDesign/PocketMage_PDA/edit/main/Docs/docs","branch":"main","editLink":true,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
+      
+      
       
   </body>
 </html>
