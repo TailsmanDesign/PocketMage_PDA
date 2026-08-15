@@ -4,10 +4,10 @@ title: "PocketMage Documentation"
 description: "Official documentation for the PocketMage open-source PDA device."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/"
 path: /
-updated: 2026-08-04
+updated: 2026-08-15
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-04T02:13:37.654Z"
+  generated_at: "2026-08-15T18:08:50.952Z"
 ---
 ---
 title: "PocketMage Documentation"

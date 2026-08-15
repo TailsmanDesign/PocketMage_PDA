@@ -4,10 +4,10 @@ title: Guides
 description: "Practical guides for building apps and working with PocketMage."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/"
 path: /guides/
-updated: 2026-08-04
+updated: 2026-08-15
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-04T02:13:37.652Z"
+  generated_at: "2026-08-15T18:08:50.951Z"
 ---
 ---
 title: "Guides"

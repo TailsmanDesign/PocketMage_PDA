@@ -4,10 +4,10 @@ title: "What is PocketMage?"
 description: "A short explanation of the PocketMage device and firmware stack."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/getting-started/what-is-pocketmage/"
 path: /getting-started/what-is-pocketmage/
-updated: 2026-08-04
+updated: 2026-08-15
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-04T02:13:37.652Z"
+  generated_at: "2026-08-15T18:08:50.950Z"
 ---
 ---
 title: "What is PocketMage?"
