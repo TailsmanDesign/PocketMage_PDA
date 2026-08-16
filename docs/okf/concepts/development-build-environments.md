@@ -7,7 +7,7 @@ path: /development/build-environments/
 updated: 2026-08-16
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-16T21:58:43.068Z"
+  generated_at: "2026-08-16T22:45:57.798Z"
 ---
 ---
 title: "Build Environments & PlatformIO Setup"
