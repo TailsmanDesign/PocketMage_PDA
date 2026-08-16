@@ -9,117 +9,117 @@
   "batchCount": 2,
   "files": {
     "command-manual/index.md": {
-      "mtime": 1786916388543.4937,
+      "mtime": 1786917490145.0562,
       "size": 15246,
       "batches": []
     },
     "development/build-environments.md": {
-      "mtime": 1786916388543.4937,
+      "mtime": 1786917490145.0562,
       "size": 3996,
       "batches": []
     },
     "development/index.md": {
-      "mtime": 1786916388543.6846,
+      "mtime": 1786917490145.2495,
       "size": 4799,
       "batches": []
     },
     "faq/index.md": {
-      "mtime": 1786916388543.6846,
+      "mtime": 1786917490145.2495,
       "size": 5277,
       "batches": []
     },
     "features/index.md": {
-      "mtime": 1786916388543.6846,
+      "mtime": 1786917490145.2495,
       "size": 3467,
       "batches": []
     },
     "getting-started/index.md": {
-      "mtime": 1786916388543.6846,
+      "mtime": 1786917490145.2495,
       "size": 1606,
       "batches": []
     },
     "getting-started/what-is-pocketmage.md": {
-      "mtime": 1786916388543.972,
+      "mtime": 1786917490145.5312,
       "size": 3718,
       "batches": []
     },
     "guides/index.md": {
-      "mtime": 1786916388544.0217,
+      "mtime": 1786917490145.5312,
       "size": 1253,
       "batches": []
     },
     "guides/making-apps.md": {
-      "mtime": 1786916388544.131,
+      "mtime": 1786917490145.647,
       "size": 4143,
       "batches": []
     },
     "guides/native-apps.md": {
-      "mtime": 1786916388544.131,
+      "mtime": 1786917490145.647,
       "size": 2903,
       "batches": []
     },
     "guides/ota-apps.md": {
-      "mtime": 1786916388544.131,
+      "mtime": 1786917490145.647,
       "size": 2312,
       "batches": []
     },
     "index.md": {
-      "mtime": 1786916388544.131,
+      "mtime": 1786917490145.647,
       "size": 1996,
       "batches": []
     },
     "reference/app-api.md": {
-      "mtime": 1786916388544.131,
+      "mtime": 1786917490145.647,
       "size": 4713,
       "batches": []
     },
     "reference/index.md": {
-      "mtime": 1786916388544.3892,
+      "mtime": 1786917490145.9236,
       "size": 1693,
       "batches": []
     },
     "reference/pocketmage-library.md": {
-      "mtime": 1786916388544.3892,
+      "mtime": 1786917490145.9236,
       "size": 6210,
       "batches": []
     },
     "reference/system-state.md": {
-      "mtime": 1786916388544.3892,
+      "mtime": 1786917490145.9236,
       "size": 3162,
       "batches": []
     },
     "scripting/example-c.md": {
-      "mtime": 1786916388544.3892,
+      "mtime": 1786917490145.9236,
       "size": 1476,
       "batches": []
     },
     "scripting/fullPotionCommandList.md": {
-      "mtime": 1786916388544.5972,
+      "mtime": 1786917490146.1365,
       "size": 9463,
       "batches": []
     },
     "scripting/index.md": {
-      "mtime": 1786916388544.5972,
+      "mtime": 1786917490146.1365,
       "size": 3538,
       "batches": []
     },
     "scripting/ink-c.md": {
-      "mtime": 1786916388544.5972,
+      "mtime": 1786917490146.1365,
       "size": 1663,
       "batches": []
     },
     "scripting/oled-c.md": {
-      "mtime": 1786916388544.5972,
+      "mtime": 1786917490146.1365,
       "size": 1666,
       "batches": []
     },
     "tutorials/format-micro-sd.md": {
-      "mtime": 1786916388544.5972,
+      "mtime": 1786917490146.1365,
       "size": 2838,
       "batches": []
     },
     "tutorials/index.md": {
-      "mtime": 1786916388544.8704,
+      "mtime": 1786917490146.4028,
       "size": 571,
       "batches": []
     }
