@@ -4,10 +4,10 @@ title: "PocketMage Scripting Reference"
 description: "Complete API reference for Wrench script bindings on PocketMage."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/fullPotionCommandList/"
 path: /scripting/fullPotionCommandList/
-updated: 2026-08-16
+updated: 2026-08-17
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-16T22:45:57.807Z"
+  generated_at: "2026-08-17T00:23:56.974Z"
 ---
 ---
 title: "PocketMage Scripting Reference"

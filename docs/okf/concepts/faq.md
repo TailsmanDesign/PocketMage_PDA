@@ -4,10 +4,10 @@ title: "PocketMage FAQ"
 description: "Frequently asked questions about the PocketMage PDA device."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/faq/"
 path: /faq/
-updated: 2026-08-16
+updated: 2026-08-17
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-16T22:45:57.799Z"
+  generated_at: "2026-08-17T00:23:56.969Z"
 ---
 ---
 title: "PocketMage FAQ"
