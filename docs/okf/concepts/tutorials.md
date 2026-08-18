@@ -4,10 +4,10 @@ title: "PocketMage Tutorials"
 description: "Step-by-step guides for PocketMage setup and configuration."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/tutorials/"
 path: /tutorials/
-updated: 2026-08-17
+updated: 2026-08-18
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-17T00:23:56.977Z"
+  generated_at: "2026-08-18T01:16:52.300Z"
 ---
 ---
 title: "PocketMage Tutorials"

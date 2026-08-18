@@ -4,10 +4,10 @@ title: Scripting
 description: "Scripting reference and examples for the PocketMage TERMINAL app (Wrench)."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/"
 path: /scripting/
-updated: 2026-08-17
+updated: 2026-08-18
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-17T00:23:56.975Z"
+  generated_at: "2026-08-18T01:16:52.298Z"
 ---
 ---
 title: "Scripting"

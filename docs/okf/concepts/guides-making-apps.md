@@ -4,10 +4,10 @@ title: "Making Apps"
 description: "How to create PocketMage apps, both native and OTA."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/making-apps/"
 path: /guides/making-apps/
-updated: 2026-08-17
+updated: 2026-08-18
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-17T00:23:56.971Z"
+  generated_at: "2026-08-18T01:16:52.296Z"
 ---
 ---
 title: "Making Apps"
