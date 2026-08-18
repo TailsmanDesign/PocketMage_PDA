@@ -799,7 +799,7 @@ void waitForKeypress(String message) {
     const uint16_t dw = u8g2.getDisplayWidth();
     const uint16_t dh = u8g2.getDisplayHeight();
 
-    // Re-use the shared font-fit helper (margin = 0 for waitForKeypress)
+    // Re-use the shared font-fit helper (keeps an ~8 px horizontal margin from the frame)
     PromptLayout layout = fitPromptText(msg, dw, 16);
 
     for (int y = dh; y > 0; y -= 2) {
