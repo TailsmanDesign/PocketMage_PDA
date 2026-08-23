@@ -451,20 +451,10 @@ static void drawWifiAskPage() {
   const StringID optionIDs[] = {STR_ONBOARD_WIFIASK_NO, STR_ONBOARD_WIFIASK_YES};
   int y = 172;
   for (int i = 0; i < 2; i++) {
-    const char* name = TR(optionIDs[i]);
-    FontStyle style = FontEngine::fitStyle(DisplayTarget::EINK, name, kEinkWidth - 80,
-                                           kLabelCascade, kLabelCascadeCount);
-    if (i == (int)ob.index) {
-      int w = FontEngine::textWidth(DisplayTarget::EINK, name, style);
-      display.fillRoundRect(26, y - 14, min(w + 16, kEinkWidth - 60), 20, 4, GxEPD_BLACK);
-      u8g2f.setForegroundColor(GxEPD_WHITE);
-    } else {
-      u8g2f.setForegroundColor(GxEPD_BLACK);
-    }
-    FontEngine::drawText(DisplayTarget::EINK, 34, y, name, style);
+    drawChipText(26, y, TR(optionIDs[i]), FontStyle::Body, kEinkWidth - 80,
+                 i == (int)ob.index, kEinkWidth - 60);
     y += ONB_LANG_PITCH;
   }
-  u8g2f.setForegroundColor(GxEPD_BLACK);
 }
 
 static void drawLanguagePage() {
@@ -474,20 +464,10 @@ static void drawLanguagePage() {
   constexpr int nameMaxW = kEinkWidth - nameX - 30;
   int y = ONB_LANG_Y0;
   for (int i = 0; i < I18n::languageCount(); i++) {
-    const char* name = I18n::nativeName(i);
-    FontStyle style = FontEngine::fitStyle(DisplayTarget::EINK, name, nameMaxW,
-                                           kLabelCascade, kLabelCascadeCount);
-    if ((ulong)i == ob.index) {
-      int w = FontEngine::textWidth(DisplayTarget::EINK, name, style);
-      display.fillRoundRect(nameX - 8, y - 14, min(w + 16, nameMaxW + 16), 20, 4, GxEPD_BLACK);
-      u8g2f.setForegroundColor(GxEPD_WHITE);
-    } else {
-      u8g2f.setForegroundColor(GxEPD_BLACK);
-    }
-    FontEngine::drawText(DisplayTarget::EINK, nameX, y, name, style);
+    drawChipText(nameX - 8, y, I18n::nativeName(i), FontStyle::Body, nameMaxW,
+                 (ulong)i == ob.index, nameMaxW + 16);
     y += ONB_LANG_PITCH;
   }
-  u8g2f.setForegroundColor(GxEPD_BLACK);
 }
 
 static void drawWifiList() {
@@ -512,15 +492,9 @@ static void drawWifiList() {
     String label = truncateWithEllipsis(ap.ssid, ssidMaxW, style);
     if (ap.authmode != WIFI_AUTH_OPEN) label += " *";
 
-    if (i == (int)ob.index) {
-      int w = FontEngine::textWidth(DisplayTarget::EINK, label, style);
-      display.fillRoundRect(18, y - 13, min(w + 12, ssidMaxW + ONB_RSSI_GUTTER), 18, 4, GxEPD_BLACK);
-      u8g2f.setForegroundColor(GxEPD_WHITE);
-    } else {
-      u8g2f.setForegroundColor(GxEPD_BLACK);
-    }
+    drawChipText(18, y, label, style, 0, i == (int)ob.index,
+                 ssidMaxW + ONB_RSSI_GUTTER, 6, 18, 5);
 
-    FontEngine::drawText(DisplayTarget::EINK, 26, y, label, style);
     String rssi = String(ap.rssi) + "dBm";
     int rw = FontEngine::textWidth(DisplayTarget::EINK, rssi, FontStyle::Caption);
     FontEngine::drawText(DisplayTarget::EINK, kEinkWidth - 14 - rw, y, rssi, FontStyle::Caption);
@@ -598,17 +572,16 @@ static void drawControlsPage() {
 
   int y = ONB_CTRL_Y0;
   for (int i = 0; i < 6; i++) {
-    // Inverted chip for the key combo
-    const char* key = TR(keyIDs[i]);
-    int kw = FontEngine::textWidth(DisplayTarget::EINK, key, FontStyle::Caption);
-    display.fillRoundRect(ONB_KEY_X, y - 12, min(kw + 12, ONB_KEY_CHIP_MAX_W), 18, 4, GxEPD_BLACK);
-    u8g2f.setForegroundColor(GxEPD_WHITE);
-    FontEngine::drawText(DisplayTarget::EINK, ONB_KEY_X + 6, y, key, FontStyle::Caption);
-    u8g2f.setForegroundColor(GxEPD_BLACK);
+    drawChipText(ONB_KEY_X, y, TR(keyIDs[i]), FontStyle::Caption, 0,
+                 true, ONB_KEY_CHIP_MAX_W, 6, 18, 6);
 
+    // Shrink through the label cascade before resorting to an ellipsis
     constexpr int descMaxW = kEinkWidth - ONB_DESC_X - 14;
-    String desc = truncateWithEllipsis(TR(descIDs[i]), descMaxW, FontStyle::Body);
-    FontEngine::drawText(DisplayTarget::EINK, ONB_DESC_X, y, desc, FontStyle::Body);
+    FontStyle descStyle = FontEngine::fitStyle(DisplayTarget::EINK, TR(descIDs[i]),
+                                               descMaxW, kLabelCascade,
+                                               kLabelCascadeCount);
+    String desc = truncateWithEllipsis(TR(descIDs[i]), descMaxW, descStyle);
+    FontEngine::drawText(DisplayTarget::EINK, ONB_DESC_X, y, desc, descStyle);
     y += ONB_CTRL_PITCH;
   }
 }

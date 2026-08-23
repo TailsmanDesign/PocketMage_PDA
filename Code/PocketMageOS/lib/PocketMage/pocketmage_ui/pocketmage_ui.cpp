@@ -60,6 +60,31 @@ void drawListItem(int x, int y, const String& text, int maxWidth) {
   }
 }
 
+int drawChipText(int x, int baselineY, const String& text,
+                 FontStyle style, int maxTextW,
+                 bool inverted, int chipMaxW, int padX, int chipH, int bottomPad) {
+  String s = text;
+  if (maxTextW > 0) {
+    style = FontEngine::fitStyle(DisplayTarget::EINK, text.c_str(), maxTextW,
+                                 kLabelCascade, kLabelCascadeCount);
+    s = truncateWithEllipsis(text, maxTextW, style);
+  }
+
+  const int inkW = FontEngine::textWidth(DisplayTarget::EINK, s, style);
+  int chipW = inkW + padX * 2;
+  if (chipMaxW > 0 && chipW > chipMaxW) chipW = chipMaxW;
+
+  if (inverted) {
+    display.fillRoundRect(x, baselineY + bottomPad - chipH, chipW, chipH, 4, GxEPD_BLACK);
+    u8g2f.setForegroundColor(GxEPD_WHITE);
+  }
+  FontEngine::drawText(DisplayTarget::EINK, x + padX, baselineY, s, style);
+  if (inverted) {
+    u8g2f.setForegroundColor(GxEPD_BLACK);
+  }
+  return chipW;
+}
+
 void drawCyclePickerOLED(U8G2& u8g2, const char* const* items, int count,
                          int selected, const char* badge) {
   if (count <= 0 || items == nullptr) return;
