@@ -434,7 +434,7 @@ static void drawWrappedBlock(const char* text, int x, int y, int maxWidth, FontS
 }
 
 static void drawWelcomePage() {
-  display.drawBitmap(8, 4, onboardMage, 180, 204, GxEPD_BLACK);
+  display.drawBitmap(8, 4, onboardMage, 185, 204, GxEPD_BLACK);
 
   FontEngine::drawText(DisplayTarget::EINK, ONB_RIGHT_COL_X, 80,
                        TR(STR_ONBOARD_WELCOME), FontStyle::Heading3);
