@@ -858,9 +858,28 @@ char PocketmageKB::updateKeypress() {
             int activeCycleLen = 0;
             bool uiDrawn = false;
 
+            // Snapshot the framebuffer before any hold-UI drawing so every
+            // exit path can restore exactly what was on screen.
+            static uint8_t* tabFrameSnap = nullptr;
+            static size_t   tabSnapLen   = 0;
+            const size_t frameBytes = u8g2_GetBufferSize(u8g2.getU8g2());
+            if (frameBytes != tabSnapLen) {
+                delete[] tabFrameSnap;
+                tabFrameSnap = new uint8_t[frameBytes];
+                tabSnapLen   = frameBytes;
+            }
+            memcpy(tabFrameSnap, u8g2.getBufferPtr(), tabSnapLen);
+
+            auto restoreFrame = [&]() {
+                if (!uiDrawn) return;
+                memcpy(u8g2.getBufferPtr(), tabFrameSnap, tabSnapLen);
+                u8g2.sendBuffer();
+            };
+
             for (;;) {
-              if (millis() > tabTimeout) {
-                if (uiDrawn) { u8g2.clearBuffer(); u8g2.sendBuffer(); }
+              // Deadline only applies before a selection starts cycling
+              if (!charSelected && millis() > tabTimeout) {
+                restoreFrame();
                 char retChar = (kbState_ == 1 || kbState_ == 3) ? 14 : 9;
                 if (shift_oneshot) { shift_oneshot = false; sync_and_update_state(); }
                 return retChar;
@@ -884,19 +903,17 @@ char PocketmageKB::updateKeypress() {
                 // If TAB is RELEASED
                 if (!nextPress && next_k == 20) { 
                   if (!charSelected) {
-                    if (uiDrawn) {
-                      u8g2.clearBuffer();
-                      u8g2.sendBuffer();
-                    }
+                    restoreFrame();
                     char retChar = (kbState_ == 1 || kbState_ == 3) ? 14 : 9; 
                     if (shift_oneshot) { shift_oneshot = false; sync_and_update_state(); }
                     return retChar;
                   } else {
-                    u8g2.clearBuffer();
-                    u8g2.sendBuffer();
+                    restoreFrame();
 
                     // --- APP SWITCHER HOOK ---
-                    if (activeCycleLen == 12 && CurrentAppState != USB_APP) { // cyc_appSwitch trigger length
+                    // Excluded during onboarding: the wizard owns app state
+                    // until finished; special-char cycling still works.
+                    if (activeCycleLen == 12 && CurrentAppState != USB_APP && CurrentAppState != ONBOARDING) { // cyc_appSwitch trigger length
 #if !OTA_APP_FLAG
                         if (cycleIndex == 1) TXT_INIT("");
                         else if (cycleIndex == 2) FILEWIZ_INIT();
@@ -964,7 +981,7 @@ char PocketmageKB::updateKeypress() {
                   static const char* cyc_period[] = {":)", ":D", ";)", ":P", ":O", ":(", ":|", "<3"};
                   
                   // App Switcher Arrays
-                  static const char* cyc_appSwitch[] = {" ", "N", "F", "U", "M", "S", "T", "C", "J", "D", "P", "L"};
+                  static const char* cyc_appSwitch[] = {"X", "N", "F", "U", "M", "S", "T", "C", "J", "D", "P", "L"};
 
                   bool matched = true;
                   if (nestedBaseC == 'a') { activeCycle = cyc_a; activeCycleLen = 8; }
@@ -983,7 +1000,9 @@ char PocketmageKB::updateKeypress() {
                   else if (nestedBaseC == 'c') { activeCycle = cyc_c; activeCycleLen = 2; }
                   else if (nestedBaseC == 'C') { activeCycle = cyc_C; activeCycleLen = 2; }
                   else if (nestedBaseC == '.') { activeCycle = cyc_period; activeCycleLen = 8; }
-                  else if (nestedBaseC == 20 || nestedBaseC == 7)  { activeCycle = cyc_appSwitch; activeCycleLen = 12; }
+                  // App switcher: never offered from the first-boot wizard;
+                  // it owns app state until finished.
+                  else if ((nestedBaseC == 20 || nestedBaseC == 7) && CurrentAppState != ONBOARDING) { activeCycle = cyc_appSwitch; activeCycleLen = 12; }
                   else matched = false;
 
                   if (matched) {
@@ -991,62 +1010,13 @@ char PocketmageKB::updateKeypress() {
                     else { activeBaseChar = nestedBaseC; cycleIndex = 1 % activeCycleLen; }
                     charSelected = true;
 
-                    int cx = (u8g2.getDisplayWidth()-22*activeCycleLen)/2.0;
-
-                    if (activeCycle != cyc_appSwitch) {
-                      u8g2.setDrawColor(0);
-                      u8g2.drawRBox(cx, 2, activeCycleLen*22, 28, 4);
-                      u8g2.setDrawColor(1);
-                      u8g2.drawRFrame(cx, 2, activeCycleLen*22, 28, 4);
-
-                      for (int i=0; i<activeCycleLen; i++) {
-                          if (i == cycleIndex) {
-                            u8g2.setDrawColor(1);
-                            u8g2.drawRBox(cx, 2, 22, 28, 4);
-                            u8g2.setDrawColor(0);
-                          } else {
-                            u8g2.setDrawColor(1);
-                          }
-                    FontEngine::drawText(DisplayTarget::OLED, cx + ((22-FontEngine::textWidth(DisplayTarget::OLED, activeCycle[i], FontStyle::BodyBold))/2.0), 25, activeCycle[i], FontStyle::BodyBold);
-                          u8g2.setDrawColor(0);
-                          cx += 22;
-                      }
-                    }
-                    else {
-                      u8g2.setDrawColor(0);
-                      u8g2.drawRBox((u8g2.getDisplayWidth() - FontEngine::textWidth(DisplayTarget::OLED, "XXXXXXXXXXXX", FontStyle::Tiny))/2, u8g2.getDisplayHeight()-7,FontEngine::textWidth(DisplayTarget::OLED, "XXXXXXXXXXXX", FontStyle::Tiny),7,4);
-                      u8g2.drawRBox(cx, 0, activeCycleLen*22, 28, 4);
-                      u8g2.setDrawColor(1);
-                      u8g2.drawRFrame(cx, 0, activeCycleLen*22, 28, 4);
-
-                      for (int i=0; i<activeCycleLen; i++) {
-                          if (i == cycleIndex) {
-                            u8g2.setDrawColor(1);
-                            u8g2.drawRBox(cx, 0, 22, 28, 4);
-                            u8g2.setDrawColor(0);
-                          } else {
-                            u8g2.setDrawColor(1);
-                          }
-                          FontEngine::drawText(DisplayTarget::OLED, cx + ((22-FontEngine::textWidth(DisplayTarget::OLED, activeCycle[i], FontStyle::BodyBold))/2.0), 23, activeCycle[i], FontStyle::BodyBold);
-                          u8g2.setDrawColor(0);
-                          cx += 22;
-                      }
-                    }
-                    
-                    if (activeCycle == cyc_appSwitch) {
-                      u8g2.setDrawColor(0);
-                      u8g2.drawRBox((u8g2.getDisplayWidth() - (FontEngine::textWidth(DisplayTarget::OLED, I18n::kbAppName(cycleIndex), FontStyle::Tiny)+6))/2, u8g2.getDisplayHeight()-12,FontEngine::textWidth(DisplayTarget::OLED, I18n::kbAppName(cycleIndex), FontStyle::Tiny)+6,11,4);
-                      
-                      // Draw border
-                      u8g2.setDrawColor(1);
-                      u8g2.drawRFrame((u8g2.getDisplayWidth() - (FontEngine::textWidth(DisplayTarget::OLED, I18n::kbAppName(cycleIndex), FontStyle::Tiny)+6))/2, u8g2.getDisplayHeight()-12,FontEngine::textWidth(DisplayTarget::OLED, I18n::kbAppName(cycleIndex), FontStyle::Tiny)+6,11,4);
-                    
-                      // Draw app name
-                      FontEngine::drawText(DisplayTarget::OLED, (u8g2.getDisplayWidth() - FontEngine::textWidth(DisplayTarget::OLED, I18n::kbAppName(cycleIndex), FontStyle::Tiny))/2,u8g2.getDisplayHeight()-3,I18n::kbAppName(cycleIndex), FontStyle::Tiny);
-                    }
-
+                    // Rebuild each press: the snapshot restores live app
+                    // content around the picker, the shared widget owns
+                    // everything inside its rectangle.
+                    memcpy(u8g2.getBufferPtr(), tabFrameSnap, tabSnapLen);
+                    drawCyclePickerOLED(u8g2, activeCycle, activeCycleLen, cycleIndex,
+                                        activeCycle == cyc_appSwitch ? I18n::kbAppName(cycleIndex) : nullptr);
                     u8g2.sendBuffer();
-                    u8g2.setDrawColor(1);
                     uiDrawn = true;
                   }
                 }

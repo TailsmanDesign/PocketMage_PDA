@@ -1540,3 +1540,175 @@ msgstr "Les PIN ne correspondent pas"
 msgctxt "STR_LOCK_HELP"
 msgid "Lock: on | off | pin <4-8 digits>"
 msgstr "Verrou : on | off | pin <4-8 chiffres>"
+
+msgctxt "STR_SETTINGS_NAME_ONBOARD"
+msgid "Run onboarding"
+msgstr "Relancer la configuration"
+
+msgctxt "STR_ONBOARD_WELCOME"
+msgid "Welcome!"
+msgstr "Bienvenue !"
+
+msgctxt "STR_ONBOARD_WELCOME_SUB"
+msgid "Meet your new PocketMage PDA."
+msgstr "Voici votre nouveau PocketMage PDA."
+
+msgctxt "STR_ONBOARD_HINT_START"
+msgid "[ENTER] Start   [>] Skip setup"
+msgstr "[ENTER] Commencer   [>] Tout passer"
+
+msgctxt "STR_ONBOARD_LANG_TITLE"
+msgid "Choose your language"
+msgstr "Choisissez votre langue"
+
+msgctxt "STR_ONBOARD_HINT_SELECT"
+msgid "[ENTER] Select   [>] Skip   [<] Back"
+msgstr "[ENTER] Choisir   [>] Passer   [<] Retour"
+
+msgctxt "STR_ONBOARD_WIFIASK_TITLE"
+msgid "Set up Wi-Fi?"
+msgstr "Configurer le Wi-Fi ?"
+
+msgctxt "STR_ONBOARD_WIFIASK_BODY"
+msgid "Totally optional, PocketMage works fully without it. Digital minimalism is the point. Only turn it on if you want SSH and other online extras."
+msgstr "Totalement facultatif, le PocketMage fonctionne parfaitement sans. Le minimalisme numérique, c'est l'idée. Active-le seulement si tu veux SSH et d'autres extras en ligne."
+
+msgctxt "STR_ONBOARD_WIFIASK_NO"
+msgid "No, keep it offline"
+msgstr "Non, rester hors ligne"
+
+msgctxt "STR_ONBOARD_WIFIASK_YES"
+msgid "Yes, set up Wi-Fi"
+msgstr "Oui, configurer le Wi-Fi"
+
+msgctxt "STR_ONBOARD_HINT_ASK"
+msgid "[ENTER] Confirm   [>] Skip   [<] Back"
+msgstr "[ENTER] Confirmer   [>] Passer   [<] Retour"
+
+msgctxt "STR_ONBOARD_HINT_NEXT"
+msgid "[ENTER] Continue   [>] Skip   [<] Back"
+msgstr "[ENTER] Continuer   [>] Passer   [<] Retour"
+
+msgctxt "STR_ONBOARD_WIFI_TITLE"
+msgid "Wi-Fi setup"
+msgstr "Configuration Wi-Fi"
+
+msgctxt "STR_ONBOARD_WIFI_SCANNING"
+msgid "Scanning for networks"
+msgstr "Recherche de réseaux"
+
+msgctxt "STR_ONBOARD_WIFI_NONE"
+msgid "No networks found"
+msgstr "Aucun réseau trouvé"
+
+msgctxt "STR_ONBOARD_WIFI_PASS_PROMPT"
+msgid "Password for"
+msgstr "Mot de passe pour"
+
+msgctxt "STR_ONBOARD_WIFI_CONNECTING"
+msgid "Connecting to"
+msgstr "Connexion à"
+
+msgctxt "STR_ONBOARD_WIFI_CONNECTED"
+msgid "Connected:"
+msgstr "Connecté :"
+
+msgctxt "STR_ONBOARD_WIFI_FAILED"
+msgid "Could not connect"
+msgstr "Connexion impossible"
+
+msgctxt "STR_ONBOARD_TIME_TITLE"
+msgid "Date & time"
+msgstr "Date et heure"
+
+msgctxt "STR_ONBOARD_TIME_CURRENT"
+msgid "Current time"
+msgstr "Heure actuelle"
+
+msgctxt "STR_ONBOARD_CTRL_TITLE"
+msgid "Essential keys"
+msgstr "Touches essentielles"
+
+msgctxt "STR_ONBOARD_KEY_1"
+msgid "FN + <"
+msgstr ""
+
+msgctxt "STR_ONBOARD_KEY_2"
+msgid "FN + >"
+msgstr ""
+
+msgctxt "STR_ONBOARD_KEY_3"
+msgid "SHIFT"
+msgstr ""
+
+msgctxt "STR_ONBOARD_KEY_4"
+msgid "ENTER"
+msgstr ""
+
+msgctxt "STR_ONBOARD_KEY_5"
+msgid "SLIDER"
+msgstr ""
+
+msgctxt "STR_ONBOARD_KEY_6"
+msgid "SPACE"
+msgstr ""
+
+msgctxt "STR_ONBOARD_CTRL_DESC_1"
+msgid "Exit app / go back"
+msgstr "Quitter l'app / retour"
+
+msgctxt "STR_ONBOARD_CTRL_DESC_2"
+msgid "Save document"
+msgstr "Enregistrer le document"
+
+msgctxt "STR_ONBOARD_CTRL_DESC_3"
+msgid "Capital letter"
+msgstr "Lettre majuscule"
+
+msgctxt "STR_ONBOARD_CTRL_DESC_4"
+msgid "Select item"
+msgstr "Sélectionner l'élément"
+
+msgctxt "STR_ONBOARD_CTRL_DESC_5"
+msgid "Scroll lists"
+msgstr "Faire défiler les listes"
+
+msgctxt "STR_ONBOARD_CTRL_DESC_6"
+msgid "Resume last app after sleep"
+msgstr "Reprendre la dernière app"
+
+msgctxt "STR_ONBOARD_SD_TITLE"
+msgid "Storage"
+msgstr "Stockage"
+
+msgctxt "STR_ONBOARD_SD_OK"
+msgid "microSD card detected. Notes, journal, tasks and apps are stored on the card."
+msgstr "Carte microSD détectée. Notes, journal, tâches et apps sont stockés dessus."
+
+msgctxt "STR_ONBOARD_SD_MISSING"
+msgid "No microSD card detected. Notes, journal, tasks and apps need one. Insert a card, then re-run this guide from Settings > Run onboarding."
+msgstr "Aucune carte microSD détectée. Notes, journal, tâches et apps en nécessitent une. Insérez une carte, puis relancez depuis Réglages > Relancer la configuration."
+
+msgctxt "STR_ONBOARD_DONE_TITLE"
+msgid "All set!"
+msgstr "Tout est prêt !"
+
+msgctxt "STR_ONBOARD_DONE_HINT"
+msgid "Press any key to begin"
+msgstr "Appuyez sur une touche pour commencer"
+
+msgctxt "STR_ONBOARD_SUM_LANG"
+msgid "Language:"
+msgstr "Langue :"
+
+msgctxt "STR_ONBOARD_SUM_WIFI"
+msgid "Wi-Fi:"
+msgstr "Wi-Fi :"
+
+msgctxt "STR_ONBOARD_SUM_CLOCK"
+msgid "Clock:"
+msgstr "Horloge :"
+
+msgctxt "STR_ONBOARD_SKIPPED"
+msgid "Skipped"
+msgstr "Passé"

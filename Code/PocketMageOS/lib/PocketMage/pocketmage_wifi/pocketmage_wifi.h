@@ -123,6 +123,7 @@ class PocketMageWifi {
   // Thread-safe state
   mutable SemaphoreHandle_t _mutex;
   volatile WifiRadioState _state;
+  volatile WifiRadioState _stateBeforeScan;
   char _statusMessage[64];
   char _connectedSSID[33];
   char _ipAddress[16];

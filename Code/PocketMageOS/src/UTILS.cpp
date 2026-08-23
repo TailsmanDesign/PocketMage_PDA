@@ -271,7 +271,12 @@ void loadState(bool changeState, char bootKey) {
   u8g2.setContrast(OLED_BRIGHTNESS);
 
 #if !OTA_APP  // POCKETMAGE_OS
-  if (HOME_ON_BOOT) {
+  if (!prefs.getBool("Onboarded", false)) {
+    // First boot (or NVS wipe): the setup wizard takes priority over any
+    // saved app, boot shortcut, or HOME_ON_BOOT preference.
+    CurrentAppState = ONBOARDING;
+    ONBOARDING_INIT();
+  } else if (HOME_ON_BOOT) {
     CurrentAppState = HOME;
     HOME_INIT();
   } else {
@@ -1228,64 +1233,83 @@ void checkCrashState() {
   }
 }
 
+// Apply a user-entered date (DD/MM/YYYY) to the RTC, keeping the current
+// time-of-day. Prefills the prompt with the current date.
+// Returns false when the prompt was aborted.
+bool applyDateFromPrompt() {
+  DateTime now = CLOCK().nowDT();
+  char defaultDate[9];
+  snprintf(defaultDate, sizeof(defaultDate), "%04d%02d%02d", now.year(), now.month(), now.day());
+
+  String newDateStr = datePrompt(String(defaultDate));
+  if (newDateStr == "_EXIT_" || newDateStr == "_RETURN_" || newDateStr == "_CENTER_")
+    return false;
+
+  int d = newDateStr.substring(0, 2).toInt();
+  int m = newDateStr.substring(3, 5).toInt();
+  int y = newDateStr.substring(6, 10).toInt();
+  CLOCK().getRTC().adjust(DateTime(y, m, d, now.hour(), now.minute(), now.second()));
+  return true;
+}
+
+// Apply a user-entered time (HHMM) to the RTC. Prefills the prompt with the
+// current time. Returns false when the prompt was aborted or invalid.
+bool applyTimeFromPrompt() {
+  DateTime now = CLOCK().nowDT();
+  int defaultTime = (now.hour() * 100) + now.minute();
+
+  int newTime = timePrompt(defaultTime);
+  if (newTime < 0)
+    return false;
+
+  char timeBuf[6];
+  snprintf(timeBuf, sizeof(timeBuf), "%02d:%02d", newTime / 100, newTime % 100);
+  CLOCK().setTimeFromString(String(timeBuf));
+  return true;
+}
+
+// Shared clock-setup flow: optional "set the clock?" question followed by the
+// date and time prompts with current values prefilled. Used by the boot RTC
+// power-loss path and by the onboarding wizard's Date & Time step.
+void runClockSetupFlow(bool ask) {
+#if !OTA_APP
+  // Temporarily disable the sleep timeout so the setup prompts don't force a sleep loop
+  bool previousTimeoutState = noTimeout;
+  noTimeout = true;
+
+  if (ask && !boolPrompt(TR(STR_UTILS_POWER_LOST))) {
+    noTimeout = previousTimeoutState;
+    return;
+  }
+
+  bool changed = applyDateFromPrompt();
+  changed |= applyTimeFromPrompt();
+  if (changed)
+    OLED().sysMessage(TR(STR_UTILS_TIME_SET), 500);
+
+  noTimeout = previousTimeoutState;
+#endif
+}
+
 void checkRTCPowerLoss() {
   // Check if RTC lost power (e.g., coin cell drained/removed)
-  bool in = false;
+  bool lostClock = SET_CLOCK_ON_UPLOAD || CLOCK().getRTC().lostPower();
 
-  // SET CLOCK IF NEEDED
-  if (SET_CLOCK_ON_UPLOAD || CLOCK().getRTC().lostPower()) {
-    CLOCK().setToCompileTimeUTC();
-    in = true;
-  }
+  prefs.begin("PocketMage", true);
+  bool onboarded = prefs.getBool("Onboarded", false);
+  prefs.end();
 
-  if (in) {
-#if !OTA_APP
-    // Temporarily disable the sleep timeout so the setup prompts don't force a sleep loop
-    bool previousTimeoutState = noTimeout;
-    noTimeout = true;
+  if (!lostClock)
+    return;
 
-    // Get the current (inaccurate) time from the RTC to use as a baseline
-    DateTime now = CLOCK().nowDT();
-    
-    // Format the baseline date to YYYYMMDD for datePrompt()
-    char defaultDate[9];
-    snprintf(defaultDate, sizeof(defaultDate), "%04d%02d%02d", now.year(), now.month(), now.day());
-    
-    // Format the baseline time to HHMM for timePrompt()
-    int defaultTime = (now.hour() * 100) + now.minute();
-    
-    // Display text
-    bool setTime = boolPrompt(TR(STR_UTILS_POWER_LOST));
-    if (!setTime) {
-      noTimeout = previousTimeoutState; // Restore before early exit
-      return;
-    }
+  // Always give the clock a sane baseline; adjust() clears the hardware
+  // lostPower() flag.
+  CLOCK().setToCompileTimeUTC();
 
-    // 1. Launch Date Prompt
-    String newDateStr = datePrompt(String(defaultDate)); 
-    
-    // 2. Launch Time Prompt
-    int newTimeInt = timePrompt(defaultTime); 
-    
-    // Parse the DD/MM/YYYY string returned by datePrompt
-    int d = newDateStr.substring(0, 2).toInt();
-    int m = newDateStr.substring(3, 5).toInt();
-    int y = newDateStr.substring(6, 10).toInt();
-    
-    // Parse the HHMM integer returned by timePrompt
-    int h = newTimeInt / 100;
-    int min = newTimeInt % 100;
-    
-    // Apply the corrected date and time to the RTC.
-    // Calling adjust() automatically clears the hardware lostPower() flag.
-    CLOCK().getRTC().adjust(DateTime(y, m, d, h, min, 0));
-    
-    OLED().sysMessage(TR(STR_UTILS_TIME_SET),500);
-
-    // Restore the timeout state before continuing boot
-    noTimeout = previousTimeoutState;
-#endif
-  }
+  // The first-boot wizard owns clock setup before Onboarded is set (its
+  // Date & Time step calls runClockSetupFlow(false)); don't double-prompt.
+  if (onboarded)
+    runClockSetupFlow(true);
 }
 
 #if !OTA_APP

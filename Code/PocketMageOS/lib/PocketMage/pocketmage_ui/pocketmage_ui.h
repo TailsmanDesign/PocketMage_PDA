@@ -18,3 +18,8 @@ void beginEinkScreen(bool preserveBg = false);
 void endEinkScreen(const char* statusText, EinkRefresh mode = EinkRefresh::Normal);
 
 void drawListItem(int x, int y, const String& text, int maxWidth = -1);
+
+class U8G2;
+
+void drawCyclePickerOLED(U8G2& u8g2, const char* const* items, int count,
+                         int selected, const char* badge = nullptr);
