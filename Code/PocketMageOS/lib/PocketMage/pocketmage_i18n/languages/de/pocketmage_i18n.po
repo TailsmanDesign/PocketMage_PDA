@@ -1641,8 +1641,8 @@ msgid "SHIFT"
 msgstr ""
 
 msgctxt "STR_ONBOARD_KEY_4"
-msgid "ENTER"
-msgstr ""
+msgid "TAB"
+msgstr "TAB"
 
 msgctxt "STR_ONBOARD_KEY_5"
 msgid "SLIDER"
@@ -1665,8 +1665,8 @@ msgid "Capital letter"
 msgstr "Großbuchstabe"
 
 msgctxt "STR_ONBOARD_CTRL_DESC_4"
-msgid "Select item"
-msgstr "Element auswählen"
+msgid "Hold for special letters"
+msgstr "Halten für Sonderbuchstaben"
 
 msgctxt "STR_ONBOARD_CTRL_DESC_5"
 msgid "Scroll lists"
