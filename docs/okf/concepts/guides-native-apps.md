@@ -4,10 +4,10 @@ title: "Native Apps"
 description: "How PocketMageOS native apps are structured."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/native-apps/"
 path: /guides/native-apps/
-updated: 2026-08-18
+updated: 2026-08-30
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-18T01:16:52.296Z"
+  generated_at: "2026-08-30T22:49:51.395Z"
 ---
 ---
 title: "Native Apps"

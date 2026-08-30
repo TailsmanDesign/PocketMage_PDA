@@ -4,10 +4,10 @@ title: Reference
 description: "Exact-use reference pages for PocketMage app authors and contributors."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/reference/"
 path: /reference/
-updated: 2026-08-18
+updated: 2026-08-30
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-18T01:16:52.297Z"
+  generated_at: "2026-08-30T22:49:51.397Z"
 ---
 ---
 title: "Reference"

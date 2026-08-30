@@ -4,10 +4,10 @@ title: "Scripting Example: OLED Drawing"
 description: "A PocketMage script demonstrating drawing shapes and text on the OLED display."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/oled-c/"
 path: /scripting/oled-c/
-updated: 2026-08-18
+updated: 2026-08-30
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-18T01:16:52.299Z"
+  generated_at: "2026-08-30T22:49:51.399Z"
 ---
 ---
 title: "Scripting Example: OLED Drawing"

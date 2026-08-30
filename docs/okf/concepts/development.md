@@ -4,10 +4,10 @@ title: PocketMageOS
 description: "The PocketMage operating system and app runtime."
 source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/development/"
 path: /development/
-updated: 2026-08-18
+updated: 2026-08-30
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-18T01:16:52.294Z"
+  generated_at: "2026-08-30T22:49:51.392Z"
 ---
 ---
 title: "PocketMageOS"
