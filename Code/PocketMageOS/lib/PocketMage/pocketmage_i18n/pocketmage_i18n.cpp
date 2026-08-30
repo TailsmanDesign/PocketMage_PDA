@@ -62,23 +62,18 @@ const char* I18n::dayName(int idx) {
 }
 
 const char* I18n::appName(int idx) {
-  if (idx < 0 || idx > 10) return "";
+  if (idx < 0 || idx > 11) return "";
   return get(static_cast<StringID>(STR_GRID_TXT + idx));
 }
 
 const char* I18n::kbAppName(int idx) {
-  if (idx < 0 || idx > 11) return "";
+  if (idx < 0 || idx > 12) return "";
   return get(static_cast<StringID>(STR_KB_APP_CANCEL + idx));
 }
 
-// Fold one UTF-8 0xC3 0x80..0xBF pair (LATIN-1 accented letters) to its ASCII
-// base.  The case bit is masked off first so À-Þ and à-þ share one table and
-// the result is always lowercase, matching fold()'s ASCII folding.  Returns 0
-// for characters with no ASCII equivalent (multiply/divide signs, ordinals,
-// ...) which are then dropped from the folded command.
 static char foldAccent(uint8_t hi, uint8_t lo) {
   if (hi != 0xC3 || lo < 0x80 || lo > 0xBF) return 0;
-  if (lo <= 0x9E) lo |= 0x20;  // À..Þ -> à..þ; ß (0x9F) and ÿ (0xBF) are kept
+  if (lo <= 0x9E) lo |= 0x20; 
   switch (lo) {
     case 0xA0: case 0xA1: case 0xA2: case 0xA3: case 0xA4: case 0xA5: return 'a';
     case 0xA7: return 'c';
@@ -88,10 +83,9 @@ static char foldAccent(uint8_t hi, uint8_t lo) {
     case 0xB2: case 0xB3: case 0xB4: case 0xB5: case 0xB6: return 'o';
     case 0xB9: case 0xBA: case 0xBB: case 0xBC: return 'u';
     case 0xBD: return 'y';
-    case 0x9F: return 's';   // ß folds to 's', not "ss", single char here and
-                             // no alias needs the German digraph
-    case 0xBF: return 'y';   // ÿ
-    default: return 0;       // Æ æ, Ð ð, Ø ø, Þ þ, ×, °, ·, ¸, ...
+    case 0x9F: return 's'; 
+    case 0xBF: return 'y'; 
+    default: return 0;     
   }
 }
 
@@ -103,9 +97,6 @@ String I18n::fold(const String& s) {
     if (c >= 'A' && c <= 'Z') {
       out += static_cast<char>(c + 32);
     } else if (c >= 0x80) {
-      // UTF-8 sequence length from the lead byte; only 0xC3 pairs (LATIN-1
-      // accented letters) fold to ASCII.  Unmappable and truncated sequences
-      // are dropped whole so no raw high byte ever reaches the output.
       unsigned int seq = 1;
       if (c >= 0xC2 && c <= 0xDF) seq = 2;
       else if (c >= 0xE0 && c <= 0xEF) seq = 3;

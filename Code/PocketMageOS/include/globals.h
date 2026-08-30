@@ -36,7 +36,7 @@ extern String OTA4_APP;
 enum KBState { NORMAL, SHIFT, FUNC, FN_SHIFT };    // Keyboard state
 
 // ===================== APP STATES =====================
-enum AppState { HOME, TXT, FILEWIZ, USB_APP, COMM, SETTINGS, TASKS, CALENDAR, JOURNAL, LEXICON, APPLOADER, TERMINAL, ONBOARDING };
+enum AppState { HOME, TXT, FILEWIZ, USB_APP, COMM, SETTINGS, TASKS, CALENDAR, JOURNAL, LEXICON, APPLOADER, TERMINAL, ONBOARDING, GUIDE };
 extern const unsigned char *appIcons[11];       // App icons
 extern AppState CurrentAppState;                // Current app state
 
@@ -194,6 +194,11 @@ bool sshCommand(const String& command);
 void COMM_INIT();
 void processKB_COMM();
 void einkHandler_COMM();
+
+// <GUIDE.cpp>
+void GUIDE_INIT();
+void processKB_GUIDE();
+void einkHandler_GUIDE();
 
 #endif // POCKETMAGE_OS
 

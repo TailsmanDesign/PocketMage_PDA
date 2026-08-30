@@ -69,6 +69,9 @@ void applicationEinkHandler() {
     case ONBOARDING:
       einkHandler_ONBOARDING();
       break;
+    case GUIDE:
+      processKB_GUIDE();
+      break;
     // ADD APP CASES HERE
     default:
       einkHandler_HOME();
@@ -153,6 +156,9 @@ void processKB() {
       break;
     case ONBOARDING:
       processKB_ONBOARDING();
+      break;
+    case GUIDE:
+      einkHandler_GUIDE();
       break;
     // ADD APP CASES HERE
     default:

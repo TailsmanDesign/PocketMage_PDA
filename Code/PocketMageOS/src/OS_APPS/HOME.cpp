@@ -170,6 +170,9 @@ String commandSelect(String command) {
   else if (command == "chat" || command == "msg" || command == "4") {
     COMM_INIT();
   }
+  else if (command == "guide" || command == "help") {
+    GUIDE_INIT();
+  }
   else if (command == "version" || command == "ver") {
     OLED().sysMessage(TR(STR_HOME_PMOS_PREFIX) + String(OS_VERSION_STR),2000);   
   }
