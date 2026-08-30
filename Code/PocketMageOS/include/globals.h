@@ -36,7 +36,7 @@ extern String OTA4_APP;
 enum KBState { NORMAL, SHIFT, FUNC, FN_SHIFT };    // Keyboard state
 
 // ===================== APP STATES =====================
-enum AppState { HOME, TXT, FILEWIZ, USB_APP, COMM, SETTINGS, TASKS, CALENDAR, JOURNAL, LEXICON, APPLOADER, TERMINAL };
+enum AppState { HOME, TXT, FILEWIZ, USB_APP, COMM, SETTINGS, TASKS, CALENDAR, JOURNAL, LEXICON, APPLOADER, TERMINAL, ONBOARDING };
 extern const unsigned char *appIcons[11];       // App icons
 extern AppState CurrentAppState;                // Current app state
 
@@ -66,6 +66,9 @@ void checkCrashState();
 String datePrompt(String defaultYYYYMMDD = "");
 int timePrompt(int defaultTime = -1);
 void checkRTCPowerLoss();
+bool applyDateFromPrompt();
+bool applyTimeFromPrompt();
+void runClockSetupFlow(bool ask);
 #if !OTA_APP
 void saveEditingFile(); // OTA_APP: Remove saveEditingFile
 #endif
@@ -127,6 +130,11 @@ void SETTINGS_INIT();
 void processKB_SETTINGS();
 void einkHandler_SETTINGS();
 String settingCommandSelect(String command);
+
+// <ONBOARDING.cpp>
+void ONBOARDING_INIT();
+void processKB_ONBOARDING();
+void einkHandler_ONBOARDING();
 
 // <USB.cpp>
 void USB_INIT();

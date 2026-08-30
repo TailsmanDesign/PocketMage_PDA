@@ -26,25 +26,16 @@ void updateBlank() {}
 
 // Action Callbacks for specialized prompts
 void actionSetTime() {
-  int newTime = timePrompt();
-  if (newTime >= 0) {
-    char timeBuf[6];
-    snprintf(timeBuf, sizeof(timeBuf), "%02d:%02d", newTime / 100, newTime % 100);
-    CLOCK().setTimeFromString(String(timeBuf));
-    OLED().sysMessage(TR(STR_SETTINGS_TIME_UPDATED_TO) + String(timeBuf), 1000);
-  }
+  if (!applyTimeFromPrompt()) return;
+  DateTime now = CLOCK().nowDT();
+  char timeBuf[6];
+  snprintf(timeBuf, sizeof(timeBuf), "%02d:%02d", now.hour(), now.minute());
+  OLED().sysMessage(TR(STR_SETTINGS_TIME_UPDATED_TO) + String(timeBuf), 1000);
 }
 
 void actionSetDate() {
-  String newDate = datePrompt();
-  if (newDate != "_EXIT_" && newDate != "_RETURN_" && newDate != "_CENTER_") {
-    int day   = newDate.substring(0, 2).toInt();
-    int month = newDate.substring(3, 5).toInt();
-    int year  = newDate.substring(6, 10).toInt();
-    DateTime now = CLOCK().nowDT();
-    CLOCK().getRTC().adjust(DateTime(year, month, day, now.hour(), now.minute(), now.second()));
-    OLED().sysMessage(TR(STR_SETTINGS_DATE_UPDATED), 1000);
-  }
+  if (!applyDateFromPrompt()) return;
+  OLED().sysMessage(TR(STR_SETTINGS_DATE_UPDATED), 1000);
 }
 
 void actionSetPin() {
@@ -80,6 +71,10 @@ void actionSetLang() {
   }
 }
 
+void actionOnboarding() {
+  ONBOARDING_INIT();
+}
+
 // Core array defining the system settings
 static std::vector<SettingItem> settingsList = {
   SettingItem{"OLED_BRIGHTNESS", STR_SETTINGS_NAME_BRIGHTNESS, SetType::INTEGER, &OLED_BRIGHTNESS, nullptr, 0, 255, updateLumina},
@@ -97,7 +92,8 @@ static std::vector<SettingItem> settingsList = {
   SettingItem{"", STR_SETTINGS_NAME_SET_PIN, SetType::ACTION, nullptr, nullptr, 0, 0, actionSetPin},
   SettingItem{"", STR_SETTINGS_NAME_SET_TIME, SetType::ACTION, nullptr, nullptr, 0, 0, actionSetTime},
   SettingItem{"", STR_SETTINGS_NAME_SET_DATE, SetType::ACTION, nullptr, nullptr, 0, 0, actionSetDate},
-  SettingItem{"", STR_SETTINGS_NAME_SET_LANG, SetType::ACTION, nullptr, nullptr, 0, 0, actionSetLang}
+  SettingItem{"", STR_SETTINGS_NAME_SET_LANG, SetType::ACTION, nullptr, nullptr, 0, 0, actionSetLang},
+  SettingItem{"", STR_SETTINGS_NAME_ONBOARD, SetType::ACTION, nullptr, nullptr, 0, 0, actionOnboarding}
 };
 
 // Simplified state machine
@@ -342,6 +338,10 @@ void processKB_SETTINGS() {
         }
         else if (item.type == SetType::ACTION) {
           if (item.onUpdate) item.onUpdate();
+          // The action may have switched CurrentAppState (e.g. launching
+          // onboarding); bail before the OLED preview below repaints over
+          // the new app's splash.
+          if (CurrentAppState != SETTINGS) return;
         }
 
         // Return gracefully and redraw menus

@@ -118,7 +118,16 @@ void PocketmageEink::drawStatusBar(const String& input) {
   u8g2f.setBackgroundColor(GxEPD_WHITE);
   display_.fillRect(0, display_.height() - 26, display_.width(), 26, GxEPD_WHITE);
   display_.drawRect(0, display_.height() - 20, display_.width(), 20, GxEPD_BLACK);
-  FontEngine::drawText(DisplayTarget::EINK, 4, display_.height() - 6, input, FontStyle::Body);
+
+  // Leave room for the battery box on the right
+  constexpr int kBarPadL = 4;
+  constexpr int kBatteryW = 30;
+  const int maxTextW = display_.width() - kBarPadL - kBatteryW - 2;
+
+  FontStyle style = FontEngine::fitStyle(DisplayTarget::EINK, input.c_str(), maxTextW,
+                                         kLabelCascade, kLabelCascadeCount);
+  String text = truncateWithEllipsis(input, maxTextW, style);
+  FontEngine::drawText(DisplayTarget::EINK, kBarPadL, display_.height() - 6, text, style);
 }
 
 void PocketmageEink::resetDisplay(bool clearScreen, uint16_t color) {

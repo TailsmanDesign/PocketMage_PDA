@@ -189,5 +189,7 @@ extern const unsigned char _repeatGUI0 [] PROGMEM;
 extern const unsigned char _repeatGUI1 [] PROGMEM;
 extern const unsigned char _repeatGUI2 [] PROGMEM;
 
+extern const unsigned char onboardMage [] PROGMEM;
+
 #endif // POCKETMAGE_OS
 #endif

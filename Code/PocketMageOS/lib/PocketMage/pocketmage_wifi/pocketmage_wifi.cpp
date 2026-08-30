@@ -19,6 +19,7 @@ PocketMageWifi& P_WIFI = PocketMageWifi::getInstance();
 PocketMageWifi::PocketMageWifi()
     : _mutex(xSemaphoreCreateRecursiveMutex()),
       _state(WifiRadioState::Off),
+      _stateBeforeScan(WifiRadioState::Off),
       _scanResults(nullptr),
       _scanResultCount(0),
       _taskHandle(nullptr),
@@ -411,7 +412,11 @@ void PocketMageWifi::handleWifiEvent(int32_t id, void* data) {
         }
         xSemaphoreGiveRecursive(_mutex);
       }
-      _state = WifiRadioState::On;
+      // esp_wifi stays associated across a scan; restore a pre-scan
+      // Connected state instead of dropping the link back to On, otherwise
+      // isConnected() reports false until STA_CONNECTED refires (it won't).
+      _state = (_stateBeforeScan == WifiRadioState::Connected) ? WifiRadioState::Connected
+                                                               : WifiRadioState::On;
       publishEvent();
       break;
     default:
@@ -503,7 +508,9 @@ void PocketMageWifi::doDisable() {
 
 void PocketMageWifi::doScan() {
   ESP_LOGI(TAG, "doScan(): state=%d", (int)_state);
-  if (_state == WifiRadioState::On) {
+  // remember the prior state
+  if (_state == WifiRadioState::On || _state == WifiRadioState::Connected) {
+    _stateBeforeScan = _state;
     _state = WifiRadioState::Scanning;
     setStatus(TR(STR_WIFI_SCANNING));
     wifi_scan_config_t scanConf = {};
