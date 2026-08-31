@@ -75,5 +75,5 @@ What the device does today and what is still planned.
 
 - [FAQ](faq/index.md)
 - [Scripting](scripting/index.md)
-- [GitHub Repository](https://github.com/TailsmanDesign/PocketMage_PDA)
+- [GitHub Repository](https://github.com/TalismanDesign/PocketMage_PDA)
 - [Discord Community](https://discord.gg/KSCapSf4XH)

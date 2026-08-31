@@ -39,7 +39,7 @@ This pattern is visible in `Code/PocketMageOS/include/globals.h` (the prototypes
 
 The app template is your starting point:
 
-- [APP_TEMPLATE.cpp](https://github.com/TailsmanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp)
+- [APP_TEMPLATE.cpp](https://github.com/TalismanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp)
 
 It defines the three entry points an OTA app needs:
 

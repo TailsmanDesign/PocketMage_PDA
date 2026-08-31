@@ -19,14 +19,14 @@ PocketMage is available on Crowd Supply! Check it out [here](https://pocketmage.
 
 Start with the docs site:
 
-- [PocketMage Docs](https://tailsmandesign.github.io/PocketMage_PDA/docs/)
-- [Build Environments](https://tailsmandesign.github.io/PocketMage_PDA/docs/development/build-environments)
-- [Command Manual](https://tailsmandesign.github.io/PocketMage_PDA/docs/command-manual)
-- [FAQ](https://tailsmandesign.github.io/PocketMage_PDA/docs/faq)
-- [Scripting](https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting)
-- [App API Reference](https://tailsmandesign.github.io/PocketMage_PDA/docs/reference/app-api)
+- [PocketMage Docs](https://talismandesign.github.io/PocketMage_PDA/docs/)
+- [Build Environments](https://talismandesign.github.io/PocketMage_PDA/docs/development/build-environments)
+- [Command Manual](https://talismandesign.github.io/PocketMage_PDA/docs/command-manual)
+- [FAQ](https://talismandesign.github.io/PocketMage_PDA/docs/faq)
+- [Scripting](https://talismandesign.github.io/PocketMage_PDA/docs/scripting)
+- [App API Reference](https://talismandesign.github.io/PocketMage_PDA/docs/reference/app-api)
 
-To build or extend apps, start with [APP_TEMPLATE.cpp](./Code/PocketMageOS/src/APP_TEMPLATE.cpp) and the [App API Reference](https://tailsmandesign.github.io/PocketMage_PDA/docs/reference/app-api).
+To build or extend apps, start with [APP_TEMPLATE.cpp](./Code/PocketMageOS/src/APP_TEMPLATE.cpp) and the [App API Reference](https://talismandesign.github.io/PocketMage_PDA/docs/reference/app-api).
 The app walkthrough video is still useful for a first pass:
 [Developing For the PocketMage](https://www.youtube.com/watch?v=3Ytc-3-BbMM)
 

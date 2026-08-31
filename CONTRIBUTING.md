@@ -20,7 +20,7 @@ Thanks for your interest in contributing! This guide covers everything you need 
 ## Getting the code
 
 ```bash
-git clone https://github.com/TailsmanDesign/PocketMage_PDA.git
+git clone https://github.com/TalismanDesign/PocketMage_PDA.git
 ```
 
 Main firmware source lives under `Code/PocketMageOS/`. Hardware design files (KiCad schematics/PCBs) are under `Resources/PCB/`.
@@ -86,4 +86,4 @@ AI tools are welcome for drafting code or documentation, but **every submission 
 
 ## Community
 
-See the [docs site](https://tailsmandesign.github.io/PocketMage_PDA/docs/) for the FAQ, tutorials, and command manual.
+See the [docs site](https://talismandesign.github.io/PocketMage_PDA/docs/) for the FAQ, tutorials, and command manual.

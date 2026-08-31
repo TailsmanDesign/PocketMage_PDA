@@ -21,14 +21,14 @@ Running `pio run` with no arguments builds all three. Build one explicitly with 
 
 ### What the OTA_APP flag does
 
-The `OTA_APP` environment defines `OTA_APP_FLAG=1`. In `config.h` this becomes `OTA_APP == true`, which excludes the native OS app set from the build. The three entry points from [APP_TEMPLATE.cpp](https://github.com/TailsmanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp) - `APP_INIT()`, `processKB_APP()`, `einkHandler_APP()` - become the program. The same source tree therefore builds either a full OS or a standalone app depending on the environment you choose.
+The `OTA_APP` environment defines `OTA_APP_FLAG=1`. In `config.h` this becomes `OTA_APP == true`, which excludes the native OS app set from the build. The three entry points from [APP_TEMPLATE.cpp](https://github.com/TalismanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp) - `APP_INIT()`, `processKB_APP()`, `einkHandler_APP()` - become the program. The same source tree therefore builds either a full OS or a standalone app depending on the environment you choose.
 
 ## Prerequisites
 
 - [VS Code](https://code.visualstudio.com/) installed
 - Python 3 installed
 - PlatformIO Core (installed automatically by the VS Code extension, or via `pip install platformio`)
-- The PocketMage source code, cloned from [GitHub](https://github.com/TailsmanDesign/PocketMage_PDA)
+- The PocketMage source code, cloned from [GitHub](https://github.com/TalismanDesign/PocketMage_PDA)
 
 The ESP32 platform support downloads automatically on the first build, so the first build is noticeably slower.
 
