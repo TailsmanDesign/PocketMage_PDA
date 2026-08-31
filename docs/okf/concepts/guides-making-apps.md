@@ -2,12 +2,12 @@
 type: guide
 title: "Making Apps"
 description: "How to create PocketMage apps, both native and OTA."
-source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/making-apps/"
+source: "https://talismandesign.github.io/PocketMage_PDA/docs/guides/making-apps/"
 path: /guides/making-apps/
-updated: 2026-08-30
+updated: 2026-08-31
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-30T22:49:51.394Z"
+  generated_at: "2026-08-31T22:19:13.732Z"
 ---
 ---
 title: "Making Apps"
@@ -50,7 +50,7 @@ This pattern is visible in `Code/PocketMageOS/include/globals.h` (the prototypes
 
 The app template is your starting point:
 
-- [APP_TEMPLATE.cpp](https://github.com/TailsmanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp)
+- [APP_TEMPLATE.cpp](https://github.com/TalismanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp)
 
 It defines the three entry points an OTA app needs:
 

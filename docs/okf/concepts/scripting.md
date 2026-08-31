@@ -2,12 +2,12 @@
 type: concept
 title: Scripting
 description: "Scripting reference and examples for the PocketMage TERMINAL app (Wrench)."
-source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/"
+source: "https://talismandesign.github.io/PocketMage_PDA/docs/scripting/"
 path: /scripting/
-updated: 2026-08-30
+updated: 2026-08-31
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-30T22:49:51.398Z"
+  generated_at: "2026-08-31T22:19:13.737Z"
 ---
 ---
 title: "Scripting"

@@ -2,12 +2,12 @@
 type: concept
 title: "Build Environments & PlatformIO Setup"
 description: "How to set up PlatformIO and build PocketMage firmware on Linux, macOS, and Windows."
-source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/development/build-environments/"
+source: "https://talismandesign.github.io/PocketMage_PDA/docs/development/build-environments/"
 path: /development/build-environments/
-updated: 2026-08-30
+updated: 2026-08-31
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-30T22:49:51.392Z"
+  generated_at: "2026-08-31T22:19:13.727Z"
 ---
 ---
 title: "Build Environments & PlatformIO Setup"
@@ -32,14 +32,14 @@ Running `pio run` with no arguments builds all three. Build one explicitly with 
 
 ### What the OTA_APP flag does
 
-The `OTA_APP` environment defines `OTA_APP_FLAG=1`. In `config.h` this becomes `OTA_APP == true`, which excludes the native OS app set from the build. The three entry points from [APP_TEMPLATE.cpp](https://github.com/TailsmanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp) - `APP_INIT()`, `processKB_APP()`, `einkHandler_APP()` - become the program. The same source tree therefore builds either a full OS or a standalone app depending on the environment you choose.
+The `OTA_APP` environment defines `OTA_APP_FLAG=1`. In `config.h` this becomes `OTA_APP == true`, which excludes the native OS app set from the build. The three entry points from [APP_TEMPLATE.cpp](https://github.com/TalismanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp) - `APP_INIT()`, `processKB_APP()`, `einkHandler_APP()` - become the program. The same source tree therefore builds either a full OS or a standalone app depending on the environment you choose.
 
 ## Prerequisites
 
 - [VS Code](https://code.visualstudio.com/) installed
 - Python 3 installed
 - PlatformIO Core (installed automatically by the VS Code extension, or via `pip install platformio`)
-- The PocketMage source code, cloned from [GitHub](https://github.com/TailsmanDesign/PocketMage_PDA)
+- The PocketMage source code, cloned from [GitHub](https://github.com/TalismanDesign/PocketMage_PDA)
 
 The ESP32 platform support downloads automatically on the first build, so the first build is noticeably slower.
 

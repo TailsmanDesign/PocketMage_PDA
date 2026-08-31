@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://tailsmandesign.github.io/PocketMage_PDA/docs/sitemap.xml
+Sitemap: https://talismandesign.github.io/PocketMage_PDA/docs/sitemap.xml

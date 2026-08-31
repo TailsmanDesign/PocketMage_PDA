@@ -2,12 +2,12 @@
 type: concept
 title: Features
 description: "What PocketMage can do today."
-source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/features/"
+source: "https://talismandesign.github.io/PocketMage_PDA/docs/features/"
 path: /features/
-updated: 2026-08-30
+updated: 2026-08-31
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-30T22:49:51.393Z"
+  generated_at: "2026-08-31T22:19:13.729Z"
 ---
 ---
 title: "Features"

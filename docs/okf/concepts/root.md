@@ -2,12 +2,12 @@
 type: concept
 title: "PocketMage Documentation"
 description: "Official documentation for the PocketMage open-source PDA device."
-source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/"
+source: "https://talismandesign.github.io/PocketMage_PDA/docs/"
 path: /
-updated: 2026-08-30
+updated: 2026-08-31
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-30T22:49:51.396Z"
+  generated_at: "2026-08-31T22:19:13.733Z"
 ---
 ---
 title: "PocketMage Documentation"
@@ -86,5 +86,5 @@ What the device does today and what is still planned.
 
 - [FAQ](faq/index.md)
 - [Scripting](scripting/index.md)
-- [GitHub Repository](https://github.com/TailsmanDesign/PocketMage_PDA)
+- [GitHub Repository](https://github.com/TalismanDesign/PocketMage_PDA)
 - [Discord Community](https://discord.gg/KSCapSf4XH)

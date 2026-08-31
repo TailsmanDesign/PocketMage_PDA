@@ -104,33 +104,33 @@
     
     
 
-    <link id="site-favicon" rel="icon" href="../../assets/favicon.png?v=mtgejevy">
-    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=mtgejevy">
+    <link id="site-favicon" rel="icon" href="../../assets/favicon.png?v=mthsvu89">
+    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=mthsvu89">
     
-    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=mtgejevy" id="hljs-light" >
-    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=mtgejevy" id="hljs-dark" disabled>
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=mthsvu89" id="hljs-light" >
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=mthsvu89" id="hljs-dark" disabled>
     
     
 <meta name="description" content="How to create PocketMage apps, both native and OTA.">
-<link rel="canonical" href="https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/making-apps/">
+<link rel="canonical" href="https://talismandesign.github.io/PocketMage_PDA/docs/guides/making-apps/">
 <meta property="og:title" content="Making Apps - PocketMage">
 <meta property="og:description" content="How to create PocketMage apps, both native and OTA.">
-<meta property="og:url" content="https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/making-apps/">
+<meta property="og:url" content="https://talismandesign.github.io/PocketMage_PDA/docs/guides/making-apps/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://tailsmandesign.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
+<meta property="og:image" content="https://talismandesign.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Making Apps - PocketMage">
 <meta name="twitter:description" content="How to create PocketMage apps, both native and OTA.">
-<meta name="twitter:image" content="https://tailsmandesign.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
+<meta name="twitter:image" content="https://talismandesign.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
 
 
 
-<link rel="stylesheet" href="../../assets/css/docmd-theme-ruby.css?v=mtgejevy" >
-<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=mtgejevy" >
-<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=mtgejevy" >
+<link rel="stylesheet" href="../../assets/css/docmd-theme-ruby.css?v=mthsvu89" >
+<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=mthsvu89" >
+<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=mthsvu89" >
 
     
-      <link rel="stylesheet" href="../../assets/css/theme.css?v=mtgejevy">
+      <link rel="stylesheet" href="../../assets/css/theme.css?v=mthsvu89">
     
     
   </head>
@@ -1077,7 +1077,7 @@
     
       <li class="" >
       
-        <a href="https://github.com/TailsmanDesign/PocketMage_PDA" class=" "
+        <a href="https://github.com/TalismanDesign/PocketMage_PDA" class=" "
           target=&quot;_blank&quot; rel=&quot;noopener&quot;>
            
 <svg class="lucide-icon icon-github " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -1260,7 +1260,7 @@
             <div class="content-layout">
               <div class="main-content">
                 <div class="docmd-breadcrumbs-row">
-                  <div id="docmd-raw-markdown" data-content="---%0Atitle%3A%20%22Making%20Apps%22%0Adescription%3A%20%22How%20to%20create%20PocketMage%20apps%2C%20both%20native%20and%20OTA.%22%0A---%0A%0A%23%20Making%20Apps%0A%0APocketMage%20apps%20come%20in%20two%20forms%3A%20native%20apps%20that%20ship%20inside%20PocketMageOS%2C%20and%20OTA%20apps%20that%20are%20loaded%20onto%20the%20device%20later.%20The%20two%20share%20the%20same%20core%20shape%2C%20so%20this%20page%20walks%20through%20that%20shape%20once%20and%20then%20explains%20where%20the%20paths%20diverge.%0A%0A%3A%3A%3A%20grids%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20card%20%22Native%20apps%22%20icon%3Aterminal%0ACompiled%20into%20the%20OS%20and%20wired%20into%20the%20app%20dispatch%20switch.%0A%3A%3A%3A%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20card%20%22OTA%20apps%22%20icon%3Apackage%0ACompiled%20separately%20and%20loaded%20into%20one%20of%20four%20OTA%20slots%20at%20runtime.%0A%3A%3A%3A%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20card%20%22Same%20shape%22%20icon%3Acode%0ABoth%20are%20three%20functions%3A%20init%2C%20handle%20input%2C%20draw.%0A%3A%3A%3A%0A%3A%3A%3A%0A%3A%3A%3A%0A%0A%23%23%20The%20basic%20app%20shape%0A%0AEvery%20PocketMage%20app%20has%20the%20same%20three%20jobs%2C%20and%20they%20map%20directly%20to%20three%20functions.%0A%0A1.%20**Initialize%20state**%20-%20run%20once%20when%20the%20app%20opens.%20Set%20up%20whatever%20the%20app%20needs%20and%20mark%20the%20screen%20for%20a%20redraw.%0A2.%20**Process%20keyboard%20input**%20-%20run%20on%20every%20keypress.%20Read%20the%20key%2C%20update%20app%20state%2C%20and%20queue%20a%20redraw.%0A3.%20**Draw%20the%20screen**%20-%20run%20when%20the%20E-Ink%20needs%20to%20update.%20Render%20the%20current%20app%20state.%0A%0AThis%20pattern%20is%20visible%20in%20%60Code%2FPocketMageOS%2Finclude%2Fglobals.h%60%20(the%20prototypes)%20and%20in%20the%20app%20files%20under%20%60Code%2FPocketMageOS%2Fsrc%2FOS_APPS%2F%60.%0A%0A%23%23%20Start%20with%20the%20template%0A%0AThe%20app%20template%20is%20your%20starting%20point%3A%0A%0A-%20%5BAPP_TEMPLATE.cpp%5D(https%3A%2F%2Fgithub.com%2FTailsmanDesign%2FPocketMage_PDA%2Fblob%2Fmain%2FCode%2FPocketMageOS%2Fsrc%2FAPP_TEMPLATE.cpp)%0A%0AIt%20defines%20the%20three%20entry%20points%20an%20OTA%20app%20needs%3A%0A%0A%60%60%60cpp%0A%23include%20%3Cglobals.h%3E%0A%23if%20OTA_APP%0Avoid%20APP_INIT()%20%7B%0A%20%20%2F%2F%201.%20set%20up%20app%20state%0A%7D%0A%0Avoid%20processKB_APP()%20%7B%0A%20%20%2F%2F%202.%20handle%20a%20keypress%0A%7D%0A%0Avoid%20einkHandler_APP()%20%7B%0A%20%20%2F%2F%203.%20draw%20the%20screen%0A%7D%0A%23endif%0A%60%60%60%0A%0A%23%23%20Building%20the%20app%20step%20by%20step%0A%0A1.%20**Decide%20native%20vs%20OTA.**%20If%20the%20app%20belongs%20to%20the%20device%20experience%2C%20make%20it%20native.%20If%20it%20is%20third-party%20or%20experimental%2C%20make%20it%20an%20OTA%20app%20so%20it%20can%20be%20installed%20and%20removed%20without%20reflashing%20the%20OS.%0A2.%20**Pick%20the%20shared%20helpers.**%20Browse%20the%20%5BPocketMage%20Library%5D(..%2Freference%2Fpocketmage-library.md)%20before%20writing%20anything.%20Prompts%20(%60textPrompt()%60)%2C%20file%20selection%20(%60fileWizardMini()%60)%2C%20and%20timeouts%20(%60checkTimeout()%60)%20already%20exist%3B%20do%20not%20reimplement%20them.%0A3.%20**Wire%20it%20into%20the%20OS%20(native%20only).**%20Add%20an%20%60AppState%60%20entry%2C%20the%20three%20prototypes%2C%20and%20the%20%60switch%60%20cases%20marked%20%60%2F%2F%20ADD%20APP%20CASES%20HERE%60%20in%20%60PocketMageV3.cpp%60.%20Then%20add%20a%20home-screen%20command%20if%20you%20want%20it%20launchable%20by%20name.%0A4.%20**Test%20the%20keyboard%20path%20first.**%20Get%20a%20keypress%20into%20your%20handler%20and%20onto%20the%20OLED%20before%20worrying%20about%20the%20E-Ink.%0A5.%20**Test%20the%20E-Ink%20path%20second.**%20Make%20sure%20drawing%20and%20refresh%20behave%2C%20including%20fast%20partial%20refreshes.%0A6.%20**Check%20timeout%2C%20wake%2C%20and%20save%20last.**%20Confirm%20the%20app%20resets%20the%20idle%20clock%2C%20handles%20sleep%2Fwake%20without%20corrupting%20state%2C%20and%20saves%20before%20exit%20where%20it%20should.%0A%0A%23%23%20Good%20app%20rules%0A%0A-%20Keep%20app%20state%20local%20and%20explicit%3B%20do%20not%20scatter%20globals.%0A-%20Use%20shared%20helpers%20instead%20of%20duplicating%20them.%0A-%20Keep%20draw%20code%20separate%20from%20input%20code.%0A-%20Make%20exit%2C%20save%2C%20and%20sleep%20behavior%20obvious.%0A-%20For%20native%20apps%2C%20follow%20the%20existing%20app%20in%20%60src%2FOS_APPS%2F%60%20that%20does%20the%20closest%20job.%0A%0A%23%23%20Native%20vs%20OTA%3A%20which%20path%0A%0A%7C%20%7C%20Native%20%7C%20OTA%20%7C%0A%7C%20---%20%7C%20---%20%7C%20---%20%7C%0A%7C%20Where%20the%20code%20lives%20%7C%20%60src%2FOS_APPS%2F%60%20inside%20PocketMageOS%20%7C%20Standalone%20project%20using%20%60APP_TEMPLATE.cpp%60%20%7C%0A%7C%20How%20it%20is%20built%20%7C%20With%20the%20OS%20(%60PM_PRODUCTION%60%2F%60PM_BETA%60)%20%7C%20With%20the%20%60OTA_APP%60%20environment%20%7C%0A%7C%20How%20it%20ships%20%7C%20Flashed%20as%20part%20of%20the%20firmware%20%7C%20Packaged%20as%20a%20%60.tar%60%20and%20loaded%20through%20the%20app%20loader%20%7C%0A%7C%20Dispatch%20%7C%20Wired%20into%20the%20switch%20in%20%60PocketMageV3.cpp%60%20%7C%20Entry%20points%20called%20by%20the%20loader%20%7C%0A%7C%20Hardware%20access%20%7C%20PocketMage%20Library%20%7C%20PocketMage%20Library%20%7C%0A%0ARead%20the%20%5BNative%20Apps%5D(native-apps.md)%20and%20%5BOTA%20Apps%5D(ota-apps.md)%20pages%20for%20the%20details%20of%20each%20path.%0A%0A%23%23%20Next%20steps%0A%0A%3A%3A%3A%20grids%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22Native%20Apps%22%20.%2Fnative-apps.md%20icon%3Aterminal%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22OTA%20Apps%22%20.%2Fota-apps.md%20icon%3Apackage%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22App%20API%20Reference%22%20..%2Freference%2Fapp-api.md%20icon%3Abook%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22PocketMage%20Library%22%20..%2Freference%2Fpocketmage-library.md%20icon%3Abox%0A%3A%3A%3A%0A%3A%3A%3A%0A" style="display: none;"></div>
+                  <div id="docmd-raw-markdown" data-content="---%0Atitle%3A%20%22Making%20Apps%22%0Adescription%3A%20%22How%20to%20create%20PocketMage%20apps%2C%20both%20native%20and%20OTA.%22%0A---%0A%0A%23%20Making%20Apps%0A%0APocketMage%20apps%20come%20in%20two%20forms%3A%20native%20apps%20that%20ship%20inside%20PocketMageOS%2C%20and%20OTA%20apps%20that%20are%20loaded%20onto%20the%20device%20later.%20The%20two%20share%20the%20same%20core%20shape%2C%20so%20this%20page%20walks%20through%20that%20shape%20once%20and%20then%20explains%20where%20the%20paths%20diverge.%0A%0A%3A%3A%3A%20grids%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20card%20%22Native%20apps%22%20icon%3Aterminal%0ACompiled%20into%20the%20OS%20and%20wired%20into%20the%20app%20dispatch%20switch.%0A%3A%3A%3A%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20card%20%22OTA%20apps%22%20icon%3Apackage%0ACompiled%20separately%20and%20loaded%20into%20one%20of%20four%20OTA%20slots%20at%20runtime.%0A%3A%3A%3A%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20card%20%22Same%20shape%22%20icon%3Acode%0ABoth%20are%20three%20functions%3A%20init%2C%20handle%20input%2C%20draw.%0A%3A%3A%3A%0A%3A%3A%3A%0A%3A%3A%3A%0A%0A%23%23%20The%20basic%20app%20shape%0A%0AEvery%20PocketMage%20app%20has%20the%20same%20three%20jobs%2C%20and%20they%20map%20directly%20to%20three%20functions.%0A%0A1.%20**Initialize%20state**%20-%20run%20once%20when%20the%20app%20opens.%20Set%20up%20whatever%20the%20app%20needs%20and%20mark%20the%20screen%20for%20a%20redraw.%0A2.%20**Process%20keyboard%20input**%20-%20run%20on%20every%20keypress.%20Read%20the%20key%2C%20update%20app%20state%2C%20and%20queue%20a%20redraw.%0A3.%20**Draw%20the%20screen**%20-%20run%20when%20the%20E-Ink%20needs%20to%20update.%20Render%20the%20current%20app%20state.%0A%0AThis%20pattern%20is%20visible%20in%20%60Code%2FPocketMageOS%2Finclude%2Fglobals.h%60%20(the%20prototypes)%20and%20in%20the%20app%20files%20under%20%60Code%2FPocketMageOS%2Fsrc%2FOS_APPS%2F%60.%0A%0A%23%23%20Start%20with%20the%20template%0A%0AThe%20app%20template%20is%20your%20starting%20point%3A%0A%0A-%20%5BAPP_TEMPLATE.cpp%5D(https%3A%2F%2Fgithub.com%2FTalismanDesign%2FPocketMage_PDA%2Fblob%2Fmain%2FCode%2FPocketMageOS%2Fsrc%2FAPP_TEMPLATE.cpp)%0A%0AIt%20defines%20the%20three%20entry%20points%20an%20OTA%20app%20needs%3A%0A%0A%60%60%60cpp%0A%23include%20%3Cglobals.h%3E%0A%23if%20OTA_APP%0Avoid%20APP_INIT()%20%7B%0A%20%20%2F%2F%201.%20set%20up%20app%20state%0A%7D%0A%0Avoid%20processKB_APP()%20%7B%0A%20%20%2F%2F%202.%20handle%20a%20keypress%0A%7D%0A%0Avoid%20einkHandler_APP()%20%7B%0A%20%20%2F%2F%203.%20draw%20the%20screen%0A%7D%0A%23endif%0A%60%60%60%0A%0A%23%23%20Building%20the%20app%20step%20by%20step%0A%0A1.%20**Decide%20native%20vs%20OTA.**%20If%20the%20app%20belongs%20to%20the%20device%20experience%2C%20make%20it%20native.%20If%20it%20is%20third-party%20or%20experimental%2C%20make%20it%20an%20OTA%20app%20so%20it%20can%20be%20installed%20and%20removed%20without%20reflashing%20the%20OS.%0A2.%20**Pick%20the%20shared%20helpers.**%20Browse%20the%20%5BPocketMage%20Library%5D(..%2Freference%2Fpocketmage-library.md)%20before%20writing%20anything.%20Prompts%20(%60textPrompt()%60)%2C%20file%20selection%20(%60fileWizardMini()%60)%2C%20and%20timeouts%20(%60checkTimeout()%60)%20already%20exist%3B%20do%20not%20reimplement%20them.%0A3.%20**Wire%20it%20into%20the%20OS%20(native%20only).**%20Add%20an%20%60AppState%60%20entry%2C%20the%20three%20prototypes%2C%20and%20the%20%60switch%60%20cases%20marked%20%60%2F%2F%20ADD%20APP%20CASES%20HERE%60%20in%20%60PocketMageV3.cpp%60.%20Then%20add%20a%20home-screen%20command%20if%20you%20want%20it%20launchable%20by%20name.%0A4.%20**Test%20the%20keyboard%20path%20first.**%20Get%20a%20keypress%20into%20your%20handler%20and%20onto%20the%20OLED%20before%20worrying%20about%20the%20E-Ink.%0A5.%20**Test%20the%20E-Ink%20path%20second.**%20Make%20sure%20drawing%20and%20refresh%20behave%2C%20including%20fast%20partial%20refreshes.%0A6.%20**Check%20timeout%2C%20wake%2C%20and%20save%20last.**%20Confirm%20the%20app%20resets%20the%20idle%20clock%2C%20handles%20sleep%2Fwake%20without%20corrupting%20state%2C%20and%20saves%20before%20exit%20where%20it%20should.%0A%0A%23%23%20Good%20app%20rules%0A%0A-%20Keep%20app%20state%20local%20and%20explicit%3B%20do%20not%20scatter%20globals.%0A-%20Use%20shared%20helpers%20instead%20of%20duplicating%20them.%0A-%20Keep%20draw%20code%20separate%20from%20input%20code.%0A-%20Make%20exit%2C%20save%2C%20and%20sleep%20behavior%20obvious.%0A-%20For%20native%20apps%2C%20follow%20the%20existing%20app%20in%20%60src%2FOS_APPS%2F%60%20that%20does%20the%20closest%20job.%0A%0A%23%23%20Native%20vs%20OTA%3A%20which%20path%0A%0A%7C%20%7C%20Native%20%7C%20OTA%20%7C%0A%7C%20---%20%7C%20---%20%7C%20---%20%7C%0A%7C%20Where%20the%20code%20lives%20%7C%20%60src%2FOS_APPS%2F%60%20inside%20PocketMageOS%20%7C%20Standalone%20project%20using%20%60APP_TEMPLATE.cpp%60%20%7C%0A%7C%20How%20it%20is%20built%20%7C%20With%20the%20OS%20(%60PM_PRODUCTION%60%2F%60PM_BETA%60)%20%7C%20With%20the%20%60OTA_APP%60%20environment%20%7C%0A%7C%20How%20it%20ships%20%7C%20Flashed%20as%20part%20of%20the%20firmware%20%7C%20Packaged%20as%20a%20%60.tar%60%20and%20loaded%20through%20the%20app%20loader%20%7C%0A%7C%20Dispatch%20%7C%20Wired%20into%20the%20switch%20in%20%60PocketMageV3.cpp%60%20%7C%20Entry%20points%20called%20by%20the%20loader%20%7C%0A%7C%20Hardware%20access%20%7C%20PocketMage%20Library%20%7C%20PocketMage%20Library%20%7C%0A%0ARead%20the%20%5BNative%20Apps%5D(native-apps.md)%20and%20%5BOTA%20Apps%5D(ota-apps.md)%20pages%20for%20the%20details%20of%20each%20path.%0A%0A%23%23%20Next%20steps%0A%0A%3A%3A%3A%20grids%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22Native%20Apps%22%20.%2Fnative-apps.md%20icon%3Aterminal%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22OTA%20Apps%22%20.%2Fota-apps.md%20icon%3Apackage%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22App%20API%20Reference%22%20..%2Freference%2Fapp-api.md%20icon%3Abook%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22PocketMage%20Library%22%20..%2Freference%2Fpocketmage-library.md%20icon%3Abox%0A%3A%3A%3A%0A%3A%3A%3A%0A" style="display: none;"></div>
                   
                     <nav aria-label="breadcrumb" class="docmd-breadcrumbs">
                       <ol>
@@ -1423,7 +1423,7 @@ Same shape</div><div class="card-content"><p>Both are three functions: init, han
 <h2 id="making-apps-start-with-the-template" class="docmd-heading"><a href="#making-apps-start-with-the-template" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Start with the template</h2>
 <p>The app template is your starting point:</p>
 <ul>
-<li><a href="https://github.com/TailsmanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp">APP_TEMPLATE.cpp</a></li>
+<li><a href="https://github.com/TalismanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp">APP_TEMPLATE.cpp</a></li>
 </ul>
 <p>It defines the three entry points an OTA app needs:</p>
 <pre class="hljs"><code class="language-cpp"><span class="hljs-comment">#include &lt;globals.h&gt;</span>
@@ -1689,29 +1689,29 @@ PocketMage Library</a></div>
             <div class="page-footer-actions">
               
               
-                <span class="git-last-updated" data-timestamp="1788130138000">
+                <span class="git-last-updated" data-timestamp="1788214702000">
                   <svg class="git-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <polyline points="12 6 12 12 16 14"></polyline>
                   </svg>
                   <span class="git-label">Last updated:</span>
-                  <span class="git-time" data-timestamp="1788130138000"></span>
+                  <span class="git-time" data-timestamp="1788214702000"></span>
                   
                   <div class="git-commit-tooltip" role="tooltip">
                     <div class="git-tooltip-title">Recent commits</div>
                     <ul class="git-commit-list">
                       
                         <li class="git-commit-item">
-                          <div class="git-commit-avatar" title="Ashtf">
+                          <div class="git-commit-avatar" title="NellowTCS">
                             
-                              <img src="https://www.gravatar.com/avatar/88c69ec22216c441f9cbcc5c230f7123?d=mp&amp;s=64" alt="Ashtf">
+                              <img src="https://www.gravatar.com/avatar/baecf29c7bedbb00a8d5bd5984799c55?d=mp&amp;s=64" alt="NellowTCS">
                             
                           </div>
                           <div class="git-commit-details">
-                            <div class="git-commit-message" title="Merge pull request #323 from TailsmanDesign/onboarding">Merge pull request #323 from Tailsman...</div>
+                            <div class="git-commit-message" title="Merge pull request #324 from TalismanDesign/rename">Merge pull request #324 from Talisman...</div>
                             <div class="git-commit-meta">
-                              <span class="git-commit-author">Ashtf</span>
-                              <span class="git-commit-date" data-timestamp="1788130138000"></span>
+                              <span class="git-commit-author">NellowTCS</span>
+                              <span class="git-commit-date" data-timestamp="1788214702000"></span>
                             </div>
                           </div>
                         </li>
@@ -1723,7 +1723,7 @@ PocketMage Library</a></div>
               
               <span class="git-spacer"></span>
               
-                <a href="https://github.com/TailsmanDesign/PocketMage_PDA/edit/main/Docs/docs/Docs/docs/guides/making-apps.md" target="_blank" rel="noopener noreferrer" class="edit-link">
+                <a href="https://github.com/TalismanDesign/PocketMage_PDA/edit/main/Docs/docs/Docs/docs/guides/making-apps.md" target="_blank" rel="noopener noreferrer" class="edit-link">
                   
 <svg class="lucide-icon icon-pencil " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-pencil"
@@ -1779,7 +1779,7 @@ PocketMage Library</a></div>
                 <span class="footer-column-title">Community</span>
                 <ul>
                   
-                    <li><a href="https://github.com/TailsmanDesign/PocketMage_PDA" >GitHub</a></li>
+                    <li><a href="https://github.com/TalismanDesign/PocketMage_PDA" >GitHub</a></li>
                   
                     <li><a href="https://discord.gg/KSCapSf4XH" >Discord</a></li>
                   
@@ -1792,7 +1792,7 @@ PocketMage Library</a></div>
         
       </div>
       <div class="footer-complete-bottom">
-        <div class="user-footer">Built with <a href="https://docmd.io">docmd</a>. <a href="https://github.com/TailsmanDesign/PocketMage_PDA">View on GitHub</a>.</div>
+        <div class="user-footer">Built with <a href="https://docmd.io">docmd</a>. <a href="https://github.com/TalismanDesign/PocketMage_PDA">View on GitHub</a>.</div>
         
           <div class="branding-footer">
             Built with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg> <a href="https://docmd.io" target="_blank" rel="noopener">docmd.</a>
@@ -1804,13 +1804,13 @@ PocketMage Library</a></div>
         </div>
       </div>
       
-      <script src="../../assets/js/docmd-main.js?v=mtgejevy"></script>
+      <script src="../../assets/js/docmd-main.js?v=mthsvu89"></script>
       
-      <script src="../../assets/js/docmd-git.js?v=mtgejevy"></script>
-      <script src="../../assets/js/docmd-image-lightbox.js?v=mtgejevy" ></script>
-<script src="../../assets/js/vendor/minisearch.js?v=mtgejevy" ></script>
-<script src="../../assets/js/docmd-search.js?v=mtgejevy" ></script>
-<script src="../../assets/js/docmd-git.js?v=mtgejevy" type="module"></script>
+      <script src="../../assets/js/docmd-git.js?v=mthsvu89"></script>
+      <script src="../../assets/js/docmd-image-lightbox.js?v=mthsvu89" ></script>
+<script src="../../assets/js/vendor/minisearch.js?v=mthsvu89" ></script>
+<script src="../../assets/js/docmd-search.js?v=mthsvu89" ></script>
+<script src="../../assets/js/docmd-git.js?v=mthsvu89" type="module"></script>
 
   <!-- Search Modal (Injected by @docmd/plugin-search) -->
   <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;" data-semantic="true" data-show-confidence="true" data-show-filters="true"
@@ -1885,7 +1885,7 @@ PocketMage Library</a></div>
       })();
     </script>
 
-<script>window.__git_config={"repo":"https://github.com/TailsmanDesign/PocketMage_PDA/edit/main/Docs/docs","branch":"main","editLink":true,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
+<script>window.__git_config={"repo":"https://github.com/TalismanDesign/PocketMage_PDA/edit/main/Docs/docs","branch":"main","editLink":true,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
       
       
       

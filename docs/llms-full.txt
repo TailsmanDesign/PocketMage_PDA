@@ -4,7 +4,7 @@
 
 ---
 
-## [PocketMage Command Manual](https://tailsmandesign.github.io/PocketMage_PDA/docs/command-manual/)
+## [PocketMage Command Manual](https://talismandesign.github.io/PocketMage_PDA/docs/command-manual/)
 
 ---
 title: "PocketMage Command Manual"
@@ -319,7 +319,7 @@ On battery, the device saves power and shows a random screensaver. When charging
 
 ---
 
-## [Build Environments & PlatformIO Setup](https://tailsmandesign.github.io/PocketMage_PDA/docs/development/build-environments/)
+## [Build Environments & PlatformIO Setup](https://talismandesign.github.io/PocketMage_PDA/docs/development/build-environments/)
 
 ---
 title: "Build Environments & PlatformIO Setup"
@@ -344,14 +344,14 @@ Running `pio run` with no arguments builds all three. Build one explicitly with 
 
 ### What the OTA_APP flag does
 
-The `OTA_APP` environment defines `OTA_APP_FLAG=1`. In `config.h` this becomes `OTA_APP == true`, which excludes the native OS app set from the build. The three entry points from [APP_TEMPLATE.cpp](https://github.com/TailsmanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp) - `APP_INIT()`, `processKB_APP()`, `einkHandler_APP()` - become the program. The same source tree therefore builds either a full OS or a standalone app depending on the environment you choose.
+The `OTA_APP` environment defines `OTA_APP_FLAG=1`. In `config.h` this becomes `OTA_APP == true`, which excludes the native OS app set from the build. The three entry points from [APP_TEMPLATE.cpp](https://github.com/TalismanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp) - `APP_INIT()`, `processKB_APP()`, `einkHandler_APP()` - become the program. The same source tree therefore builds either a full OS or a standalone app depending on the environment you choose.
 
 ## Prerequisites
 
 - [VS Code](https://code.visualstudio.com/) installed
 - Python 3 installed
 - PlatformIO Core (installed automatically by the VS Code extension, or via `pip install platformio`)
-- The PocketMage source code, cloned from [GitHub](https://github.com/TailsmanDesign/PocketMage_PDA)
+- The PocketMage source code, cloned from [GitHub](https://github.com/TalismanDesign/PocketMage_PDA)
 
 The ESP32 platform support downloads automatically on the first build, so the first build is noticeably slower.
 
@@ -420,7 +420,7 @@ There is no automated test suite for the firmware. Verify changes against real h
 
 ---
 
-## [PocketMageOS](https://tailsmandesign.github.io/PocketMage_PDA/docs/development/)
+## [PocketMageOS](https://talismandesign.github.io/PocketMage_PDA/docs/development/)
 
 ---
 title: "PocketMageOS"
@@ -527,7 +527,7 @@ Both follow the same three-function shape. The difference is only where the code
 
 ---
 
-## [PocketMage FAQ](https://tailsmandesign.github.io/PocketMage_PDA/docs/faq/)
+## [PocketMage FAQ](https://talismandesign.github.io/PocketMage_PDA/docs/faq/)
 
 ---
 title: "PocketMage FAQ"
@@ -539,7 +539,7 @@ description: "Frequently asked questions about the PocketMage PDA device."
 ## Helpful links
 
 - [PocketMage.org](https://pocketmage.org/)
-- [PocketMage on GitHub](https://github.com/TailsmanDesign/PocketMage_PDA)
+- [PocketMage on GitHub](https://github.com/TalismanDesign/PocketMage_PDA)
 - [PocketMage on Discord](https://discord.gg/KSCapSf4XH)
 - [Ashtf on YouTube](https://www.youtube.com/@ashtf)
 - [Ashtf on Patreon](https://patreon.com/Ashtf)
@@ -589,7 +589,7 @@ Yes. Use the [Command Manual](../command-manual/index.md).
 1. Carefully remove the battery (pull on the plastic connector).
 2. Ensure the DIP switch for programming mode is ON.
 3. Hold the power button while plugging the PocketMage into your computer. Nothing should happen.
-4. Open [The Web Flasher](https://tailsmandesign.github.io/PocketMage_PDA/) in a Chrome-based browser and select your firmware version. The most recent stable build is recommended.
+4. Open [The Web Flasher](https://talismandesign.github.io/PocketMage_PDA/) in a Chrome-based browser and select your firmware version. The most recent stable build is recommended.
 5. If you want to keep your saved settings, check the "Preserve user data during installation" box.
 6. Hit the flash button and select the PocketMage from the list of USB devices.
 7. When flashing is done, unplug the PocketMage and re-insert the battery.
@@ -602,7 +602,7 @@ Use a microSD card formatted as FAT32 with an MBR partition table. Cards up to 3
 
 ### Where are the CAD files?
 
-CAD files are available only to beta testers until the final production release. If you are a beta tester, find the password-protected archive [here](https://github.com/TailsmanDesign/PocketMage_PDA/tree/main/Resources/CAD) and the password in the beta Discord channel.
+CAD files are available only to beta testers until the final production release. If you are a beta tester, find the password-protected archive [here](https://github.com/TalismanDesign/PocketMage_PDA/tree/main/Resources/CAD) and the password in the beta Discord channel.
 
 ### Where can I get an extra battery?
 
@@ -624,7 +624,7 @@ For the current setup path, start here:
 
 ### My dictionary isn't working
 
-The English dictionary is not installed out of the box and must be downloaded to the SD card. Find the dictionary files [here](https://github.com/TailsmanDesign/PocketMage_PDA/tree/main/Resources/Assets/Dictionary%20(OPTED)). Connect the PocketMage to your computer with the USB app and drop all the `.txt` files into the dictionary folder.
+The English dictionary is not installed out of the box and must be downloaded to the SD card. Find the dictionary files [here](https://github.com/TalismanDesign/PocketMage_PDA/tree/main/Resources/Assets/Dictionary%20(OPTED)). Connect the PocketMage to your computer with the USB app and drop all the `.txt` files into the dictionary folder.
 
 ### I can't flash the firmware
 
@@ -636,12 +636,12 @@ First, ensure the card is 32 GB or smaller (8 GB is recommended). Next, ensure i
 
 ### I found a software bug
 
-Report the bug in detail on the [GitHub issues page](https://github.com/TailsmanDesign/PocketMage_PDA/issues), including steps to reproduce.
+Report the bug in detail on the [GitHub issues page](https://github.com/TalismanDesign/PocketMage_PDA/issues), including steps to reproduce.
 
 
 ---
 
-## [Features](https://tailsmandesign.github.io/PocketMage_PDA/docs/features/)
+## [Features](https://talismandesign.github.io/PocketMage_PDA/docs/features/)
 
 ---
 title: "Features"
@@ -774,7 +774,7 @@ On battery, the device enters sleep and shows a random screensaver. When plugged
 
 ---
 
-## [Getting Started](https://tailsmandesign.github.io/PocketMage_PDA/docs/getting-started/)
+## [Getting Started](https://talismandesign.github.io/PocketMage_PDA/docs/getting-started/)
 
 ---
 title: "Getting Started"
@@ -843,7 +843,7 @@ The hardware wrapper and helper layer.
 
 ---
 
-## [What is PocketMage?](https://tailsmandesign.github.io/PocketMage_PDA/docs/getting-started/what-is-pocketmage/)
+## [What is PocketMage?](https://talismandesign.github.io/PocketMage_PDA/docs/getting-started/what-is-pocketmage/)
 
 ---
 title: "What is PocketMage?"
@@ -939,7 +939,7 @@ The stock firmware includes these apps:
 
 ---
 
-## [Guides](https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/)
+## [Guides](https://talismandesign.github.io/PocketMage_PDA/docs/guides/)
 
 ---
 title: "Guides"
@@ -997,7 +997,7 @@ Use **Making Apps** for the full path, **Native Apps** if you are changing the O
 
 ---
 
-## [Making Apps](https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/making-apps/)
+## [Making Apps](https://talismandesign.github.io/PocketMage_PDA/docs/guides/making-apps/)
 
 ---
 title: "Making Apps"
@@ -1040,7 +1040,7 @@ This pattern is visible in `Code/PocketMageOS/include/globals.h` (the prototypes
 
 The app template is your starting point:
 
-- [APP_TEMPLATE.cpp](https://github.com/TailsmanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp)
+- [APP_TEMPLATE.cpp](https://github.com/TalismanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp)
 
 It defines the three entry points an OTA app needs:
 
@@ -1110,7 +1110,7 @@ Read the [Native Apps](native-apps.md) and [OTA Apps](ota-apps.md) pages for the
 
 ---
 
-## [Native Apps](https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/native-apps/)
+## [Native Apps](https://talismandesign.github.io/PocketMage_PDA/docs/guides/native-apps/)
 
 ---
 title: "Native Apps"
@@ -1182,7 +1182,7 @@ The OS calls your three functions, but you share everything else through helpers
 
 ---
 
-## [OTA Apps](https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/ota-apps/)
+## [OTA Apps](https://talismandesign.github.io/PocketMage_PDA/docs/guides/ota-apps/)
 
 ---
 title: "OTA Apps"
@@ -1247,7 +1247,7 @@ Installed apps are tracked in `OTA1_APP` through `OTA4_APP` in `globals.h`. Laun
 
 ---
 
-## [PocketMage Documentation](https://tailsmandesign.github.io/PocketMage_PDA/docs/)
+## [PocketMage Documentation](https://talismandesign.github.io/PocketMage_PDA/docs/)
 
 ---
 title: "PocketMage Documentation"
@@ -1326,13 +1326,13 @@ What the device does today and what is still planned.
 
 - [FAQ](faq/index.md)
 - [Scripting](scripting/index.md)
-- [GitHub Repository](https://github.com/TailsmanDesign/PocketMage_PDA)
+- [GitHub Repository](https://github.com/TalismanDesign/PocketMage_PDA)
 - [Discord Community](https://discord.gg/KSCapSf4XH)
 
 
 ---
 
-## [App API Reference](https://tailsmandesign.github.io/PocketMage_PDA/docs/reference/app-api/)
+## [App API Reference](https://talismandesign.github.io/PocketMage_PDA/docs/reference/app-api/)
 
 ---
 title: "App API Reference"
@@ -1464,7 +1464,7 @@ If you are unsure where a function belongs, start with the existing app in `src/
 
 ---
 
-## [Reference](https://tailsmandesign.github.io/PocketMage_PDA/docs/reference/)
+## [Reference](https://talismandesign.github.io/PocketMage_PDA/docs/reference/)
 
 ---
 title: "Reference"
@@ -1512,7 +1512,7 @@ Start here if you are writing an OTA app, touching shared app state, or looking 
 
 ---
 
-## [PocketMage Library](https://tailsmandesign.github.io/PocketMage_PDA/docs/reference/pocketmage-library/)
+## [PocketMage Library](https://talismandesign.github.io/PocketMage_PDA/docs/reference/pocketmage-library/)
 
 ---
 title: "PocketMage Library"
@@ -1688,7 +1688,7 @@ WiFi helpers and connectivity.
 
 ---
 
-## [System State Reference](https://tailsmandesign.github.io/PocketMage_PDA/docs/reference/system-state/)
+## [System State Reference](https://talismandesign.github.io/PocketMage_PDA/docs/reference/system-state/)
 
 ---
 title: "System State Reference"
@@ -1801,7 +1801,7 @@ Declared in `globals.h` and `config.h`:
 
 ---
 
-## [Scripting Example: Basic Input/Output](https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/example-c/)
+## [Scripting Example: Basic Input/Output](https://talismandesign.github.io/PocketMage_PDA/docs/scripting/example-c/)
 
 ---
 title: "Scripting Example: Basic Input/Output"
@@ -1878,7 +1878,7 @@ updateTerm();
 
 ---
 
-## [PocketMage Scripting Reference](https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/fullPotionCommandList/)
+## [PocketMage Scripting Reference](https://talismandesign.github.io/PocketMage_PDA/docs/scripting/fullPotionCommandList/)
 
 ---
 title: "PocketMage Scripting Reference"
@@ -2336,7 +2336,7 @@ Generates a pseudo-random integer within a specific range.
 
 ---
 
-## [Scripting](https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/)
+## [Scripting](https://talismandesign.github.io/PocketMage_PDA/docs/scripting/)
 
 ---
 title: "Scripting"
@@ -2418,7 +2418,7 @@ Wrench bindings fall into five groups. The [full command list](fullPotionCommand
 
 ---
 
-## [Scripting Example: E-Ink Drawing](https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/ink-c/)
+## [Scripting Example: E-Ink Drawing](https://talismandesign.github.io/PocketMage_PDA/docs/scripting/ink-c/)
 
 ---
 title: "Scripting Example: E-Ink Drawing"
@@ -2473,7 +2473,7 @@ delay(3000);
 
 ---
 
-## [Scripting Example: OLED Drawing](https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/oled-c/)
+## [Scripting Example: OLED Drawing](https://talismandesign.github.io/PocketMage_PDA/docs/scripting/oled-c/)
 
 ---
 title: "Scripting Example: OLED Drawing"
@@ -2528,7 +2528,7 @@ delay(3000);
 
 ---
 
-## [Format a MicroSD Card for PocketMage](https://tailsmandesign.github.io/PocketMage_PDA/docs/tutorials/format-micro-sd/)
+## [Format a MicroSD Card for PocketMage](https://talismandesign.github.io/PocketMage_PDA/docs/tutorials/format-micro-sd/)
 
 ---
 title: "Format a MicroSD Card for PocketMage"
@@ -2672,7 +2672,7 @@ If issues persist after following this guide, the SD card itself may be incompat
 
 ---
 
-## [PocketMage Tutorials](https://tailsmandesign.github.io/PocketMage_PDA/docs/tutorials/)
+## [PocketMage Tutorials](https://talismandesign.github.io/PocketMage_PDA/docs/tutorials/)
 
 ---
 title: "PocketMage Tutorials"
@@ -2690,7 +2690,7 @@ These pages cover hands-on setup tasks.
 ## Development
 
 - [Build Environments & PlatformIO Setup](../development/build-environments.md)
-- [OTA App Template](https://github.com/TailsmanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp)
+- [OTA App Template](https://github.com/TalismanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp)
 
 ## Scripting
 

@@ -2,12 +2,12 @@
 type: concept
 title: "PocketMage FAQ"
 description: "Frequently asked questions about the PocketMage PDA device."
-source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/faq/"
+source: "https://talismandesign.github.io/PocketMage_PDA/docs/faq/"
 path: /faq/
-updated: 2026-08-30
+updated: 2026-08-31
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-30T22:49:51.393Z"
+  generated_at: "2026-08-31T22:19:13.729Z"
 ---
 ---
 title: "PocketMage FAQ"
@@ -19,7 +19,7 @@ description: "Frequently asked questions about the PocketMage PDA device."
 ## Helpful links
 
 - [PocketMage.org](https://pocketmage.org/)
-- [PocketMage on GitHub](https://github.com/TailsmanDesign/PocketMage_PDA)
+- [PocketMage on GitHub](https://github.com/TalismanDesign/PocketMage_PDA)
 - [PocketMage on Discord](https://discord.gg/KSCapSf4XH)
 - [Ashtf on YouTube](https://www.youtube.com/@ashtf)
 - [Ashtf on Patreon](https://patreon.com/Ashtf)
@@ -69,7 +69,7 @@ Yes. Use the [Command Manual](../command-manual/index.md).
 1. Carefully remove the battery (pull on the plastic connector).
 2. Ensure the DIP switch for programming mode is ON.
 3. Hold the power button while plugging the PocketMage into your computer. Nothing should happen.
-4. Open [The Web Flasher](https://tailsmandesign.github.io/PocketMage_PDA/) in a Chrome-based browser and select your firmware version. The most recent stable build is recommended.
+4. Open [The Web Flasher](https://talismandesign.github.io/PocketMage_PDA/) in a Chrome-based browser and select your firmware version. The most recent stable build is recommended.
 5. If you want to keep your saved settings, check the "Preserve user data during installation" box.
 6. Hit the flash button and select the PocketMage from the list of USB devices.
 7. When flashing is done, unplug the PocketMage and re-insert the battery.
@@ -82,7 +82,7 @@ Use a microSD card formatted as FAT32 with an MBR partition table. Cards up to 3
 
 ### Where are the CAD files?
 
-CAD files are available only to beta testers until the final production release. If you are a beta tester, find the password-protected archive [here](https://github.com/TailsmanDesign/PocketMage_PDA/tree/main/Resources/CAD) and the password in the beta Discord channel.
+CAD files are available only to beta testers until the final production release. If you are a beta tester, find the password-protected archive [here](https://github.com/TalismanDesign/PocketMage_PDA/tree/main/Resources/CAD) and the password in the beta Discord channel.
 
 ### Where can I get an extra battery?
 
@@ -104,7 +104,7 @@ For the current setup path, start here:
 
 ### My dictionary isn't working
 
-The English dictionary is not installed out of the box and must be downloaded to the SD card. Find the dictionary files [here](https://github.com/TailsmanDesign/PocketMage_PDA/tree/main/Resources/Assets/Dictionary%20(OPTED)). Connect the PocketMage to your computer with the USB app and drop all the `.txt` files into the dictionary folder.
+The English dictionary is not installed out of the box and must be downloaded to the SD card. Find the dictionary files [here](https://github.com/TalismanDesign/PocketMage_PDA/tree/main/Resources/Assets/Dictionary%20(OPTED)). Connect the PocketMage to your computer with the USB app and drop all the `.txt` files into the dictionary folder.
 
 ### I can't flash the firmware
 
@@ -116,4 +116,4 @@ First, ensure the card is 32 GB or smaller (8 GB is recommended). Next, ensure i
 
 ### I found a software bug
 
-Report the bug in detail on the [GitHub issues page](https://github.com/TailsmanDesign/PocketMage_PDA/issues), including steps to reproduce.
+Report the bug in detail on the [GitHub issues page](https://github.com/TalismanDesign/PocketMage_PDA/issues), including steps to reproduce.

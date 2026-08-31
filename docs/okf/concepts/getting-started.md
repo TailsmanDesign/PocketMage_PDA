@@ -2,12 +2,12 @@
 type: concept
 title: "Getting Started"
 description: "PocketMage overview, setup, and first steps."
-source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/getting-started/"
+source: "https://talismandesign.github.io/PocketMage_PDA/docs/getting-started/"
 path: /getting-started/
-updated: 2026-08-30
+updated: 2026-08-31
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-30T22:49:51.393Z"
+  generated_at: "2026-08-31T22:19:13.730Z"
 ---
 ---
 title: "Getting Started"

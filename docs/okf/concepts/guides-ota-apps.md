@@ -2,12 +2,12 @@
 type: guide
 title: "OTA Apps"
 description: "How third-party PocketMage apps work."
-source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/guides/ota-apps/"
+source: "https://talismandesign.github.io/PocketMage_PDA/docs/guides/ota-apps/"
 path: /guides/ota-apps/
-updated: 2026-08-30
+updated: 2026-08-31
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-30T22:49:51.395Z"
+  generated_at: "2026-08-31T22:19:13.733Z"
 ---
 ---
 title: "OTA Apps"

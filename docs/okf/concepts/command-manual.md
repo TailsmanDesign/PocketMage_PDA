@@ -2,12 +2,12 @@
 type: concept
 title: "PocketMage Command Manual"
 description: "Keystrokes and command reference for the PocketMage PDA."
-source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/command-manual/"
+source: "https://talismandesign.github.io/PocketMage_PDA/docs/command-manual/"
 path: /command-manual/
-updated: 2026-08-30
+updated: 2026-08-31
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-30T22:49:51.391Z"
+  generated_at: "2026-08-31T22:19:13.726Z"
 ---
 ---
 title: "PocketMage Command Manual"

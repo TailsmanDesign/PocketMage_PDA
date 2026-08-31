@@ -104,33 +104,33 @@
     
     
 
-    <link id="site-favicon" rel="icon" href="../../assets/favicon.png?v=mtgejevy">
-    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=mtgejevy">
+    <link id="site-favicon" rel="icon" href="../../assets/favicon.png?v=mthsvu89">
+    <link rel="stylesheet" href="../../assets/css/docmd-main.css?v=mthsvu89">
     
-    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=mtgejevy" id="hljs-light" >
-    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=mtgejevy" id="hljs-dark" disabled>
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-light.css?v=mthsvu89" id="hljs-light" >
+    <link rel="stylesheet" href="../../assets/css/docmd-highlight-dark.css?v=mthsvu89" id="hljs-dark" disabled>
     
     
 <meta name="description" content="How to set up PlatformIO and build PocketMage firmware on Linux, macOS, and Windows.">
-<link rel="canonical" href="https://tailsmandesign.github.io/PocketMage_PDA/docs/development/build-environments/">
+<link rel="canonical" href="https://talismandesign.github.io/PocketMage_PDA/docs/development/build-environments/">
 <meta property="og:title" content="Build Environments &amp; PlatformIO Setup - PocketMage">
 <meta property="og:description" content="How to set up PlatformIO and build PocketMage firmware on Linux, macOS, and Windows.">
-<meta property="og:url" content="https://tailsmandesign.github.io/PocketMage_PDA/docs/development/build-environments/">
+<meta property="og:url" content="https://talismandesign.github.io/PocketMage_PDA/docs/development/build-environments/">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://tailsmandesign.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
+<meta property="og:image" content="https://talismandesign.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Build Environments &amp; PlatformIO Setup - PocketMage">
 <meta name="twitter:description" content="How to set up PlatformIO and build PocketMage firmware on Linux, macOS, and Windows.">
-<meta name="twitter:image" content="https://tailsmandesign.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
+<meta name="twitter:image" content="https://talismandesign.github.io/PocketMage_PDA/docs/assets/images/og-image.png">
 
 
 
-<link rel="stylesheet" href="../../assets/css/docmd-theme-ruby.css?v=mtgejevy" >
-<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=mtgejevy" >
-<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=mtgejevy" >
+<link rel="stylesheet" href="../../assets/css/docmd-theme-ruby.css?v=mthsvu89" >
+<link rel="stylesheet" href="../../assets/css/docmd-git.css?v=mthsvu89" >
+<link rel="stylesheet" href="../../assets/css/docmd-openapi.css?v=mthsvu89" >
 
     
-      <link rel="stylesheet" href="../../assets/css/theme.css?v=mtgejevy">
+      <link rel="stylesheet" href="../../assets/css/theme.css?v=mthsvu89">
     
     
   </head>
@@ -1077,7 +1077,7 @@
     
       <li class="" >
       
-        <a href="https://github.com/TailsmanDesign/PocketMage_PDA" class=" "
+        <a href="https://github.com/TalismanDesign/PocketMage_PDA" class=" "
           target=&quot;_blank&quot; rel=&quot;noopener&quot;>
            
 <svg class="lucide-icon icon-github " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
@@ -1260,7 +1260,7 @@
             <div class="content-layout">
               <div class="main-content">
                 <div class="docmd-breadcrumbs-row">
-                  <div id="docmd-raw-markdown" data-content="---%0Atitle%3A%20%22Build%20Environments%20%26%20PlatformIO%20Setup%22%0Adescription%3A%20%22How%20to%20set%20up%20PlatformIO%20and%20build%20PocketMage%20firmware%20on%20Linux%2C%20macOS%2C%20and%20Windows.%22%0A---%0A%0A%23%20Build%20Environments%20%26%20PlatformIO%20Setup%0A%0APocketMage%20firmware%20is%20built%20with%20%5BPlatformIO%5D(https%3A%2F%2Fplatformio.org%2F).%20The%20build%20configuration%20lives%20in%20%60Code%2FPocketMageOS%2Fplatformio.ini%60%20and%20defines%20three%20environments%20that%20produce%20different%20firmware%20images%20from%20the%20same%20source.%0A%0A%23%23%20The%20three%20build%20environments%0A%0A%7C%20Environment%20%7C%20Target%20%7C%20Purpose%20%7C%0A%7C%20---%20%7C%20---%20%7C%20---%20%7C%0A%7C%20%60PM_PRODUCTION%60%20%7C%20Production%20hardware%20(N16R2%2C%20Quad%20PSRAM%20enabled)%20%7C%20The%20stable%20OS%20image%20flashed%20to%20production%20devices%20%7C%0A%7C%20%60PM_BETA%60%20%7C%20Beta%20hardware%20(N16R8%2C%20PSRAM%20forced%20disabled)%20%7C%20A%20test%20build%20with%20the%20latest%20changes%20%7C%0A%7C%20%60OTA_APP%60%20%7C%20Hardware-agnostic%20%7C%20A%20single%20third-party%20app%20built%20to%20be%20sideloaded%20%7C%0A%0AThe%20three%20environments%20share%20a%20common%20%60%5Bcommon%5D%60%20section%20and%20differ%20only%20in%20build%20flags.%20The%20flags%20set%20three%20things%3A%20which%20hardware%20revision%20to%20target%2C%20whether%20the%20build%20is%20an%20OS%20or%20an%20OTA%20app%2C%20and%20the%20version%20string.%0A%0ARunning%20%60pio%20run%60%20with%20no%20arguments%20builds%20all%20three.%20Build%20one%20explicitly%20with%20%60pio%20run%20-e%20%3Cname%3E%60.%0A%0A%23%23%23%20What%20the%20OTA_APP%20flag%20does%0A%0AThe%20%60OTA_APP%60%20environment%20defines%20%60OTA_APP_FLAG%3D1%60.%20In%20%60config.h%60%20this%20becomes%20%60OTA_APP%20%3D%3D%20true%60%2C%20which%20excludes%20the%20native%20OS%20app%20set%20from%20the%20build.%20The%20three%20entry%20points%20from%20%5BAPP_TEMPLATE.cpp%5D(https%3A%2F%2Fgithub.com%2FTailsmanDesign%2FPocketMage_PDA%2Fblob%2Fmain%2FCode%2FPocketMageOS%2Fsrc%2FAPP_TEMPLATE.cpp)%20-%20%60APP_INIT()%60%2C%20%60processKB_APP()%60%2C%20%60einkHandler_APP()%60%20-%20become%20the%20program.%20The%20same%20source%20tree%20therefore%20builds%20either%20a%20full%20OS%20or%20a%20standalone%20app%20depending%20on%20the%20environment%20you%20choose.%0A%0A%23%23%20Prerequisites%0A%0A-%20%5BVS%20Code%5D(https%3A%2F%2Fcode.visualstudio.com%2F)%20installed%0A-%20Python%203%20installed%0A-%20PlatformIO%20Core%20(installed%20automatically%20by%20the%20VS%20Code%20extension%2C%20or%20via%20%60pip%20install%20platformio%60)%0A-%20The%20PocketMage%20source%20code%2C%20cloned%20from%20%5BGitHub%5D(https%3A%2F%2Fgithub.com%2FTailsmanDesign%2FPocketMage_PDA)%0A%0AThe%20ESP32%20platform%20support%20downloads%20automatically%20on%20the%20first%20build%2C%20so%20the%20first%20build%20is%20noticeably%20slower.%0A%0A%23%23%20Setup%0A%0A%23%23%23%20Linux%0A%0A1.%20Install%20%60python3-venv%60%20if%20it%20is%20missing%3A%0A%0A%20%20%20%60%60%60bash%0A%20%20%20sudo%20apt%20install%20python3-venv%0A%20%20%20%60%60%60%0A%0A2.%20Install%20the%20%5BPlatformIO%20IDE%5D(https%3A%2F%2Fdocs.platformio.org%2Fen%2Flatest%2Fintegration%2Fide%2Fvscode.html%23ide-vscode)%20extension%20in%20VS%20Code.%0A3.%20Open%20the%20PocketMage%20source%20folder%20in%20VS%20Code.%0A4.%20When%20PlatformIO%20asks%20for%20a%20project%20folder%2C%20choose%20%60Code%2FPocketMageOS%2F%60.%0A5.%20Build%20from%20the%20PlatformIO%20toolbar%20or%20the%20command%20palette.%0A%0A%23%23%23%20macOS%0A%0AUse%20the%20same%20steps%20as%20Linux.%20No%20extra%20setup%20is%20required.%0A%0A%23%23%23%20Windows%0A%0A1.%20Install%20%5BGit%5D(https%3A%2F%2Fgit-scm.com%2F)%20to%20clone%20the%20repository.%0A2.%20Follow%20the%20same%20PlatformIO%20IDE%20steps%20as%20Linux.%0A3.%20Build%20from%20the%20PlatformIO%20toolbar%20in%20VS%20Code.%0A%0A%23%23%20Command%20line%0A%0AFrom%20%60Code%2FPocketMageOS%2F%60%3A%0A%0A%60%60%60bash%0Apio%20run%20-e%20PM_PRODUCTION%20%20%20%23%20production%20firmware%0Apio%20run%20-e%20PM_BETA%20%20%20%20%20%20%20%20%20%23%20beta%20firmware%0Apio%20run%20-e%20OTA_APP%20%20%20%20%20%20%20%20%20%23%20a%20third-party%20OTA%20app%0A%60%60%60%0A%0A%23%23%20OTA%20apps%0A%0AOTA%20apps%20use%20the%20%60OTA_APP%60%20environment%2C%20which%20switches%20the%20build%20into%20app%20mode%20as%20described%20above.%20The%20app%20is%20packaged%20as%20a%20%60.tar%60%20file%20and%20installed%20on%20the%20device%20through%20the%20app%20loader.%20See%20%5BOTA%20Apps%5D(..%2Fguides%2Fota-apps.md)%20and%20the%20%5Bapp%20loader%20section%5D(..%2Fcommand-manual%2Findex.md)%20of%20the%20command%20manual.%0A%0AFor%20a%20full%20walkthrough%2C%20watch%20the%20%5BOTA%20app%20development%20video%5D(https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D3Ytc-3-BbMM).%0A%0A%23%23%20Testing%0A%0AThere%20is%20no%20automated%20test%20suite%20for%20the%20firmware.%20Verify%20changes%20against%20real%20hardware%2C%20or%20review%20the%20build%20log%20for%20changes%20with%20no%20runtime%20effect.%20CI%20builds%20%60PM_PRODUCTION%60%20and%20%60PM_BETA%60%20on%20every%20push%2C%20so%20a%20clean%20build%20locally%20is%20the%20minimum%20bar%20before%20opening%20a%20pull%20request.%0A%0A%23%23%20Next%20steps%0A%0A%3A%3A%3A%20grids%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22PocketMageOS%20overview%22%20.%2Findex.md%20icon%3Acpu%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22Making%20Apps%22%20..%2Fguides%2Fmaking-apps.md%20icon%3Acode%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22OTA%20Apps%22%20..%2Fguides%2Fota-apps.md%20icon%3Apackage%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22Firmware%20FAQ%22%20..%2Ffaq%2Findex.md%20icon%3Ahelp-circle%0A%3A%3A%3A%0A%3A%3A%3A%0A" style="display: none;"></div>
+                  <div id="docmd-raw-markdown" data-content="---%0Atitle%3A%20%22Build%20Environments%20%26%20PlatformIO%20Setup%22%0Adescription%3A%20%22How%20to%20set%20up%20PlatformIO%20and%20build%20PocketMage%20firmware%20on%20Linux%2C%20macOS%2C%20and%20Windows.%22%0A---%0A%0A%23%20Build%20Environments%20%26%20PlatformIO%20Setup%0A%0APocketMage%20firmware%20is%20built%20with%20%5BPlatformIO%5D(https%3A%2F%2Fplatformio.org%2F).%20The%20build%20configuration%20lives%20in%20%60Code%2FPocketMageOS%2Fplatformio.ini%60%20and%20defines%20three%20environments%20that%20produce%20different%20firmware%20images%20from%20the%20same%20source.%0A%0A%23%23%20The%20three%20build%20environments%0A%0A%7C%20Environment%20%7C%20Target%20%7C%20Purpose%20%7C%0A%7C%20---%20%7C%20---%20%7C%20---%20%7C%0A%7C%20%60PM_PRODUCTION%60%20%7C%20Production%20hardware%20(N16R2%2C%20Quad%20PSRAM%20enabled)%20%7C%20The%20stable%20OS%20image%20flashed%20to%20production%20devices%20%7C%0A%7C%20%60PM_BETA%60%20%7C%20Beta%20hardware%20(N16R8%2C%20PSRAM%20forced%20disabled)%20%7C%20A%20test%20build%20with%20the%20latest%20changes%20%7C%0A%7C%20%60OTA_APP%60%20%7C%20Hardware-agnostic%20%7C%20A%20single%20third-party%20app%20built%20to%20be%20sideloaded%20%7C%0A%0AThe%20three%20environments%20share%20a%20common%20%60%5Bcommon%5D%60%20section%20and%20differ%20only%20in%20build%20flags.%20The%20flags%20set%20three%20things%3A%20which%20hardware%20revision%20to%20target%2C%20whether%20the%20build%20is%20an%20OS%20or%20an%20OTA%20app%2C%20and%20the%20version%20string.%0A%0ARunning%20%60pio%20run%60%20with%20no%20arguments%20builds%20all%20three.%20Build%20one%20explicitly%20with%20%60pio%20run%20-e%20%3Cname%3E%60.%0A%0A%23%23%23%20What%20the%20OTA_APP%20flag%20does%0A%0AThe%20%60OTA_APP%60%20environment%20defines%20%60OTA_APP_FLAG%3D1%60.%20In%20%60config.h%60%20this%20becomes%20%60OTA_APP%20%3D%3D%20true%60%2C%20which%20excludes%20the%20native%20OS%20app%20set%20from%20the%20build.%20The%20three%20entry%20points%20from%20%5BAPP_TEMPLATE.cpp%5D(https%3A%2F%2Fgithub.com%2FTalismanDesign%2FPocketMage_PDA%2Fblob%2Fmain%2FCode%2FPocketMageOS%2Fsrc%2FAPP_TEMPLATE.cpp)%20-%20%60APP_INIT()%60%2C%20%60processKB_APP()%60%2C%20%60einkHandler_APP()%60%20-%20become%20the%20program.%20The%20same%20source%20tree%20therefore%20builds%20either%20a%20full%20OS%20or%20a%20standalone%20app%20depending%20on%20the%20environment%20you%20choose.%0A%0A%23%23%20Prerequisites%0A%0A-%20%5BVS%20Code%5D(https%3A%2F%2Fcode.visualstudio.com%2F)%20installed%0A-%20Python%203%20installed%0A-%20PlatformIO%20Core%20(installed%20automatically%20by%20the%20VS%20Code%20extension%2C%20or%20via%20%60pip%20install%20platformio%60)%0A-%20The%20PocketMage%20source%20code%2C%20cloned%20from%20%5BGitHub%5D(https%3A%2F%2Fgithub.com%2FTalismanDesign%2FPocketMage_PDA)%0A%0AThe%20ESP32%20platform%20support%20downloads%20automatically%20on%20the%20first%20build%2C%20so%20the%20first%20build%20is%20noticeably%20slower.%0A%0A%23%23%20Setup%0A%0A%23%23%23%20Linux%0A%0A1.%20Install%20%60python3-venv%60%20if%20it%20is%20missing%3A%0A%0A%20%20%20%60%60%60bash%0A%20%20%20sudo%20apt%20install%20python3-venv%0A%20%20%20%60%60%60%0A%0A2.%20Install%20the%20%5BPlatformIO%20IDE%5D(https%3A%2F%2Fdocs.platformio.org%2Fen%2Flatest%2Fintegration%2Fide%2Fvscode.html%23ide-vscode)%20extension%20in%20VS%20Code.%0A3.%20Open%20the%20PocketMage%20source%20folder%20in%20VS%20Code.%0A4.%20When%20PlatformIO%20asks%20for%20a%20project%20folder%2C%20choose%20%60Code%2FPocketMageOS%2F%60.%0A5.%20Build%20from%20the%20PlatformIO%20toolbar%20or%20the%20command%20palette.%0A%0A%23%23%23%20macOS%0A%0AUse%20the%20same%20steps%20as%20Linux.%20No%20extra%20setup%20is%20required.%0A%0A%23%23%23%20Windows%0A%0A1.%20Install%20%5BGit%5D(https%3A%2F%2Fgit-scm.com%2F)%20to%20clone%20the%20repository.%0A2.%20Follow%20the%20same%20PlatformIO%20IDE%20steps%20as%20Linux.%0A3.%20Build%20from%20the%20PlatformIO%20toolbar%20in%20VS%20Code.%0A%0A%23%23%20Command%20line%0A%0AFrom%20%60Code%2FPocketMageOS%2F%60%3A%0A%0A%60%60%60bash%0Apio%20run%20-e%20PM_PRODUCTION%20%20%20%23%20production%20firmware%0Apio%20run%20-e%20PM_BETA%20%20%20%20%20%20%20%20%20%23%20beta%20firmware%0Apio%20run%20-e%20OTA_APP%20%20%20%20%20%20%20%20%20%23%20a%20third-party%20OTA%20app%0A%60%60%60%0A%0A%23%23%20OTA%20apps%0A%0AOTA%20apps%20use%20the%20%60OTA_APP%60%20environment%2C%20which%20switches%20the%20build%20into%20app%20mode%20as%20described%20above.%20The%20app%20is%20packaged%20as%20a%20%60.tar%60%20file%20and%20installed%20on%20the%20device%20through%20the%20app%20loader.%20See%20%5BOTA%20Apps%5D(..%2Fguides%2Fota-apps.md)%20and%20the%20%5Bapp%20loader%20section%5D(..%2Fcommand-manual%2Findex.md)%20of%20the%20command%20manual.%0A%0AFor%20a%20full%20walkthrough%2C%20watch%20the%20%5BOTA%20app%20development%20video%5D(https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D3Ytc-3-BbMM).%0A%0A%23%23%20Testing%0A%0AThere%20is%20no%20automated%20test%20suite%20for%20the%20firmware.%20Verify%20changes%20against%20real%20hardware%2C%20or%20review%20the%20build%20log%20for%20changes%20with%20no%20runtime%20effect.%20CI%20builds%20%60PM_PRODUCTION%60%20and%20%60PM_BETA%60%20on%20every%20push%2C%20so%20a%20clean%20build%20locally%20is%20the%20minimum%20bar%20before%20opening%20a%20pull%20request.%0A%0A%23%23%20Next%20steps%0A%0A%3A%3A%3A%20grids%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22PocketMageOS%20overview%22%20.%2Findex.md%20icon%3Acpu%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22Making%20Apps%22%20..%2Fguides%2Fmaking-apps.md%20icon%3Acode%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22OTA%20Apps%22%20..%2Fguides%2Fota-apps.md%20icon%3Apackage%0A%3A%3A%3A%0A%3A%3A%3A%20grid%0A%3A%3A%3A%20button%20%22Firmware%20FAQ%22%20..%2Ffaq%2Findex.md%20icon%3Ahelp-circle%0A%3A%3A%3A%0A%3A%3A%3A%0A" style="display: none;"></div>
                   
                     <nav aria-label="breadcrumb" class="docmd-breadcrumbs">
                       <ol>
@@ -1381,13 +1381,13 @@
 </div><p>The three environments share a common <code>[common]</code> section and differ only in build flags. The flags set three things: which hardware revision to target, whether the build is an OS or an OTA app, and the version string.</p>
 <p>Running <code>pio run</code> with no arguments builds all three. Build one explicitly with <code>pio run -e &lt;name&gt;</code>.</p>
 <h3 id="build-environments-platformio-setup-the-three-build-environments-what-the-otaapp-flag-does" class="docmd-heading"><a href="#build-environments-platformio-setup-the-three-build-environments-what-the-otaapp-flag-does" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>What the OTA_APP flag does</h3>
-<p>The <code>OTA_APP</code> environment defines <code>OTA_APP_FLAG=1</code>. In <code>config.h</code> this becomes <code>OTA_APP == true</code>, which excludes the native OS app set from the build. The three entry points from <a href="https://github.com/TailsmanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp">APP_TEMPLATE.cpp</a> - <code>APP_INIT()</code>, <code>processKB_APP()</code>, <code>einkHandler_APP()</code> - become the program. The same source tree therefore builds either a full OS or a standalone app depending on the environment you choose.</p>
+<p>The <code>OTA_APP</code> environment defines <code>OTA_APP_FLAG=1</code>. In <code>config.h</code> this becomes <code>OTA_APP == true</code>, which excludes the native OS app set from the build. The three entry points from <a href="https://github.com/TalismanDesign/PocketMage_PDA/blob/main/Code/PocketMageOS/src/APP_TEMPLATE.cpp">APP_TEMPLATE.cpp</a> - <code>APP_INIT()</code>, <code>processKB_APP()</code>, <code>einkHandler_APP()</code> - become the program. The same source tree therefore builds either a full OS or a standalone app depending on the environment you choose.</p>
 <h2 id="build-environments-platformio-setup-prerequisites" class="docmd-heading"><a href="#build-environments-platformio-setup-prerequisites" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Prerequisites</h2>
 <ul>
 <li><a href="https://code.visualstudio.com/">VS Code</a> installed</li>
 <li>Python 3 installed</li>
 <li>PlatformIO Core (installed automatically by the VS Code extension, or via <code>pip install platformio</code>)</li>
-<li>The PocketMage source code, cloned from <a href="https://github.com/TailsmanDesign/PocketMage_PDA">GitHub</a></li>
+<li>The PocketMage source code, cloned from <a href="https://github.com/TalismanDesign/PocketMage_PDA">GitHub</a></li>
 </ul>
 <p>The ESP32 platform support downloads automatically on the first build, so the first build is noticeably slower.</p>
 <h2 id="build-environments-platformio-setup-setup" class="docmd-heading"><a href="#build-environments-platformio-setup-setup" class="heading-anchor" aria-label="Permalink to this section"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link2-icon lucide-link-2"><path d="M9 17H7A5 5 0 0 1 7 7h2m6 0h2a5 5 0 1 1 0 10h-2m-7-5h8"/></svg></a>Setup</h2>
@@ -1651,29 +1651,29 @@ Firmware FAQ</a></div>
             <div class="page-footer-actions">
               
               
-                <span class="git-last-updated" data-timestamp="1788130138000">
+                <span class="git-last-updated" data-timestamp="1788214702000">
                   <svg class="git-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <polyline points="12 6 12 12 16 14"></polyline>
                   </svg>
                   <span class="git-label">Last updated:</span>
-                  <span class="git-time" data-timestamp="1788130138000"></span>
+                  <span class="git-time" data-timestamp="1788214702000"></span>
                   
                   <div class="git-commit-tooltip" role="tooltip">
                     <div class="git-tooltip-title">Recent commits</div>
                     <ul class="git-commit-list">
                       
                         <li class="git-commit-item">
-                          <div class="git-commit-avatar" title="Ashtf">
+                          <div class="git-commit-avatar" title="NellowTCS">
                             
-                              <img src="https://www.gravatar.com/avatar/88c69ec22216c441f9cbcc5c230f7123?d=mp&amp;s=64" alt="Ashtf">
+                              <img src="https://www.gravatar.com/avatar/baecf29c7bedbb00a8d5bd5984799c55?d=mp&amp;s=64" alt="NellowTCS">
                             
                           </div>
                           <div class="git-commit-details">
-                            <div class="git-commit-message" title="Merge pull request #323 from TailsmanDesign/onboarding">Merge pull request #323 from Tailsman...</div>
+                            <div class="git-commit-message" title="Merge pull request #324 from TalismanDesign/rename">Merge pull request #324 from Talisman...</div>
                             <div class="git-commit-meta">
-                              <span class="git-commit-author">Ashtf</span>
-                              <span class="git-commit-date" data-timestamp="1788130138000"></span>
+                              <span class="git-commit-author">NellowTCS</span>
+                              <span class="git-commit-date" data-timestamp="1788214702000"></span>
                             </div>
                           </div>
                         </li>
@@ -1685,7 +1685,7 @@ Firmware FAQ</a></div>
               
               <span class="git-spacer"></span>
               
-                <a href="https://github.com/TailsmanDesign/PocketMage_PDA/edit/main/Docs/docs/Docs/docs/development/build-environments.md" target="_blank" rel="noopener noreferrer" class="edit-link">
+                <a href="https://github.com/TalismanDesign/PocketMage_PDA/edit/main/Docs/docs/Docs/docs/development/build-environments.md" target="_blank" rel="noopener noreferrer" class="edit-link">
                   
 <svg class="lucide-icon icon-pencil " width="1em" height="1em" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"
   class="lucide lucide-pencil"
@@ -1741,7 +1741,7 @@ Firmware FAQ</a></div>
                 <span class="footer-column-title">Community</span>
                 <ul>
                   
-                    <li><a href="https://github.com/TailsmanDesign/PocketMage_PDA" >GitHub</a></li>
+                    <li><a href="https://github.com/TalismanDesign/PocketMage_PDA" >GitHub</a></li>
                   
                     <li><a href="https://discord.gg/KSCapSf4XH" >Discord</a></li>
                   
@@ -1754,7 +1754,7 @@ Firmware FAQ</a></div>
         
       </div>
       <div class="footer-complete-bottom">
-        <div class="user-footer">Built with <a href="https://docmd.io">docmd</a>. <a href="https://github.com/TailsmanDesign/PocketMage_PDA">View on GitHub</a>.</div>
+        <div class="user-footer">Built with <a href="https://docmd.io">docmd</a>. <a href="https://github.com/TalismanDesign/PocketMage_PDA">View on GitHub</a>.</div>
         
           <div class="branding-footer">
             Built with <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path><path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66"></path><path d="m18 15-2-2"></path><path d="m15 18-2-2"></path></svg> <a href="https://docmd.io" target="_blank" rel="noopener">docmd.</a>
@@ -1766,13 +1766,13 @@ Firmware FAQ</a></div>
         </div>
       </div>
       
-      <script src="../../assets/js/docmd-main.js?v=mtgejevy"></script>
+      <script src="../../assets/js/docmd-main.js?v=mthsvu89"></script>
       
-      <script src="../../assets/js/docmd-git.js?v=mtgejevy"></script>
-      <script src="../../assets/js/docmd-image-lightbox.js?v=mtgejevy" ></script>
-<script src="../../assets/js/vendor/minisearch.js?v=mtgejevy" ></script>
-<script src="../../assets/js/docmd-search.js?v=mtgejevy" ></script>
-<script src="../../assets/js/docmd-git.js?v=mtgejevy" type="module"></script>
+      <script src="../../assets/js/docmd-git.js?v=mthsvu89"></script>
+      <script src="../../assets/js/docmd-image-lightbox.js?v=mthsvu89" ></script>
+<script src="../../assets/js/vendor/minisearch.js?v=mthsvu89" ></script>
+<script src="../../assets/js/docmd-search.js?v=mthsvu89" ></script>
+<script src="../../assets/js/docmd-git.js?v=mthsvu89" type="module"></script>
 
   <!-- Search Modal (Injected by @docmd/plugin-search) -->
   <div id="docmd-search-modal" class="docmd-search-modal" style="display: none;" data-semantic="true" data-show-confidence="true" data-show-filters="true"
@@ -1847,7 +1847,7 @@ Firmware FAQ</a></div>
       })();
     </script>
 
-<script>window.__git_config={"repo":"https://github.com/TailsmanDesign/PocketMage_PDA/edit/main/Docs/docs","branch":"main","editLink":true,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
+<script>window.__git_config={"repo":"https://github.com/TalismanDesign/PocketMage_PDA/edit/main/Docs/docs","branch":"main","editLink":true,"lastUpdated":true,"commitHistory":true,"maxCommits":5,"dateFormat":"relative"};window.__git_i18n={"lastUpdated":"Last updated","recentCommits":"Recent commits","viewCommitHistory":"View commit history","editOnGitHub":"Edit on GitHub","editOnGitLab":"Edit on GitLab","editOnBitbucket":"Edit on Bitbucket","editThisPage":"Edit this page","justNow":"just now","minutesAgo":"{n}m ago","hoursAgo":"{n}h ago","daysAgo":"{n}d ago"}</script>
       
       
       

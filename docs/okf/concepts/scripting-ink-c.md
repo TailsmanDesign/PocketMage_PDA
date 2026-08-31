@@ -2,12 +2,12 @@
 type: concept
 title: "Scripting Example: E-Ink Drawing"
 description: "A PocketMage script demonstrating drawing shapes and text on the E-Ink display."
-source: "https://tailsmandesign.github.io/PocketMage_PDA/docs/scripting/ink-c/"
+source: "https://talismandesign.github.io/PocketMage_PDA/docs/scripting/ink-c/"
 path: /scripting/ink-c/
-updated: 2026-08-30
+updated: 2026-08-31
 okf:
   generated_by: "@docmd/plugin-okf"
-  generated_at: "2026-08-30T22:49:51.399Z"
+  generated_at: "2026-08-31T22:19:13.738Z"
 ---
 ---
 title: "Scripting Example: E-Ink Drawing"
