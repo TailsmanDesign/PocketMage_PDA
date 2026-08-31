@@ -21,7 +21,7 @@
     "homepage": "https://pocketmage.org/",
     "repository": {
         "type": "git",
-        "url": "https://github.com/TailsmanDesign/PocketMage_PDA"
+        "url": "https://github.com/TalismanDesign/PocketMage_PDA"
     },
     "frameworks": [
         "arduino"

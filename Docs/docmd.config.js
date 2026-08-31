@@ -1,6 +1,6 @@
 export default {
   title: "PocketMage",
-  url: "https://tailsmandesign.github.io/PocketMage_PDA/docs",
+  url: "https://talismandesign.github.io/PocketMage_PDA/docs",
   logo: { alt: "PocketMage", href: "./" },
   favicon: "/assets/favicon.png",
   theme: {
@@ -33,7 +33,7 @@ export default {
         {
           title: "Community",
           links: [
-            { text: "GitHub", url: "https://github.com/TailsmanDesign/PocketMage_PDA" },
+            { text: "GitHub", url: "https://github.com/TalismanDesign/PocketMage_PDA" },
             { text: "Discord", url: "https://discord.gg/KSCapSf4XH" },
             { text: "Website", url: "https://pocketmage.org/" },
           ],
@@ -135,15 +135,15 @@ export default {
     },
     {
       title: "GitHub",
-      path: "https://github.com/TailsmanDesign/PocketMage_PDA",
+      path: "https://github.com/TalismanDesign/PocketMage_PDA",
       icon: "github",
       external: true,
     },
   ],
-  footer: "Built with [docmd](https://docmd.io). [View on GitHub](https://github.com/TailsmanDesign/PocketMage_PDA).",
+  footer: "Built with [docmd](https://docmd.io). [View on GitHub](https://github.com/TalismanDesign/PocketMage_PDA).",
   editLink: {
     enabled: true,
-    baseUrl: "https://github.com/TailsmanDesign/PocketMage_PDA/edit/main/Docs/docs",
+    baseUrl: "https://github.com/TalismanDesign/PocketMage_PDA/edit/main/Docs/docs",
     text: "Edit this page",
   },
 };
